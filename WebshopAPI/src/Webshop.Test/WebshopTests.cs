@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Webshop.Database
+namespace Webshop.Test
 {
-    public class Class1
+    public class WebshopTests
     {
-        public Class1()
+        public WebshopTests()
         {
         }
     }
