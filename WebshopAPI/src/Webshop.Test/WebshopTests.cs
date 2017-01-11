@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Webshop.Test
 {
-    public class Class1
+    public class WebshopTests
     {
-        public Class1()
+        public WebshopTests()
         {
         }
     }

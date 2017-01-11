@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Webshop.Database
+namespace FactuurService.Test
 {
-    public class Class1
+    public class FactuurServiceTests
     {
-        public Class1()
+        public FactuurServiceTests()
         {
         }
     }
