@@ -1,6 +1,6 @@
 FROM microsoft/aspnetcore:1.0.1
 ENTRYPOINT ["dotnet", "TestBuildWebApp.dll"]
-ARG source=.
+ARG SOURCE=.
 WORKDIR /app
 EXPOSE 80
-COPY $source /app
+COPY $SOURCE /app
