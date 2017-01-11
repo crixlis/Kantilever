@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0D24C645-C8F7-45E6-8D8C-1D0A5F46ECB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6683A123-830E-48D6-A85A-3F9441979DE3}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebshopBeheer", "src\WebshopBeheer\WebshopBeheer.xproj", "{4BB7FFDF-E90C-4581-8B17-D0E1CEB393EC}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebshopBeheer.Test", "src\WebshopBeheer.Test\WebshopBeheer.Test.xproj", "{071DE28D-93DE-4DD0-B8F5-A0BBBE0F0874}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BB7FFDF-E90C-4581-8B17-D0E1CEB393EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BB7FFDF-E90C-4581-8B17-D0E1CEB393EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BB7FFDF-E90C-4581-8B17-D0E1CEB393EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BB7FFDF-E90C-4581-8B17-D0E1CEB393EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{071DE28D-93DE-4DD0-B8F5-A0BBBE0F0874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{071DE28D-93DE-4DD0-B8F5-A0BBBE0F0874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{071DE28D-93DE-4DD0-B8F5-A0BBBE0F0874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{071DE28D-93DE-4DD0-B8F5-A0BBBE0F0874}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4BB7FFDF-E90C-4581-8B17-D0E1CEB393EC} = {0D24C645-C8F7-45E6-8D8C-1D0A5F46ECB5}
+		{071DE28D-93DE-4DD0-B8F5-A0BBBE0F0874} = {0D24C645-C8F7-45E6-8D8C-1D0A5F46ECB5}
+	EndGlobalSection
+EndGlobal
