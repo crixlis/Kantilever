@@ -1,0 +1,217 @@
+/* You can add global styles to this file, and also import other style files */
+
+/**********************************
+ * General styling
+ **********************************/
+
+* {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+}
+
+body
+{
+    background-color: #eee;
+}
+ 
+header {
+    background-color: lightblue;
+    color: #fff;
+    height: 140px;
+}
+
+h1 {
+    padding: 20px;
+    z-index: 99;
+    font-weight: 600;
+    position: absolute;
+    top: 70px;
+}
+
+main {
+    box-sizing: border-box;
+    background: #fff;
+    padding: 20px;
+    min-height: 1000px;
+}
+
+h2 {
+    font-weight: 400;
+}
+
+/**********************************
+ * Navigation, Shopping Car and LoginButton
+ **********************************/
+
+#floatingHeader {
+    z-index: 66;
+    display: block;
+    width: 100%;
+}
+
+#floatingHeader div {
+    background-color:rgba(173, 216, 230, 0.8);
+    text-align: right;
+    vertical-align: top;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    color: white;
+}
+
+#floatingHeader nav {
+    display: inline-block;
+    list-style: none;
+    vertical-align: top;
+}
+
+#floatingHeader nav ul:before {
+    display: block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('svg/menuWhite.svg');
+}
+
+#floatingHeader nav ul:active:before, 
+#floatingHeader nav ul:hover:before {
+    display: none;
+}
+
+#floatingHeader nav ul, 
+#floatingHeader a {
+    padding: 10px;
+    right: 0px;
+    position: relative;
+}
+
+#floatingHeader nav li {
+    display: none;
+    background-color: green;
+    z-index: 120;
+}
+
+#floatingHeader a {
+    vertical-align: top;
+}
+
+#floatingHeader nav ul:hover li, 
+#floatingHeader nav ul:active li 
+{
+    display: block;
+    position: relative;
+    top: 200%;
+    padding: 10px;
+}
+
+#floatingHeader nav ul:hover {
+    z-index: 10;
+}
+
+#floatingHeader nav ul li:hover, 
+#floatingHeader nav ul li:active, 
+#floatingHeader a:hover, 
+#floatingHeader a:active {
+    background-color: #fff;
+    color: lightblue;
+    cursor: pointer;
+}
+
+#floatingHeader #shoppingCar:before {
+    display: inline-block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('svg/shoppingCarWhite.svg');
+    right: 20px;
+    bottom: 2px;
+
+    /* create a new stacking context */
+    position: absolute;
+}
+#floatingHeader a:hover #shoppingCar:before,
+#floatingHeader a:active #shoppingCar:before {
+    background-image: url('svg/shoppingCarBlack.svg');
+}
+#floatingHeader #shoppingCar {
+    position: relative;
+    color: black;
+    display: inline-block;
+    width:20px;
+    height:20px;
+    font-size: 10px;
+    text-align: center;
+    padding-left: 20px;
+    top: 5px;
+}
+#floatingHeader a:hover #shoppingCar,
+#floatingHeader a:active #shoppingCar {
+    color: white;
+    z-index: 80;
+}
+
+#floatingHeader #shoppingCar:after {
+    content: '';
+    display: inline-block;
+    border: solid #fff 10px;
+    width: 0;
+    height: 0;
+    padding: 0;
+    border-radius: 100%;
+    color: lightblue;
+    right: 0px;
+    bottom: 3px;
+
+    /* create a new stacking context */
+    position: absolute;
+    z-index: -1;  /* to be below the parent element */
+}
+#floatingHeader a:hover #shoppingCar:after,
+#floatingHeader a:active #shoppingCar:after {
+    border-color: lightblue;
+}
+/**********************************
+ * WIDESCREEN CORRECTIONS
+ **********************************/
+
+@media screen and (min-width: 760px) 
+{
+    header, #floatingHeader, main {
+        position: relative;
+        width: 720px;
+        margin: auto;
+    }
+
+    /**********************************
+    * Navigation Wide Screen
+    **********************************/
+
+    #floatingHeader div {
+        width: 720px;
+    }
+    #floatingHeader nav ul {
+        display: inline;
+    }
+    #floatingHeader nav ul:before {
+        display: none;
+    }
+    #floatingHeader nav li, 
+    #floatingHeader a {
+        padding: 10px;
+        color: #fff;
+        display: inline-block;
+    }
+    #floatingHeader nav ul:hover li, 
+    #floatingHeader nav ul:active li {
+        display: inline-block;
+        position: relative;
+        top: 0px;
+    }
+
+    #floatingHeader #shoppingCar {
+        top: -5px;
+    }
+}
