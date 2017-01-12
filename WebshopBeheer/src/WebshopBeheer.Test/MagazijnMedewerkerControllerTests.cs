@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace WebshopBeheer.Test
 {
-    public class Class1
+    public class MagazijnMedewerkerControllerTests
     {
-        public Class1()
-        {
-        }
+        
     }
 }
