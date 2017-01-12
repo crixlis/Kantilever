@@ -1,11 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using NSubstitute;
+using rabbitmq_demo;
+using Xunit;
 
 namespace BestelService.Test
 {
     public class BestelServiceTests
     {
+        [Fact]
+        public void IkWilEenBestellingAanmakenEventOpvangenEnEenBestellingAangemaaktPublishen()
+        {
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var service = new BestelService(sender);
+            var bestelling = new bestellingAanmaken{Id = 1};
+
+            //Act
+            service.Execute(bestelling);
+
+            //Assert
+            sender.Received(1).PublishEvent(Arg.Any<bestellingAangemaakt>());
+        }
+
+        [Fact]
+        public void IkWilEenBestellingKeurenEventOpvangenEnEenBestellingGoedgekeurdPublishen()
+        {
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var service = new BestelService(sender);
+            var bestelling = new bestellingKeuren {Id = 1};
+
+            //Act
+            service.Execute(bestelling);
+
+            //Assert
+            sender.Received(1).PublishEvent(Arg.Any<bestellingGekeurd>());
+        }
     }
 }

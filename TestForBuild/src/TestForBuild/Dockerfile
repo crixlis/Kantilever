@@ -1,5 +1,5 @@
-FROM microsoft/aspnetcore:1.0.1
-ENTRYPOINT ["dotnet", "TestBuildWebApp.dll"]
+FROM microsoft/dotnet:1.0.3-runtime
+ENTRYPOINT ["dotnet", "TestForBuild.dll"]
 ARG SOURCE=.
 WORKDIR /app
 EXPOSE 80
