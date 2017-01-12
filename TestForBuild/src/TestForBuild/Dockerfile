@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore:1.0.1
+FROM microsoft/dotnet:runtime
 ENTRYPOINT ["dotnet", "TestBuildWebApp.dll"]
 ARG SOURCE=.
 WORKDIR /app
