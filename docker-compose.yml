@@ -1,12 +1,12 @@
 version: '2'
 services:
-  TestForBuild:
+  testforbuild:
     build:
       context: ./TestForBuild/src/TestForBuild
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-  WebshopBeheer:
+  webshopbeheer:
     build:
       context: ./WebshopBeheer/src/WebshopBeheer
       dockerfile: Dockerfile
