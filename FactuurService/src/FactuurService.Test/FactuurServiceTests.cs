@@ -6,21 +6,29 @@ using Xunit;
 using FactuurService;
 using RabbitMQ;
 using rabbitmq_demo;
+using NSubstitute;
 
 namespace FactuurService.Test
 {
     public class FactuurServiceTests
     {
         [Fact]
-        public void DeFactuurServiceKanEenFactuurAanmakenCommandOntvangen()
+        public void DeFactuurServiceKanEenFactuurAanmakenCommandOntvangenEnVerstuurtEenFactuurAangemaaktEvent()
         {
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var service = new FactuurService(sender);
+
             var FactuurAanmakenCommand = new FactuurAanmaken
             {
                 ID = 0
             };
 
-            var service = new FactuurService();
+            //Act
             service.Execute(FactuurAanmakenCommand);
+
+            //Assert
+            sender.Received(1).PublishEvent(Arg.Any<FactuurAangemaakt>());
         }
     }
 }
