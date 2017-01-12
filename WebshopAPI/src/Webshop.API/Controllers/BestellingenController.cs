@@ -10,10 +10,11 @@ namespace Webshop.API.Controllers
     {
         private ISender _sender = new Sender(new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" }, "Kantilever");
 
-
         public BestellingenController(ISender sender = null)
         {
-            _sender = sender;
+            if (sender != null) {
+                _sender = sender;
+            }
         }
 
         // GET api/bestellingen
@@ -36,7 +37,7 @@ namespace Webshop.API.Controllers
         {
             var bestellingKeuren = new BestellingKeuren
             {
-                ID = bestelling.ID,
+                ID = bestelling.ID ,
                 Price = bestelling.Price
             };
 

@@ -1,5 +1,6 @@
 ﻿using NSubstitute;
 using rabbitmq_demo;
+using System;
 using Xunit;
 
 namespace Webshop.Listener.Test
@@ -19,7 +20,7 @@ namespace Webshop.Listener.Test
             };
 
             //Act + Asser ... er wordt tot nu toe alleen gecontrolleerd of een BetaaldeFactuurAfgemeld event ontvangen kan worden
-            service.Execute(factuurAfgemeld);
+            Assert.Throws(typeof(NotImplementedException), () => service.Execute(factuurAfgemeld));
         }
     }
 }
