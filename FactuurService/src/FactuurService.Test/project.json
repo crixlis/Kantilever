@@ -7,6 +7,7 @@
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "rabbitmq-demo": "1.2.0",
     "RabbitMQ.Client": "4.1.1",
+    "Microsoft.CodeCoverage": "1.0.2",
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.1"
