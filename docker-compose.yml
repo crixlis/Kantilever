@@ -1,0 +1,16 @@
+version: '2'
+services:
+  lmf-webshop:
+    build:
+      context: ./TestForBuild/src/TestForBuild
+      dockerfile: Dockerfile
+      args: 
+        SOURCE: ./bin/publish
+  lmf-webshopbeheer:
+    build:
+      context: ./WebshopBeheer/src/WebshopBeheer
+      dockerfile: Dockerfile
+      args: 
+        SOURCE: ./bin/publish
+    ports: 
+      - "8080:5000"
