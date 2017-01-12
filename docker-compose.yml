@@ -1,12 +1,12 @@
 version: '2'
 services:
-  testforbuild:
+  lmf-webshop:
     build:
       context: ./TestForBuild/src/TestForBuild
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-  webshopbeheer:
+  lmf-webshopbeheer:
     build:
       context: ./WebshopBeheer/src/WebshopBeheer
       dockerfile: Dockerfile
