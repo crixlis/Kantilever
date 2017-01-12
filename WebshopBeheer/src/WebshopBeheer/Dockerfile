@@ -1,10 +1,10 @@
 FROM microsoft/aspnetcore:1.0
-
 ENV HOME=/app
 ENV ASPNETCORE_URLS http://+:5000
+ARG SOURCE=.
 
 WORKDIR $HOME
-COPY ./bin/Publish/ $HOME
+COPY $SOURCE $HOME
 
 EXPOSE 5000
 
