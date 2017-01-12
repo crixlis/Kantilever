@@ -22,7 +22,7 @@ namespace Webshop.API.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Bestelling bestelling)
         {
         }
 
