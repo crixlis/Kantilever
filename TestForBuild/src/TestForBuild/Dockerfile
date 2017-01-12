@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:1.0.1-runtime
+FROM microsoft/dotnet:1.0.3-runtime
 ENTRYPOINT ["dotnet", "TestForBuild.dll"]
 ARG SOURCE=.
 WORKDIR /app
