@@ -37,8 +37,7 @@ namespace Webshop.API.Controllers
         {
             var bestellingKeuren = new BestellingKeuren
             {
-                ID = bestelling.ID ,
-                Price = bestelling.Price
+                Id =  bestelling.Id
             };
 
             _sender.PublishCommand(bestellingKeuren);

@@ -2,7 +2,6 @@
 {
     public class Bestelling
     {
-        public int ID { get; set; }
-        public double Price { get; set; }
+        public int Id { get; set; }
     }
 }

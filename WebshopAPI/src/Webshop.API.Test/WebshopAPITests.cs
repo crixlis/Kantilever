@@ -15,8 +15,7 @@ namespace Webshop.API.Test
             var sender = Substitute.For<ISender>();
             var bestelling = new Bestelling
             {
-                ID = 0,
-                Price = 22.30
+                Id = 0
             };
 
             //Act
