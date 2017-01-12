@@ -6,10 +6,6 @@ namespace FactuurService
     {
         private ISender _sender;
 
-        public FactuurService()
-        {
-        }
-
         public FactuurService(ISender sender)
         {
             _sender = sender;
@@ -17,12 +13,12 @@ namespace FactuurService
 
         public void Execute(FactuurAanmaken item)
         {
-            var factuurAangemaakt = new FactuurAangemaakt
+            var newEvent = new FactuurAangemaakt
             {
                 ID = item.ID
             };
 
-            _sender.PublishEvent(factuurAangemaakt);
+            _sender.PublishEvent(newEvent);
         }
     }
 }
