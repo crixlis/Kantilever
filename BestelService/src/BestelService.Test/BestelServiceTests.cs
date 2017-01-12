@@ -12,11 +12,7 @@ namespace BestelService.Test
             //Arrange
             var sender = Substitute.For<ISender>();
             var service = new BestelService(sender);
-
-            var bestelling = new bestellingAanmaken
-            {
-                Id = 1
-            };
+            var bestelling = new bestellingAanmaken{Id = 1};
 
             //Act
             service.Execute(bestelling);

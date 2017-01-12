@@ -17,7 +17,7 @@ namespace BestelService
 
         public void Execute(bestellingAanmaken item)
         {
-            _sender.PublishEvent(new bestellingAangemaakt());
+            _sender.PublishEvent(new bestellingAangemaakt{Id = item.Id });
         }
     }
 }
