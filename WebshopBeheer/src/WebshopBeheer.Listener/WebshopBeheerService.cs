@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebshopBeheer.Listener
 {
-    public class WebshopBeheerService : IReceive<bestellingGoedgekeurd>, IReceive<factuurAangemaakt>, IReceive<betaaldeFactuurAfgemeld>
+    public class WebshopBeheerService : IReceive<BestellingGoedgekeurd>, IReceive<FactuurAangemaakt>, IReceive<BetaaldeFactuurAfgemeld>
     {
         ISender _sender;
 
@@ -15,16 +15,16 @@ namespace WebshopBeheer.Listener
             _sender = sender;
         }
 
-        public void Execute(bestellingGoedgekeurd item)
+        public void Execute(BestellingGoedgekeurd item)
         {
-            _sender.PublishEvent(new factuurAanmaken { Id = 1 });   
+            _sender.PublishEvent(new FactuurAanmaken { Id = 1 });   
         }
-        public void Execute(factuurAangemaakt item)
+        public void Execute(FactuurAangemaakt item)
         {
-            _sender.PublishEvent(new betaaldeFactuurAfmelden { Id = 1 });
+            _sender.PublishEvent(new BetaaldeFactuurAfmelden { Id = 1 });
         }
 
-        public void Execute(betaaldeFactuurAfgemeld item)
+        public void Execute(BetaaldeFactuurAfgemeld item)
         {
             throw new NotImplementedException();
         }

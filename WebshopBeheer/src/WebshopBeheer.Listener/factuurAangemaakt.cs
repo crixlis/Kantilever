@@ -1,6 +1,6 @@
 ﻿namespace WebshopBeheer.Listener
 {
-    public class factuurAangemaakt : factuurAanmaken
+    public class FactuurAangemaakt : FactuurAanmaken
     {
     }
 }

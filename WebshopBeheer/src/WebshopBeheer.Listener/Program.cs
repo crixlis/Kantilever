@@ -16,16 +16,16 @@ namespace WebshopBeheer.Listener
             var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
 
             var builder = new ContainerBuilder();
-            builder.RegisterReceiverFor<WebshopBeheerService, bestellingGoedgekeurd>();
-            builder.RegisterReceiverFor<WebshopBeheerService, factuurAangemaakt>();
-            builder.RegisterReceiverFor<WebshopBeheerService, betaaldeFactuurAfgemeld>();
+            builder.RegisterReceiverFor<WebshopBeheerService, BestellingGoedgekeurd>();
+            builder.RegisterReceiverFor<WebshopBeheerService, FactuurAangemaakt>();
+            builder.RegisterReceiverFor<WebshopBeheerService, BetaaldeFactuurAfgemeld>();
 
             using (var container = builder.Build())
             using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
             {
-                listener.SubscribeCommands<bestellingGoedgekeurd>(container);
-                listener.SubscribeCommands<factuurAangemaakt>(container);
-                listener.SubscribeCommands<betaaldeFactuurAfgemeld>(container);
+                listener.SubscribeCommands<BestellingGoedgekeurd>(container);
+                listener.SubscribeCommands<FactuurAangemaakt>(container);
+                listener.SubscribeCommands<BetaaldeFactuurAfgemeld>(container);
                 listener.Received += ListenerMessage;
                 using (ManualResetEvent manualResetEvent = new ManualResetEvent(false))
                 {

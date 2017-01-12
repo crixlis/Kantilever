@@ -1,6 +1,6 @@
 ﻿namespace WebshopBeheer.Listener
 {
-    public class betaaldeFactuurAfmelden
+    public class BetaaldeFactuurAfmelden
     {
         public int Id { get; set; }
     }
