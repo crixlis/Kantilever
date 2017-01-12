@@ -20,5 +20,20 @@ namespace BestelService.Test
             //Assert
             sender.Received(1).PublishEvent(Arg.Any<bestellingAangemaakt>());
         }
+
+        [Fact]
+        public void IkWilEenBestellingKeurenEventOpvangenEnEenBestellingGoedgekeurdPublishen()
+        {
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var service = new BestelService(sender);
+            var bestelling = new bestellingKeuren {Id = 1};
+
+            //Act
+            service.Execute(bestelling);
+
+            //Assert
+            sender.Received(1).PublishEvent(Arg.Any<bestellingGekeurd>());
+        }
     }
 }
