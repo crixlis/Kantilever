@@ -1,0 +1,15 @@
+version: '2'
+services:
+  TestForBuild:
+    build:
+      context: ./TestForBuild/src/TestForBuild
+      dockerfile: Dockerfile
+      args: 
+        SOURCE: ./bin/publish
+  WebshopBeheer:
+    build:
+      context: ./WebshopBeheer/src/WebshopBeheer
+      dockerfile: Dockerfile
+      args: 
+        SOURCE: ./bin/publish
+    ports: "8080:5000"
