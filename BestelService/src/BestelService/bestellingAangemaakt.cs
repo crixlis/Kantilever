@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BestelService
+﻿namespace BestelService
 {
-    public class bestellingAangemaakt
+    public class bestellingAangemaakt : bestellingAanmaken
     {
-        public int Id { get; set; }
     }
 }

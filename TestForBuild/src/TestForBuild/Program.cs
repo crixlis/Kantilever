@@ -9,6 +9,7 @@ namespace TestForBuild
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("It Works!!!!!!!!!!!!!!")
         }
     }
 }
