@@ -14,5 +14,3 @@ services:
       args: 
         SOURCE: ./bin/publish
     image: lmf-webshopbeheer
-    ports: 
-      - "8080:5000"
