@@ -3,7 +3,8 @@ services:
   lmf-webshop-frontend:
     build:
       context: ./WebshopFrontend/particulier
-      dockerfile: Dockerfile     
+      dockerfile: Dockerfile
+    image: docentm:5000/lmf-webshop-frontend
 
   lmf-webshopbeheer:
     build:
@@ -11,3 +12,4 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
+    image: docentm:5000/lmf-webshopbeheer
