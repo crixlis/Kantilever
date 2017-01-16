@@ -8,7 +8,7 @@
     margin: 0;
     padding: 0;
 
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Calibri', sans-serif;
     font-weight: 300;
 }
 
@@ -18,7 +18,10 @@ body
 }
  
 header {
-    background-color: #2D398E;
+    background-image: url('image/Kantilever 8 Banner.png');
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position-x: 60%;
     color: #fff;
     height: 140px;
 }
@@ -53,8 +56,6 @@ h2 {
 }
 
 #floatingHeader div {
-    /*background-color:rgba(45, 57, 142, 0.8);*/
-    text-align: right;
     vertical-align: top;
     position: fixed;
     top: 0px;
@@ -62,13 +63,89 @@ h2 {
     color: white;
 }
 
-#floatingHeader nav {
+#floatingHeader .rightGroup {
     display: inline-block;
-    list-style: none;
-    vertical-align: top;
+    position: absolute;
+    text-align: right;
+    right: 0;
 }
 
+#floatingHeader #menu:before {
+    display: inline-block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('svg/menuWhite.svg');
+    top: -10px;
+    left: -10px;
 
+    /* create a new stacking context */
+    position: absolute;
+    z-index: 1;
+}
+
+#floatingHeader #menu {
+    position: relative;
+    display: inline-block;
+    width:0;
+    height:0;
+    border: solid #2D398E 20px;
+    border-radius: 100%;
+    left: 0;
+    margin: 10px;
+}
+
+#floatingHeader #user:before {
+    display: inline-block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('svg/userWhite.svg');
+    top: -10px;
+    left: -10px;
+
+    /* create a new stacking context */
+    position: absolute;
+    z-index: 1;
+}
+
+#floatingHeader #user {
+    position: relative;
+    display: inline-block;
+    width:0;
+    height:0;
+    border: solid #2D398E 20px;
+    border-radius: 100%;
+    right: 0;
+    margin: 10px;
+}
+
+#floatingHeader #shoppingCar:before {
+    display: inline-block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('svg/shoppingCarWhite.svg');
+    top: -10px;
+    left: -10px;
+
+    /* create a new stacking context */
+    position: absolute;
+    z-index: 1;
+}
+
+#floatingHeader #shoppingCar {
+    position: relative;
+    display: inline-block;
+    width:0;
+    height:0;
+    border: solid #2D398E 20px;
+    border-radius: 100%;
+    right: 0;
+    margin: 10px;
+}
+
+/*
 #floatingHeader #shoppingCar:before {
     display: inline-block;
     content: '';
@@ -78,9 +155,9 @@ h2 {
     right: 20px;
     bottom: 2px;
 
-    /* create a new stacking context */
     position: absolute;
 }
+
 #floatingHeader a:hover #shoppingCar:before,
 #floatingHeader a:active #shoppingCar:before {
     background-image: url('svg/shoppingCarBlack.svg');
@@ -114,14 +191,14 @@ h2 {
     right: 0px;
     bottom: 3px;
 
-    /* create a new stacking context */
     position: absolute;
-    z-index: -1;  /* to be below the parent element */
+    z-index: -1;
 }
 #floatingHeader a:hover #shoppingCar:after,
 #floatingHeader a:active #shoppingCar:after {
     border-color: #2D398E;
 }
+*/
 /**********************************
  * WIDESCREEN CORRECTIONS
  **********************************/
