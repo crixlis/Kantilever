@@ -3,7 +3,7 @@ services:
   lmf-webshop-frontend:
     build:
       context: ./WebshopFrontend/particulier
-      dockerfile: Dockerfile     
+      dockerfile: Dockerfile
 
   lmf-webshopbeheer:
     build:
