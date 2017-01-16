@@ -26,7 +26,7 @@ namespace WebshopBeheer.Listener
 
         public void Execute(BetaaldeFactuurAfgemeld item)
         {
-            Console.WriteLine("De cirkel is rond !!!");
+            throw new NotImplementedException(message: "De cirkel is rond !!!");
         }
     }
 }

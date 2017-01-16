@@ -18,7 +18,7 @@ body
 }
  
 header {
-    background-color: lightblue;
+    background-color: #2D398E;
     color: #fff;
     height: 140px;
 }
@@ -53,7 +53,7 @@ h2 {
 }
 
 #floatingHeader div {
-    background-color:rgba(173, 216, 230, 0.8);
+    /*background-color:rgba(45, 57, 142, 0.8);*/
     text-align: right;
     vertical-align: top;
     position: fixed;
@@ -68,57 +68,6 @@ h2 {
     vertical-align: top;
 }
 
-#floatingHeader nav ul:before {
-    display: block;
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-image: url('svg/menuWhite.svg');
-}
-
-#floatingHeader nav ul:active:before, 
-#floatingHeader nav ul:hover:before {
-    display: none;
-}
-
-#floatingHeader nav ul, 
-#floatingHeader a {
-    padding: 10px;
-    right: 0px;
-    position: relative;
-}
-
-#floatingHeader nav li {
-    display: none;
-    background-color: green;
-    z-index: 120;
-}
-
-#floatingHeader a {
-    vertical-align: top;
-}
-
-#floatingHeader nav ul:hover li, 
-#floatingHeader nav ul:active li 
-{
-    display: block;
-    position: relative;
-    top: 200%;
-    padding: 10px;
-}
-
-#floatingHeader nav ul:hover {
-    z-index: 10;
-}
-
-#floatingHeader nav ul li:hover, 
-#floatingHeader nav ul li:active, 
-#floatingHeader a:hover, 
-#floatingHeader a:active {
-    background-color: #fff;
-    color: lightblue;
-    cursor: pointer;
-}
 
 #floatingHeader #shoppingCar:before {
     display: inline-block;
@@ -161,7 +110,7 @@ h2 {
     height: 0;
     padding: 0;
     border-radius: 100%;
-    color: lightblue;
+    color: #2D398E;
     right: 0px;
     bottom: 3px;
 
@@ -171,7 +120,7 @@ h2 {
 }
 #floatingHeader a:hover #shoppingCar:after,
 #floatingHeader a:active #shoppingCar:after {
-    border-color: lightblue;
+    border-color: #2D398E;
 }
 /**********************************
  * WIDESCREEN CORRECTIONS
