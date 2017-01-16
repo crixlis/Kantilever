@@ -17,16 +17,16 @@ namespace WebshopBeheer.Listener
 
         public void Execute(BestellingGoedgekeurd item)
         {
-            _sender.PublishCommand(new FactuurAanmaken { Id = 1 });   
+            _sender.PublishCommand(new FactuurAanmaken { Id = item.Id });   
         }
         public void Execute(FactuurAangemaakt item)
         {
-            _sender.PublishCommand(new BetaaldeFactuurAfmelden { Id = 1 });
+            _sender.PublishCommand(new BetaaldeFactuurAfmelden { Id = item.Id });
         }
 
         public void Execute(BetaaldeFactuurAfgemeld item)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("De cirkel is rond !!!");
         }
     }
 }
