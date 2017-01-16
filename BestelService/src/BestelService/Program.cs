@@ -23,10 +23,10 @@ namespace BestelService
             builder.RegisterReceiverFor<BestelService, BestellingKeuren>();
 
             using (var container = builder.Build())
-            using (var listener = new Listener(connection, "Kantilever"))
+            using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
             {
-                listener.SubscribeCommands<BestellingAanmaken>(container);
                 listener.SubscribeCommands<BestellingKeuren>(container);
+                listener.SubscribeCommands<BestellingAanmaken>(container);
                 listener.Received += ListenerMessage;
                 using (ManualResetEvent manualResetEvent = new ManualResetEvent(false))
                 {
