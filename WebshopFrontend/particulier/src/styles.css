@@ -171,6 +171,15 @@ h2 {
     color: #2D398E;
 }
 
+main button{
+    padding: 10px;
+    border-radius: 5px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
 /*
 #floatingHeader #shoppingCar:before {
     display: inline-block;
