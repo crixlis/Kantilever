@@ -1,13 +1,9 @@
 version: '2'
 services:
-  lmf-webshop:
+  lmf-webshop-frontend:
     build:
-      context: ./TestForBuild/src/TestForBuild
-      dockerfile: Dockerfile
-      args: 
-        SOURCE: ./bin/publish
-    networks: 
-      - kantilever
+      context: ./WebshopFrontend/particulier
+      dockerfile: Dockerfile     
 
   lmf-webshopbeheer:
     build:
@@ -15,10 +11,3 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    networks: 
-      - kantilever
-    ports: 
-      - "8080:5000"
-
-networks: 
-  kantilever:
