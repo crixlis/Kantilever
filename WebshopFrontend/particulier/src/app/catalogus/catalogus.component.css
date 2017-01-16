@@ -5,6 +5,7 @@
     color: #ffffff;
     margin-top: 10px;
     margin-bottom: 10px;
+    display: inline-block;
 }
 
 #catalogus .euro:before {
@@ -30,4 +31,20 @@
 #catalogus img {
     width: 100%;
     height: auto;
+}
+
+/**********************************
+ * WIDESCREEN CORRECTIONS
+ **********************************/
+@media screen and (min-width: 760px) 
+{
+    #catalogus img {
+        width: auto;
+        max-height: 100px;
+    }
+
+    #catalogus article {
+        margin: 10px;
+        width: 280px;
+    }
 }
