@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:1.0.3-runtime
+FROM microsoft/aspnetcore:1.0
 ENTRYPOINT ["dotnet", "Webshop.API.dll"]
 
 ARG SOURCE=.
