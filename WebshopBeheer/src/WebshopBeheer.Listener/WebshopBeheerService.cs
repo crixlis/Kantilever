@@ -17,11 +17,11 @@ namespace WebshopBeheer.Listener
 
         public void Execute(BestellingGoedgekeurd item)
         {
-            _sender.PublishEvent(new FactuurAanmaken { Id = 1 });   
+            _sender.PublishCommand(new FactuurAanmaken { Id = 1 });   
         }
         public void Execute(FactuurAangemaakt item)
         {
-            _sender.PublishEvent(new BetaaldeFactuurAfmelden { Id = 1 });
+            _sender.PublishCommand(new BetaaldeFactuurAfmelden { Id = 1 });
         }
 
         public void Execute(BetaaldeFactuurAfgemeld item)

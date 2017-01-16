@@ -15,12 +15,14 @@ namespace FactuurService
 
             var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
             var builder = new ContainerBuilder();
-            builder.RegisterReceiverFor<FactuurService, FactuurAanmaken>();
+            builder.RegisterReceiverFor<FactuurService, BetaaldeFactuurAfmelden>();
+            builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
 
             using (var container = builder.Build())
             using (var listener = new Listener(connection, "Kantilever"))
             {
                 listener.SubscribeCommands<FactuurAanmaken>(container);
+                listener.SubscribeCommands <BetaaldeFactuurAfmelden>(container);
                 listener.Received += Listener_Received;
                 using (var mEvent = new ManualResetEvent(false)){ 
                     mEvent.WaitOne();

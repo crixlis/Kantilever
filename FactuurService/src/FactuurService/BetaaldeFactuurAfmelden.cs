@@ -1,6 +1,6 @@
 ﻿namespace FactuurService
 {
-    public class FactuurAanmaken
+    public class BetaaldeFactuurAfmelden
     {
         public int Id { get; set; }
     }
