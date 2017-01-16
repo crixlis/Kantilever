@@ -1,0 +1,18 @@
+.productDetails{
+    display: flex;
+    margin: 20px 0;
+    flex-direction: column;
+}
+
+.pdTitle, .pdInfo{
+    font-weight: bold;
+}
+
+.pdTitle{
+    margin-right: 5px;
+}
+
+.pdImage img{
+    width: 100%;
+    height: auto;
+}
