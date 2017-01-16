@@ -6,6 +6,7 @@ import { environment } from './environments/environment';
 import { AppModule } from './app/';
 import { PageNotFoundModule } from './app/pageNotFound';
 import { ProductModule } from './app/product';
+import { WinkelwagenModule } from './app/winkelwagen';
 
 if (environment.production) {
   enableProdMode();

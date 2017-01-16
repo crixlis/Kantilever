@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { CatalogusComponent } from './catalogus';
 import { PageNotFoundComponent } from './pageNotFound';
 import { ProductComponent } from './product';
+import { WinkelwagenComponent } from './winkelwagen';
 
 const appRoutes: Routes = [
   { path: 'product/:id', component: ProductComponent },
@@ -15,6 +16,11 @@ const appRoutes: Routes = [
     path: 'catalogus',
     component: CatalogusComponent,
     data: { title: 'Catalogus' }
+  },
+  {
+    path: 'winkelwagen',
+    component: WinkelwagenComponent,
+    data: { title: 'Winkelwagen' }
   },
   { path: '',
     redirectTo: '/catalogus',
@@ -29,6 +35,7 @@ const appRoutes: Routes = [
     CatalogusComponent,
     PageNotFoundComponent,
     ProductComponent,
+    WinkelwagenComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
