@@ -73,11 +73,10 @@ h2 {
 #floatingHeader #menu:before {
     display: inline-block;
     content: '';
+    margin: 5px;
     width: 20px;
     height: 20px;
     background-image: url('svg/menuWhite.svg');
-    top: -10px;
-    left: -10px;
 
     /* create a new stacking context */
     position: absolute;
@@ -87,62 +86,89 @@ h2 {
 #floatingHeader #menu {
     position: relative;
     display: inline-block;
-    width:0;
-    height:0;
-    border: solid #2D398E 20px;
+    width: 30px;
+    height: 30px;
+    border: solid #2D398E 5px;
     border-radius: 100%;
     left: 0;
     margin: 10px;
+    background-color: #2D398E;
+}
+
+#floatingHeader #menu:active:before,
+#floatingHeader #menu:hover:before {
+    background-image: url('svg/menuBlue.svg');
 }
 
 #floatingHeader #user:before {
     display: inline-block;
     content: '';
+    margin: 5px;
     width: 20px;
     height: 20px;
     background-image: url('svg/userWhite.svg');
-    top: -10px;
-    left: -10px;
-
-    /* create a new stacking context */
-    position: absolute;
-    z-index: 1;
 }
 
 #floatingHeader #user {
     position: relative;
     display: inline-block;
-    width:0;
-    height:0;
-    border: solid #2D398E 20px;
+    width: 30px;
+    height: 30px;
+    border: solid #2D398E 5px;
     border-radius: 100%;
     right: 0;
     margin: 10px;
+    background-color: #2D398E;
 }
 
 #floatingHeader #shoppingCar:before {
     display: inline-block;
     content: '';
+    margin: 5px;
     width: 20px;
     height: 20px;
     background-image: url('svg/shoppingCarWhite.svg');
-    top: -10px;
-    left: -10px;
-
-    /* create a new stacking context */
-    position: absolute;
-    z-index: 1;
 }
 
 #floatingHeader #shoppingCar {
     position: relative;
     display: inline-block;
-    width:0;
-    height:0;
-    border: solid #2D398E 20px;
+    width: 30px;
+    height: 30px;
+    border: solid #2D398E 5px;
     border-radius: 100%;
     right: 0;
     margin: 10px;
+    background-color: #2D398E;
+}
+
+#floatingHeader #user:active:before,
+#floatingHeader #user:hover:before {
+    background-image: url('svg/userBlue.svg');
+}
+
+#floatingHeader #shoppingCar:active:before,
+#floatingHeader #shoppingCar:hover:before {
+    background-image: url('svg/shoppingCarBlue.svg');
+}
+
+#floatingHeader #menu:active,
+#floatingHeader #menu:hover,
+#floatingHeader #shoppingCar:active,
+#floatingHeader #shoppingCar:hover,
+#floatingHeader #user:active,
+#floatingHeader #user:hover {
+    border-color: #2D398E;
+    background-color: #ffffff;
+}
+
+#floatingHeader #menu:before:active
+#floatingHeader #menu:before:hover,
+#floatingHeader #shoppingCar:active:before,
+#floatingHeader #shoppingCar:hover:before,
+#floatingHeader #user:active:before,
+#floatingHeader #user:hover:before {
+    color: #2D398E;
 }
 
 /*

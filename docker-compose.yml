@@ -38,7 +38,7 @@ services:
         SOURCE: ./bin/publish
     image: docentm:5000/lmf-bestelservice
     
-    lmf-factuurservice:
+  lmf-factuurservice:
     build:
       context: ./FactuurService/src/FactuurService
       dockerfile: Dockerfile
