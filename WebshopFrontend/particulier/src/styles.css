@@ -52,6 +52,15 @@ h2 {
     font-weight: 400;
 }
 
+main button{
+    padding: 10px;
+    border-radius: 5px;
+}
+
+button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:active{
+    cursor: pointer;
+}
+
 /**********************************
  * Navigation, Shopping Car and LoginButton
  **********************************/
@@ -187,6 +196,10 @@ button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:ac
     cursor: pointer;
 }
 
+/**********************************
+ * WIDESCREEN CORRECTIONS
+ **********************************/
+
 @media screen and (min-width: 760px) 
 {
     header, #floatingHeader, main {
@@ -202,6 +215,10 @@ button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:ac
     #floatingHeader div {
         width: 720px;
     }
+
+    /**********************************
+    * Header Wide Screen
+    **********************************/
 
     header {
         background-image: url('image/Kantilever 8 Banner.png');
