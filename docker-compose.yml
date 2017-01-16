@@ -1,6 +1,6 @@
 version: '2'
 services:
-  lmf-webshop:
+  TestForBuild:
     build:
       context: ./TestForBuild/src/TestForBuild
       dockerfile: Dockerfile
@@ -9,8 +9,6 @@ services:
       networks: 
         - kantilever
   WebshopBeheer:
-
-    image: lmf-webshop
     build:
       context: ./WebshopBeheer/src/WebshopBeheer
       dockerfile: Dockerfile
@@ -22,5 +20,3 @@ services:
 
   networks: 
     - kantilever
-    image: lmf-webshopbeheer
-
