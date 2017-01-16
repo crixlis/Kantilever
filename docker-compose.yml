@@ -11,5 +11,5 @@ services:
       context: ./WebshopBeheer/src/WebshopBeheer
       dockerfile: Dockerfile
       args: 
-        SOURCE: ./WebshopBeheer/src/WebshopBeheer/bin/publish
+        SOURCE: ./bin/publish
     image: docentm:5000/lmf-webshopbeheer
