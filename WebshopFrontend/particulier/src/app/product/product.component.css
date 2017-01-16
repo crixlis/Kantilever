@@ -26,6 +26,10 @@ article{
     flex-flow: row wrap;
 }
 
+.productDetails dl {
+    width: 100%;
+}
+
 .pdTitle, .pdInfo, .sbTitle, .bpTitle{
     font-weight: bold;
 }
@@ -55,6 +59,10 @@ img{
 }
 
 @media screen and (min-width: 760px) {
+
+    .productDetails dd, productDetails dt {
+        width: 40%;
+    }
 
     main{
         flex-flow: row wrap;
