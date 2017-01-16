@@ -20,4 +20,4 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    image: docentm:5000/lmf-BestelService
+    image: docentm:5000/lmf-bestelservice
