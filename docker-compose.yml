@@ -8,6 +8,7 @@ services:
         SOURCE: ./bin/publish
       networks: 
         - kantilever
+        
   WebshopBeheer:
     build:
       context: ./WebshopBeheer/src/WebshopBeheer
