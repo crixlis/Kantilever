@@ -19,14 +19,14 @@ namespace BestelService
             var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
 
             var builder = new ContainerBuilder();
-            builder.RegisterReceiverFor<BestelService, bestellingAanmaken>();
-            builder.RegisterReceiverFor<BestelService, bestellingKeuren>();
+            builder.RegisterReceiverFor<BestelService, BestellingAanmaken>();
+            builder.RegisterReceiverFor<BestelService, BestellingKeuren>();
 
             using (var container = builder.Build())
             using (var listener = new Listener(connection, "Kantilever"))
             {
-                listener.SubscribeCommands<bestellingAanmaken>(container);
-                listener.SubscribeCommands<bestellingKeuren>(container);
+                listener.SubscribeCommands<BestellingAanmaken>(container);
+                listener.SubscribeCommands<BestellingKeuren>(container);
                 listener.Received += ListenerMessage;
                 using (ManualResetEvent manualResetEvent = new ManualResetEvent(false))
                 {

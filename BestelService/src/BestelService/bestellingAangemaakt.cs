@@ -1,6 +1,6 @@
 ﻿namespace BestelService
 {
-    public class bestellingAangemaakt : bestellingAanmaken
+    public class BestellingAangemaakt : BestellingAanmaken
     {
     }
 }

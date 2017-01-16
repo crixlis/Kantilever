@@ -1,14 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using NSubstitute;
+using rabbitmq_demo;
+using System;
+using Xunit;
 
 namespace Webshop.Listener.Test
 {
     public class WebshopListenerTests
     {
-        public WebshopListenerTests()
+        [Fact]
+        public void DeWebshopListenerKanEenBetaaldeFactuurAfgemeldEventOntvangen()
         {
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var service = new WebshopListenerService(sender);
+
+            var factuurAfgemeld = new BetaaldeFactuurAfgemeld
+            {
+                ID = 0
+            };
+
+            //Act + Asser ... er wordt tot nu toe alleen gecontrolleerd of een BetaaldeFactuurAfgemeld event ontvangen kan worden
+            Assert.Throws(typeof(NotImplementedException), () => service.Execute(factuurAfgemeld));
         }
     }
 }

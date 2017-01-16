@@ -8,7 +8,10 @@
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.1"
-    }
+    },
+    "rabbitmq-demo": "1.2.0",
+    "RabbitMQ.Client": "4.1.1",
+    "Microsoft.CodeCoverage": "1.0.2"
   },
 
   "frameworks": {

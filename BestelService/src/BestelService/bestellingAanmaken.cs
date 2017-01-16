@@ -1,6 +1,6 @@
 ﻿namespace BestelService
 {
-    public class bestellingAanmaken
+    public class BestellingAanmaken
     {
         public int Id { get; set; }
     }

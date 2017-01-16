@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BestelService
 {
-    public class BestelService: IReceive<bestellingAanmaken>, IReceive<bestellingKeuren>
+    public class BestelService: IReceive<BestellingAanmaken>, IReceive<BestellingKeuren>
     {
         ISender _sender;
 
@@ -15,14 +15,14 @@ namespace BestelService
             _sender = sender;
         }
 
-        public void Execute(bestellingAanmaken item)
+        public void Execute(BestellingAanmaken item)
         {
-            _sender.PublishEvent(new bestellingAangemaakt{Id = item.Id });
+            _sender.PublishEvent(new BestellingAangemaakt{Id = item.Id });
         }
 
-        public void Execute(bestellingKeuren item)
+        public void Execute(BestellingKeuren item)
         {
-            _sender.PublishEvent(new bestellingGekeurd {Id = item.Id });
+            _sender.PublishEvent(new BestellingGekeurd {Id = item.Id });
         }
     }
 }

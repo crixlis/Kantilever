@@ -1,22 +1,31 @@
 version: '2'
 services:
-  TestForBuild:
+  lmf-webshop:
     build:
       context: ./TestForBuild/src/TestForBuild
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
+<<<<<<< HEAD
       networks: 
         - kantilever
   WebshopBeheer:
+=======
+    image: lmf-webshop
+  lmf-webshopbeheer:
+>>>>>>> f36cb3629e2c98ade2aefbb0900185c17902753f
     build:
       context: ./WebshopBeheer/src/WebshopBeheer
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
+<<<<<<< HEAD
     networks: 
         - kantilever
     ports: "8080:5000"
 
   networks: 
     - kantilever
+=======
+    image: lmf-webshopbeheer
+>>>>>>> f36cb3629e2c98ade2aefbb0900185c17902753f
