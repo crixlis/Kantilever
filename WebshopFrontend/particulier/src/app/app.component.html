@@ -1,13 +1,12 @@
 <section id="floatingHeader">
   <div>
-    <span id="menu"></span>
+    <span id="menu" (click)="ToggleSideNav()"></span>
     <span class="rightGroup">
       <span id="shoppingCar"></span>
       <span id="user"></span>
     </span>
   </div>
 </section>
-<button (click)="ToggleSideNav()">Toon menu</button>
 <section id="sidebar" class="">
     <nav>
       <ul>
