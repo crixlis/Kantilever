@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BestelService
 {
-    public class BestellingGekeurd : BestellingKeuren
+    public class BestellingGoedgekeurd : BestellingKeuren
     {
     }
 }
