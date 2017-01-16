@@ -19,13 +19,14 @@ namespace WebshopBeheer.Listener
             builder.RegisterReceiverFor<WebshopBeheerService, BestellingGoedgekeurd>();
             builder.RegisterReceiverFor<WebshopBeheerService, FactuurAangemaakt>();
             builder.RegisterReceiverFor<WebshopBeheerService, BetaaldeFactuurAfgemeld>();
+            builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
 
             using (var container = builder.Build())
             using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
             {
-                listener.SubscribeCommands<BestellingGoedgekeurd>(container);
-                listener.SubscribeCommands<FactuurAangemaakt>(container);
-                listener.SubscribeCommands<BetaaldeFactuurAfgemeld>(container);
+                listener.SubscribeEvents<BestellingGoedgekeurd>(container);
+                listener.SubscribeEvents<FactuurAangemaakt>(container);
+                listener.SubscribeEvents<BetaaldeFactuurAfgemeld>(container);
                 listener.Received += ListenerMessage;
                 using (ManualResetEvent manualResetEvent = new ManualResetEvent(false))
                 {

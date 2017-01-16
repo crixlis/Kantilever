@@ -22,7 +22,7 @@ namespace BestelService
 
         public void Execute(BestellingKeuren item)
         {
-            _sender.PublishEvent(new BestellingGekeurd {Id = item.Id });
+            _sender.PublishEvent(new BestellingGoedgekeurd {Id = item.Id });
         }
     }
 }

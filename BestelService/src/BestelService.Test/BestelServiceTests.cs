@@ -33,7 +33,7 @@ namespace BestelService.Test
             service.Execute(bestelling);
 
             //Assert
-            sender.Received(1).PublishEvent(Arg.Any<BestellingGekeurd>());
+            sender.Received(1).PublishEvent(Arg.Any<BestellingGoedgekeurd>());
         }
     }
 }
