@@ -1,0 +1,47 @@
+version: '2'
+services: 
+    lmf-webshop-frontend:
+        container_name: lmf-webshop-frontend
+        image: docentm:5000/lmf-webshop-frontend:latest
+        networks: 
+            - kantilever
+        ports:
+            - 7000:80
+
+    lmf-webshopbeheer:
+        container_name: lmf-webshopbeheer
+        image: docentm:5000/lmf-webshopbeheer:latest
+        networks: 
+            - kantilever
+        ports: 
+            - 8081:5000
+
+    lmf-webshop.api:
+        container_name: lmf-webshop.api
+        image: docentm:5000/lmf-webshop.api
+        networks: 
+            - kantilever
+        ports: 
+            - 8090:5000
+
+    lmf-webshop.listener:
+        container_name: lmf-webshop.listener
+        image: docentm:5000/lmf-webshop.listener
+        networks: 
+            - kantilever
+
+    lmf-bestelservice:
+        container_name: lmf-bestelservice
+        image: docentm:5000/lmf-bestelservice
+        networks: 
+            - kantilever
+    
+    lmf-factuurservice:
+        container_name: lmf-factuurservice
+        image: docentm:5000/lmf-factuurservice
+        networks: 
+            - kantilever
+
+networks: 
+    kantilever:
+        driver: bridge

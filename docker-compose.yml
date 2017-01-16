@@ -6,6 +6,22 @@ services:
       dockerfile: Dockerfile
     image: docentm:5000/lmf-webshop-frontend
 
+  lmf-webshop.api:
+    build:
+      context: ./WebshopAPI/src/Webshop.API
+      dockerfile: Dockerfile
+      args: 
+        SOURCE: ./bin/publish
+    image: docentm:5000/lmf-webshop.api
+    
+  lmf-webshop.listener:
+    build:
+      context: ./WebshopAPI/src/Webshop.Listener
+      dockerfile: Dockerfile
+      args: 
+        SOURCE: ./bin/publish
+    image: docentm:5000/lmf-webshop.listener
+    
   lmf-webshopbeheer:
     build:
       context: ./WebshopBeheer/src/WebshopBeheer
@@ -13,3 +29,19 @@ services:
       args: 
         SOURCE: ./bin/publish
     image: docentm:5000/lmf-webshopbeheer
+
+  lmf-bestelservice:
+    build:
+      context: ./BestelService/src/BestelService
+      dockerfile: Dockerfile
+      args: 
+        SOURCE: ./bin/publish
+    image: docentm:5000/lmf-bestelservice
+    
+  lmf-factuurservice:
+    build:
+      context: ./FactuurService/src/FactuurService
+      dockerfile: Dockerfile
+      args: 
+        SOURCE: ./bin/publish
+    image: docentm:5000/lmf-factuurservice

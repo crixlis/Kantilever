@@ -10,7 +10,7 @@ import { PageNotFoundComponent } from './pageNotFound';
 import { ProductComponent } from './product';
 
 const appRoutes: Routes = [
-  { path: 'product/:id', component: PageNotFoundComponent },
+  { path: 'product/:id', component: ProductComponent },
   {
     path: 'catalogus',
     component: CatalogusComponent,
