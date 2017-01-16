@@ -6,10 +6,17 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
+      networks: 
+        - kantilever
   WebshopBeheer:
     build:
       context: ./WebshopBeheer/src/WebshopBeheer
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
+    networks: 
+        - kantilever
     ports: "8080:5000"
+
+  networks: 
+    - kantilever
