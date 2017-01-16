@@ -21,7 +21,7 @@ namespace FactuurService.Test
 
             var FactuurAanmakenCommand = new FactuurAanmaken
             {
-                ID = 0
+                Id = 0
             };
 
             //Act
@@ -29,6 +29,25 @@ namespace FactuurService.Test
 
             //Assert
             sender.Received(1).PublishEvent(Arg.Any<FactuurAangemaakt>());
+        }
+
+        [Fact]
+        public void DeFactuurServiceKanEenBetaaldeFactuurAfmeldenCommandOntvangenEnEenBetaaldeFactuurAfgemeldEventOpgooien()
+        {
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var service = new FactuurService(sender);
+
+            var BetaaldeFactuurAfmeldenCommand = new BetaaldeFactuurAfmelden
+            {
+                Id = 0
+            };
+
+            //Act
+            service.Execute(BetaaldeFactuurAfmeldenCommand);
+
+            //Assert
+            sender.Received(1).PublishEvent(Arg.Any<BetaaldeFactuurAfgemeld>());
         }
     }
 }

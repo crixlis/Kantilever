@@ -23,9 +23,9 @@ namespace WebshopBeheer.Listener
             using (var container = builder.Build())
             using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
             {
-                listener.SubscribeCommands<BestellingGoedgekeurd>(container);
-                listener.SubscribeCommands<FactuurAangemaakt>(container);
-                listener.SubscribeCommands<BetaaldeFactuurAfgemeld>(container);
+                listener.SubscribeEvents<BestellingGoedgekeurd>(container);
+                listener.SubscribeEvents<FactuurAangemaakt>(container);
+                listener.SubscribeEvents<BetaaldeFactuurAfgemeld>(container);
                 listener.Received += ListenerMessage;
                 using (ManualResetEvent manualResetEvent = new ManualResetEvent(false))
                 {

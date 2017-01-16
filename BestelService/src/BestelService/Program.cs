@@ -2,10 +2,7 @@
 using RabbitMQ.Client;
 using rabbitmq_demo;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BestelService
 {
@@ -21,12 +18,13 @@ namespace BestelService
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<BestelService, BestellingAanmaken>();
             builder.RegisterReceiverFor<BestelService, BestellingKeuren>();
+            builder.Register(d => new Sender(connection, "Kantilever")).As<ISender>();
 
             using (var container = builder.Build())
-            using (var listener = new Listener(connection, "Kantilever"))
+            using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
             {
-                listener.SubscribeCommands<BestellingAanmaken>(container);
                 listener.SubscribeCommands<BestellingKeuren>(container);
+                listener.SubscribeCommands<BestellingAanmaken>(container);
                 listener.Received += ListenerMessage;
                 using (ManualResetEvent manualResetEvent = new ManualResetEvent(false))
                 {
