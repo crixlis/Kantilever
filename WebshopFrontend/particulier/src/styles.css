@@ -178,6 +178,72 @@ h2 {
     color: #2D398E;
 }
 
+<<<<<<< HEAD
+=======
+main button{
+    padding: 10px;
+    border-radius: 5px;
+}
+
+button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:active{
+    cursor: pointer;
+}
+
+/*
+#floatingHeader #shoppingCar:before {
+    display: inline-block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('svg/shoppingCarWhite.svg');
+    right: 20px;
+    bottom: 2px;
+
+    position: absolute;
+}
+
+#floatingHeader a:hover #shoppingCar:before,
+#floatingHeader a:active #shoppingCar:before {
+    background-image: url('svg/shoppingCarBlack.svg');
+}
+#floatingHeader #shoppingCar {
+    position: relative;
+    color: black;
+    display: inline-block;
+    width:20px;
+    height:20px;
+    font-size: 10px;
+    text-align: center;
+    padding-left: 20px;
+    top: 5px;
+}
+#floatingHeader a:hover #shoppingCar,
+#floatingHeader a:active #shoppingCar {
+    color: white;
+    z-index: 80;
+}
+
+#floatingHeader #shoppingCar:after {
+    content: '';
+    display: inline-block;
+    border: solid #fff 10px;
+    width: 0;
+    height: 0;
+    padding: 0;
+    border-radius: 100%;
+    color: #2D398E;
+    right: 0px;
+    bottom: 3px;
+
+    position: absolute;
+    z-index: -1;
+}
+#floatingHeader a:hover #shoppingCar:after,
+#floatingHeader a:active #shoppingCar:after {
+    border-color: #2D398E;
+}
+*/
+>>>>>>> dd5d7733c25bdcb4a689446223cadac21d209767
 /**********************************
  * WIDESCREEN CORRECTIONS
  **********************************/
