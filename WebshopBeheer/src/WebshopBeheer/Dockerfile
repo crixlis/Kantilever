@@ -1,5 +1,5 @@
 FROM microsoft/aspnetcore:1.0
-ENV HOME=./app
+ENV HOME=/app
 ENV ASPNETCORE_URLS http://+:5000
 ARG SOURCE
 
