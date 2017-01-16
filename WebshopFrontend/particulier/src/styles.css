@@ -187,15 +187,6 @@ button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:ac
     color: #2D398E;
 }
 
-main button{
-    padding: 10px;
-    border-radius: 5px;
-}
-
-button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:active{
-    cursor: pointer;
-}
-
 /**********************************
  * WIDESCREEN CORRECTIONS
  **********************************/
