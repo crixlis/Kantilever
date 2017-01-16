@@ -19,7 +19,8 @@ services:
     networks: 
         external:
           name: kantilever
-    ports: "8080:5000"
+    ports: 
+      - "8080:5000"
 
   networks: 
     kantilever:
