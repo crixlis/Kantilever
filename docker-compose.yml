@@ -20,5 +20,5 @@ services:
     ports: 
       - "8080:5000"
 
-  networks: 
-    kantilever:
+networks: 
+  kantilever:
