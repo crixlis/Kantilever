@@ -16,6 +16,7 @@ namespace FactuurService
             var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<FactuurService, BetaaldeFactuurAfmelden>();
+            builder.RegisterReceiverFor<FactuurService, FactuurAanmaken>();
             builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
 
             using (var container = builder.Build())

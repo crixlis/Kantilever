@@ -19,7 +19,7 @@ namespace WebshopBeheer.Listener.Test
             service.Execute(bestelling);
 
             //Assert
-            sender.Received(1).PublishEvent(Arg.Any<FactuurAanmaken>());
+            sender.Received(1).PublishCommand(Arg.Any<FactuurAanmaken>());
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace WebshopBeheer.Listener.Test
             service.Execute(factuur);
 
             //Assert
-            sender.Received(1).PublishEvent(Arg.Any<BetaaldeFactuurAfmelden>());
+            sender.Received(1).PublishCommand(Arg.Any<BetaaldeFactuurAfmelden>());
         }
 
         [Fact]
