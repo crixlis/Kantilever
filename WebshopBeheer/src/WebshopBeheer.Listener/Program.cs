@@ -19,6 +19,7 @@ namespace WebshopBeheer.Listener
             builder.RegisterReceiverFor<WebshopBeheerService, BestellingGoedgekeurd>();
             builder.RegisterReceiverFor<WebshopBeheerService, FactuurAangemaakt>();
             builder.RegisterReceiverFor<WebshopBeheerService, BetaaldeFactuurAfgemeld>();
+            builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
 
             using (var container = builder.Build())
             using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
