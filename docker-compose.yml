@@ -6,8 +6,8 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-      networks: 
-        - kantilever
+    networks: 
+      - kantilever
 
   WebshopBeheer:
     build:
