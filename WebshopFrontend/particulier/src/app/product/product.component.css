@@ -45,6 +45,12 @@ img{
     width: 100%;
 }
 
+#buyProduct{
+    padding: 10px;
+    background: #2D398E;
+    color: #fff;
+}
+
 #buyProduct button{
     margin: 20px 0;
 }
