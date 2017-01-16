@@ -32,6 +32,13 @@ h1 {
     font-weight: 600;
     position: absolute;
     top: 70px;
+    visibility: hidden;
+}
+
+h1:before {
+    content: '';
+    display: inline-block;
+    background-image: url('image/Kantilever 8b Logo Transparent.png');
 }
 
 main {
@@ -88,7 +95,7 @@ h2 {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: solid #2D398E 5px;
+    border: solid #ffffff 5px;
     border-radius: 100%;
     left: 0;
     margin: 10px;
@@ -114,7 +121,7 @@ h2 {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: solid #2D398E 5px;
+    border: solid #ffffff 5px;
     border-radius: 100%;
     right: 0;
     margin: 10px;
@@ -135,7 +142,7 @@ h2 {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: solid #2D398E 5px;
+    border: solid #ffffff 5px;
     border-radius: 100%;
     right: 0;
     margin: 10px;
@@ -171,6 +178,8 @@ h2 {
     color: #2D398E;
 }
 
+<<<<<<< HEAD
+=======
 main button{
     padding: 10px;
     border-radius: 5px;
@@ -234,6 +243,7 @@ button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:ac
     border-color: #2D398E;
 }
 */
+>>>>>>> dd5d7733c25bdcb4a689446223cadac21d209767
 /**********************************
  * WIDESCREEN CORRECTIONS
  **********************************/
@@ -253,26 +263,14 @@ button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:ac
     #floatingHeader div {
         width: 720px;
     }
-    #floatingHeader nav ul {
-        display: inline;
-    }
-    #floatingHeader nav ul:before {
-        display: none;
-    }
-    #floatingHeader nav li, 
-    #floatingHeader a {
-        padding: 10px;
-        color: #fff;
-        display: inline-block;
-    }
-    #floatingHeader nav ul:hover li, 
-    #floatingHeader nav ul:active li {
-        display: inline-block;
-        position: relative;
-        top: 0px;
+
+    header {
+        background-image: url('image/Kantilever 8 Banner.png');
+        background-repeat: no-repeat;
+        background-size: 720px auto;
     }
 
-    #floatingHeader #shoppingCar {
-        top: -5px;
+    h1:before {
+        display: none;
     }
 }
