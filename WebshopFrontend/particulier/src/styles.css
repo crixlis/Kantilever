@@ -176,7 +176,7 @@ main button{
     border-radius: 5px;
 }
 
-button:hover{
+button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:active{
     cursor: pointer;
 }
 
