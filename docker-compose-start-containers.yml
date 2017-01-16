@@ -22,7 +22,7 @@ services:
         networks: 
             - kantilever
         ports: 
-            - 8090:5672
+            - 8090:5000
 
     lmf-webshop.listener:
         container_name: lmf-webshop.listener
