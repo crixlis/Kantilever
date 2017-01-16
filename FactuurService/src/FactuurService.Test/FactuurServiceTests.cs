@@ -19,7 +19,7 @@ namespace FactuurService.Test
             var sender = Substitute.For<ISender>();
             var service = new FactuurService(sender);
 
-            var FactuurAanmakenCommand = new BetaaldeFactuurAfmelden
+            var FactuurAanmakenCommand = new FactuurAanmaken
             {
                 Id = 0
             };
