@@ -13,3 +13,11 @@ services:
       args: 
         SOURCE: ./bin/publish
     image: docentm:5000/lmf-webshopbeheer
+
+  lmf-bestelservice:
+    build:
+      context: ./BestelService/src/BestelService
+      dockerfile: Dockerfile
+      args: 
+        SOURCE: ./bin/publish
+    image: docentm:5000/lmf-BestelService
