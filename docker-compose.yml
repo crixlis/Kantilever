@@ -6,8 +6,6 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    networks: 
-      - kantilever
 
   lmf-webshopbeheer:
     build:
@@ -15,10 +13,5 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    networks: 
-      - kantilever
     ports: 
       - "8080:5000"
-
-networks: 
-  kantilever:
