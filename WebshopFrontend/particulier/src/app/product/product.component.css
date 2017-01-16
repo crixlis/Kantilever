@@ -1,10 +1,30 @@
 .productDetails{
     display: flex;
     margin: 20px 0;
-    flex-direction: column;
+    flex-flow: row wrap;
 }
 
-.pdTitle, .pdInfo, .sbTitle{
+header, main, nav, aside, footer, article {
+  flex: 1 100%;
+}
+
+main{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+article{
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+}
+
+#detailPage{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.pdTitle, .pdInfo, .sbTitle, .bpTitle{
     font-weight: bold;
 }
 
@@ -15,4 +35,39 @@
 img{
     width: 100%;
     height: auto;
+}
+
+#buyProduct{
+    margin: 0 0 20px 0;
+}
+
+.productDetails>div{
+    width: 100%;
+}
+
+#buyProduct button{
+    margin: 20px 0;
+}
+
+@media screen and (min-width: 760px) {
+
+    main{
+        flex-flow: row wrap;
+    }
+
+    header, main, nav, aside, footer, article {
+        flex: 1 auto;
+    }
+
+    article{
+        width: 70%;
+    }
+
+    aside{
+        width :20%;
+    }
+
+    .productDetails{
+         flex-flow: row wrap;
+    }
 }
