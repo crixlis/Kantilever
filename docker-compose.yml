@@ -7,8 +7,9 @@ services:
       args: 
         SOURCE: ./bin/publish
       networks: 
-        - kantilever
-        
+        external:
+          name: kantilever
+
   WebshopBeheer:
     build:
       context: ./WebshopBeheer/src/WebshopBeheer
@@ -16,7 +17,8 @@ services:
       args: 
         SOURCE: ./bin/publish
     networks: 
-        - kantilever
+        external:
+          name: kantilever
     ports: "8080:5000"
 
   networks: 
