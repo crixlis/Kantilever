@@ -32,6 +32,13 @@ h1 {
     font-weight: 600;
     position: absolute;
     top: 70px;
+    visibility: hidden;
+}
+
+h1:before {
+    content: '';
+    display: inline-block;
+    background-image: url('image/Kantilever 8b Logo Transparent.png');
 }
 
 main {
@@ -88,7 +95,7 @@ h2 {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: solid #2D398E 5px;
+    border: solid #ffffff 5px;
     border-radius: 100%;
     left: 0;
     margin: 10px;
@@ -114,7 +121,7 @@ h2 {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: solid #2D398E 5px;
+    border: solid #ffffff 5px;
     border-radius: 100%;
     right: 0;
     margin: 10px;
@@ -135,7 +142,7 @@ h2 {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: solid #2D398E 5px;
+    border: solid #ffffff 5px;
     border-radius: 100%;
     right: 0;
     margin: 10px;
@@ -171,60 +178,6 @@ h2 {
     color: #2D398E;
 }
 
-/*
-#floatingHeader #shoppingCar:before {
-    display: inline-block;
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-image: url('svg/shoppingCarWhite.svg');
-    right: 20px;
-    bottom: 2px;
-
-    position: absolute;
-}
-
-#floatingHeader a:hover #shoppingCar:before,
-#floatingHeader a:active #shoppingCar:before {
-    background-image: url('svg/shoppingCarBlack.svg');
-}
-#floatingHeader #shoppingCar {
-    position: relative;
-    color: black;
-    display: inline-block;
-    width:20px;
-    height:20px;
-    font-size: 10px;
-    text-align: center;
-    padding-left: 20px;
-    top: 5px;
-}
-#floatingHeader a:hover #shoppingCar,
-#floatingHeader a:active #shoppingCar {
-    color: white;
-    z-index: 80;
-}
-
-#floatingHeader #shoppingCar:after {
-    content: '';
-    display: inline-block;
-    border: solid #fff 10px;
-    width: 0;
-    height: 0;
-    padding: 0;
-    border-radius: 100%;
-    color: #2D398E;
-    right: 0px;
-    bottom: 3px;
-
-    position: absolute;
-    z-index: -1;
-}
-#floatingHeader a:hover #shoppingCar:after,
-#floatingHeader a:active #shoppingCar:after {
-    border-color: #2D398E;
-}
-*/
 /**********************************
  * WIDESCREEN CORRECTIONS
  **********************************/
@@ -244,26 +197,14 @@ h2 {
     #floatingHeader div {
         width: 720px;
     }
-    #floatingHeader nav ul {
-        display: inline;
-    }
-    #floatingHeader nav ul:before {
-        display: none;
-    }
-    #floatingHeader nav li, 
-    #floatingHeader a {
-        padding: 10px;
-        color: #fff;
-        display: inline-block;
-    }
-    #floatingHeader nav ul:hover li, 
-    #floatingHeader nav ul:active li {
-        display: inline-block;
-        position: relative;
-        top: 0px;
+
+    header {
+        background-image: url('image/Kantilever 8 Banner.png');
+        background-repeat: no-repeat;
+        background-size: 720px auto;
     }
 
-    #floatingHeader #shoppingCar {
-        top: -5px;
+    h1:before {
+        display: none;
     }
 }
