@@ -6,11 +6,19 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    image: lmf-webshop
+    networks: 
+      - kantilever
+
   lmf-webshopbeheer:
     build:
       context: ./WebshopBeheer/src/WebshopBeheer
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    image: lmf-webshopbeheer
+    networks: 
+      - kantilever
+    ports: 
+      - "8080:5000"
+
+networks: 
+  kantilever:

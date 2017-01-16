@@ -1,4 +1,5 @@
 ﻿using rabbitmq_demo;
+using System;
 
 namespace Webshop.Listener
 {
@@ -13,7 +14,7 @@ namespace Webshop.Listener
 
         public void Execute(BetaaldeFactuurAfgemeld item)
         {
-
+            throw new NotImplementedException();
         }
     }
 }
