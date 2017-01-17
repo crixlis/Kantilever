@@ -8,13 +8,11 @@ namespace Webshop.API.Controllers
     [Route("api/[controller]")]
     public class BestellingenController : Controller
     {
-        private ISender _sender = new Sender(new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" }, "Kantilever");
+        private ISender _sender;
 
-        public BestellingenController(ISender sender = null)
+        public BestellingenController(ISender sender)
         {
-            if (sender != null) {
-                _sender = sender;
-            }
+            _sender = sender;
         }
 
         // GET api/bestellingen
