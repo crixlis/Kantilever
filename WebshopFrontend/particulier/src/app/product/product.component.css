@@ -54,6 +54,12 @@ img{
     margin: 20px 0;
 }
 
+article div{
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 5px;
+}
+
 @media screen and (min-width: 760px) {
 
     main{
@@ -74,5 +80,10 @@ img{
 
     .productDetails{
          flex-flow: row wrap;
+    }
+
+    article div{
+        flex-flow: row wrap;
+        margin: 0;
     }
 }
