@@ -23,11 +23,6 @@ article{
     flex-direction: column;
 }
 
-#detailPage{
-    display: flex;
-    flex-flow: row wrap;
-}
-
 .pdTitle{
     margin-right: 5px;
 }
@@ -37,10 +32,6 @@ img{
     height: auto;
     max-width: 75px;
     max-height: 75px;
-}
-
-.productDetails>div{
-    width: 100%;
 }
 
 #buyProduct{
