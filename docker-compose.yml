@@ -11,7 +11,7 @@ services:
       context: ./WebshopAPI/src/Webshop.API
       dockerfile: Dockerfile
       args: 
-        SOURCE: ..../publish/Webshop.API
+        SOURCE: ../../../publish/Webshop.API
     image: docentm:5000/lmf-webshop.api
     
   lmf-webshop.listener:
@@ -19,7 +19,7 @@ services:
       context: ./WebshopAPI/src/Webshop.Listener
       dockerfile: Dockerfile
       args: 
-        SOURCE: ..../publish/Webshop.Listener
+        SOURCE: ../../../publish/Webshop.Listener
     image: docentm:5000/lmf-webshop.listener
     
   lmf-webshopbeheer:
@@ -27,7 +27,7 @@ services:
       context: ./WebshopBeheer/src/WebshopBeheer
       dockerfile: Dockerfile
       args: 
-        SOURCE: ..../publish/WebshopBeheer
+        SOURCE: ../../../publish/WebshopBeheer
     image: docentm:5000/lmf-webshopbeheer
 
   lmf-bestelservice:
@@ -35,7 +35,7 @@ services:
       context: ./BestelService/src/BestelService
       dockerfile: Dockerfile
       args: 
-        SOURCE: ..../publish/BestelService
+        SOURCE: ../../../publish/BestelService
     image: docentm:5000/lmf-bestelservice
     
   lmf-factuurservice:
@@ -43,5 +43,5 @@ services:
       context: ./FactuurService/src/FactuurService
       dockerfile: Dockerfile
       args: 
-        SOURCE: ..../publish/FactuurService
+        SOURCE: ../../../publish/FactuurService
     image: docentm:5000/lmf-factuurservice
