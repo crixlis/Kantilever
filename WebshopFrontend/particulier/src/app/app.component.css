@@ -23,6 +23,7 @@
     font-size: 20px;
     transition: width 600ms;
     visibility: hidden;
+    box-sizing: border-box;
 }
 
 #sidebar li {
@@ -30,12 +31,11 @@
     margin: 20px;
     background-color: white;
     border: 1px solid white;
-    border-radius: 5px;
     list-style: none;
 }
 
 #sidebar a {
-    font-size: 50px;
+    font-size: 1em;
     color: black;
     font-style: none;
     text-decoration: none;
