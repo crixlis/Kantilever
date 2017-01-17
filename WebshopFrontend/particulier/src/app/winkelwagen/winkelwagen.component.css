@@ -2,6 +2,7 @@
     display: flex;
     margin: 10px 0;
     flex-flow: row wrap;
+    width: 100%;
 }
 
 header, main, nav, aside, footer, article {
@@ -19,15 +20,7 @@ article{
     width: 100%;
     flex-flow: row wrap;
     margin-right: 10%;
-}
-
-#detailPage{
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.pdTitle, .pdInfo, .sbTitle, .bpTitle{
-    font-weight: bold;
+    flex-direction: column;
 }
 
 .pdTitle{
@@ -37,10 +30,8 @@ article{
 img{
     width: 100%;
     height: auto;
-}
-
-.productDetails>div{
-    width: 100%;
+    max-width: 75px;
+    max-height: 75px;
 }
 
 #buyProduct{
