@@ -33,6 +33,10 @@
     height: auto;
 }
 
+#catalogus ul {
+    list-style: none;
+}
+
 /**********************************
  * WIDESCREEN CORRECTIONS
  **********************************/
@@ -43,8 +47,14 @@
         max-height: 100px;
     }
 
+    section#catalogus ul {
+        display: -webkit-box;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+
     #catalogus article {
-        margin: 10px;
-        width: 280px;
+        width: 290px;
     }
 }
