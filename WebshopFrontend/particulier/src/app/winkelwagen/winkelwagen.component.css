@@ -12,7 +12,6 @@ header, main, nav, aside, footer, article {
 main{
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
 }
 
 article{
@@ -65,5 +64,10 @@ img{
 
     .productDetails{
          flex-flow: row wrap;
+    }
+
+    section{
+        flex-flow: row wrap;
+        display: flex;
     }
 }
