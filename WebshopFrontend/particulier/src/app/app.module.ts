@@ -8,6 +8,7 @@ import { CatalogusComponent } from './catalogus';
 import { PageNotFoundComponent } from './pageNotFound';
 import { ProductComponent } from './product';
 import { WinkelwagenComponent } from './winkelwagen';
+import { PrijsPipe } from './prijs.pipe';
 import { shoppingCartService, IProductPair } from './shared';
 
 const appRoutes: Routes = [
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     CatalogusComponent,
     PageNotFoundComponent,
     ProductComponent,
-    WinkelwagenComponent
+    WinkelwagenComponent,
+    PrijsPipe
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

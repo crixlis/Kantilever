@@ -1,79 +1,23 @@
 <main >
     <section id="detailPage">
         <article>
-            <h2>Altec Manta - Stadsfiets - Mannen - Zwart - 61 cm</h2>
+            <h2>{{productTitel}}</h2>
             <div class="pdImage">
             <img src="https://s.s-bol.com/imgbase0/imagebase3/large/FC/6/6/4/0/9200000057890466.jpg">
             </div>
             <div class="pdInfo">
                 <h2>Informatie:</h2>
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quo, dolor ut eius accusantium repellat consequatur, dignissimos error in adipisci, sit placeat minima, harum dicta nam magnam expedita obcaecati. Iste veritatis adipisci tempore voluptatum, sit quibusdam, natus reiciendis repellendus tempora! Quam temporibus velit ullam nisi recusandae, asperiores mollitia voluptatem quo.</span>
+                <span>{{productOmschrijving}}</span>
             </div>
             <div class="productDetails">
                 <h2>Productdetails:</h2>
                 <div id="merk">
-                    <span class="pdTitle">Merk:</span>
-                    <span>Altec Manta</span>
+                    <span class="pdTitle">Leverancier:</span>
+                    <span>{{productLeverancier}}</span>
                 </div>
-                <div id="framemaat">
-                    <span class="pdTitle">Framemaat:</span>
-                    <span>61 cm</span>
-                </div>
-                <div id="kleur">
-                    <span class="pdTitle">Kleur:</span>
-                    <span>zwart</span>
-                </div>
-                <div id="frame">
-                    <span class="pdTitle">Frame:</span>
-                    <span>staal</span>
-                </div>
-                <div id="wielmaat">
-                    <span class="pdTitle">Wielmaat:</span>
-                    <span>28 inch</span>
-                </div>
-                <div id="versnellingen">
-                    <span class="pdTitle">Versnellingen:</span>
-                    <span>Shimano Nexus 3 versnellingen</span>
-                </div>
-                <div id="framemaat">
-                    <span class="pdTitle">Remmen:</span>
-                    <span>terugtraprem en V-brake voor</span> 
-                </div>
-                <div id="verlichting">
-                    <span class="pdTitle">Verlichting:</span>
-                    <span>LED batterijverlichting voor en achter</span>
-                </div>
-                <div id="voorfork">
-                    <span class="pdTitle">Voorvork:</span>
-                    <span>staal, vast</span>
-                </div>
-                <div id="trappers">
-                    <span class="pdTitle">Trappers:</span>
-                    <span>anti slip trappers</span>
-                </div>
-                <div id="spatborden">
-                    <span class="pdTitle">Spatborden:</span>
-                    <span> staal</span>
-                </div>
-                <div class="velgen">
-                    <span class="pdTitle">Velgen:</span>
-                    <span>dubbelwandig aluminium</span>
-                </div>
-                <div id="kettingkast">
-                    <span class="pdTitle">Kettingkast:</span>
-                    <span>gesloten</span>
-                </div>
-                <div id="bagagedrage">
-                    <span class="pdTitle">Bagagedrager:</span>
-                    <span>stevige bagagedrager</span>
-                </div>
-                <div id="slot">
-                    <span class="pdTitle">Slot:</span>
-                    <span>ringslot</span>
-                </div>
-                <div id="gewicht">
-                    <span class="pdTitle">Gewicht:</span>
-                    <span>ca. 18 kg</span>
+                <div id="leverbaartot">
+                    <span class="pdTitle">Leverbaar tot:</span>
+                    <span>{{productLeverbaarTot}}</span>
                 </div>
             </div>
         </article>
@@ -81,7 +25,7 @@
             <div id="buyProduct">
                 <div id="prijs">
                     <span class="bpTitle">Prijs</span>
-                    <span>€ 599 ,-</span>
+                    <span>{{productPrijs | Prijs}}</span>
                 </div>
                 <div id="voorraad">
                     <span>Op voorraad. Voor 16:00 uur besteld, morgen in huis</span>
