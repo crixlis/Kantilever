@@ -67,7 +67,7 @@ namespace Webshop.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Bestelling bestelling)
         {
-                if (bestelling.Id != 0 && bestelling.Klant != null && bestelling.Artikelen != null)
+                if (bestelling.Id != 0 && bestelling.Klant != null && bestelling.Artikelen.Count > 0)
                 {
                     var bestellingKeuren = new BestellingKeuren
                     {
@@ -81,7 +81,7 @@ namespace Webshop.API.Controllers
                     return CreatedAtRoute("api/bestellingen", bestelling);
                 }
 
-                return BadRequest("Er is iets fout gegaan met het toevoegen van het product. Controller of de bestelling compleet is.");
+                return BadRequest("Er is iets fout gegaan met het toevoegen van het product. Controleer of de bestelling compleet is.");
         }
 
         // PUT api/bestellingen/5

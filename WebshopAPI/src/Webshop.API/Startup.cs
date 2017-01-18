@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using rabbitmq_demo;
 using RabbitMQ.Client;
+using Microsoft.EntityFrameworkCore;
 
 namespace Webshop.API
 {
@@ -12,6 +13,16 @@ namespace Webshop.API
     {
         public Startup(IHostingEnvironment env)
         {
+            var options = new DbContextOptionsBuilder<WebshopContext>()
+               .UseSqlServer(@"Server=.\SQLEXPRESS;Database=ArtikelenKantilever;Trusted_Connection=true")
+               .Options;
+
+            using (var context = new WebshopContext(options))
+            {
+                context.Database.Migrate();
+                context.SaveChanges();
+            }
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -26,10 +37,19 @@ namespace Webshop.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+
             var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
             services.AddSingleton<ISender>(s => new Sender(connection, "Kantilever"));
             services.AddMvc();
+            services.AddCors();
             services.AddSwaggerGen();
+
+            services.AddScoped<IWebshopContext, WebshopContext>(p =>
+                p.GetService<WebshopContext>()
+            );
+
+            services.AddDbContext<WebshopContext>(options => options
+                .UseSqlServer(@"Server=.\SQLEXPRESS;Database=ArtikelenKantilever;Trusted_Connection=true"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +57,13 @@ namespace Webshop.API
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyHeader();
+                builder.AllowAnyOrigin();
+                builder.AllowAnyMethod();
+            });
 
             app.UseMvc();
             app.UseSwagger();

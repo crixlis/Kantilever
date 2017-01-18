@@ -69,7 +69,7 @@ namespace Webshop.API.Test
 
             //Assert
             Assert.Equal(400, response.StatusCode);
-            Assert.Equal("Er is iets fout gegaan met het toevoegen van het product. Controller of de bestelling compleet is.", response.Value);
+            Assert.Equal("Er is iets fout gegaan met het toevoegen van het product. Controleer of de bestelling compleet is.", response.Value);
         }
 
         [Fact]
