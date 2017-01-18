@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Webshop.Database.Migrations
 {
     [DbContext(typeof(WebshopContext))]
-    partial class WebshopContextModelSnapshot : ModelSnapshot
+    [Migration("20170118142600_Third migration")]
+    partial class Thirdmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
