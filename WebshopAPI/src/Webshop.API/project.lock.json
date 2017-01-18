@@ -2098,7 +2098,7 @@
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
         }
       },
-      "rabbitmq-demo/1.2.0": {
+      "rabbitmq-demo/1.2.1": {
         "type": "package",
         "dependencies": {
           "Autofac": "4.2.0",
@@ -6222,13 +6222,13 @@
         "lib/netstandard1.0/NuGet.Versioning.xml"
       ]
     },
-    "rabbitmq-demo/1.2.0": {
-      "sha512": "CDQgQK5eGMKYxzl6K4pM+eGFTGPu2Yrcr34aE6aa6Qxq8ZljvHG1fMff83jrYJNd2DhTms5M1N4O+I180tFB5Q==",
+    "rabbitmq-demo/1.2.1": {
+      "sha512": "hOEnfiVLb6RnGnbn84AMqs3GLA9ClmFd0Q+7rEOPZZbwsHlHupnUCFnER58Wrr+USYkKyohMOEKLeJCadeiiHg==",
       "type": "package",
-      "path": "rabbitmq-demo/1.2.0",
+      "path": "rabbitmq-demo/1.2.1",
       "files": [
         "lib/netstandard1.6/rabbitmq-demo.dll",
-        "rabbitmq-demo.1.2.0.nupkg.sha512",
+        "rabbitmq-demo.1.2.1.nupkg.sha512",
         "rabbitmq-demo.nuspec"
       ]
     },
@@ -11305,7 +11305,7 @@
       "Swashbuckle.SwaggerGen >= 6.0.0-beta902",
       "Swashbuckle.SwaggerUi >= 6.0.0-beta902",
       "Webshop.Database >= 1.0.0-*",
-      "rabbitmq-demo >= 1.2.0"
+      "rabbitmq-demo >= 1.2.*"
     ],
     ".NETCoreApp,Version=v1.0": []
   },
