@@ -11,6 +11,10 @@ services:
     lmf-webshopbeheer:
         container_name: lmf-webshopbeheer
         image: docentm:5000/lmf-webshopbeheer:latest
+        environment:
+            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq
         networks: 
             - kantilever
         ports: 
@@ -19,6 +23,10 @@ services:
     lmf-webshop.api:
         container_name: lmf-webshop.api
         image: docentm:5000/lmf-webshop.api
+        environment:
+            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq
         networks: 
             - kantilever
         ports: 
@@ -27,18 +35,30 @@ services:
     lmf-webshop.listener:
         container_name: lmf-webshop.listener
         image: docentm:5000/lmf-webshop.listener
+        environment:
+            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq
         networks: 
             - kantilever
 
     lmf-bestelservice:
         container_name: lmf-bestelservice
         image: docentm:5000/lmf-bestelservice
+        environment:
+            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq
         networks: 
             - kantilever
     
     lmf-factuurservice:
         container_name: lmf-factuurservice
         image: docentm:5000/lmf-factuurservice
+        environment:
+            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq
         networks: 
             - kantilever
 
@@ -49,7 +69,7 @@ services:
             - RABBITMQ_ERLANG_COOKIE=SWQOKODSQALRPCLNMEQG
             - RABBITMQ_DEFAULT_USER=rabbitmq
             - RABBITMQ_DEFAULT_PASS=rabbitmq
-            - RABBITMQ_DEFAULT_VHOST=/
+            - RABBITMQ_DEFAULT_VHOST=/         
         container_name: rabbitmq
         ports:
             - 15672:15672
