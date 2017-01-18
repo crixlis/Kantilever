@@ -15,7 +15,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "rabbitmq-demo": "1.2.0",
+    "rabbitmq-demo": "1.2.*",
     "RabbitMQ.Client": "4.1.1",
     "Swashbuckle.SwaggerGen": "6.0.0-beta902",
     "Swashbuckle.SwaggerUi": "6.0.0-beta902",
