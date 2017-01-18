@@ -3,22 +3,22 @@
     <h2>Catalogus</h2>
     <ul>
       <li>
-          <article>
+          <article (click)="goToProductPage(1)" >
             <h3>Fietsband</h3>
             <span class="euro">6,00</span>
             <img src="image/fietsband.jpg" />
             <p>voor 26" velg</p>
             <p>{{amountOfProducts}}</p>
-            <span class="addToCart" (click)="addProductToCart(1)"></span>
+            <span class="addToCart" (click)="addProductToCart($event, 1)"></span>
           </article>
       </li>
       <li>
-          <article>
+          <article (click)="goToProductPage(2)" >
             <h3>Fietsband</h3>
             <span class="euro">5,50</span>
             <img src="/image/fietsband.jpg" />
             <p>voor 24" velg</p>
-            <span class="addToCart" (click)="addProductToCart(2)"></span>
+            <span class="addToCart" (click)="addProductToCart($event, 2)"></span>
           </article>
       </li>
     </ul>

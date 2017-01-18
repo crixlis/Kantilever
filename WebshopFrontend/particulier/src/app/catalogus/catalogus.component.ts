@@ -20,9 +20,16 @@ export class CatalogusComponent implements OnInit {
     this.amountOfProducts = this._shoppingCart.amountOfProducts();
   }
 
-  addProductToCart(productId : number) {
+  public addProductToCart(event: any, productId : number) {
+    event.stopPropagation();
+    event.preventDefault();
     this._shoppingCart.addProduct(productId);
     this.amountOfProducts = this._shoppingCart.amountOfProducts();
+  }
+
+  public goToProductPage(productId : number) {
+    console.log('linking...');
+    //window.location.href = 'product/' + productId;
   }
 
 }

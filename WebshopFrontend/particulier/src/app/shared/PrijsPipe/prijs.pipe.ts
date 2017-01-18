@@ -8,23 +8,45 @@ export class PrijsPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     let prijs = String(value);
     let prijslengte = prijs.length;
+
+    let prijsvoorkomma;
+    let prijsachterkomma;
+
     if(value % 1 != 0)
     {
-        //Prijs heeft decimalen
-        if(prijs.substring(prijslengte -3, 1) == '.')
-        {
-          prijs.replace('.',',')
-        }
+      let splitprijs = prijs.split('.');
+      prijsvoorkomma = splitprijs[0];
+      prijsachterkomma = splitprijs[1];
+
+      if(prijsachterkomma.length == 1)
+      {
+        prijsachterkomma = prijsachterkomma + '0';
+      }
+      console.log('prijsachterkomma: ' + prijsachterkomma);
     }
+    else
+    {
+      prijsvoorkomma = prijs;
+    }
+    console.log('prijsvoorkomma: ' + prijsvoorkomma);
 
     if(value >= 1000)
     {
-      let getallenvoorkomma = value % 1 != 0 ? prijs.split(',')[0] : prijs;
-      if(getallenvoorkomma.length >= 4)
+      if(prijsvoorkomma.length >= 4)
       {
-        let getal1 = getallenvoorkomma.substring(0,getallenvoorkomma.length -3);
-        let getal2 = getallenvoorkomma.substring(getallenvoorkomma.length -3, 3);
+        console.log('prijsvoorkommma lengte: ' + prijsvoorkomma.length);
+        let prijsvoorkomma1 = prijsvoorkomma.substring(0, prijsvoorkomma.length - 4);
+        let prijsvoorkomma2 = prijsvoorkomma.substring(prijsvoorkomma.length -4, prijsvoorkomma.length)
+        console.log('prijsvoorkomma1: ' + prijsvoorkomma1);
+        console.log('prijsvoorkomma2: ' + prijsvoorkomma2);
+        prijs = prijsvoorkomma1 + '.' + prijsvoorkomma2;
       }
+
+      if(prijsachterkomma != null)
+      {
+        prijs = prijs + ',' + prijsachterkomma;
+      }
+
       
 
     }
