@@ -11,7 +11,7 @@ services:
       context: ./WebshopAPI/src/Webshop.API
       dockerfile: Dockerfile
       args: 
-        SOURCE:../../../publish/Webshop.API
+        SOURCE: ../../../publish/Webshop.API
     image: docentm:5000/lmf-webshop.api
     
   lmf-webshop.listener:
