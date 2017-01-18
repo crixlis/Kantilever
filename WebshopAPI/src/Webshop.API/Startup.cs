@@ -38,7 +38,8 @@ namespace Webshop.API
         {
             // Add framework services.
 
-            var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
+            var connection = new ConnectionFactory()
+                .FromEnvironment();
             services.AddSingleton<ISender>(s => new Sender(connection, "Kantilever"));
             services.AddMvc();
             services.AddCors();

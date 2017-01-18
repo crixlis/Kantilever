@@ -13,7 +13,8 @@ namespace WebshopBeheer.Listener
             Console.Title = "WebshopBeheer";
             Console.WriteLine("WebshopBeheer wacht op een inkomend bericht...");
 
-            var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
+            var connection = new ConnectionFactory()
+                .FromEnvironment();
 
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<WebshopBeheerService, BestellingGoedgekeurd>();
