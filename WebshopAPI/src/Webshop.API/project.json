@@ -19,7 +19,8 @@
     "RabbitMQ.Client": "4.1.1",
     "Swashbuckle.SwaggerGen": "6.0.0-beta902",
     "Swashbuckle.SwaggerUi": "6.0.0-beta902",
-    "Webshop.Database": "1.0.0-*"
+    "Webshop.Database": "1.0.0-*",
+    "MySql.Data.EntityFrameworkCore": "7.0.6-IR31"
   },
 
   "tools": {
