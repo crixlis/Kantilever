@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
 using rabbitmq_demo;
 using System;
@@ -16,12 +17,21 @@ namespace Webshop.Listener
             var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<WebshopListenerService, BetaaldeFactuurAfgemeld>();
+            builder.RegisterReceiverFor<WebshopListenerService, ArtikelAanCatalogusToegevoegd>();
             builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
+
+            var options = new DbContextOptionsBuilder<WebshopContext>()
+               .UseSqlServer(@"Server=.\SQLEXPRESS;Database=ArtikelenKantilever;Trusted_Connection=true")
+               .Options;
+
+            builder.RegisterType<WebshopContext>().As<IWebshopContext>();
+            builder.RegisterInstance(options);
 
             using (var container = builder.Build())
             using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
             {
                 listener.SubscribeEvents<BetaaldeFactuurAfgemeld>(container);
+                listener.SubscribeEvents<ArtikelAanCatalogusToegevoegd>(container);
                 listener.Received += Listener_Received;
 
                 using (var mEvent = new ManualResetEvent(false))

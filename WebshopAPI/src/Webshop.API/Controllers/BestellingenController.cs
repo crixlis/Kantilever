@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using rabbitmq_demo;
-using RabbitMQ.Client;
+using System;
 
 namespace Webshop.API.Controllers
 {
@@ -17,28 +17,71 @@ namespace Webshop.API.Controllers
 
         // GET api/bestellingen
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<Artikel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new List<Artikel>
+            {
+                new Artikel
+                {
+                    Id = 0,
+                    Naam = "Giant XTC",
+                    Beschrijving = "Mountainbike",
+                    Prijs = 1000.99m,
+                    LeverbaarVanaf = new DateTime(2017, 1, 1),
+                    LeverbaarTot = new DateTime(2020, 1, 1),
+                    Leverancier = "Giant",
+                    Categorieen = new string[]{ "Mountainbikes", "Fietsen" }
+                },
+                new Artikel
+                {
+                    Id = 1,
+                    Naam = "Giant Talon 2",
+                    Beschrijving = "Mountainbike",
+                    Prijs = 600.29m,
+                    LeverbaarVanaf = new DateTime(2017, 1, 1),
+                    LeverbaarTot = new DateTime(2020, 1, 1),
+                    Leverancier = "Giant",
+                    Categorieen = new string[]{ "Mountainbikes", "Fietsen" }
+                }
+            };
         }
 
         // GET api/bestellingen/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Artikel Get(int id)
         {
-            return "value";
+            return new Artikel
+            {
+                Id = 0,
+                Naam = "Giant XTC",
+                Beschrijving = "Mountainbike",
+                Prijs = 1000.99m,
+                LeverbaarVanaf = new DateTime(2017, 1, 1),
+                LeverbaarTot = new DateTime(2020, 1, 1),
+                Leverancier = "Giant",
+                Categorieen = new string[]{ "Mountainbikes", "Fietsen" }
+            };
         }
 
         // POST api/bestellingen
         [HttpPost]
-        public void Post([FromBody]Bestelling bestelling)
+        public IActionResult Post([FromBody]Bestelling bestelling)
         {
-            var bestellingKeuren = new BestellingKeuren
-            {
-                Id =  bestelling.Id
-            };
+                if (bestelling.Id != 0 && bestelling.Klant != null && bestelling.Artikelen.Count > 0)
+                {
+                    var bestellingKeuren = new BestellingKeuren
+                    {
+                        Id = bestelling.Id,
+                        Artikelen = bestelling.Artikelen,
+                        Klant = bestelling.Klant
+                    };
 
-            _sender.PublishCommand(bestellingKeuren);
+                    _sender.PublishCommand(bestellingKeuren);
+
+                    return CreatedAtRoute("api/bestellingen", bestelling);
+                }
+
+                return BadRequest("Er is iets fout gegaan met het toevoegen van het product. Controleer of de bestelling compleet is.");
         }
 
         // PUT api/bestellingen/5

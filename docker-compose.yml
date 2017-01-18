@@ -4,44 +4,44 @@ services:
     build:
       context: ./WebshopFrontend/particulier
       dockerfile: Dockerfile
-    image: docentm:5000/lmf-webshop-frontend
+    image: docentm:5000/lmf-webshop-frontend:${BUILD_BUILDNUMBER}
 
   lmf-webshop.api:
     build:
       context: ./WebshopAPI/src/Webshop.API
       dockerfile: Dockerfile
       args: 
-        SOURCE: ${BASEPATH}\\publish\\Webshop.API
-    image: docentm:5000/lmf-webshop.api
+        SOURCE: ./bin/publish
+    image: docentm:5000/lmf-webshop.api:${BUILD_BUILDNUMBER}
     
   lmf-webshop.listener:
     build:
       context: ./WebshopAPI/src/Webshop.Listener
       dockerfile: Dockerfile
       args: 
-        SOURCE: ${BASEPATH}\\publish\\Webshop.Listener
-    image: docentm:5000/lmf-webshop.listener
+        SOURCE: ./bin/publish
+    image: docentm:5000/lmf-webshop.listener:${BUILD_BUILDNUMBER}
     
   lmf-webshopbeheer:
     build:
       context: ./WebshopBeheer/src/WebshopBeheer
       dockerfile: Dockerfile
       args: 
-        SOURCE: ${BASEPATH}\\publish\\WebshopBeheer
-    image: docentm:5000/lmf-webshopbeheer
+        SOURCE: ./bin/publish
+    image: docentm:5000/lmf-webshopbeheer:${BUILD_BUILDNUMBER}
 
   lmf-bestelservice:
     build:
       context: ./BestelService/src/BestelService
       dockerfile: Dockerfile
       args: 
-        SOURCE: ${BASEPATH}\\publish\\BestelService
-    image: docentm:5000/lmf-bestelservice
+        SOURCE: ./bin/publish
+    image: docentm:5000/lmf-bestelservice:${BUILD_BUILDNUMBER}
     
   lmf-factuurservice:
     build:
       context: ./FactuurService/src/FactuurService
       dockerfile: Dockerfile
       args: 
-        SOURCE: ${BASEPATH}\\publish\\FactuurService
-    image: docentm:5000/lmf-factuurservice
+        SOURCE: ./bin/publish
+    image: docentm:5000/lmf-factuurservice:${BUILD_BUILDNUMBER}
