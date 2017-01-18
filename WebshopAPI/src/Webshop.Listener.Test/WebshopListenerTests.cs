@@ -1,8 +1,9 @@
-﻿using NSubstitute;
-using rabbitmq_demo;
-using System;
-using Xunit;
+﻿using Xunit;
+using NSubstitute;
 using Microsoft.EntityFrameworkCore;
+using System;
+using rabbitmq_demo;
+using System.Linq;
 
 namespace Webshop.Listener.Test
 {
@@ -12,16 +13,25 @@ namespace Webshop.Listener.Test
         public void DeWebshopListenerKanEenBetaaldeFactuurAfgemeldEventOntvangen()
         {
             //Arrange
-            var sender = Substitute.For<ISender>();
-            var service = new WebshopListenerService(sender);
 
-            var factuurAfgemeld = new BetaaldeFactuurAfgemeld
+            var options = new DbContextOptionsBuilder<WebshopContext>()
+                .UseInMemoryDatabase(databaseName: "BetaaldeFactuurAfgemeld")
+                .Options;
+
+            using (var context = new WebshopContext(options))
             {
-                ID = 0
-            };
 
-            //Act + Asser ... er wordt tot nu toe alleen gecontrolleerd of een BetaaldeFactuurAfgemeld event ontvangen kan worden
-            Assert.Throws(typeof(NotImplementedException), () => service.Execute(factuurAfgemeld));
+                var sender = Substitute.For<ISender>();
+                var service = new WebshopListenerService(sender, context);
+
+                var factuurAfgemeld = new BetaaldeFactuurAfgemeld
+                {
+                    ID = 0
+                };
+
+                //Act + Asser ... er wordt tot nu toe alleen gecontrolleerd of een BetaaldeFactuurAfgemeld event ontvangen kan worden
+                Assert.Throws(typeof(NotImplementedException), () => service.Execute(factuurAfgemeld));
+            }
         }
 
         [Fact]
@@ -34,11 +44,16 @@ namespace Webshop.Listener.Test
 
             using (var context = new WebshopContext(options))
             {
-
+                //Arrange
                 var sender = Substitute.For<ISender>();
-                var service = new WebshopListenerService(sender);
-
+                var service = new WebshopListenerService(sender, context);
                 var artikelToegevoegd = new ArtikelAanCatalogusToegevoegd();
+
+                //Act
+                service.Execute(artikelToegevoegd);
+
+                //Assert
+                Assert.True(context.Artikelen.Any());
             }
         }
     }

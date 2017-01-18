@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class ArtikelAanCatalogusToegevoegd
+public class Artikel
 {
     public int Id { get; set; }
     public string Naam { get; set; }
@@ -14,5 +14,3 @@ public class ArtikelAanCatalogusToegevoegd
 
     public List<string> Categorieen = new List<string>();
 }
-
-
