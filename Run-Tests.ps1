@@ -9,4 +9,3 @@ foreach ($folder in $(Get-ChildItem -Path $rootURL | Where-Object{ $_.PSIsContai
         }
     }            
 }    
-
