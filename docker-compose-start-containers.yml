@@ -44,7 +44,7 @@ services:
 
     rabbitmq:
         image: "rabbitmq:3-management"
-        hostname: "rabbitmq"
+        hostname: "rabbitmq-client"
         environment:
             - RABBITMQ_ERLANG_COOKIE=SWQOKODSQALRPCLNMEQG
             - RABBITMQ_DEFAULT_USER=rabbitmq
