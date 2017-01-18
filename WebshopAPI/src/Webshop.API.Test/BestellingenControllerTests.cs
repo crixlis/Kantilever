@@ -3,6 +3,7 @@ using Webshop.API.Controllers;
 using NSubstitute;
 using rabbitmq_demo;
 using System;
+using System.Collections.Generic;
 
 namespace Webshop.API.Test
 {
@@ -15,7 +16,31 @@ namespace Webshop.API.Test
             var sender = Substitute.For<ISender>();
             var bestelling = new Bestelling
             {
-                Id = 0
+                Id = 1,
+                Klant = new Klant
+                {
+                    Id = 0,
+                    Voornaam = "Herman",
+                    Acternaam = "Berghuis",
+                    Adres = "Antilheldenstraat 1",
+                    Postcode = "1740 DD",
+                    Plaatsnaam = "Schagen",
+                    Telefoonnummer = 0612345678
+                },
+                Artikelen = new List<Artikel>
+                {
+                    new Artikel
+                    {
+                        Id = 0,
+                        Naam = "Giant XTC",
+                        Beschrijving = "Mountainbike",
+                        Prijs = 1000.99m,
+                        LeverbaarVanaf = new DateTime(2017,1,1),
+                        LeverbaarTot = new DateTime(2020, 1, 1),
+                        Leverancier = "Giant",
+                        Categorieen = new string[] { "Mountainbikes", "Fietsen" }
+                    }
+                }
             };
 
             //Act

@@ -68,12 +68,19 @@ namespace Webshop.API.Controllers
         [HttpPost]
         public void Post([FromBody]Bestelling bestelling)
         {
-            var bestellingKeuren = new BestellingKeuren
-            {
-                Id =  bestelling.Id
-            };
+            if (bestelling.Id != 0 && bestelling.Klant != null && bestelling.Artikelen != null) {
+                var bestellingKeuren = new BestellingKeuren
+                {
+                    Id = bestelling.Id,
+                    Artikelen = bestelling.Artikelen,
+                    Klant = bestelling.Klant
+                };
 
-            _sender.PublishCommand(bestellingKeuren);
+                _sender.PublishCommand(bestellingKeuren);
+
+                Ok();
+            }
+
         }
 
         // PUT api/bestellingen/5
