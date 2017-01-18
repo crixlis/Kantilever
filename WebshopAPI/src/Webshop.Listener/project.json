@@ -23,5 +23,11 @@
 
       }
     }
+  },
+
+  "publishOptions": {    
+    "exclude": [
+        "bin/publish"
+    ]
   }
 }
