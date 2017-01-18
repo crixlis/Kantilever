@@ -13,14 +13,12 @@ namespace Webshop.Listener.Test
         public void DeWebshopListenerKanEenBetaaldeFactuurAfgemeldEventOntvangen()
         {
             //Arrange
-
             var options = new DbContextOptionsBuilder<WebshopContext>()
                 .UseInMemoryDatabase(databaseName: "BetaaldeFactuurAfgemeld")
                 .Options;
 
             using (var context = new WebshopContext(options))
             {
-
                 var sender = Substitute.For<ISender>();
                 var service = new WebshopListenerService(sender, context);
 
@@ -29,7 +27,7 @@ namespace Webshop.Listener.Test
                     ID = 0
                 };
 
-                //Act + Asser ... er wordt tot nu toe alleen gecontrolleerd of een BetaaldeFactuurAfgemeld event ontvangen kan worden
+                //Act + Assert ... er wordt tot nu toe alleen gecontrolleerd of een BetaaldeFactuurAfgemeld event ontvangen kan worden
                 Assert.Throws(typeof(NotImplementedException), () => service.Execute(factuurAfgemeld));
             }
         }

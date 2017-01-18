@@ -6,7 +6,7 @@ namespace Webshop.Listener
     public class WebshopListenerService : IReceive<BetaaldeFactuurAfgemeld>, IReceive<ArtikelAanCatalogusToegevoegd>
     {
         private ISender _sender;
-        IWebshopContext _context;
+        private IWebshopContext _context;
 
         public WebshopListenerService(ISender sender, IWebshopContext context)
         {
