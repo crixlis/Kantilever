@@ -16,12 +16,14 @@ namespace Webshop.Listener
             var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<WebshopListenerService, BetaaldeFactuurAfgemeld>();
+            builder.RegisterReceiverFor<WebshopListenerService, ArtikelAanCatalogusToegevoegd>();
             builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
 
             using (var container = builder.Build())
             using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
             {
                 listener.SubscribeEvents<BetaaldeFactuurAfgemeld>(container);
+                listener.SubscribeEvents<ArtikelAanCatalogusToegevoegd>(container);
                 listener.Received += Listener_Received;
 
                 using (var mEvent = new ManualResetEvent(false))

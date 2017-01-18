@@ -13,7 +13,10 @@
       "version": "1.0.1"
     },
     "NSubstitute": "2.0.0-rc",
-    "Webshop.Listener": "1.0.0-*"
+    "Webshop.Listener": "1.0.0-*",
+    "Microsoft.EntityFrameworkCore": "1.1.0-preview1-final",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.0.1",
+    "Webshop.Database": "1.0.0-*"
   },
 
   "frameworks": {
