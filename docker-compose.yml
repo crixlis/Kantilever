@@ -4,7 +4,7 @@ services:
     build:
       context: ./WebshopFrontend/particulier
       dockerfile: Dockerfile
-    image: docentm:5000/lmf-webshop-frontend
+    image: docentm:5000/lmf-webshop-frontend:${BUILD_BUILDNUMBER}
 
   lmf-webshop.api:
     build:
@@ -12,7 +12,7 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    image: docentm:5000/lmf-webshop.api
+    image: docentm:5000/lmf-webshop.api:${BUILD_BUILDNUMBER}
     
   lmf-webshop.listener:
     build:
@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    image: docentm:5000/lmf-webshop.listener
+    image: docentm:5000/lmf-webshop.listener:${BUILD_BUILDNUMBER}
     
   lmf-webshopbeheer:
     build:
@@ -28,7 +28,7 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    image: docentm:5000/lmf-webshopbeheer
+    image: docentm:5000/lmf-webshopbeheer:${BUILD_BUILDNUMBER}
 
   lmf-bestelservice:
     build:
@@ -36,7 +36,7 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    image: docentm:5000/lmf-bestelservice
+    image: docentm:5000/lmf-bestelservice:${BUILD_BUILDNUMBER}
     
   lmf-factuurservice:
     build:
@@ -44,4 +44,4 @@ services:
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
-    image: docentm:5000/lmf-factuurservice
+    image: docentm:5000/lmf-factuurservice:${BUILD_BUILDNUMBER}
