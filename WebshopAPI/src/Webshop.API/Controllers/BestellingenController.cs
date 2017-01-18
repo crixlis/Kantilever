@@ -18,9 +18,33 @@ namespace Webshop.API.Controllers
 
         // GET api/bestellingen
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<Artikel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new List<Artikel>
+            {
+                new Artikel
+                {
+                    Id = 0,
+                    Naam = "Giant XTC",
+                    Beschrijving = "Mountainbike",
+                    Prijs = 1000.99m,
+                    LeverbaarVanaf = new DateTime(2017, 1, 1),
+                    LeverbaarTot = new DateTime(2020, 1, 1),
+                    Leverancier = "Giant",
+                    Categorieen = new string[]{ "Mountainbikes", "Fietsen" }
+                },
+                new Artikel
+                {
+                    Id = 1,
+                    Naam = "Giant Talon 2",
+                    Beschrijving = "Mountainbike",
+                    Prijs = 600.29m,
+                    LeverbaarVanaf = new DateTime(2017, 1, 1),
+                    LeverbaarTot = new DateTime(2020, 1, 1),
+                    Leverancier = "Giant",
+                    Categorieen = new string[]{ "Mountainbikes", "Fietsen" }
+                }
+            };
         }
 
         // GET api/bestellingen/5

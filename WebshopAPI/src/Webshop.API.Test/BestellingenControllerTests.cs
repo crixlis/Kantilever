@@ -1,5 +1,4 @@
 ﻿using Xunit;
-using Webshop.API;
 using Webshop.API.Controllers;
 using NSubstitute;
 using rabbitmq_demo;
@@ -28,7 +27,7 @@ namespace Webshop.API.Test
         }
 
         [Fact]
-        public void ErKanEenBestellingOpBasisVanEeenSpecifiekIdOpgevraagdWorden()
+        public void ErKanEenArtikelOpBasisVanEeenSpecifiekIdOpgevraagdWorden()
         {
             /* Let op, deze test moest herschreven worden zodra de database actief is. 
             Voor nu wordt het artikel statisch vanuit de controller meegegeven */
@@ -60,6 +59,25 @@ namespace Webshop.API.Test
             Assert.Equal(artikelExpected.LeverbaarTot, artikelFromAPI.LeverbaarTot);
             Assert.Equal(artikelExpected.Leverancier, artikelFromAPI.Leverancier);
             Assert.Equal(artikelExpected.Categorieen, artikelFromAPI.Categorieen);
+        }
+
+        [Fact]
+        public void AlleArtikelenKunnenInEenKeerOpgevraagdWorden()
+        {
+            /* Let op, deze test moest herschreven worden zodra de database actief is. 
+            Voor nu wordt het artikel statisch vanuit de controller meegegeven */
+
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var controller = new BestellingenController(sender);
+
+            //Act
+            var artikelenFromAPI = controller.Get();
+
+            //Assert
+            Assert.True(artikelenFromAPI.Count > 1);
+            Assert.Equal(0, artikelenFromAPI[0].Id);
+            Assert.Equal(1, artikelenFromAPI[1].Id);
         }
     }
 }
