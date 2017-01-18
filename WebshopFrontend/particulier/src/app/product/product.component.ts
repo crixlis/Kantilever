@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { PrijsPipe } from './../shared';
 
 @Component({
   selector: 'appProduct',
@@ -42,7 +42,7 @@ export class ProductComponent implements OnInit {
     //Data ophalen, nu eerst mock data tot we een GET request hebben
     this.productTitel = 'Altec Manta - Stadsfiets - Mannen - Zwart - 61 cm';
     this.productOmschrijving = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quo, dolor ut eius accusantium repellat consequatur, dignissimos error in adipisci, sit placeat minima, harum dicta nam magnam expedita obcaecati. Iste veritatis adipisci tempore voluptatum, sit quibusdam, natus reiciendis repellendus tempora! Quam temporibus velit ullam nisi recusandae, asperiores mollitia voluptatem quo.';
-    this.productPrijs = 599;
+    this.productPrijs = 579.07;
     this.productLeverancier = 'Altec Manta';
     this.productCatagorieen = ['Fietsen', 'Stadsfietsen'];
     this.productLeverbaarTot = '20-02-2017';

@@ -8,8 +8,7 @@ import { CatalogusComponent } from './catalogus';
 import { PageNotFoundComponent } from './pageNotFound';
 import { ProductComponent } from './product';
 import { WinkelwagenComponent } from './winkelwagen';
-import { PrijsPipe } from './prijs.pipe';
-import { shoppingCartService, IProductPair } from './shared';
+import { shoppingCartService, IProductPair, PrijsPipe } from './shared';
 
 const appRoutes: Routes = [
   { path: 'product/:id', component: ProductComponent },
