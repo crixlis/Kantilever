@@ -66,21 +66,23 @@ namespace Webshop.API.Controllers
 
         // POST api/bestellingen
         [HttpPost]
-        public void Post([FromBody]Bestelling bestelling)
+        public IActionResult Post([FromBody]Bestelling bestelling)
         {
-            if (bestelling.Id != 0 && bestelling.Klant != null && bestelling.Artikelen != null) {
-                var bestellingKeuren = new BestellingKeuren
+                if (bestelling.Id != 0 && bestelling.Klant != null && bestelling.Artikelen != null)
                 {
-                    Id = bestelling.Id,
-                    Artikelen = bestelling.Artikelen,
-                    Klant = bestelling.Klant
-                };
+                    var bestellingKeuren = new BestellingKeuren
+                    {
+                        Id = bestelling.Id,
+                        Artikelen = bestelling.Artikelen,
+                        Klant = bestelling.Klant
+                    };
 
-                _sender.PublishCommand(bestellingKeuren);
+                    _sender.PublishCommand(bestellingKeuren);
 
-                Ok();
-            }
+                    return CreatedAtRoute("api/bestellingen", bestelling);
+                }
 
+                return BadRequest("Er is iets fout gegaan met het toevoegen van het product.");
         }
 
         // PUT api/bestellingen/5

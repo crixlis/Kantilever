@@ -4,6 +4,7 @@ using NSubstitute;
 using rabbitmq_demo;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Webshop.API.Test
 {
@@ -45,10 +46,30 @@ namespace Webshop.API.Test
 
             //Act
             var controller = new BestellingenController(sender);
-            controller.Post(bestelling);
+            var response = (CreatedAtRouteResult)controller.Post(bestelling);
 
             //Assert
             sender.Received(1).PublishCommand(Arg.Any<BestellingKeuren>());
+            Assert.Equal(201, response.StatusCode);
+        }
+
+        [Fact]
+        public void PostMethodGeeftEenBadRequest400TerugBijEenNietCompletePost()
+        {
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var bestelling = new Bestelling
+            {
+                Id = 0
+            };
+
+            //Act
+            var controller = new BestellingenController(sender);
+            var response = (BadRequestObjectResult)controller.Post(bestelling);
+
+            //Assert
+            Assert.Equal(400, response.StatusCode);
+            Assert.Equal("Er is iets fout gegaan met het toevoegen van het product.", response.Value);
         }
 
         [Fact]
