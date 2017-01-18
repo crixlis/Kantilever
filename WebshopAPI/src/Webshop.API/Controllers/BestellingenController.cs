@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using rabbitmq_demo;
-using RabbitMQ.Client;
 using System;
 
 namespace Webshop.API.Controllers
@@ -82,7 +81,7 @@ namespace Webshop.API.Controllers
                     return CreatedAtRoute("api/bestellingen", bestelling);
                 }
 
-                return BadRequest("Er is iets fout gegaan met het toevoegen van het product.");
+                return BadRequest("Er is iets fout gegaan met het toevoegen van het product. Controller of de bestelling compleet is.");
         }
 
         // PUT api/bestellingen/5
