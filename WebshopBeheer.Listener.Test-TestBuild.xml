@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assemblies>
+  <assembly name="WebshopBeheer.Listener.Test.dll" environment="64-bit .NET (unknown version) [collection-per-class, parallel (8 threads)]" test-framework="xUnit.net 2.2.0.3300" run-date="2017-01-18" run-time="13:11:17" total="3" passed="3" failed="0" skipped="0" time="0.331" errors="0">
+    <errors />
+    <collection total="3" passed="3" failed="0" skipped="0" name="Test collection for WebshopBeheer.Listener.Test.WebshopBeheerListenerTests" time="0.180">
+      <test name="WebshopBeheer.Listener.Test.WebshopBeheerListenerTests.IkWilEenbetaaldeFactuurAfgemeldEventOpvangen" type="WebshopBeheer.Listener.Test.WebshopBeheerListenerTests" method="IkWilEenbetaaldeFactuurAfgemeldEventOpvangen" time="0.1368614" result="Pass" />
+      <test name="WebshopBeheer.Listener.Test.WebshopBeheerListenerTests.IkWilEenbestellingGoedgekeurdEventOpvangenEnEenfactuurAanmakenPublishen" type="WebshopBeheer.Listener.Test.WebshopBeheerListenerTests" method="IkWilEenbestellingGoedgekeurdEventOpvangenEnEenfactuurAanmakenPublishen" time="0.0422056" result="Pass" />
+      <test name="WebshopBeheer.Listener.Test.WebshopBeheerListenerTests.IkWilfactuurAangemaaktEventOpvangenEnEenbetaaldeFactuurAfmeldenPublishen" type="WebshopBeheer.Listener.Test.WebshopBeheerListenerTests" method="IkWilfactuurAangemaaktEventOpvangenEnEenbetaaldeFactuurAfmeldenPublishen" time="0.0010033" result="Pass" />
+    </collection>
+  </assembly>
+</assemblies>

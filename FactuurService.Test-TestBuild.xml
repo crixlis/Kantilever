@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assemblies>
+  <assembly name="FactuurService.Test.dll" environment="64-bit .NET (unknown version) [collection-per-class, parallel (8 threads)]" test-framework="xUnit.net 2.2.0.3300" run-date="2017-01-18" run-time="13:11:11" total="2" passed="2" failed="0" skipped="0" time="0.313" errors="0">
+    <errors />
+    <collection total="2" passed="2" failed="0" skipped="0" name="Test collection for FactuurService.Test.FactuurServiceTests" time="0.162">
+      <test name="FactuurService.Test.FactuurServiceTests.DeFactuurServiceKanEenFactuurAanmakenCommandOntvangenEnVerstuurtEenFactuurAangemaaktEvent" type="FactuurService.Test.FactuurServiceTests" method="DeFactuurServiceKanEenFactuurAanmakenCommandOntvangenEnVerstuurtEenFactuurAangemaaktEvent" time="0.1579621" result="Pass" />
+      <test name="FactuurService.Test.FactuurServiceTests.DeFactuurServiceKanEenBetaaldeFactuurAfmeldenCommandOntvangenEnEenBetaaldeFactuurAfgemeldEventOpgooien" type="FactuurService.Test.FactuurServiceTests" method="DeFactuurServiceKanEenBetaaldeFactuurAfmeldenCommandOntvangenEnEenBetaaldeFactuurAfgemeldEventOpgooien" time="0.0044292" result="Pass" />
+    </collection>
+  </assembly>
+</assemblies>
