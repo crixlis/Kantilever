@@ -14,7 +14,9 @@ namespace Webshop.Listener
             Console.Title = "Webshop.Listener";
             Console.WriteLine("De webshoplistener wacht op een nieuwe events...");
 
-            var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
+            var connection = new ConnectionFactory()
+                .FromEnvironment();
+
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<WebshopListenerService, BetaaldeFactuurAfgemeld>();
             builder.RegisterReceiverFor<WebshopListenerService, ArtikelAanCatalogusToegevoegd>();
