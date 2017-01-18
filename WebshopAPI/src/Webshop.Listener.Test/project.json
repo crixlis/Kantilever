@@ -10,13 +10,22 @@
     "Microsoft.CodeCoverage": "1.0.2",
     "Microsoft.NETCore.App": {
       "type": "platform",
-      "version": "1.0.1"
+      "version": "1.0.1",
+      "Microsoft.EntityFrameworkCore": "1.0.1",
+      "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0",
+      "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
+      "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.0.1",
+      "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview2-final"
     },
     "NSubstitute": "2.0.0-rc",
     "Webshop.Listener": "1.0.0-*",
     "Microsoft.EntityFrameworkCore": "1.1.0-preview1-final",
     "Microsoft.EntityFrameworkCore.InMemory": "1.0.1",
     "Webshop.Database": "1.0.0-*"
+  },
+
+  "tools": {
+    "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview2-final"
   },
 
   "frameworks": {
