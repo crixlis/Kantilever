@@ -29,7 +29,6 @@ namespace Webshop.API
             var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
             services.AddSingleton<ISender>(s => new Sender(connection, "Kantilever"));
             services.AddMvc();
-
             services.AddSwaggerGen();
         }
 
