@@ -13,7 +13,9 @@ namespace FactuurService
             Console.Title = "FactuurService";
             Console.WriteLine("De factuurservice wacht op een nieuwe factuur die door het magazijn wordt opgegooid...");
 
-            var connection = new ConnectionFactory { HostName = "cursistm07", UserName = "manuel", Password = "manuel" };
+            var connection = new ConnectionFactory()
+                .FromEnvironment();
+                
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<FactuurService, BetaaldeFactuurAfmelden>();
             builder.RegisterReceiverFor<FactuurService, FactuurAanmaken>();
