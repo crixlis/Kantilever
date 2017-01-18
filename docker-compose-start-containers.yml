@@ -2,7 +2,7 @@ version: '2'
 services: 
     lmf-webshop-frontend:
         container_name: lmf-webshop-frontend
-        image: docentm:5000/lmf-webshop-frontend:latest
+        image: docentm:5000/lmf-webshop-frontend:${BUILD_BUILDNUMBER}
         networks: 
             - kantilever
         ports:
@@ -10,7 +10,7 @@ services:
 
     lmf-webshopbeheer:
         container_name: lmf-webshopbeheer
-        image: docentm:5000/lmf-webshopbeheer:latest
+        image: docentm:5000/lmf-webshopbeheer:${BUILD_BUILDNUMBER}
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq-client
             - RABBITMQ_USERNAME=rabbitmq
@@ -22,7 +22,7 @@ services:
 
     lmf-webshop.api:
         container_name: lmf-webshop.api
-        image: docentm:5000/lmf-webshop.api
+        image: docentm:5000/lmf-webshop.api:${BUILD_BUILDNUMBER}
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq-client
             - RABBITMQ_USERNAME=rabbitmq
@@ -34,7 +34,7 @@ services:
 
     lmf-webshop.listener:
         container_name: lmf-webshop.listener
-        image: docentm:5000/lmf-webshop.listener
+        image: docentm:5000/lmf-webshop.listener:${BUILD_BUILDNUMBER}
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq-client
             - RABBITMQ_USERNAME=rabbitmq
@@ -44,7 +44,7 @@ services:
 
     lmf-bestelservice:
         container_name: lmf-bestelservice
-        image: docentm:5000/lmf-bestelservice
+        image: docentm:5000/lmf-bestelservice:${BUILD_BUILDNUMBER}
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq-client
             - RABBITMQ_USERNAME=rabbitmq
@@ -54,7 +54,7 @@ services:
     
     lmf-factuurservice:
         container_name: lmf-factuurservice
-        image: docentm:5000/lmf-factuurservice
+        image: docentm:5000/lmf-factuurservice:${BUILD_BUILDNUMBER}
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq-client
             - RABBITMQ_USERNAME=rabbitmq
@@ -63,7 +63,7 @@ services:
             - kantilever
 
     rabbitmq:
-        image: "rabbitmq:3-management"
+        image: rabbitmq:3-management
         hostname: "rabbitmq-client"
         environment:
             - RABBITMQ_ERLANG_COOKIE=SWQOKODSQALRPCLNMEQG
