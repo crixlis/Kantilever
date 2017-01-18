@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using rabbitmq_demo;
-using RabbitMQ.Client;
 using System;
 
 namespace Webshop.API.Controllers
@@ -66,14 +65,23 @@ namespace Webshop.API.Controllers
 
         // POST api/bestellingen
         [HttpPost]
-        public void Post([FromBody]Bestelling bestelling)
+        public IActionResult Post([FromBody]Bestelling bestelling)
         {
-            var bestellingKeuren = new BestellingKeuren
-            {
-                Id =  bestelling.Id
-            };
+                if (bestelling.Id != 0 && bestelling.Klant != null && bestelling.Artikelen != null)
+                {
+                    var bestellingKeuren = new BestellingKeuren
+                    {
+                        Id = bestelling.Id,
+                        Artikelen = bestelling.Artikelen,
+                        Klant = bestelling.Klant
+                    };
 
-            _sender.PublishCommand(bestellingKeuren);
+                    _sender.PublishCommand(bestellingKeuren);
+
+                    return CreatedAtRoute("api/bestellingen", bestelling);
+                }
+
+                return BadRequest("Er is iets fout gegaan met het toevoegen van het product. Controller of de bestelling compleet is.");
         }
 
         // PUT api/bestellingen/5
