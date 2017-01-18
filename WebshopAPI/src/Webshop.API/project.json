@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
@@ -18,7 +18,8 @@
     "rabbitmq-demo": "1.2.0",
     "RabbitMQ.Client": "4.1.1",
     "Swashbuckle.SwaggerGen": "6.0.0-beta902",
-    "Swashbuckle.SwaggerUi": "6.0.0-beta902"
+    "Swashbuckle.SwaggerUi": "6.0.0-beta902",
+    "Webshop.Database": "1.0.0-*"
   },
 
   "tools": {
@@ -51,6 +52,9 @@
       "**/*.cshtml",
       "appsettings.json",
       "web.config"
+    ],
+    "exclude": [
+      "bin/publish"
     ]
   },
 
