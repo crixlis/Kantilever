@@ -51,6 +51,8 @@ services:
             - RABBITMQ_DEFAULT_PASS=rabbitmq
             - RABBITMQ_DEFAULT_VHOST=/
         container_name: rabbitmq
+        ports:
+            - 15672:15672
         networks: 
             - kantilever
 
