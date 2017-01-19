@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using System.IO;
-using System.Net;
+﻿using System.Net;
+using WebshopBeheer.Controllers;
 using Xunit;
 
 namespace WebshopBeheer.Test
@@ -11,20 +9,14 @@ namespace WebshopBeheer.Test
         [Fact]
         public async void TestOfPaginaBereikbaarIsNaHetStarten()
         {
-            using (var server = StartTestServer())
+            using (var server = CustomTestServer.Start())
             using (var client = server.CreateClient())
             {
-                var result = await client.GetAsync("CommercieelManager/Index");
-                Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+                var controllerName = (new CommercieelManagerController().GetType().Name).Replace("Controller","");
+                var status = await client.GetAsync(controllerName + "\\" + "Index");
+                Assert.Equal(HttpStatusCode.OK, status.StatusCode);
             }
 
-        }
-
-        private static TestServer StartTestServer()
-        {
-            return new TestServer(new WebHostBuilder()
-                            .UseStartup<Startup>()
-                            .UseContentRoot(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "src", "WebshopBeheer")));
         }
     }
 }

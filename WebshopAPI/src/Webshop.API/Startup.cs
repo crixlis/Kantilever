@@ -16,8 +16,8 @@ namespace Webshop.API
         {
             var options = new DbContextOptionsBuilder<WebshopContext>()
                //.UseSqlServer(@"Server=.\SQLEXPRESS;Database=ArtikelenKantilever;Trusted_Connection=true")
-               //.UseMySQL(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=7568;database=ArtikelenKantilever;sslmode=none;")
-               .UseMySQL(@"server=127.0.0.1;userid=root;pwd=my-secret-pw;port=7568;database=ArtikelenKantilever;sslmode=none;")
+               .UseMySQL(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=7568;database=ArtikelenKantilever;sslmode=none;")
+               //.UseMySQL(@"server=127.0.0.1;userid=root;pwd=my-secret-pw;port=7568;database=ArtikelenKantilever;sslmode=none;")
                .Options;
 
             using (var context = new WebshopContext(options))

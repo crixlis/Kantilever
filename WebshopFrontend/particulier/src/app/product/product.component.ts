@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PrijsPipe, ShoppingCartService } from './../shared';
+import { PrijsPipe, ShoppingCartService, ArtikelService, Artikel } from './../shared';
 
 @Component({
   selector: 'appProduct',
@@ -8,6 +8,8 @@ import { PrijsPipe, ShoppingCartService } from './../shared';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+
+  @Input() artikel : Artikel = new Artikel();
 
   private _sub: any;
   public addtoshoppingcarttext = 'Voeg toe aan winkelwagen';
@@ -24,13 +26,18 @@ export class ProductComponent implements OnInit {
   public productCatagorieen: string[];
   public productVoorraad: number;
 
-  constructor(private route: ActivatedRoute, private shoppingCart : ShoppingCartService) {
+  constructor(private route: ActivatedRoute, private shoppingCart : ShoppingCartService, private artikelService : ArtikelService) {
   }
 
 
   ngOnInit() {
      this._sub = this.route.params.subscribe(params => {
        this.productId = +params['id']; // (+) converts string 'id' to a number
+
+       //Data ophalen van Web API
+       this.artikelService.getArtikel(this.productId).then(result => { 
+         this.artikel = Artikel.fromJS(result); 
+        }, error => console.error(error) );
 
        //Data ophalen, nu eerst mock data tot we een GET request hebben
       this.productTitel = 'Altec Manta - Stadsfiets - Mannen - Zwart - 61 cm';
