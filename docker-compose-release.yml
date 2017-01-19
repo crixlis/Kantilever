@@ -13,6 +13,7 @@ services:
         image: mysql:latest
         hostname: "lmf-webfrontend.api.database"
         environment:
+            - MYSQL_ROOT_PASSWORD=my-secret-pw
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq      
