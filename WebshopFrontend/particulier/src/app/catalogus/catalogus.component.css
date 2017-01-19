@@ -69,6 +69,7 @@
 #catalogus article {
     box-sizing: border-box;
     width: 100%;
+    min-height: 160px;
  }
 
 /**********************************
@@ -91,5 +92,6 @@
     #catalogus article {
         width: 290px;
         box-sizing: content-box;
+        min-height: 120px;
     }
 }
