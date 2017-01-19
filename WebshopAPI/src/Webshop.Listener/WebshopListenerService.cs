@@ -1,5 +1,6 @@
 ﻿using rabbitmq_demo;
 using System;
+using System.IO;
 
 namespace Webshop.Listener
 {
@@ -26,10 +27,9 @@ namespace Webshop.Listener
                 LeverbaarTot = item.LeverbaarTot,
                 LeverbaarVanaf = item.LeverbaarVanaf,
                 Naam = item.Naam,
-                Prijs = item.Prijs,
-                
-                 
+                Prijs = item.Prijs
             };
+            File.WriteAllBytes(Path.Combine("./img", item.Id.ToString()), item.Afbeelding);
 
             _context.Artikelen.Add(nieuwArtikel);
             _context.SaveChanges();
