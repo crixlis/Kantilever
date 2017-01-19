@@ -66,6 +66,11 @@
     list-style: none;
 }
 
+#catalogus article {
+    box-sizing: border-box;
+    width: 100%;
+ }
+
 /**********************************
  * WIDESCREEN CORRECTIONS
  **********************************/
