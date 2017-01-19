@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { shoppingCartService } from './../shared'
 
 @Component({
@@ -14,22 +14,22 @@ export class CatalogusComponent implements OnInit {
 
   _shoppingCart : shoppingCartService;
 
-  public amountOfProducts : number;
+  @Output() onNewAmountProducts = new EventEmitter();
 
   ngOnInit() {
-    this.amountOfProducts = this._shoppingCart.amountOfProducts();
+    //this.amountOfProducts = this._shoppingCart.amountOfProducts();
   }
 
   public addProductToCart(event: any, productId : number) {
     event.stopPropagation();
     event.preventDefault();
     this._shoppingCart.addProduct(productId);
-    this.amountOfProducts = this._shoppingCart.amountOfProducts();
+    let amountOfProducts = this._shoppingCart.amountOfProducts();
+    this.onNewAmountProducts.emit();
   }
 
   public goToProductPage(productId : number) {
-    console.log('linking...');
-    //window.location.href = 'product/' + productId;
+    window.location.href = 'product/' + productId;
   }
 
 }
