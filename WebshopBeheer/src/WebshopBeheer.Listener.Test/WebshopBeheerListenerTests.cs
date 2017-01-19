@@ -3,8 +3,8 @@ using NSubstitute;
 using rabbitmq_demo;
 using System;
 using System.Linq;
-using WebshopBeheer.Database;
 using Xunit;
+using WebshopBeheer.Database;
 
 namespace WebshopBeheer.Listener.Test
 {
