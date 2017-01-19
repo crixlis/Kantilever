@@ -12,7 +12,8 @@
     "xunit": "2.2.0-beta2-build3300",
     "RabbitMQ.Client": "4.1.1",
     "System.Threading": "4.0.11",
-    "NSubstitute": "2.0.0-rc"
+    "NSubstitute": "2.0.0-rc",
+    "MySql.Data.EntityFrameworkCore": "7.0.6-IR31"
   },
 
   "tools": {
