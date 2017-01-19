@@ -1,5 +1,13 @@
 version: '2'
-services: 
+services:
+    lmf-img-storage:
+        container_name: lmf-img-storage
+        image: phusion/baseimage:latest
+        networks:
+            - kantilever
+        volumes: 
+            - /img
+
     lmf-webshop-frontend:
         container_name: lmf-webshop-frontend
         image: docentm:5000/lmf-webshop-frontend:${BUILD_BUILDNUMBER}
@@ -7,6 +15,8 @@ services:
             - kantilever
         ports:
             - 7000:80
+        volumes_from: 
+            - lmf-img-storage
 
     lmf-webshopbeheer:
         container_name: lmf-webshopbeheer
@@ -41,6 +51,8 @@ services:
             - RABBITMQ_PASSWORD=rabbitmq
         networks: 
             - kantilever
+        volumes_from: 
+            - lmf-img-storage
 
     lmf-bestelservice:
         container_name: lmf-bestelservice
@@ -89,4 +101,4 @@ services:
             
 networks: 
     kantilever:
-        driver: bridge
+        driver: bridge 
