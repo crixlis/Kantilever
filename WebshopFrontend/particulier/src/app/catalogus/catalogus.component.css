@@ -49,12 +49,12 @@
     display: block;
     width: 30px;
     height: 30px;
-    background-image:url('svg/shoppigCarAddWhite.svg');
+    background-image: url('svg/shoppigCarAddWhite.svg');
 }
 
 #catalogus .addToCart:hover:before
 #catalogus .addToCart:active:before {
-    background-image:url('svg/shoppigCarAddBlue.svg');
+    background-image: url('svg/shoppigCarAddBlue.svg');
 }
 
 #catalogus img {
