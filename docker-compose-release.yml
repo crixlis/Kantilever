@@ -1,5 +1,16 @@
 version: '2'
 services: 
+    lmf-webfrontend.api.database:
+        image: mysql:latest
+        hostname: "lmf-webfrontend.api.database"
+        environment:
+            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq      
+        container_name: lmf-webfrontend.api.database
+        networks: 
+            - kantilever
+
     lmf-webshop-frontend:
         container_name: lmf-webshop-frontend
         image: docentm:5000/lmf-webshop-frontend:${BUILD_BUILDNUMBER}
@@ -74,8 +85,8 @@ services:
         ports:
             - 15672:15672
         networks: 
-            - kantilever
-
+            - kantilever           
+            
 networks: 
     kantilever:
         driver: bridge

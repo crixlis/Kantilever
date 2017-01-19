@@ -22,34 +22,28 @@ export class PrijsPipe implements PipeTransform {
       {
         prijsachterkomma = prijsachterkomma + '0';
       }
-      console.log('prijsachterkomma: ' + prijsachterkomma);
     }
     else
     {
       prijsvoorkomma = prijs;
     }
-    console.log('prijsvoorkomma: ' + prijsvoorkomma);
 
     if(value >= 1000)
     {
       if(prijsvoorkomma.length >= 4)
       {
-        console.log('prijsvoorkommma lengte: ' + prijsvoorkomma.length);
         let prijsvoorkomma1 = prijsvoorkomma.substring(0, prijsvoorkomma.length - 4);
         let prijsvoorkomma2 = prijsvoorkomma.substring(prijsvoorkomma.length -4, prijsvoorkomma.length)
-        console.log('prijsvoorkomma1: ' + prijsvoorkomma1);
-        console.log('prijsvoorkomma2: ' + prijsvoorkomma2);
         prijs = prijsvoorkomma1 + '.' + prijsvoorkomma2;
       }
+    } else {
+      prijs = prijsvoorkomma;
+    }
 
-      if(prijsachterkomma != null)
+    if(prijsachterkomma != null)
       {
         prijs = prijs + ',' + prijsachterkomma;
       }
-
-      
-
-    }
 
     return '€' + prijs;
   }

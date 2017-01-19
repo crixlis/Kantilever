@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using rabbitmq_demo;
 using System.Linq;
+using System.Data.SqlClient;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace Webshop.Listener.Test
 {
@@ -55,10 +57,28 @@ namespace Webshop.Listener.Test
         }
 
         [Fact]
-        public void IkWilEenFoutmeldingWanneerEenIdVanArtikelAanCatalogusToegevoegd()
+        public void ZelfToevoegenVanIdVanArtikelAanCatalogusToegevoegdAanDB()
         {
-            
-        }
+            var options = new DbContextOptionsBuilder<WebshopContext>()
+                .UseInMemoryDatabase(databaseName: "ZelfArtikelAanCatalogusToevoegen")
+                .Options;
 
+            using (var context = new WebshopContext(options))
+            {
+                //Arrange
+                context.Database.EnsureCreated();
+
+                var id = 34;
+                var sender = Substitute.For<ISender>();
+                var service = new WebshopListenerService(sender, context);
+
+                //Act
+                context.Artikelen.Add(new Artikel { Id = id });
+                context.SaveChanges();
+
+                //Assert
+                Assert.NotEmpty(context.Artikelen.Where(a => a.Id == id));
+            }
+        }
     }
 }

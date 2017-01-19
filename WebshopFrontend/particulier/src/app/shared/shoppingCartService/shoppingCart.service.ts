@@ -5,7 +5,7 @@ import { Subject } from 'rxjs/Subject';
 const WINKELMANDJE = 'Kantilever';
 
 @Injectable()
-export class shoppingCartService {
+export class ShoppingCartService {
 
     private _newAmountOfProductsSource = new Subject();
     newAmountOfProducts = this._newAmountOfProductsSource.asObservable();

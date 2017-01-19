@@ -16,7 +16,8 @@
     "Microsoft.EntityFrameworkCore.InMemory": "1.0.1",
     "Webshop.Database": "1.0.0-*",
     "Webshop.Listener": "1.0.0-*",
-    "Microsoft.AspNetCore.Hosting.Server.Abstractions": "1.1.0"
+    "Microsoft.AspNetCore.Hosting.Server.Abstractions": "1.1.0",
+    "MySql.Data.EntityFrameworkCore": "7.0.6-IR31"
   },
 
   "tools": {
