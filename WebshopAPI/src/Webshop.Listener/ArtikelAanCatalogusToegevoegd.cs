@@ -13,6 +13,8 @@ public class ArtikelAanCatalogusToegevoegd
     public string Leverancier { get; set; }
 
     public List<string> Categorieen = new List<string>();
+
+    public byte[] Afbeelding { get; set; }
 }
 
 

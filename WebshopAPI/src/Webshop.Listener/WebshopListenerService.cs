@@ -26,7 +26,9 @@ namespace Webshop.Listener
                 LeverbaarTot = item.LeverbaarTot,
                 LeverbaarVanaf = item.LeverbaarVanaf,
                 Naam = item.Naam,
-                Prijs = item.Prijs
+                Prijs = item.Prijs,
+                
+                 
             };
 
             _context.Artikelen.Add(nieuwArtikel);
