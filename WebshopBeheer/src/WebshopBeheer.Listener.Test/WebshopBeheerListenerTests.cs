@@ -7,8 +7,21 @@ namespace WebshopBeheer.Listener.Test
 {
     public class WebshopBeheerListenerTests
     {
+
         [Fact]
-        public void IkWilEenbestellingGoedgekeurdEventOpvangenEnEenfactuurAanmakenPublishen()
+        public void IkWilEenBestellingKeurenCommandOpvangenEnDeBestellingOpslaanInDeDatabase()
+        {
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var service = new WebshopBeheerService(sender);
+            var bestellingKeuren = new BestellingKeuren { Id = 1 };
+
+            //Act + Assert
+            service.Execute(bestellingKeuren);
+        }
+
+        [Fact]
+        public void IkWilEenBestellingGoedgekeurdEventOpvangenEnEenfactuurAanmakenPublishen()
         {
             //Arrange
             var sender = Substitute.For<ISender>();

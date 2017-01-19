@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebshopBeheer.Listener
 {
-    public class WebshopBeheerService : IReceive<BestellingGoedgekeurd>, IReceive<FactuurAangemaakt>, IReceive<BetaaldeFactuurAfgemeld>
+    public class WebshopBeheerService : IReceive<BestellingKeuren>, IReceive<BestellingGoedgekeurd>, IReceive<FactuurAangemaakt>, IReceive<BetaaldeFactuurAfgemeld>
     {
         ISender _sender;
 
@@ -19,6 +19,12 @@ namespace WebshopBeheer.Listener
         {
             _sender.PublishCommand(new FactuurAanmaken { Id = item.Id });   
         }
+
+        public void Execute(BestellingKeuren item)
+        {
+
+        }
+
         public void Execute(FactuurAangemaakt item)
         {
             _sender.PublishCommand(new BetaaldeFactuurAfmelden { Id = item.Id });
