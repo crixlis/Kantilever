@@ -90,5 +90,6 @@
 
     #catalogus article {
         width: 290px;
+        box-sizing: content-box;
     }
 }
