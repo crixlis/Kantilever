@@ -15,7 +15,6 @@ export class ProductComponent implements OnInit {
   public addtoshoppingcarttext = 'Voeg toe aan winkelwagen';
 
   public productId: number;
-
   public productTitel: string;
   public productOmschrijving: string;
   public productPrijs: number;
@@ -38,15 +37,7 @@ export class ProductComponent implements OnInit {
        this.artikelService.getArtikel(this.productId).then(result => { 
          this.artikel = Artikel.fromJS(result); 
         }, error => console.error(error) );
-
-       //Data ophalen, nu eerst mock data tot we een GET request hebben
-      this.productTitel = 'Altec Manta - Stadsfiets - Mannen - Zwart - 61 cm';
-      this.productOmschrijving = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quo, dolor ut eius accusantium repellat consequatur, dignissimos error in adipisci, sit placeat minima, harum dicta nam magnam expedita obcaecati. Iste veritatis adipisci tempore voluptatum, sit quibusdam, natus reiciendis repellendus tempora! Quam temporibus velit ullam nisi recusandae, asperiores mollitia voluptatem quo.';
-      this.productPrijs = 12345.40;
-      this.productLeverancier = 'Altec Manta';
-      this.productCatagorieen = ['Fietsen', 'Stadsfietsen'];
-      this.productLeverbaarTot = '20-02-2017';
-      this.productVoorraad = 6;
+        this.artikel.leverancier
     });
 
     //

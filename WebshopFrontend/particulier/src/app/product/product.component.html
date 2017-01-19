@@ -7,25 +7,25 @@
             </div>
             <div class="pdInfo">
                 <h2>Informatie:</h2>
-                <span>{{productOmschrijving}}</span>
+                <span>{{artikel.beschrijving}}</span>
             </div>
             <div class="productDetails">
                 <h2>Productdetails:</h2>
-                <div id="merk">
+                <div id="leverancierdetail">
                     <span class="pdTitle">Leverancier:</span>
-                    <span>{{productLeverancier}}</span>
+                    <span>{{artikel.leverancier}}</span>
                 </div>
-                <div id="leverbaartot">
+                <div id="beschikbaardetail">
                     <span class="pdTitle">Beschikbaar:</span>
-                    <span>{{productVoorraad}}</span>
+                    <span></span>
                 </div>
             </div>
         </article>
         <aside>
             <div id="buyProduct">
                 <div id="prijs">
-                    <span class="bpTitle">Prijs</span>
-                    <span>{{productPrijs | prijs}}</span>
+                    <span class="bpTitle">Prijs</span><br>
+                    <span>{{artikel.prijs | prijs}}</span>
                 </div>
                 <div id="voorraad">
                     <span>Op voorraad. Voor 16:00 uur besteld, morgen in huis</span>

@@ -64,6 +64,7 @@ services:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
+            - IMG_ROOT=/img
         networks: 
             - kantilever
         volumes_from: 
