@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Webshop.Database.Migrations
 {
     [DbContext(typeof(WebshopContext))]
-    [Migration("20170118140028_Second migration")]
-    partial class Secondmigration
+    [Migration("20170118152127_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,8 +18,7 @@ namespace Webshop.Database.Migrations
 
             modelBuilder.Entity("Artikel", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
                     b.Property<string>("Beschrijving");
 

@@ -15,6 +15,7 @@ namespace Webshop.API
         {
             var options = new DbContextOptionsBuilder<WebshopContext>()
                .UseSqlServer(@"Server=.\SQLEXPRESS;Database=ArtikelenKantilever;Trusted_Connection=true")
+               //.UseMySQL(@"server=mysql;userid=root;pwd=test;port=3306;database=Afspraken;sslmode=none;")
                .Options;
 
             using (var context = new WebshopContext(options))
