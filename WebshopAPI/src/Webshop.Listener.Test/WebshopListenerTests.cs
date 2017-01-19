@@ -56,7 +56,6 @@ namespace Webshop.Listener.Test
             }
         }
 
-
         [Fact]
         public void ZelfToevoegenVanIdVanArtikelAanCatalogusToegevoegdAanDB()
         {
