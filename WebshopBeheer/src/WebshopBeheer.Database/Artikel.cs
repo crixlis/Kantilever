@@ -12,6 +12,6 @@ namespace WebshopBeheer.Database
         public DateTime LeverbaarVanaf { get; set; }
         public DateTime LeverbaarTot { get; set; }
         public string Leverancier { get; set; }
-        public List<string> Categorieen { get; set; }
+        public List<Categorie> Categorieen { get; set; }
     }
 }

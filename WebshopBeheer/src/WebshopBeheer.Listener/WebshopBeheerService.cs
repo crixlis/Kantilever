@@ -1,5 +1,6 @@
 ﻿using rabbitmq_demo;
 using System;
+using System.Collections.Generic;
 using WebshopBeheer.Database;
 
 namespace WebshopBeheer.Listener
@@ -29,9 +30,53 @@ namespace WebshopBeheer.Listener
 
         public void Execute(BestellingKeuren item)
         {
+            List<Artikel> artikelen = new List<Artikel>();
+
+            foreach (var artikel in item.Artikelen)
+            {
+                List<Categorie> categorieen = new List<Categorie>();
+
+                foreach (var categorie in artikel.Categorieen)
+                {
+                    categorieen.Add(
+                        new Categorie
+                        {
+                            Id = categorie.Id,
+                            Naam = categorie.Naam
+                        }
+                    );
+
+                };
+
+                artikelen.Add(
+                    new Artikel
+                    {
+                        Id = artikel.Id,
+                        Beschrijving = artikel.Beschrijving,
+                        Leverancier = artikel.Leverancier,
+                        LeverbaarTot = artikel.LeverbaarTot,
+                        LeverbaarVanaf = artikel.LeverbaarVanaf,
+                        Naam = artikel.Naam,
+                        Prijs = artikel.Prijs,
+                        Categorieen = categorieen
+                    }
+                );
+            }
+
             var bestelling = new Bestelling
             {
-                Id = item.Id
+                Id = item.Id,
+                Klant = new Klant
+                {
+                    Id = item.Klant.Id,
+                    Achternaam = item.Klant.Achternaam,
+                    Voornaam = item.Klant.Voornaam,
+                    Adres = item.Klant.Adres,
+                    Plaatsnaam = item.Klant.Plaatsnaam,
+                    Postcode = item.Klant.Postcode,
+                    Telefoonnummer = item.Klant.Telefoonnummer
+                },
+                Artikelen = artikelen
             };
 
             _context.Bestellingen.Add(bestelling);

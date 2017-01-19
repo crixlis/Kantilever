@@ -29,9 +29,9 @@ namespace WebshopBeheer.Listener.Test
                     Id = 1,
                     Klant = new Klant
                     {
-                        Id = 0,
+                        Id = 2,
                         Voornaam = "Herman",
-                        Acternaam = "Berghuis",
+                        Achternaam = "Berghuis",
                         Adres = "Antilheldenstraat 1",
                         Postcode = "1740 DD",
                         Plaatsnaam = "Schagen",
@@ -41,16 +41,16 @@ namespace WebshopBeheer.Listener.Test
                     {
                         new Artikel
                         {
-                            Id = 0,
+                            Id = 3,
                             Naam = "Giant XTC",
                             Beschrijving = "Mountainbike",
                             Prijs = 1000.99m,
                             LeverbaarVanaf = new DateTime(2017,1,1),
                             LeverbaarTot = new DateTime(2020, 1, 1),
                             Leverancier = "Giant",
-                            Categorieen = new List<string>
+                            Categorieen = new List<Categorie>
                             {
-                                "Mountainbikes", "Fietsen"
+                                new Categorie { Id = 0, Naam =  "Mountainbikes" }
                             }
                         }
                     }
@@ -61,7 +61,7 @@ namespace WebshopBeheer.Listener.Test
 
                 //Assert
                 Assert.True(context.Bestellingen.Any());
-                Assert.Equal("HermanElitemofo", context.Bestellingen.First().Klant.Voornaam);
+                Assert.Equal("Herman", context.Bestellingen.First().Klant.Voornaam);
             }
         }
 
