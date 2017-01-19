@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PrijsPipe, shoppingCartService } from './../shared';
+import { PrijsPipe, ShoppingCartService } from './../shared';
 
 @Component({
   selector: 'appProduct',
@@ -24,7 +24,7 @@ export class ProductComponent implements OnInit {
   public productCatagorieen: string[];
   public productVoorraad: number;
 
-  constructor(private route: ActivatedRoute, private shoppingCart : shoppingCartService) {
+  constructor(private route: ActivatedRoute, private shoppingCart : ShoppingCartService) {
   }
 
 

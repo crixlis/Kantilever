@@ -2,23 +2,13 @@
   <section id="catalogus">
     <h2>Catalogus</h2>
     <ul>
-      <li>
+      <li *ngFor='let artikel of artikelen'>
           <article (click)="goToProductPage(1)" >
-            <h3>Fietsband</h3>
-            <span class="euro">6,00</span>
+            <h3>{{artikel.naam}}</h3>
+            <span class="euro">{{artikel.prijs | prijs}}</span>
             <img src="image/fietsband.jpg" />
-            <p>voor 26" velg</p>
-            <p>{{amountOfProducts}}</p>
+            <p>{{artikel.beschrijving}}</p>
             <span class="addToCart" (click)="addProductToCart($event, 1)"></span>
-          </article>
-      </li>
-      <li>
-          <article (click)="goToProductPage(2)" >
-            <h3>Fietsband</h3>
-            <span class="euro">5,50</span>
-            <img src="/image/fietsband.jpg" />
-            <p>voor 24" velg</p>
-            <span class="addToCart" (click)="addProductToCart($event, 2)"></span>
           </article>
       </li>
     </ul>

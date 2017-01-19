@@ -41,15 +41,14 @@ export class PrijsPipe implements PipeTransform {
         console.log('prijsvoorkomma2: ' + prijsvoorkomma2);
         prijs = prijsvoorkomma1 + '.' + prijsvoorkomma2;
       }
+    } else {
+      prijs = prijsvoorkomma;
+    }
 
-      if(prijsachterkomma != null)
+    if(prijsachterkomma != null)
       {
         prijs = prijs + ',' + prijsachterkomma;
       }
-
-      
-
-    }
 
     return '€' + prijs;
   }

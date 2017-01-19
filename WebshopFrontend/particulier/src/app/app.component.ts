@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { shoppingCartService } from './shared'
+import { ShoppingCartService } from './shared'
 
 @Component({
   selector: 'app-root',
@@ -9,10 +9,10 @@ import { shoppingCartService } from './shared'
 
 export class AppComponent {
 
-  _shoppingCart : shoppingCartService;
+  _shoppingCart : ShoppingCartService;
   amountOfProducts : number;
 
-  constructor(shoppingCart : shoppingCartService) {
+  constructor(shoppingCart : ShoppingCartService) {
     this._shoppingCart = shoppingCart;
   }
 
