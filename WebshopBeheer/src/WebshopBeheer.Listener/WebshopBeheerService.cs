@@ -34,20 +34,6 @@ namespace WebshopBeheer.Listener
 
             foreach (var artikel in item.Artikelen)
             {
-                List<Categorie> categorieen = new List<Categorie>();
-
-                foreach (var categorie in artikel.Categorieen)
-                {
-                    categorieen.Add(
-                        new Categorie
-                        {
-                            Id = categorie.Id,
-                            Naam = categorie.Naam
-                        }
-                    );
-
-                };
-
                 artikelen.Add(
                     new Artikel
                     {
@@ -58,7 +44,8 @@ namespace WebshopBeheer.Listener
                         LeverbaarVanaf = artikel.LeverbaarVanaf,
                         Naam = artikel.Naam,
                         Prijs = artikel.Prijs,
-                        Categorieen = categorieen
+                        Categorieen = artikel.Categorieen,
+                        Voorraad = artikel.Voorraad
                     }
                 );
             }

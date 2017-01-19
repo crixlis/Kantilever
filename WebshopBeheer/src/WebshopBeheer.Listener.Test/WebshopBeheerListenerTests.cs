@@ -48,10 +48,8 @@ namespace WebshopBeheer.Listener.Test
                             LeverbaarVanaf = new DateTime(2017,1,1),
                             LeverbaarTot = new DateTime(2020, 1, 1),
                             Leverancier = "Giant",
-                            Categorieen = new List<Categorie>
-                            {
-                                new Categorie { Id = 0, Naam =  "Mountainbikes" }
-                            }
+                            Categorieen = new List<string> { "Mountainbikes" },
+                            Voorraad = 1
                         }
                     }
                 };
