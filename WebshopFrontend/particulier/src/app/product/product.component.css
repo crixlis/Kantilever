@@ -36,7 +36,7 @@ button:hover {
 article{
     display: flex;
     width: 100%;
-    flex-flow: row wrap;
+    flex-flow: column;
     margin-right: 10%;
 }
 
@@ -58,8 +58,9 @@ img{
     height: auto;
 }
 
-.productDetails>div{
-    width: 100%;
+.productDetails>div, .pdInfo>div{
+    display: flex;
+    flex-direction: column;
 }
 
 #buyProduct{
@@ -95,14 +96,5 @@ article div{
 
     aside{
         width :30%;
-    }
-
-    .productDetails{
-         flex-flow: row wrap;
-    }
-
-    article div{
-        flex-flow: row wrap;
-        margin: 0;
     }
 }
