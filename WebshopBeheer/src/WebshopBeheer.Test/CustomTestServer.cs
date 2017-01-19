@@ -8,9 +8,11 @@ namespace WebshopBeheer.Test
     {
         public static TestServer Start()
         {
+            var assemblyName = (typeof(Program).Namespace).Split('.')[0];
+
             return new TestServer(new WebHostBuilder()
                             .UseStartup<Startup>()
-                            .UseContentRoot(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "src", "WebshopBeheer")));
+                            .UseContentRoot(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "src", assemblyName)));
         }
     }
 }
