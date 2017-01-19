@@ -1,6 +1,9 @@
-﻿using NSubstitute;
+﻿using Microsoft.EntityFrameworkCore;
+using NSubstitute;
 using rabbitmq_demo;
 using System;
+using System.Linq;
+using WebshopBeheer.Database;
 using Xunit;
 
 namespace WebshopBeheer.Listener.Test
@@ -11,13 +14,23 @@ namespace WebshopBeheer.Listener.Test
         [Fact]
         public void IkWilEenBestellingKeurenCommandOpvangenEnDeBestellingOpslaanInDeDatabase()
         {
-            //Arrange
-            var sender = Substitute.For<ISender>();
-            var service = new WebshopBeheerService(sender);
-            var bestellingKeuren = new BestellingKeuren { Id = 1 };
+            var options = new DbContextOptionsBuilder<WebshopBeheerContext>()
+                .UseInMemoryDatabase(databaseName: "ArtikelAanCatalogusToevoegen")
+                .Options;
 
-            //Act + Assert
-            service.Execute(bestellingKeuren);
+            using (var context = new WebshopBeheerContext(options))
+            {
+                //Arrange
+                var sender = Substitute.For<ISender>();
+                var service = new WebshopBeheerService(sender, context);
+                var bestellingKeuren = new BestellingKeuren { Id = 1 };
+
+                //Act
+                service.Execute(bestellingKeuren);
+
+                //Assert
+                Assert.True(context.Bestellingen.Any());
+            }
         }
 
         [Fact]
