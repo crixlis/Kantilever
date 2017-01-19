@@ -75,7 +75,18 @@ services:
             - 15672:15672
         networks: 
             - kantilever
-
+            
+    lmf-webfrontend.api.database:
+        image: mysql:latest
+        hostname: "lmf-webfrontend.api.database"
+        environment:
+            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq      
+        container_name: lmf-webfrontend.api.database
+        networks: 
+            - kantilever
+            
 networks: 
     kantilever:
         driver: bridge
