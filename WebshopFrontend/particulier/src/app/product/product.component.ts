@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PrijsPipe } from './../shared';
+import { PrijsPipe, shoppingCartService } from './../shared';
 
 @Component({
   selector: 'appProduct',
@@ -10,6 +10,8 @@ import { PrijsPipe } from './../shared';
 export class ProductComponent implements OnInit {
 
   private _sub: any;
+  public addtoshoppingcarttext = 'Voeg toe aan winkelwagen';
+
   public productId: number;
 
   public productTitel: string;
@@ -21,9 +23,8 @@ export class ProductComponent implements OnInit {
   public productLeverancier: string;
   public productCatagorieen: string[];
 
-  constructor(private route: ActivatedRoute) {}
-
-  _shoppingCart : { [productId: number] : number};
+  constructor(private route: ActivatedRoute, private shoppingCart : shoppingCartService) {
+  }
 
 
   ngOnInit() {
@@ -32,13 +33,6 @@ export class ProductComponent implements OnInit {
     });
 
     //
-    if(window.localStorage['winkelmandje'] === undefined)
-    {
-      window.localStorage['winkelmandje'] = this._shoppingCart;
-    }
-    //
-
-
     //Data ophalen, nu eerst mock data tot we een GET request hebben
     this.productTitel = 'Altec Manta - Stadsfiets - Mannen - Zwart - 61 cm';
     this.productOmschrijving = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quo, dolor ut eius accusantium repellat consequatur, dignissimos error in adipisci, sit placeat minima, harum dicta nam magnam expedita obcaecati. Iste veritatis adipisci tempore voluptatum, sit quibusdam, natus reiciendis repellendus tempora! Quam temporibus velit ullam nisi recusandae, asperiores mollitia voluptatem quo.';
@@ -54,7 +48,13 @@ export class ProductComponent implements OnInit {
 
 
   AddToShoppingCart() {
-    this._shoppingCart[this.productId]++;
+    this.shoppingCart.addProduct(this.productId);
+    this.addtoshoppingcarttext = 'Product toegevoegd';
+    window.setTimeout(() => {
+      this.addtoshoppingcarttext = 'Voeg toe aan winkelwagen';
+    }, 1200);
+    
+    
   }
   
 
