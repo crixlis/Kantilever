@@ -36,7 +36,7 @@ export class ProductComponent implements OnInit {
 
        //Data ophalen van Web API
        this.artikelService.getArtikel(this.productId).then(result => { 
-         this.artikel = Artikel.fromJS(result); console.log(this.artikel); 
+         this.artikel = Artikel.fromJS(result); 
         }, error => console.error(error) );
 
        //Data ophalen, nu eerst mock data tot we een GET request hebben
