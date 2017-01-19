@@ -56,18 +56,14 @@ namespace Webshop.Listener.Test
             }
         }
 
-
         [Fact]
         public void ZelfToevoegenVanIdVanArtikelAanCatalogusToegevoegdAanDB()
         {
             var options = new DbContextOptionsBuilder<WebshopContext>()
-                //.UseMySQL(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=7568;database=ArtikelenKantilever;sslmode=none;")
-                .UseMySQL(@"server=127.0.0.1;userid=root;pwd=my-secret-pw;port=7568;database=ArtikelenKantilever;sslmode=none;")
+                .UseInMemoryDatabase(databaseName: "ZelfArtikelAanCatalogusToevoegen")
                 .Options;
 
-
             using (var context = new WebshopContext(options))
-            using (var trans = context.Database.BeginTransaction())
             {
                 //Arrange
                 context.Database.EnsureCreated();

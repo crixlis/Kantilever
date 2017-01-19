@@ -1,6 +1,8 @@
 ﻿using System.Net;
-using System.Net.Http;
 using Xunit;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace WebshopBeheer.Test
 {
@@ -9,13 +11,20 @@ namespace WebshopBeheer.Test
         [Fact]
         public async void TestOfPaginaBereikbaarIsNaHetStarten()
         {
-            using (var httpClient = new HttpClient())
+            using (var server = StartTestServer())
+            using (var client = server.CreateClient())
             {
-                var result = await httpClient.GetAsync("Http://localhost:15282/MagazijnMedewerker/Index");
-                var statuscode = result.StatusCode;
-
-                Assert.Equal(HttpStatusCode.OK, statuscode);
+                var result = await client.GetAsync("MagazijnMedewerker/Index");
+                Assert.Equal(HttpStatusCode.OK, result.StatusCode);
             }
+
+        }
+
+        private static TestServer StartTestServer()
+        {
+            return new TestServer(new WebHostBuilder()
+                            .UseStartup<Startup>()
+                            .UseContentRoot(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "src", "WebshopBeheer")));
         }
     }
 }
