@@ -8,12 +8,6 @@
     display: inline-block;
 }
 
-#catalogus .euro:before {
-    content: '\20AC';
-    display: inline-block;
-    text-align: center;
-}
-
 #catalogus .euro, .addToCart {
     position: absolute;
     border: solid #ffffff 5px;
