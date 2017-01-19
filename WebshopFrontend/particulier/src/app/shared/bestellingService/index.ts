@@ -1,2 +1,2 @@
-export * from './objects.generated';
+export * from './../objects.generated';
 export * from './bestelling.service';

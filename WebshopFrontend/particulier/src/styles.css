@@ -166,6 +166,29 @@ section{
     margin: 10px;
     background-color: #2D398E;
 }
+#floatingHeader #amountArticles {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: solid #ffffff 5px;
+    border-radius: 100%;
+    right: 20px;
+    margin: 0px;
+    background-color: #2D398E;
+    color: #ffffff;
+    text-align: center;
+    font-size: 10px;
+    padding-top: 2px;
+    box-sizing: border-box;
+}
+
+#floatingHeader #amountArticles:active,
+#floatingHeader #amountArticles:hover {
+    border-color: #2D398E;
+    background-color: #fff;
+    color: #2D398E;
+}
 
 #floatingHeader #user:active:before,
 #floatingHeader #user:hover:before {

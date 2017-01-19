@@ -1,4 +1,5 @@
 version: '2'
+
 services:
     lmf-img-storage:
         container_name: lmf-img-storage
@@ -7,6 +8,17 @@ services:
             - kantilever
         volumes: 
             - /img
+            
+    lmf-webfrontend.api.database:
+        image: mysql:latest
+        hostname: "lmf-webfrontend.api.database"
+        environment:
+            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq      
+        container_name: lmf-webfrontend.api.database
+        networks: 
+            - kantilever
 
     lmf-webshop-frontend:
         container_name: lmf-webshop-frontend
@@ -86,18 +98,7 @@ services:
         ports:
             - 15672:15672
         networks: 
-            - kantilever
-            
-    lmf-webfrontend.api.database:
-        image: mysql:latest
-        hostname: "lmf-webfrontend.api.database"
-        environment:
-            - RABBITMQ_HOSTNAME=rabbitmq-client
-            - RABBITMQ_USERNAME=rabbitmq
-            - RABBITMQ_PASSWORD=rabbitmq      
-        container_name: lmf-webfrontend.api.database
-        networks: 
-            - kantilever
+            - kantilever           
             
 networks: 
     kantilever:
