@@ -8,6 +8,8 @@ services:
             - kantilever
         volumes: 
             - /img
+        ports:
+            - 7559:3306
 
     lmf-webfrontend.api.database:
         image: mysql:latest
