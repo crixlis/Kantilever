@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using Xunit;
 using WebshopBeheer.Database;
+using System.Collections.Generic;
 
 namespace WebshopBeheer.Listener.Test
 {
@@ -23,13 +24,44 @@ namespace WebshopBeheer.Listener.Test
                 //Arrange
                 var sender = Substitute.For<ISender>();
                 var service = new WebshopBeheerService(sender, context);
-                var bestellingKeuren = new BestellingKeuren { Id = 1 };
+                var bestellingKeuren = new BestellingKeuren
+                {
+                    Id = 1,
+                    Klant = new Klant
+                    {
+                        Id = 0,
+                        Voornaam = "Herman",
+                        Acternaam = "Berghuis",
+                        Adres = "Antilheldenstraat 1",
+                        Postcode = "1740 DD",
+                        Plaatsnaam = "Schagen",
+                        Telefoonnummer = 0612345678
+                    },
+                    Artikelen = new List<Artikel>
+                    {
+                        new Artikel
+                        {
+                            Id = 0,
+                            Naam = "Giant XTC",
+                            Beschrijving = "Mountainbike",
+                            Prijs = 1000.99m,
+                            LeverbaarVanaf = new DateTime(2017,1,1),
+                            LeverbaarTot = new DateTime(2020, 1, 1),
+                            Leverancier = "Giant",
+                            Categorieen = new List<string>
+                            {
+                                "Mountainbikes", "Fietsen"
+                            }
+                        }
+                    }
+                };
 
                 //Act
                 service.Execute(bestellingKeuren);
 
                 //Assert
                 Assert.True(context.Bestellingen.Any());
+                Assert.Equal("HermanElitemofo", context.Bestellingen.First().Klant.Voornaam);
             }
         }
 
