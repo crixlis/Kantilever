@@ -33,7 +33,6 @@ namespace Webshop.Listener.Test
         }
 
         [Fact]
-
         public void IkWilEenArtikelAanCatalogusToegevoegdEventOpvangenEnOpslaanInDeDatabase()
         {
             var options = new DbContextOptionsBuilder<WebshopContext>()
@@ -55,6 +54,11 @@ namespace Webshop.Listener.Test
             }
         }
 
+        [Fact]
+        public void IkWilEenFoutmeldingWanneerEenIdVanArtikelAanCatalogusToegevoegd()
+        {
+            
+        }
 
     }
 }
