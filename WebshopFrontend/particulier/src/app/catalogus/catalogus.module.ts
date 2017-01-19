@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { CatalogusComponent } from './catalogus.component';
-import { ShoppingCartService } from './../shared';
+import { ShoppingCartService, ArtikelService } from './../shared';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,8 @@ import { ShoppingCartService } from './../shared';
   ],
   imports: [],
   providers: [
-    ShoppingCartService
+    ShoppingCartService,
+    ArtikelService
   ]
 })
 export class CatalogusModule { }

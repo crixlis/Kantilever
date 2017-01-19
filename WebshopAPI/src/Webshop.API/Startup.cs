@@ -14,11 +14,20 @@ namespace Webshop.API
     {
         public Startup(IHostingEnvironment env)
         {
-            var options = new DbContextOptionsBuilder<WebshopContext>()
+            var options = new DbContextOptions<WebshopContext>();
+            if(env.IsDevelopment())
+            {
+                options = new DbContextOptionsBuilder<WebshopContext>().UseInMemoryDatabase("DevelopmentTesting").Options;
+            }
+            else
+            {
+                options = new DbContextOptionsBuilder<WebshopContext>()
                //.UseSqlServer(@"Server=.\SQLEXPRESS;Database=ArtikelenKantilever;Trusted_Connection=true")
-               .UseMySQL(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=7568;database=ArtikelenKantilever;sslmode=none;")
+               .UseMySQL(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;")
                //.UseMySQL(@"server=127.0.0.1;userid=root;pwd=my-secret-pw;port=7568;database=ArtikelenKantilever;sslmode=none;")
                .Options;
+            }
+            
 
             using (var context = new WebshopContext(options))
             {
@@ -53,7 +62,7 @@ namespace Webshop.API
             );
 
             services.AddDbContext<WebshopContext>(options => options
-                .UseMySQL(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=7568;database=ArtikelenKantilever;sslmode=none;"));
+                .UseMySQL(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,4 +13,6 @@ public class Artikel
     public string Leverancier { get; set; }
 
     public List<string> Categorieen = new List<string>();
+
+    public int Voorraad { get; set; }
 }

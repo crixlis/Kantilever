@@ -8,7 +8,7 @@
     display: inline-block;
 }
 
-#catalogus .euro, .addToCart {
+#catalogus .prijs, .addToCart {
     position: absolute;
     border: solid #ffffff 5px;
     margin: 10px;
@@ -18,11 +18,15 @@
     text-align: center;
 }
 
-#catalogus .euro {
+#catalogus .prijs {
     top: 0;
     padding-top: 15px;
     width: 50px;
     height: 35px;
+}
+
+#catalogus .prijs.prijs-small {
+    font-size: 10px;
 }
 
 #catalogus .addToCart {
@@ -32,9 +36,9 @@
     height:30px;
 }
 
-#catalogus .addToCart:hover
+#catalogus .addToCart:hover,
 #catalogus .addToCart:active {
-    background-color: #ffffff;
+    background-color: #fff;
     border-color: #2D398E;
 }
 
@@ -46,7 +50,7 @@
     background-image: url('svg/shoppigCarAddWhite.svg');
 }
 
-#catalogus .addToCart:hover:before
+#catalogus .addToCart:hover:before,
 #catalogus .addToCart:active:before {
     background-image: url('svg/shoppigCarAddBlue.svg');
 }

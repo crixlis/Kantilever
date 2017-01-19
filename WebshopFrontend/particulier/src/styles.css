@@ -183,6 +183,8 @@ section{
     box-sizing: border-box;
 }
 
+#floatingHeader #shoppingCar:active + #amountArticles,
+#floatingHeader #shoppingCar:hover + #amountArticles,
 #floatingHeader #amountArticles:active,
 #floatingHeader #amountArticles:hover {
     border-color: #2D398E;

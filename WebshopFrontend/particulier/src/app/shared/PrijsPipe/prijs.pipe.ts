@@ -6,6 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PrijsPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
+
+    if(value === undefined)
+    {
+      return "";
+    }
     let prijs = String(value);
     let prijslengte = prijs.length;
 
@@ -32,8 +37,8 @@ export class PrijsPipe implements PipeTransform {
     {
       if(prijsvoorkomma.length >= 4)
       {
-        let prijsvoorkomma1 = prijsvoorkomma.substring(0, prijsvoorkomma.length - 4);
-        let prijsvoorkomma2 = prijsvoorkomma.substring(prijsvoorkomma.length -4, prijsvoorkomma.length)
+        let prijsvoorkomma1 = prijsvoorkomma.substring(0, prijsvoorkomma.length - 3);
+        let prijsvoorkomma2 = prijsvoorkomma.substring(prijsvoorkomma.length -3, prijsvoorkomma.length)
         prijs = prijsvoorkomma1 + '.' + prijsvoorkomma2;
       }
     } else {
