@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { ShoppingCartService } from './../shared'
-import { Artikel, PrijsPipe } from './../shared'
+import { ShoppingCartService, ArtikelService, Artikel, PrijsPipe } from './../shared'
 
 @Component({
   selector: 'appCatalogus',
@@ -9,42 +8,16 @@ import { Artikel, PrijsPipe } from './../shared'
 })
 export class CatalogusComponent implements OnInit {
 
-  constructor(shoppingCart : ShoppingCartService) {
-    this._shoppingCart = shoppingCart;
+  constructor(private _shoppingCart : ShoppingCartService, private _artikelService : ArtikelService ) {
   }
 
-  _shoppingCart : ShoppingCartService;
   // _artikelenService : ArtikelenService;
-  artikelen : Artikel[];
+  artikelen : Artikel[] = [];
 
   @Output() onNewAmountProducts = new EventEmitter();
 
   ngOnInit() {
-    //this.amountOfProducts = this._shoppingCart.amountOfProducts();
-    this.artikelen = [new Artikel(
-      {
-        id: 1,
-        naam: "Fietsband",
-        beschrijving: "voor 26\" velg",
-        prijs: 6.00,
-        leverbaarVanaf: null,
-        leverbaarTot: null,
-        leverancier: 'Piet Fietsenbouwer',
-        categorieen: 'Fietsband'
-      }
-    ), new Artikel(
-      {
-        id: 1,
-        naam: "Fietsband",
-        beschrijving: "voor 24\" velg",
-        prijs: 5.50,
-        leverbaarVanaf: null,
-        leverbaarTot: null,
-        leverancier: 'Piet Fietsenbouwer',
-        categorieen: 'Fietsband'
-      }
-    )];
-    //_artikelen = this._artikelenService.getArtikelen(); 
+    this._artikelService.getArtikelen().then(result => this.artikelen = result, error => console.error(error) )
   }
 
   public addProductToCart(event: any, productId : number) {
