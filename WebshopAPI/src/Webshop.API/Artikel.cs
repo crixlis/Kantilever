@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Webshop.API
 {
@@ -11,6 +12,8 @@ namespace Webshop.API
         public DateTime LeverbaarVanaf { get; set; }
         public DateTime LeverbaarTot { get; set; }
         public string Leverancier { get; set; }
-        public string[] Categorieen { get; set; }
+        public List<string> Categorieen { get; set; }
+        public int Voorraad { get; set; }
+        public string ImagePath { get; set; }
     }
 }
