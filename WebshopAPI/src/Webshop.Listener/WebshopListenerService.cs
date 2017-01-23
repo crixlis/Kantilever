@@ -1,5 +1,6 @@
 ﻿using rabbitmq_demo;
 using System;
+using System.IO;
 
 namespace Webshop.Listener
 {
@@ -7,11 +8,13 @@ namespace Webshop.Listener
     {
         private ISender _sender;
         private IWebshopContext _context;
+        private string _imgRoot; 
 
-        public WebshopListenerService(ISender sender, IWebshopContext context)
+        public WebshopListenerService(ISender sender, IWebshopContext context, string imgRoot)
         {
-           _sender = sender;
-           _context = context;
+            _sender = sender;
+            _context = context;
+            _imgRoot = imgRoot;
         }
 
         public void Execute(ArtikelAanCatalogusToegevoegd item)
@@ -28,6 +31,11 @@ namespace Webshop.Listener
                 Naam = item.Naam,
                 Prijs = item.Prijs
             };
+            
+            if(item.Afbeelding != null)
+            {
+                File.WriteAllBytes(Path.Combine(_imgRoot, item.Id.ToString()), item.Afbeelding);
+            }
 
             _context.Artikelen.Add(nieuwArtikel);
             _context.SaveChanges();

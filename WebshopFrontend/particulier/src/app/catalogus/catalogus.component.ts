@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { shoppingCartService } from './../shared'
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { ShoppingCartService, ArtikelService, Artikel, PrijsPipe } from './../shared'
 
 @Component({
   selector: 'appCatalogus',
@@ -8,28 +8,28 @@ import { shoppingCartService } from './../shared'
 })
 export class CatalogusComponent implements OnInit {
 
-  constructor(shoppingCart : shoppingCartService) {
-    this._shoppingCart = shoppingCart;
+  constructor(private _shoppingCart : ShoppingCartService, private _artikelService : ArtikelService ) {
   }
 
-  _shoppingCart : shoppingCartService;
+  // _artikelenService : ArtikelenService;
+  artikelen : Artikel[] = [];
 
-  public amountOfProducts : number;
+  @Output() onNewAmountProducts = new EventEmitter();
 
   ngOnInit() {
-    this.amountOfProducts = this._shoppingCart.amountOfProducts();
+    this._artikelService.getArtikelen().then(result => this.artikelen = result, error => console.error(error) )
   }
 
   public addProductToCart(event: any, productId : number) {
     event.stopPropagation();
     event.preventDefault();
     this._shoppingCart.addProduct(productId);
-    this.amountOfProducts = this._shoppingCart.amountOfProducts();
+    let amountOfProducts = this._shoppingCart.amountOfProducts();
+    this.onNewAmountProducts.emit();
   }
 
   public goToProductPage(productId : number) {
-    console.log('linking...');
-    //window.location.href = 'product/' + productId;
+    window.location.href = 'product/' + productId;
   }
 
 }

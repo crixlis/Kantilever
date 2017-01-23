@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Microsoft.EntityFrameworkCore;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 using RabbitMQ.Client;
 using rabbitmq_demo;
 using System;
@@ -23,7 +24,8 @@ namespace Webshop.Listener
             builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
 
             var options = new DbContextOptionsBuilder<WebshopContext>()
-               .UseSqlServer(@"Server=.\SQLEXPRESS;Database=ArtikelenKantilever;Trusted_Connection=true")
+               //.UseSqlServer(@"Server=.\SQLEXPRESS;Database=ArtikelenKantilever;Trusted_Connection=true")
+               .UseMySQL(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;")
                .Options;
 
             builder.RegisterType<WebshopContext>().As<IWebshopContext>();

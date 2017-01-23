@@ -7,19 +7,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Webshop.Database.Migrations
 {
     [DbContext(typeof(WebshopContext))]
-    [Migration("20170118140028_Second migration")]
-    partial class Secondmigration
+    [Migration("20170119150408_Voorraad toegevoegd aan artikel")]
+    partial class Voorraadtoegevoegdaanartikel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.1")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "1.0.1");
 
             modelBuilder.Entity("Artikel", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
                     b.Property<string>("Beschrijving");
 
@@ -34,6 +32,8 @@ namespace Webshop.Database.Migrations
                     b.Property<string>("Naam");
 
                     b.Property<decimal>("Prijs");
+
+                    b.Property<int>("Voorraad");
 
                     b.HasKey("Id");
 

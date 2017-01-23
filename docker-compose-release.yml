@@ -1,5 +1,28 @@
 version: '2'
-services: 
+
+services:
+    lmf-img-storage:
+        container_name: lmf-img-storage
+        image: phusion/baseimage:latest
+        networks:
+            - kantilever
+        volumes: 
+            - /img
+        ports:
+            - 7559:3306
+
+    lmf-webfrontend.api.database:
+        image: mysql:latest
+        hostname: "lmf-webfrontend.api.database"
+        environment:
+            - MYSQL_ROOT_PASSWORD=my-secret-pw
+            - RABBITMQ_HOSTNAME=rabbitmq
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq      
+        container_name: lmf-webfrontend.api.database
+        networks: 
+            - kantilever
+
     lmf-webshop-frontend:
         container_name: lmf-webshop-frontend
         image: docentm:5000/lmf-webshop-frontend:${BUILD_BUILDNUMBER}
@@ -7,12 +30,14 @@ services:
             - kantilever
         ports:
             - 7000:80
+        volumes_from: 
+            - lmf-img-storage
 
     lmf-webshopbeheer:
         container_name: lmf-webshopbeheer
         image: docentm:5000/lmf-webshopbeheer:${BUILD_BUILDNUMBER}
         environment:
-            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
         networks: 
@@ -24,7 +49,7 @@ services:
         container_name: lmf-webshop.api
         image: docentm:5000/lmf-webshop.api:${BUILD_BUILDNUMBER}
         environment:
-            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
         networks: 
@@ -36,17 +61,20 @@ services:
         container_name: lmf-webshop.listener
         image: docentm:5000/lmf-webshop.listener:${BUILD_BUILDNUMBER}
         environment:
-            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
+            - IMG_ROOT=/img
         networks: 
             - kantilever
+        volumes_from: 
+            - lmf-img-storage
 
     lmf-bestelservice:
         container_name: lmf-bestelservice
         image: docentm:5000/lmf-bestelservice:${BUILD_BUILDNUMBER}
         environment:
-            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
         networks: 
@@ -56,7 +84,7 @@ services:
         container_name: lmf-factuurservice
         image: docentm:5000/lmf-factuurservice:${BUILD_BUILDNUMBER}
         environment:
-            - RABBITMQ_HOSTNAME=rabbitmq-client
+            - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
         networks: 
@@ -64,7 +92,7 @@ services:
 
     rabbitmq:
         image: rabbitmq:3-management
-        hostname: "rabbitmq-client"
+        hostname: "rabbitmq"
         environment:
             - RABBITMQ_ERLANG_COOKIE=SWQOKODSQALRPCLNMEQG
             - RABBITMQ_DEFAULT_USER=rabbitmq
@@ -74,8 +102,8 @@ services:
         ports:
             - 15672:15672
         networks: 
-            - kantilever
-
+            - kantilever           
+            
 networks: 
     kantilever:
-        driver: bridge
+        driver: bridge 

@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Webshop.Database.Migrations
 {
     [DbContext(typeof(WebshopContext))]
-    [Migration("20170118142600_Third migration")]
-    partial class Thirdmigration
+    [Migration("20170119105603_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Webshop.Database.Migrations
 {
-    public partial class Secondmigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +12,7 @@ namespace Webshop.Database.Migrations
                 name: "Artikelen",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<int>(nullable: false),
                     Beschrijving = table.Column<string>(nullable: true),
                     Leverancier = table.Column<string>(nullable: true),
                     LeverancierCode = table.Column<string>(nullable: true),

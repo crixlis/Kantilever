@@ -8,7 +8,7 @@ import { CatalogusComponent } from './catalogus';
 import { PageNotFoundComponent } from './pageNotFound';
 import { ProductComponent } from './product';
 import { WinkelwagenComponent } from './winkelwagen';
-import { shoppingCartService, IProductPair, PrijsPipe } from './shared';
+import { ShoppingCartService, IProductPair, PrijsPipe, ArtikelService } from './shared';
 
 const appRoutes: Routes = [
   { path: 'product/:id', component: ProductComponent },
@@ -44,7 +44,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule
   ],
-  providers: [shoppingCartService],
+  providers: [ShoppingCartService, ArtikelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

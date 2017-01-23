@@ -12,8 +12,7 @@ namespace Webshop.Database.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.1")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "1.0.1");
 
             modelBuilder.Entity("Artikel", b =>
                 {
@@ -32,6 +31,8 @@ namespace Webshop.Database.Migrations
                     b.Property<string>("Naam");
 
                     b.Property<decimal>("Prijs");
+
+                    b.Property<int>("Voorraad");
 
                     b.HasKey("Id");
 

@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { IProductPair } from './productPair.interface';
+import { Subject } from 'rxjs/Subject';
 
-const WINKELMANDJE = 'winkelmandje';
+const WINKELMANDJE = 'Kantilever';
 
 @Injectable()
-export class shoppingCartService {
+export class ShoppingCartService {
+
+    private _newAmountOfProductsSource = new Subject();
+    newAmountOfProducts = this._newAmountOfProductsSource.asObservable();
 
     getProducts() : IProductPair[] {
         if(window.localStorage[WINKELMANDJE]){
@@ -37,8 +41,9 @@ export class shoppingCartService {
                 amount: 0
             }) - 1;
         }    
-        storage[index].amount++;
+        ++storage[index].amount;
         window.localStorage[WINKELMANDJE] = JSON.stringify(storage);
+        this._newAmountOfProductsSource.next();
     } 
 
     amountOfProducts() : number {

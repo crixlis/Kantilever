@@ -1,4 +1,5 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ShoppingCartService } from './shared'
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,20 @@ import { Component} from '@angular/core';
 })
 
 export class AppComponent {
+
+  _shoppingCart : ShoppingCartService;
+  amountOfProducts : number;
+
+  constructor(shoppingCart : ShoppingCartService) {
+    this._shoppingCart = shoppingCart;
+  }
+
+  ngOnInit() {
+    this.amountOfProducts = this._shoppingCart.amountOfProducts();
+    this._shoppingCart.newAmountOfProducts.subscribe(() => {
+      this.amountOfProducts = this._shoppingCart.amountOfProducts();
+    });
+  }
 
   ToggleSideNav() {
     var sidebar = document.querySelector('#sidebar');
@@ -19,6 +34,10 @@ export class AppComponent {
     { 
       sidebar.className = '';
     }
+  }
+
+  onNewAmountProducts(){
+    this.amountOfProducts = this._shoppingCart.amountOfProducts();
   }
   
 }
