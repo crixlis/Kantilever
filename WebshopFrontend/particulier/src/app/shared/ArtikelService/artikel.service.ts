@@ -3,8 +3,9 @@ import { Http, Response }    from '@angular/http';
 import 'rxjs/add/operator/toPromise'; //needed for toPromise to work.
 import { Artikel } from './../objects.generated';
 
-const ARTIKELURL = 'http://localhost:5000/api/Artikel';
-const ARTIKELURLDEV = 'http://localhost:23284/api/Artikel';
+const ARTIKELURL = 'http://localhost:8090/api/Artikel';
+//const ARTIKELURLDEV = 'http://localhost:23284/api/Artikel';
+
 @Injectable()
 export class ArtikelService {
     

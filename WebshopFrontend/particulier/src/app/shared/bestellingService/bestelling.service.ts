@@ -3,7 +3,7 @@ import { Http, Response }    from '@angular/http';
 import { Bestelling } from '.';
 import 'rxjs/add/operator/toPromise'; //needed for toPromise to work.
 
-const BESTELLINGSERVICEURL = 'http://localhost:5000/api/Bestellingen';
+const BESTELLINGSERVICEURL = 'http://localhost:8090/api/Bestellingen';
 
 @Injectable()
 export class BestellingService {

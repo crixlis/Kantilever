@@ -3,21 +3,47 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { WinkelWagenComponent } from './winkelwagen.component';
+import { WinkelwagenComponent } from './winkelwagen.component';
+import { PrijsPipe, ShoppingCartService, ArtikelService, Artikel } from './../shared';
 
-describe('ProductComponent', () => {
-  let component: WinkelWagenComponent;
-  let fixture: ComponentFixture<WinkelWagenComponent>;
+//http mocking
+import { Http, BaseRequestOptions, XHRBackend, HttpModule } from '@angular/http' ;
+import { MockBackend } from '@angular/http/testing';
+
+describe('WinkelwagenComponent', () => {
+  let component: WinkelwagenComponent;
+  let fixture: ComponentFixture<WinkelwagenComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WinkelWagenComponent ]
+      declarations: 
+      [ 
+        WinkelwagenComponent,
+        PrijsPipe
+      ],
+      providers: [
+        ShoppingCartService,
+        ArtikelService,
+        MockBackend,
+        BaseRequestOptions,
+        {
+          provide: Http,
+          deps: [MockBackend, BaseRequestOptions],
+          useFactory:
+            (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+                return new Http(backend, defaultOptions);
+            }
+        }
+      ],
+      imports: [
+        HttpModule
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WinkelWagenComponent);
+    fixture = TestBed.createComponent(WinkelwagenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
