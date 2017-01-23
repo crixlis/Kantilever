@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FactuurService.Database
 {
-    public class FactuurServiceContext
+    public class FactuurServiceContext : DbContext
     {
         public FactuurServiceContext(DbContextOptions<FactuurServiceContext> options) : base(options) { }
 
-        public DbSet<Artikel> Artikelen { get; set; }
+        public DbSet<Factuur> Facturen { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Entity<Artikel>()
+                .Entity<Factuur>()
                 .Property(a => a.Id)
                 .ValueGeneratedNever();
         }

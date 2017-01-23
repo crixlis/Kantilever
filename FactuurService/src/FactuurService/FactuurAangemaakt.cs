@@ -1,6 +1,6 @@
 ﻿namespace FactuurService
 {
-    public class FactuurAangemaakt : FactuurAanmaken
+    public class FactuurAangemaakt : Factuur
     {
     }
 }
