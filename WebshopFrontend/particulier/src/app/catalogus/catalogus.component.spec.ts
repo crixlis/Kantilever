@@ -6,28 +6,9 @@ import { DebugElement } from '@angular/core';
 import { CatalogusComponent } from './catalogus.component';
 import { ShoppingCartService, ArtikelService, Artikel, PrijsPipe } from './../shared';
 
-class ShoppingCartServiceStub {
-      public _amountOfProducts = 4;
-
-      amountOfProducts() {
-        return Promise.resolve(this._amountOfProducts);
-      }
-
-      addProduct() {
-      }
-    };
-
-class ArtikelServiceStub {
-
-      public artikelen = {
-          id: 1,
-          naam: "yolo"
-        };
-
-      getArtikelen() {
-        return Promise.resolve(this.artikelen);
-      }
-    };
+//http mocking
+import { Http, BaseRequestOptions, XHRBackend, HttpModule } from '@angular/http' ;
+import { MockBackend } from '@angular/http/testing';
 
 describe('CatalogusComponent', () => {
   let component: CatalogusComponent;
@@ -41,8 +22,18 @@ describe('CatalogusComponent', () => {
           PrijsPipe
         ],
       providers: [ 
-        {provide: ShoppingCartService, useValue: ShoppingCartServiceStub },
-        {provide: ArtikelService, useValue: ArtikelServiceStub }
+        ShoppingCartService,
+        ArtikelService,
+        MockBackend,
+        BaseRequestOptions,
+        {
+          provide: Http,
+          deps: [MockBackend, BaseRequestOptions],
+          useFactory:
+            (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+                return new Http(backend, defaultOptions);
+            }
+        }
        ]
     })
     .compileComponents();
