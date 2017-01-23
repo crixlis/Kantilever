@@ -7,6 +7,7 @@ import { AppModule } from './app/';
 import { PageNotFoundModule } from './app/pageNotFound';
 import { ProductModule } from './app/product';
 import { WinkelwagenModule } from './app/winkelwagen';
+import { CatalogusModule } from './app/catalogus';
 
 if (environment.production) {
   enableProdMode();
