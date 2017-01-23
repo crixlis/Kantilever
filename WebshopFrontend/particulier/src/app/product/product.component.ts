@@ -15,15 +15,6 @@ export class ProductComponent implements OnInit {
   public addtoshoppingcarttext = 'Voeg toe aan winkelwagen';
 
   public productId: number;
-  public productTitel: string;
-  public productOmschrijving: string;
-  public productPrijs: number;
-  public productLeverbaarVanaf: Date;
-  public productLeverbaarTot: string;
-  public productLeverancierCode: string;
-  public productLeverancier: string;
-  public productCatagorieen: string[];
-  public productVoorraad: number;
 
   constructor(private route: ActivatedRoute, private shoppingCart : ShoppingCartService, private artikelService : ArtikelService) {
   }

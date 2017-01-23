@@ -11,14 +11,14 @@ export class ArtikelService {
     constructor(private http: Http) { }
 
     getArtikelen(): Promise<Artikel[]> {
-    return this.http.get(ARTIKELURL)
+    return this.http.get(ARTIKELURLDEV)
                 .toPromise()
                 .then(response => response.json())
                 .catch(error => Promise.reject(error.message || error));
     }
 
     getArtikel(artikelId : number): Promise<any> {
-    return this.http.get(ARTIKELURL + '/' + artikelId)
+    return this.http.get(ARTIKELURLDEV + '/' + artikelId)
                 .toPromise()
                 .then(response => response.json())
                 .catch(error => Promise.reject(error.message || error));

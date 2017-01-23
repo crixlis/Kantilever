@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.TestHost;
 using System.IO;
 
@@ -12,6 +13,7 @@ namespace WebshopBeheer.Test
 
             return new TestServer(new WebHostBuilder()
                             .UseStartup<Startup>()
+                            .UseEnvironment("Development")
                             .UseContentRoot(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "src", assemblyName)));
         }
     }
