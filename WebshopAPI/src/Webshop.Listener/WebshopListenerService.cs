@@ -39,7 +39,7 @@ namespace Webshop.Listener
                 imgName = Guid.NewGuid();
                 string rootPath = Path.Combine(_imgRoot, imgName.ToString());
 
-                File.WriteAllBytes(rootPath, item.Afbeelding);
+                File.WriteAllBytes(rootPath + ".png", item.Afbeelding);
                 nieuwArtikel.ImagePath = rootPath;
             }
 
