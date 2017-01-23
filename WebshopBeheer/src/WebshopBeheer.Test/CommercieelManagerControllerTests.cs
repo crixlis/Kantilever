@@ -12,7 +12,7 @@ namespace WebshopBeheer.Test
             using (var server = CustomTestServer.Start())
             using (var client = server.CreateClient())
             {
-                var controllerName = (new CommercieelManagerController().GetType().Name).Replace("Controller","");
+                var controllerName = nameof(CommercieelManagerController).Replace("Controller","");
                 var status = await client.GetAsync(controllerName + "\\" + "Index");
                 Assert.Equal(HttpStatusCode.OK, status.StatusCode);
             }
