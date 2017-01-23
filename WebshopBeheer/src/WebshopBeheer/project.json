@@ -38,7 +38,8 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "WebshopBeheer.Database": "1.0.0-*"
+    "WebshopBeheer.Database": "1.0.0-*",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.1.0"
   },
 
   "tools": {
