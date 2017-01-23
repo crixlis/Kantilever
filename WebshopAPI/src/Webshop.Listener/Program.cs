@@ -22,6 +22,7 @@ namespace Webshop.Listener
             builder.RegisterReceiverFor<WebshopListenerService, BetaaldeFactuurAfgemeld>();
             builder.RegisterReceiverFor<WebshopListenerService, ArtikelAanCatalogusToegevoegd>();
             builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
+            builder.Register(r => Environment.GetEnvironmentVariable("IMG_ROOT"));
 
             var options = new DbContextOptionsBuilder<WebshopContext>()
                //.UseSqlServer(@"Server=.\SQLEXPRESS;Database=ArtikelenKantilever;Trusted_Connection=true")

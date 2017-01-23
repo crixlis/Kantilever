@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 using WebshopBeheer.Data;
+using WebshopBeheer.Database;
 using WebshopBeheer.Models;
 using WebshopBeheer.Services;
 
@@ -13,12 +15,15 @@ namespace WebshopBeheer
 {
     public class Startup
     {
+        private IHostingEnvironment _env { get; set; }
+
         public Startup(IHostingEnvironment env)
         {
+            _env = env;
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            .SetBasePath(env.ContentRootPath)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
             if (env.IsDevelopment())
             {
@@ -35,9 +40,19 @@ namespace WebshopBeheer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //Add framework services.
+            if (_env.IsDevelopment())
+            {
+                services.AddDbContext<WebshopBeheerContext>(options => options.UseInMemoryDatabase("DevelopmentTesting"));
+                services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("DevelopmentTesting"));
+            }
+            else
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+                services.AddDbContext<WebshopBeheerContext>(options =>
+                    options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+            }
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -70,6 +85,20 @@ namespace WebshopBeheer
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+
+            if (!env.IsDevelopment())
+            {
+                using (var context = app.ApplicationServices.GetService<ApplicationDbContext>())
+                {
+                    context.Database.Migrate();
+                }
+
+                using (var context = app.ApplicationServices.GetService<WebshopBeheerContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 

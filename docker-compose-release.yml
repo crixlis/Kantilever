@@ -18,7 +18,8 @@ services:
             - MYSQL_ROOT_PASSWORD=my-secret-pw
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
-            - RABBITMQ_PASSWORD=rabbitmq      
+            - RABBITMQ_PASSWORD=rabbitmq
+            - MYSQL_CONNECTION=server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;      
         container_name: lmf-webfrontend.api.database
         networks: 
             - kantilever

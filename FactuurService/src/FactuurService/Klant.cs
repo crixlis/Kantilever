@@ -1,4 +1,4 @@
-﻿namespace Webshop.API
+﻿namespace FactuurService
 {
     public class Klant
     {

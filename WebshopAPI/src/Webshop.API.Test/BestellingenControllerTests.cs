@@ -22,7 +22,7 @@ namespace Webshop.API.Test
                 {
                     Id = 0,
                     Voornaam = "Herman",
-                    Acternaam = "Berghuis",
+                    Achternaam = "Berghuis",
                     Adres = "Antilheldenstraat 1",
                     Postcode = "1740 DD",
                     Plaatsnaam = "Schagen",
@@ -39,7 +39,7 @@ namespace Webshop.API.Test
                         LeverbaarVanaf = new DateTime(2017,1,1),
                         LeverbaarTot = new DateTime(2020, 1, 1),
                         Leverancier = "Giant",
-                        Categorieen = new string[] { "Mountainbikes", "Fietsen" }
+                        Categorieen = new List<string> { "Mountainbikes", "Fietsen" }
                     }
                 }
             };

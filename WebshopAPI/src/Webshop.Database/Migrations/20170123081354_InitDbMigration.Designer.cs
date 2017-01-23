@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Webshop.Database.Migrations
 {
     [DbContext(typeof(WebshopContext))]
-    partial class WebshopContextModelSnapshot : ModelSnapshot
+    [Migration("20170123081354_InitDbMigration")]
+    partial class InitDbMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
@@ -19,8 +20,6 @@ namespace Webshop.Database.Migrations
                     b.Property<int>("Id");
 
                     b.Property<string>("Beschrijving");
-
-                    b.Property<string>("ImagePath");
 
                     b.Property<string>("Leverancier");
 
