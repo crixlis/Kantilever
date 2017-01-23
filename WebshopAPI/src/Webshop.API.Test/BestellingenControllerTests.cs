@@ -22,7 +22,7 @@ namespace Webshop.API.Test
                 {
                     Id = 0,
                     Voornaam = "Herman",
-                    Acternaam = "Berghuis",
+                    Achternaam = "Berghuis",
                     Adres = "Antilheldenstraat 1",
                     Postcode = "1740 DD",
                     Plaatsnaam = "Schagen",
