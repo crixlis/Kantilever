@@ -1,5 +1,8 @@
-﻿using NSubstitute;
+﻿using BestelService.Database;
+using Microsoft.EntityFrameworkCore;
+using NSubstitute;
 using rabbitmq_demo;
+using System.Linq;
 using Xunit;
 
 namespace BestelService.Test
@@ -10,30 +13,64 @@ namespace BestelService.Test
         public void IkWilEenBestellingAanmakenEventOpvangenEnEenBestellingAangemaaktPublishen()
         {
             //Arrange
-            var sender = Substitute.For<ISender>();
-            var service = new BestelService(sender);
-            var bestelling = new BestellingAanmaken{Id = 1};
+            var options = new DbContextOptionsBuilder<BestelServiceContext>()
+               .UseInMemoryDatabase(databaseName: "BestellingAanmaken")
+               .Options;
 
-            //Act
-            service.Execute(bestelling);
+            using (var context = new BestelServiceContext(options))
+            {
+                var sender = Substitute.For<ISender>();
+                var service = new BestelService(sender, context);
+                var bestelling = new BestellingAanmaken { Id = 1 };
 
-            //Assert
-            sender.Received(1).PublishEvent(Arg.Any<BestellingAangemaakt>());
+                //Act
+                service.Execute(bestelling);
+
+                //Assert
+                sender.Received(1).PublishEvent(Arg.Any<BestellingAangemaakt>());
+            }
         }
 
         [Fact]
-        public void IkWilEenBestellingKeurenEventOpvangenEnEenBestellingGoedgekeurdPublishen()
+        public void IkWilEenBestellingKeurenEventOpvangenEnInDeDatabaseOpslaan()
         {
             //Arrange
-            var sender = Substitute.For<ISender>();
-            var service = new BestelService(sender);
-            var bestelling = new BestellingKeuren {Id = 1};
+            var options = new DbContextOptionsBuilder<BestelServiceContext>()
+               .UseInMemoryDatabase(databaseName: "BestellingKeuren")
+               .Options;
+            using (var context = new BestelServiceContext(options))
+            {
+                var sender = Substitute.For<ISender>();
+                var service = new BestelService(sender, context);
+                var bestelling = new BestellingKeuren { Id = 1 };
 
-            //Act
-            service.Execute(bestelling);
+                //Act
+                service.Execute(bestelling);
 
-            //Assert
-            sender.Received(1).PublishEvent(Arg.Any<BestellingGoedgekeurd>());
+                //Assert
+                Assert.True(context.Bestelling.Any());
+            }
+        }
+
+        [Fact]
+        public void IkWilEenBestellingGoedgekeurdEventOpvangenEnInDeDatabaseOpslaan()
+        {
+            //Arrange
+            var options = new DbContextOptionsBuilder<BestelServiceContext>()
+               .UseInMemoryDatabase(databaseName: "BestellingGoedkeuren")
+               .Options;
+            using (var context = new BestelServiceContext(options))
+            {
+                var sender = Substitute.For<ISender>();
+                var service = new BestelService(sender, context);
+                var bestelling = new BestellingGoedgekeurd { Id = 1 };
+
+                //Act
+                service.Execute(bestelling);
+
+                //Assert
+                Assert.True(context.Bestelling.Any());
+            }
         }
     }
 }

@@ -19,6 +19,8 @@ namespace BestelService
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<BestelService, BestellingAanmaken>();
             builder.RegisterReceiverFor<BestelService, BestellingKeuren>();
+            builder.RegisterReceiverFor<BestelService, BestellingGoedgekeurd>();
+
             builder.Register(d => new Sender(connection, "Kantilever")).As<ISender>();
 
             using (var container = builder.Build())

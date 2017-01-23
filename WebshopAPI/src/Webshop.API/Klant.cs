@@ -2,7 +2,7 @@
 {
     public class Klant
     {
-        public string Acternaam { get; set; }
+        public string Achternaam { get; set; }
         public string Adres { get; set; }
         public int Id { get; set; }
         public string Plaatsnaam { get; set; }
