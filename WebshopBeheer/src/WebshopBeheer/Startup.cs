@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebshopBeheer.Data;
+using WebshopBeheer.Database;
 using WebshopBeheer.Models;
 using WebshopBeheer.Services;
 
@@ -36,8 +37,16 @@ namespace WebshopBeheer
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<WebshopBeheerContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            services.AddDbContext<WebshopBeheerContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -70,6 +79,16 @@ namespace WebshopBeheer
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            using (var context = app.ApplicationServices.GetService<ApplicationDbContext>())
+            {
+                context.Database.Migrate();
+            }
+
+            using (var context = app.ApplicationServices.GetService<WebshopBeheerContext>())
+            {
+                context.Database.Migrate();
+            }
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
