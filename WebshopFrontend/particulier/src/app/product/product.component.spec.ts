@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { ProductComponent } from './product.component';
+import { PrijsPipe, ShoppingCartService, ArtikelService, Artikel } from './../shared';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
