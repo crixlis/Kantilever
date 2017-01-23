@@ -24,7 +24,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         CatalogusComponent,
-        PageNotFoundComponent        
+        PageNotFoundComponent    
       ],
       providers: [
         ShoppingCartService,
