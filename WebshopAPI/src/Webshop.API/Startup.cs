@@ -17,7 +17,7 @@ namespace Webshop.API
             var options = new DbContextOptions<WebshopContext>();
             if(env.IsDevelopment())
             {
-                options = new DbContextOptionsBuilder<WebshopContext>().UseInMemoryDatabase("DevelopmentTesting").Options;
+                options = new DbContextOptionsBuilder<WebshopContext>().UseInMemoryDatabase("DevelopmentTesting").Options; 
             }
             else
             {
@@ -26,14 +26,14 @@ namespace Webshop.API
                .UseMySQL(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;")
                //.UseMySQL(@"server=127.0.0.1;userid=root;pwd=my-secret-pw;port=7568;database=ArtikelenKantilever;sslmode=none;")
                .Options;
+
+                using (var context = new WebshopContext(options))
+                {
+                    context.Database.Migrate();
+                    context.SaveChanges();
+                }
             }
             
-
-            using (var context = new WebshopContext(options))
-            {
-                context.Database.Migrate();
-                context.SaveChanges();
-            }
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)

@@ -37,7 +37,7 @@ export class ProductComponent implements OnInit {
        this.artikelService.getArtikel(this.productId).then(result => { 
          this.artikel = Artikel.fromJS(result); 
         }, error => console.error(error) );
-        this.artikel.leverancier
+        
     });
 
     //
