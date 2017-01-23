@@ -4,25 +4,25 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { CatalogusComponent } from './catalogus.component';
-import { ShoppingCartService, ArtikelService, Artikel, PrijsPipe } from './../shared'
+import { ShoppingCartService, ArtikelService, Artikel, PrijsPipe } from './../shared';
 
-class ShoppingCartServiceStub = {
-      public amountOfProducts = 4;
+class ShoppingCartServiceStub {
+      public _amountOfProducts = 4;
 
       amountOfProducts() {
-        return Promise.resolve(this.amountOfProducts);
+        return Promise.resolve(this._amountOfProducts);
       }
 
       addProduct() {
       }
     };
 
-class ArtikelServiceStub = {
+class ArtikelServiceStub {
 
       public artikelen = {
-          id: 1
+          id: 1,
           naam: "yolo"
-        },
+        };
 
       getArtikelen() {
         return Promise.resolve(this.artikelen);
@@ -35,8 +35,12 @@ describe('CatalogusComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CatalogusComponent ]
-      providers:    [ 
+      declarations: 
+        [ 
+          CatalogusComponent,
+          PrijsPipe
+        ],
+      providers: [ 
         {provide: ShoppingCartService, useValue: ShoppingCartServiceStub },
         {provide: ArtikelService, useValue: ArtikelServiceStub }
        ]
