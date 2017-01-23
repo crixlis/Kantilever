@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "testRunner": "xunit",
   "buildOptions": {"emitEntryPoint":  true },
@@ -13,7 +13,8 @@
     "xunit": "2.2.0-beta2-build3300",
     "RabbitMQ.Client": "4.1.1",
     "rabbitmq-demo": "1.2.*",
-    "Autofac": "4.2.0"
+    "Autofac": "4.2.0",
+    "WebshopBeheer.Database": "1.0.0-*"
   },
 
   "tools": {
