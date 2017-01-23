@@ -7,6 +7,7 @@ using rabbitmq_demo;
 using RabbitMQ.Client;
 using Microsoft.EntityFrameworkCore;
 using MySQL.Data.EntityFrameworkCore.Extensions;
+using System;
 
 namespace Webshop.API
 {
@@ -22,7 +23,7 @@ namespace Webshop.API
             else
             {
                 options = new DbContextOptionsBuilder<WebshopContext>()
-               .UseMySQL(Configuration.GetConnectionString("DefaultConnection"))
+               .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION"))
                .Options;
 
                 using (var context = new WebshopContext(options))
