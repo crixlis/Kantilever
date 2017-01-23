@@ -5,44 +5,18 @@
             <div class="pdInfo">
                 <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quo, dolor ut eius accusantium repellat consequatur, dignissimos error in adipisci, sit placeat minima, harum dicta.</span>
             </div>
-            <div class="productDetails">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Aantal</th>
-                        <th>Prijs</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Product1</td>
-                        <td>2</td>
-                        <td>€ 100 ,-</td>
-                        <td class="pdImage">            
-                            <img src="https://s.s-bol.com/imgbase0/imagebase3/large/FC/6/6/4/0/9200000057890466.jpg">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Product 2</td>
-                        <td>1</td>
-                        <td>€ 59 ,-</td>
-                        <td class="pdImage">            
-                           <img src="https://s.s-bol.com/imgbase0/imagebase3/large/FC/0/4/0/1/9200000017121040.jpg">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Product 3</td>
-                        <td>1</td>
-                        <td>€ 50 ,</td>
-                        <td class="pdImage">            
-                           <img src="https://s.s-bol.com/imgbase0/imagebase3/large/FC/0/8/6/4/9200000029864680.jpg">
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            
+            <ul>
+                <li *ngFor='let artikel of Artikelen'>
+                    <article (click)="goToProductPage(1)">
+                        <h3>{{artikel.naam}}</h3>
+                        <span class="prijs" [ngClass]="{'prijs-small': artikel.naam.length > 5 }">{{artikel.prijs | prijs}}</span>
+                        <img src="image/fietsband.jpg" />
+                        <p>{{artikel.beschrijving}}</p>
+                    </article>
+                </li>
+            </ul>
+
         </article>
         <aside>
             <div id="buyProduct">
