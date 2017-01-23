@@ -15,6 +15,7 @@ export class Artikel {
     leverbaarTot: Date; 
     leverancier: string; 
     categorieen: string[];
+    Voorraad: number;
 
     constructor(data?: any) {
         if (data !== undefined) {
@@ -30,6 +31,8 @@ export class Artikel {
                 for (let item of data["categorieen"])
                     this.categorieen.push(item);
             }
+            this.Voorraad = data["voorraad"] !== undefined ? data["leverancier"] : null;
+
         }
     }
 
@@ -51,6 +54,7 @@ export class Artikel {
             for (let item of this.categorieen)
                 data["categorieen"].push(item);
         }
+        data["voorraad"] !== this.leverancier != undefined ? this.leverancier : null;
         return data; 
     }
 
