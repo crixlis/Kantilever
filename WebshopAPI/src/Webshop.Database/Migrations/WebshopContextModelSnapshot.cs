@@ -12,13 +12,15 @@ namespace Webshop.Database.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.1");
+                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
 
             modelBuilder.Entity("Artikel", b =>
                 {
                     b.Property<int>("Id");
 
                     b.Property<string>("Beschrijving");
+
+                    b.Property<string>("ImagePath");
 
                     b.Property<string>("Leverancier");
 

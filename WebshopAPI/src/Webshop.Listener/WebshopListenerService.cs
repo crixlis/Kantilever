@@ -31,10 +31,16 @@ namespace Webshop.Listener
                 Naam = item.Naam,
                 Prijs = item.Prijs
             };
-            
+
+            Guid imgName;
+
             if(item.Afbeelding != null)
             {
-                File.WriteAllBytes(Path.Combine(_imgRoot, item.Id.ToString()), item.Afbeelding);
+                imgName = Guid.NewGuid();
+                string rootPath = Path.Combine(_imgRoot, imgName.ToString());
+
+                File.WriteAllBytes(rootPath + ".png", item.Afbeelding);
+                nieuwArtikel.ImagePath = rootPath;
             }
 
             _context.Artikelen.Add(nieuwArtikel);

@@ -35,7 +35,7 @@ namespace Webshop.API.Controllers
                     LeverbaarVanaf = new DateTime(2017, 1, 1),
                     LeverbaarTot = new DateTime(2020, 1, 1),
                     Leverancier = "Giant",
-                    Categorieen = new string[]{ "Mountainbikes", "Fietsen" }
+                    Categorieen = new List<string> { "Mountainbikes", "Fietsen" }
                 },
                 new Artikel
                 {
@@ -46,7 +46,7 @@ namespace Webshop.API.Controllers
                     LeverbaarVanaf = new DateTime(2017, 1, 1),
                     LeverbaarTot = new DateTime(2020, 1, 1),
                     Leverancier = "Giant",
-                    Categorieen = new string[]{ "Mountainbikes", "Fietsen" }
+                    Categorieen = new List<string> { "Mountainbikes", "Fietsen" }
                 }
             };
         }
@@ -64,7 +64,7 @@ namespace Webshop.API.Controllers
                 LeverbaarVanaf = new DateTime(2017, 1, 1),
                 LeverbaarTot = new DateTime(2020, 1, 1),
                 Leverancier = "Giant",
-                Categorieen = new string[] { "Mountainbikes", "Fietsen" }
+                Categorieen = new List<string> { "Mountainbikes", "Fietsen" }
             };
         }
     }

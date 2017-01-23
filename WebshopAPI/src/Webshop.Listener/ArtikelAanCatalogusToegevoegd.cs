@@ -11,8 +11,10 @@ public class ArtikelAanCatalogusToegevoegd
     public DateTime? LeverbaarTot { get; set; }
     public string LeverancierCode { get; set; }
     public string Leverancier { get; set; }
-    public List<string> Categorieen = new List<string>();
+    public List<string> Categorieen { get; set; }
+    public int Voorraad { get; set; }
     public byte[] Afbeelding { get; set; }
+    public string ImagePath { get; set; }
 }
 
 

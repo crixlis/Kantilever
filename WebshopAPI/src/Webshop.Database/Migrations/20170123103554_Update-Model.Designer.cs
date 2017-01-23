@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Webshop.Database.Migrations
 {
     [DbContext(typeof(WebshopContext))]
-    [Migration("20170123081354_InitDbMigration")]
-    partial class InitDbMigration
+    [Migration("20170123103554_Update-Model")]
+    partial class UpdateModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,8 @@ namespace Webshop.Database.Migrations
                     b.Property<int>("Id");
 
                     b.Property<string>("Beschrijving");
+
+                    b.Property<string>("ImagePath");
 
                     b.Property<string>("Leverancier");
 
