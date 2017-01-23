@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-WebshopBeheer-042a8bc6-628a-4cc5-b6df-4aa8f077775d",
 
   "dependencies": {
@@ -40,10 +40,11 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc":  {
+    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "WebshopBeheer.Database": "1.0.0-*"
   },
 
   "tools": {
