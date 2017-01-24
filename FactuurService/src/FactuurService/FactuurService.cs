@@ -24,14 +24,17 @@ namespace FactuurService
                 totaal += artikel.Prijs;
             }
 
-            _sender.PublishEvent(new FactuurAangemaakt
+            FactuurAangemaakt factuur = new FactuurAangemaakt
             {
                 Id = item.Id,
                 Artikelen = item.Artikelen,
                 Klant = item.Klant,
-                BetalenVoorDatum = DateTime.Today.AddMonths(1),
+                HuidigeDatum = DateTime.Today,
                 Totaal = totaal
-            });
+            };
+            _context.Facturen.Add(factuur);
+
+            _sender.PublishEvent(factuur);
         }
 
         public void Execute(BetaaldeFactuurAfmelden item)
