@@ -49,6 +49,32 @@ namespace FactuurService.Test
         }
 
         [Fact]
+        public void IkWilFactuurAanmakenEventOpvangenEnInDeDatabaseOpslaan()
+        {
+            //Arrange
+            var options = new DbContextOptionsBuilder<FactuurServiceContext>()
+               .UseInMemoryDatabase(databaseName: "FactuurAanmaken")
+               .Options;
+
+            using (var context = new FactuurServiceContext(options))
+            {
+                var sender = Substitute.For<ISender>();
+                var service = new FactuurService(sender, context);
+                var factuur = new FactuurAanmaken
+                {
+                    Id = 1,
+                    Artikelen = new List<Artikel> { new Artikel { Id = 1} }
+                };
+
+                //Act
+                service.Execute(factuur);
+
+                //Assert
+                Assert.True(context.Facturen.Any());
+            }
+        }
+
+        [Fact]
         public void DeFactuurServiceKanEenBetaaldeFactuurAfmeldenCommandOntvangenEnEenBetaaldeFactuurAfgemeldEventOpgooien()
         {
             //Arrange
