@@ -8,6 +8,7 @@ import { CatalogusComponent } from './catalogus';
 import { PageNotFoundComponent } from './pageNotFound';
 import { ProductComponent } from './product';
 import { WinkelwagenComponent } from './winkelwagen';
+import { BestellingAfrondenComponent } from './bestellingAfronden';
 import { ShoppingCartService, IProductPair, PrijsPipe, ArtikelService } from './shared';
 import { ConfigComponent } from './config';
 
@@ -20,6 +21,7 @@ const appRoutes: Routes = ConfigComponent.routes;
     PageNotFoundComponent,
     ProductComponent,
     WinkelwagenComponent,
+    BestellingAfrondenComponent,
     PrijsPipe
   ],
   imports: [

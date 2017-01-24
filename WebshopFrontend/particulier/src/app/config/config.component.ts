@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { ProductComponent } from './../product';
 import { CatalogusComponent } from './../catalogus';
 import { WinkelwagenComponent } from './../winkelwagen';
+import { BestellingAfrondenComponent } from './../bestellingAfronden';
 import { PageNotFoundComponent } from './../pageNotFound';
 
 @Component({
@@ -24,6 +25,11 @@ export class ConfigComponent {
             path: 'winkelwagen',
             component: WinkelwagenComponent,
             data: { title: 'Winkelwagen' }
+        },
+        {
+            path: 'bestellingAfronden',
+            component: BestellingAfrondenComponent,
+            data: { title: 'Bestelling afronden' }
         },
         { path: '',
             redirectTo: '/catalogus',
