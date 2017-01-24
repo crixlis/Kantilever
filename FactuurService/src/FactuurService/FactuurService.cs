@@ -24,7 +24,7 @@ namespace FactuurService
                 totaal += artikel.Prijs;
             }
 
-            FactuurAangemaakt factuur = new FactuurAangemaakt
+            Factuur factuur = new Factuur
             {
                 Id = item.Id,
                 Artikelen = item.Artikelen,
@@ -34,7 +34,12 @@ namespace FactuurService
             };
             _context.Facturen.Add(factuur);
 
-            _sender.PublishEvent(factuur);
+            _sender.PublishEvent(new FactuurAangemaakt {
+                Id = factuur.Id,
+                Artikelen = factuur.Artikelen,
+                HuidigeDatum = factuur.HuidigeDatum,
+                Klant = factuur.Klant, Totaal = 
+                factuur.Totaal });
         }
 
         public void Execute(BetaaldeFactuurAfmelden item)
