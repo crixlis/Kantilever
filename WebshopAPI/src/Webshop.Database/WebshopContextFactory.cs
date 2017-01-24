@@ -14,7 +14,7 @@ namespace Webshop.Database
         {
             var builder = new DbContextOptionsBuilder<WebshopContext>()
             //.UseSqlServer(@"Server=.\SQLEXPRESS;Database=ArtikelenKantilever;Trusted_Connection=true");
-             .UseMySQL(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;");
+             .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION"));
 
             return new WebshopContext(builder.Options);
         }
