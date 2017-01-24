@@ -12,7 +12,7 @@
             <div id="productContainer">
                 <ul>
                     <li *ngFor='let pp of ProductPairs'>
-                        <article (click)="goToProductPage(1)">
+                        <article (click)="goToProductPage(pp.Artikel.id)">
                             <h3>{{pp.Artikel.naam}}</h3>
                             <span>Aantal: {{pp.Amount}}</span>
                             <span class="prijs">Prijs: {{pp.Artikel.prijs | prijs}}</span>
