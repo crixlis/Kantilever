@@ -1,4 +1,4 @@
-﻿namespace FactuurService
+﻿namespace FactuurService.Database
 {
     public class Klant
     {

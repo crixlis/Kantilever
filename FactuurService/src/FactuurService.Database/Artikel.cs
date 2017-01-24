@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FactuurService
+﻿namespace FactuurService.Database
 {
     public class Artikel
     {

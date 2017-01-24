@@ -1,4 +1,7 @@
 ﻿using Autofac;
+using BestelService.Database;
+using Microsoft.EntityFrameworkCore;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 using RabbitMQ.Client;
 using rabbitmq_demo;
 using System;
@@ -18,14 +21,24 @@ namespace BestelService
 
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<BestelService, BestellingAanmaken>();
-            builder.RegisterReceiverFor<BestelService, BestellingKeuren>();
+            builder.RegisterReceiverFor<BestelService, BestellingGoedgekeurd>();
+
             builder.Register(d => new Sender(connection, "Kantilever")).As<ISender>();
 
-            using (var container = builder.Build())
-            using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
+            var options = new DbContextOptionsBuilder<BestelServiceContext>()
+               .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION"))
+               .Options;
+
+            using (var context = new BestelServiceContext(options))
             {
-                listener.SubscribeCommands<BestellingKeuren>(container);
+                context.Database.Migrate();
+            }
+
+            using (var container = builder.Build())
+            using (var listener = new Listener(connection, "Kantilever"))
+            {
                 listener.SubscribeCommands<BestellingAanmaken>(container);
+                listener.SubscribeCommands <BestellingGoedgekeurd>(container);
                 listener.Received += ListenerMessage;
                 using (ManualResetEvent manualResetEvent = new ManualResetEvent(false))
                 {

@@ -1,6 +1,8 @@
-﻿namespace FactuurService
+﻿using FactuurService.Database;
+
+namespace FactuurService
 {
-    public class FactuurAangemaakt : FactuurAanmaken
+    public class FactuurAangemaakt : Factuur
     {
     }
 }

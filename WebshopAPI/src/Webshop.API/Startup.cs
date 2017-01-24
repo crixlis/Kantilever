@@ -59,7 +59,7 @@ namespace Webshop.API
             );
 
             services.AddDbContext<WebshopContext>(options => options
-                .UseSqlServer(@"server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;"));
+                .UseMySQL(Environment.GetEnvironmentVariable("MSQL_CONNECTION")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

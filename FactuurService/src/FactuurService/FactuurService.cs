@@ -1,25 +1,47 @@
 ﻿using System;
 using rabbitmq_demo;
+using FactuurService.Database;
+using System.Linq;
 
 namespace FactuurService
 {
     public class FactuurService : IReceive<BetaaldeFactuurAfmelden>, IReceive<FactuurAanmaken>
     {
         private ISender _sender;
+        private IFactuurServiceContext _context;
 
-        public FactuurService(ISender sender)
+        public FactuurService(ISender sender, IFactuurServiceContext context)
         {
             _sender = sender;
+            _context = context;
         }
 
         public void Execute(FactuurAanmaken item)
         {
-            var newEvent = new FactuurAangemaakt
-            {
-                Id = item.Id
-            };
+            decimal totaal = 0;
 
-            _sender.PublishEvent(newEvent);
+            foreach (Artikel artikel in item.Artikelen)
+            {
+                totaal += artikel.Prijs;
+            }
+
+            Factuur factuur = new Factuur
+            {
+                Id = item.Id,
+                Artikelen = item.Artikelen,
+                Klant = item.Klant,
+                HuidigeDatum = DateTime.Today,
+                Totaal = totaal
+            };
+            _context.Facturen.Add(factuur);
+            _context.SaveChanges();
+
+            _sender.PublishEvent(new FactuurAangemaakt {
+                Id = factuur.Id,
+                Artikelen = factuur.Artikelen,
+                HuidigeDatum = factuur.HuidigeDatum,
+                Klant = factuur.Klant, Totaal = 
+                factuur.Totaal });
         }
 
         public void Execute(BetaaldeFactuurAfmelden item)
@@ -28,7 +50,7 @@ namespace FactuurService
             {
                 Id = item.Id
             };
-
+ 
             _sender.PublishEvent(newEvent);
         }
 

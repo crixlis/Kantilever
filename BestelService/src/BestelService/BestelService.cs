@@ -1,24 +1,31 @@
-﻿using rabbitmq_demo;
+﻿using System;
+using rabbitmq_demo;
+using System.Linq;
 
 namespace BestelService
 {
-    public class BestelService: IReceive<BestellingAanmaken>, IReceive<BestellingKeuren>
+    public class BestelService: IReceive<BestellingAanmaken>, IReceive<BestellingGoedgekeurd>
     {
-        ISender _sender;
+        private ISender _sender;
+        private IBestelServiceContext _context;
 
-        public BestelService(ISender sender)
+        public BestelService(ISender sender, IBestelServiceContext context)
         {
             _sender = sender;
+            _context = context;
         }
 
         public void Execute(BestellingAanmaken item)
         {
-            _sender.PublishEvent(new BestellingAangemaakt{Id = item.Id });
+            _context.Bestelling.Add(new Bestelling { Artikelen = item.Artikelen, Id = item.Id, Klant = item.Klant });
+            _context.SaveChanges();
+            _sender.PublishEvent(new BestellingKeuren{Id = item.Id });
         }
-
-        public void Execute(BestellingKeuren item)
+        public void Execute(BestellingGoedgekeurd item)
         {
-            _sender.PublishEvent(new BestellingGoedgekeurd {Id = item.Id });
+            var goedgekeurdeBestelling = _context.Bestelling.Where(b => b.Id == item.Id).Single();
+            _context.Bestelling.Update(goedgekeurdeBestelling);
+            _context.SaveChanges();
         }
     }
 }

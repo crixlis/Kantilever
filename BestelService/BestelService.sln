@@ -14,6 +14,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BestelService", "src\Bestel
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BestelService.Test", "src\BestelService.Test\BestelService.Test.xproj", "{7EEFB03F-FEEB-4D22-A0B7-354B83DB7AB8}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BestelService.Database", "src\BestelService.Database\BestelService.Database.xproj", "{8248E8BF-E85F-45E9-BDA8-F6FC5CC834BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{7EEFB03F-FEEB-4D22-A0B7-354B83DB7AB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EEFB03F-FEEB-4D22-A0B7-354B83DB7AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EEFB03F-FEEB-4D22-A0B7-354B83DB7AB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8248E8BF-E85F-45E9-BDA8-F6FC5CC834BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8248E8BF-E85F-45E9-BDA8-F6FC5CC834BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8248E8BF-E85F-45E9-BDA8-F6FC5CC834BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8248E8BF-E85F-45E9-BDA8-F6FC5CC834BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,5 +41,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EC62E34A-63FC-4EA6-8DC1-BF74EFAA0C8E} = {CE16BB1A-91AC-4164-BEC4-F051C371A070}
 		{7EEFB03F-FEEB-4D22-A0B7-354B83DB7AB8} = {CE16BB1A-91AC-4164-BEC4-F051C371A070}
+		{8248E8BF-E85F-45E9-BDA8-F6FC5CC834BC} = {CE16BB1A-91AC-4164-BEC4-F051C371A070}
 	EndGlobalSection
 EndGlobal

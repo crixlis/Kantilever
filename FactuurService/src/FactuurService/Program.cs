@@ -1,4 +1,7 @@
 ﻿using Autofac;
+using FactuurService.Database;
+using Microsoft.EntityFrameworkCore;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 using RabbitMQ.Client;
 using rabbitmq_demo;
 using System;
@@ -20,6 +23,18 @@ namespace FactuurService
             builder.RegisterReceiverFor<FactuurService, BetaaldeFactuurAfmelden>();
             builder.RegisterReceiverFor<FactuurService, FactuurAanmaken>();
             builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
+
+            var options = new DbContextOptionsBuilder<FactuurServiceContext>()
+               .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION"))
+               .Options;
+
+            using (var context = new FactuurServiceContext(options))
+            {
+                context.Database.Migrate();
+            }
+
+            builder.RegisterType<FactuurServiceContext>().As<IFactuurServiceContext>();
+            builder.RegisterInstance(options);
 
             using (var container = builder.Build())
             using (var listener = new Listener(connection, "Kantilever"))

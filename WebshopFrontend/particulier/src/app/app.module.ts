@@ -9,25 +9,9 @@ import { PageNotFoundComponent } from './pageNotFound';
 import { ProductComponent } from './product';
 import { WinkelwagenComponent } from './winkelwagen';
 import { ShoppingCartService, IProductPair, PrijsPipe, ArtikelService } from './shared';
+import { ConfigComponent } from './config';
 
-const appRoutes: Routes = [
-  { path: 'product/:id', component: ProductComponent },
-  {
-    path: 'catalogus',
-    component: CatalogusComponent,
-    data: { title: 'Catalogus' }
-  },
-  {
-    path: 'winkelwagen',
-    component: WinkelwagenComponent,
-    data: { title: 'Winkelwagen' }
-  },
-  { path: '',
-    redirectTo: '/catalogus',
-    pathMatch: 'full'
-  },
-  { path: '**', component: PageNotFoundComponent }
-];
+const appRoutes: Routes = ConfigComponent.routes;
 
 @NgModule({
   declarations: [

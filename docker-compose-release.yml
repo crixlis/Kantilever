@@ -7,9 +7,35 @@ services:
         networks:
             - kantilever
         volumes: 
-            - /img
+            - img:/img
         ports:
             - 7559:3306
+
+    lmf-bestelservice.database:
+        image: mysql:latest
+        hostname: "lmf-bestelservice.database"
+        environment:
+            - MYSQL_ROOT_PASSWORD=my-secret-pw
+            - RABBITMQ_HOSTNAME=rabbitmq
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq
+            - MYSQL_CONNECTION=server=lmf-bestelservice.database;userid=root;pwd=my-secret-pw;port=3306;database=BestellingenKantilever;sslmode=none;      
+        container_name: lmf-bestelservice.database
+        networks: 
+            - kantilever
+
+    lmf-factuurservice.database:
+        image: mysql:latest
+        hostname: "lmf-factuurservice.database"
+        environment:
+            - MYSQL_ROOT_PASSWORD=my-secret-pw
+            - RABBITMQ_HOSTNAME=rabbitmq
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq
+            - MYSQL_CONNECTION=server=lmf-factuurservice.database;userid=root;pwd=my-secret-pw;port=3306;database=FacturenKantilever;sslmode=none;      
+        container_name: lmf-factuurservice.database
+        networks: 
+            - kantilever
 
     lmf-webfrontend.api.database:
         image: mysql:latest
@@ -23,6 +49,8 @@ services:
         container_name: lmf-webfrontend.api.database
         networks: 
             - kantilever
+        ports:
+            - 4567:3306
 
     lmf-webshop-frontend:
         container_name: lmf-webshop-frontend
@@ -31,8 +59,8 @@ services:
             - kantilever
         ports:
             - 7000:80
-        volumes_from: 
-            - lmf-img-storage
+        volumes: 
+            - img:/usr/share/nginx/html/img/
 
     lmf-webshopbeheer:
         container_name: lmf-webshopbeheer
@@ -53,6 +81,7 @@ services:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
+            - MYSQL_CONNECTION=server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;
         networks: 
             - kantilever
         ports: 
@@ -68,8 +97,8 @@ services:
             - IMG_ROOT=/img
         networks: 
             - kantilever
-        volumes_from: 
-            - lmf-img-storage
+        volumes: 
+            - img:/img
 
     lmf-bestelservice:
         container_name: lmf-bestelservice
@@ -78,6 +107,7 @@ services:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
+            - MYSQL_CONNECTION=server=lmf-bestelservice.database;userid=root;pwd=my-secret-pw;port=3306;database=BestellingenKantilever;sslmode=none;
         networks: 
             - kantilever
     
@@ -88,6 +118,7 @@ services:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
+            - MYSQL_CONNECTION=server=lmf-factuurservice.database;userid=root;pwd=my-secret-pw;port=3306;database=FacturenKantilever;sslmode=none;
         networks: 
             - kantilever
 
@@ -107,4 +138,7 @@ services:
             
 networks: 
     kantilever:
-        driver: bridge 
+        driver: bridge
+        
+volumes:
+    img:
