@@ -114,13 +114,13 @@ describe('CatalogusComponent', () => {
       mockBackend.connections.subscribe(conn => {
         conn.mockRespond(new Response(new ResponseOptions({ body: mockResponse })));
       });
-    })));
 
-    it('should show 4 artikelen op de catalogusPagina', fakeAsync(() => {
       fixture = TestBed.createComponent(CatalogusComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
+    })));
 
+    it('should show 4 artikelen op de catalogusPagina', fakeAsync(() => {
       let compiled = fixture.debugElement.nativeElement;
       let list : HTMLUListElement = compiled.querySelector('#catalogus ul');
 
@@ -134,85 +134,57 @@ describe('CatalogusComponent', () => {
       expect(list.childElementCount).toBe(4);
     }));
 
-    it('should show the naam, prijs, beschrijving for the first artikel', fakeAsync(() => {
-      fixture = TestBed.createComponent(CatalogusComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-
-      let compiled = fixture.debugElement.nativeElement;
-      let list : HTMLUListElement = compiled.querySelector('#catalogus ul');
-
-      flushMicrotasks(); //execute service
-      fixture.detectChanges(); //refresh view with new model
+    describe('should show the naam, prijs, beschrijving for', () => 
+    {
+      beforeEach(fakeAsync(() => {
+        flushMicrotasks(); //execute service
+        fixture.detectChanges(); //refresh view with new model
+      }));
       
-      let item : Element = list.children[0];
+      it(' the first artikel', fakeAsync(() => {
+        let compiled = fixture.debugElement.nativeElement;
+        let list : HTMLUListElement = compiled.querySelector('#catalogus ul');
+        let item : Element = list.children[0];
 
-      expect(item).toBeDefined;
-      expect(item.querySelector('h3').textContent).toBe('naam1');
-      expect(item.querySelector('span.prijs').textContent).toBe('€12,99');
-      expect(item.querySelector('p').textContent).toBe('beschrijving1');
-    }));
+        expect(item).toBeDefined;
+        expect(item.querySelector('h3').textContent).toBe('naam1');
+        expect(item.querySelector('span.prijs').textContent).toBe('€12,99');
+        expect(item.querySelector('p').textContent).toBe('beschrijving1');
+      }));
 
-    it('should show the naam, prijs, beschrijving for the second artikel', fakeAsync(() => {
-      fixture = TestBed.createComponent(CatalogusComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
+      it('the second artikel', fakeAsync(() => {
+        let compiled = fixture.debugElement.nativeElement;
+        let list : HTMLUListElement = compiled.querySelector('#catalogus ul');
+        let item : Element = list.children[1];
 
-      let compiled = fixture.debugElement.nativeElement;
-      let list : HTMLUListElement = compiled.querySelector('#catalogus ul');
+        expect(item).toBeDefined;
+        expect(item.querySelector('h3').textContent).toBe('naam3');
+        expect(item.querySelector('span.prijs').textContent).toBe('€15');
+        expect(item.querySelector('p').textContent).toBe('beschrijving3');
+      }));
 
-      flushMicrotasks(); //execute service
-      fixture.detectChanges(); //refresh view with new model
-      
-      let item : Element = list.children[1];
+      it('the third artikel', fakeAsync(() => {
+        let compiled = fixture.debugElement.nativeElement;
+        let list : HTMLUListElement = compiled.querySelector('#catalogus ul');
+        let item : Element = list.children[2];
 
-      expect(item).toBeDefined;
-      expect(item.querySelector('h3').textContent).toBe('naam3');
-      expect(item.querySelector('span.prijs').textContent).toBe('€15');
-      expect(item.querySelector('p').textContent).toBe('beschrijving3');
-    }));
+        expect(item).toBeDefined;
+        expect(item.querySelector('h3').textContent).toBe('naam8');
+        expect(item.querySelector('span.prijs').textContent).toBe('€12,60');
+        expect(item.querySelector('p').textContent).toBe('beschrijving8');
+      }));
 
-    afterEach(async(inject( [MockBackend], (MockBackend : MockBackend) => {
-      MockBackend.verifyNoPendingRequests();
-    })));
+      it('the fourth artikel', fakeAsync(() => {
+        let compiled = fixture.debugElement.nativeElement;
+        let list : HTMLUListElement = compiled.querySelector('#catalogus ul');
+        let item : Element = list.children[3];
 
-    it('should show the naam, prijs, beschrijving for the third artikel', fakeAsync(() => {
-      fixture = TestBed.createComponent(CatalogusComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-
-      let compiled = fixture.debugElement.nativeElement;
-      let list : HTMLUListElement = compiled.querySelector('#catalogus ul');
-
-      flushMicrotasks(); //execute service
-      fixture.detectChanges(); //refresh view with new model
-      
-      let item : Element = list.children[2];
-
-      expect(item).toBeDefined;
-      expect(item.querySelector('h3').textContent).toBe('naam8');
-      expect(item.querySelector('span.prijs').textContent).toBe('€12,60');
-      expect(item.querySelector('p').textContent).toBe('beschrijving8');
-    }));
-
-    it('should show the naam, prijs, beschrijving for the fourth artikel', fakeAsync(() => {
-      fixture = TestBed.createComponent(CatalogusComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-
-      let compiled = fixture.debugElement.nativeElement;
-      let list : HTMLUListElement = compiled.querySelector('#catalogus ul');
-
-      flushMicrotasks(); //execute service
-      fixture.detectChanges(); //refresh view with new model
-      
-      let item : Element = list.children[3];
-
-      expect(item).toBeDefined;
-      expect(item.querySelector('h3').textContent).toBe('naam2');
-      expect(item.querySelector('span.prijs').textContent).toBe('€1.000');
-      expect(item.querySelector('p').textContent).toBe('beschrijving2');
-    }));
+        expect(item).toBeDefined;
+        expect(item.querySelector('h3').textContent).toBe('naam2');
+        expect(item.querySelector('span.prijs').textContent).toBe('€1.000');
+        expect(item.querySelector('p').textContent).toBe('beschrijving2');
+      }));
+    })
 
     afterEach(async(inject( [MockBackend], (MockBackend : MockBackend) => {
       MockBackend.verifyNoPendingRequests();
