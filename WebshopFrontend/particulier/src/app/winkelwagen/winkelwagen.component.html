@@ -3,13 +3,14 @@
         <div id="productDetails">
             <h2>Winkelwagen</h2>
             <div id="pdInfo">
-                <span>U heeft de volgende producten toegevoegd in de winkelwagen:</span>
+                <span *ngIf="ProductPairs?.length>0">U heeft de volgende producten toegevoegd in de winkelwagen:</span>
+                <span *ngIf="ProductPairs?.length==0">U winkelwagen is leeg.</span>
             </div>
             <div *ngIf="Error" class="ErrorBox">
                 <strong>Foutmelding:</strong>
                 <span class="message">{{Error}}</span>
             </div>
-            <div id="productContainer">
+            <div *ngIf="ProductPairs?.length>0" id="productContainer">
                 <ul>
                     <li *ngFor='let pp of ProductPairs'>
                         <article (click)="goToProductPage(pp.Artikel.id)">

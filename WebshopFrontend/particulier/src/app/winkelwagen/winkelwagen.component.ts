@@ -30,12 +30,12 @@ export class WinkelwagenComponent implements OnInit {
             this.TotalCosts += parseFloat((a.prijs*artikel.amount).toFixed(4));
         }
         ,error => {
-          this.Error = "Er lijkt een probleem te zijn met de connectie. \nProbeer de pagina te verversen of probeer het later nog eens."
+          this.Error = "Er lijkt een probleem te zijn met de connectie. Probeer de pagina te verversen of probeer het later nog eens."
         });
     });
   }
 
-  public goToProductPage(productId : number) {
+  goToProductPage(productId : number) {
     window.location.href = 'product/' + productId;
   }
 }
