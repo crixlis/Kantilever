@@ -104,5 +104,22 @@ namespace WebshopBeheer.Listener.Test
             //Act and Assert
             Assert.Throws(typeof(NotImplementedException), () => service.Execute(factuur));
         }
+
+        [Fact]
+        public void ListenerKanEenNieuwArtikelBerichtOntvangen()
+        {
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var service = new WebshopBeheerService(sender);
+            var artikel = new ArtikelInCatalogusToegevoegd
+            {
+                Id = 1,
+                Naam = "Fiets",
+                Beschrijving = "Geel"
+            };
+
+            //Act and Assert
+            Assert.Throws(typeof(NotImplementedException), () => service.Execute(artikel));
+        }
     }
 }

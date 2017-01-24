@@ -17,9 +17,11 @@ namespace BestelService
 
         public void Execute(BestellingAanmaken item)
         {
-            _context.Bestelling.Add(new Bestelling { Artikelen = item.Artikelen, Id = item.Id, Klant = item.Klant });
+            //Patrick, niet aankomen s.v.p.
+            _context.Bestelling.Add(new Bestelling { Artikelen = item.Artikelen, Klant = item.Klant });
             _context.SaveChanges();
-            _sender.PublishEvent(new BestellingKeuren{Id = item.Id });
+            var last = _context.Bestelling.Last();
+            _sender.PublishEvent(new BestellingAangemaakt { Id = last.Id, Artikelen = last.Artikelen, Klant = last.Klant, BestelDatum = item.BestelDatum });
         }
         public void Execute(BestellingGoedgekeurd item)
         {

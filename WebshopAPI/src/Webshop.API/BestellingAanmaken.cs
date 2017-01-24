@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace BestelService
+namespace Webshop.API
 {
     public class BestellingAanmaken
     {
         public List<Artikel> Artikelen { get; set; }
+        public int Id { get; set; }
         public Klant Klant { get; set; }
         public DateTime BestelDatum { get; set; }
+
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System.Net;
 using Xunit;
 using WebshopBeheer.Controllers;
-using WebshopBeheer.Database;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using System;
+using MagazijnMedewerker.Database;
 
 namespace WebshopBeheer.Test
 {
@@ -42,12 +42,48 @@ namespace WebshopBeheer.Test
                 }
             };
 
-            var options = new DbContextOptionsBuilder<WebshopBeheerContext>()
+            var bestelling1 = new Bestelling()
+            {
+                Id = 1,
+                Status = 2,
+                BestelDatum = DateTime.Now
+            };
+
+            /* OMG, vet coole pseudo code
+            foreach(_artikel in bestelling.Artikel)
+            {
+                new BestelArtikel
+                {
+                    Id = 0,
+                    Bestelling = bestelling,
+                    artikel = _context.getArtikel(_artikel.Id)
+                    amount = _artikel.hoeveelheid
+                };
+            }
+            */
+
+            var bestelling = new BestelArtikel()
+            {
+                Id = 1,
+                Bestelling = new Bestelling()
+                {
+                    Id = 1,
+                    Status = 0,
+                    BestelDatum = DateTime.Now
+                },
+                Artikelen = 
+            }
+
+            var options = new DbContextOptionsBuilder<MagazijnMedewerkerContext>()
                .UseInMemoryDatabase(databaseName: "MagazijnMedewerkerTest2")
                .Options;
 
-            using (var context = new WebshopBeheerContext(options))
+            using (var context = new MagazijnMedewerkerContext(options))
             {
+                //Arrange
+
+
+
                 //Act
                 context.Bestellingen.Add(bestelling1);
                 context.SaveChanges();

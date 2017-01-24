@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Webshop.API
+namespace WebshopBeheer.Listener
 {
-    public class Artikel
+    public class ArtikelInCatalogusToegevoegd
     {
         public int Id { get; set; }
         public string Naam { get; set; }
@@ -11,10 +11,8 @@ namespace Webshop.API
         public decimal Prijs { get; set; }
         public DateTime LeverbaarVanaf { get; set; }
         public DateTime LeverbaarTot { get; set; }
-        public string Leverancier { get; set; }
+        public string LeverancierCode { get; set; }
         public List<string> Categorieen { get; set; }
-        //TODO: Hoeveelheid aanpassen naar aantal. Ook in frontend!!!
-        public int Aantal { get; set; }
-        public string ImagePath { get; set; }
+        public byte[] Afbeelding { get; set; }
     }
 }
