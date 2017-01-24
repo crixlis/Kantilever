@@ -62,7 +62,7 @@ describe('CatalogusComponent', () => {
     })));
   });
 
-  describe('receives 4 artikelen from ArtikelService', () => {
+  describe('receiving 4 artikelen from ArtikelService', () => {
 
     const mockResponse = [
       new Artikel({
