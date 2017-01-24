@@ -34,4 +34,8 @@ export class WinkelwagenComponent implements OnInit {
         });
     });
   }
+
+  public goToProductPage(productId : number) {
+    window.location.href = 'product/' + productId;
+  }
 }
