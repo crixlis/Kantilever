@@ -24,8 +24,7 @@ namespace FactuurService.Test
 
             using (var context = new FactuurServiceContext(options))
             {
-                context.Database.EnsureCreated();
-
+                //context.Database.EnsureCreated();
 
                 var sender = Substitute.For<ISender>();
                 var service = new FactuurService(sender, context);
@@ -59,8 +58,7 @@ namespace FactuurService.Test
 
             using (var context = new FactuurServiceContext(options))
             {
-                context.Database.EnsureCreated();
-
+                //context.Database.EnsureCreated();
 
                 var sender = Substitute.For<ISender>();
                 var service = new FactuurService(sender, context);
