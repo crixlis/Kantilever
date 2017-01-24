@@ -33,6 +33,7 @@ namespace FactuurService
                 Totaal = totaal
             };
             _context.Facturen.Add(factuur);
+            _context.SaveChanges();
 
             _sender.PublishEvent(new FactuurAangemaakt {
                 Id = factuur.Id,
