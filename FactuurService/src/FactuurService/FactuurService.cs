@@ -1,6 +1,7 @@
 ﻿using System;
 using rabbitmq_demo;
 using FactuurService.Database;
+using System.Linq;
 
 namespace FactuurService
 {
@@ -49,7 +50,7 @@ namespace FactuurService
             {
                 Id = item.Id
             };
-
+ 
             _sender.PublishEvent(newEvent);
         }
 
