@@ -102,6 +102,7 @@ services:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
+            - MYSQL_CONNECTION=server=lmf-factuurservice.database;userid=root;pwd=my-secret-pw;port=3306;database=FacturenKantilever;sslmode=none;
         networks: 
             - kantilever
 
