@@ -114,7 +114,7 @@ namespace Webshop.Listener.Test
                 Environment.SetEnvironmentVariable("IMG_ROOT", @".\img");
                 var service = new WebshopListenerService(sender, context, Environment.GetEnvironmentVariable("IMG_ROOT"));
 
-                service.Execute(new ArtikelAanCatalogusToegevoegd { Id = 10, Afbeelding =  Array.Empty<byte>() });
+                service.Execute(new ArtikelAanCatalogusToegevoegd { Id = 765, Afbeelding =  Array.Empty<byte>() });
 
                 Assert.False(File.Exists(Path.Combine(Environment.GetEnvironmentVariable("IMG_ROOT"), "10.txt")));
             }
