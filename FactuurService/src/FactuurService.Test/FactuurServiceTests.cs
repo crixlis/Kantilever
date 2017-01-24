@@ -31,12 +31,12 @@ namespace FactuurService.Test
 
                 var FactuurAanmakenCommand = new FactuurAanmaken
                 {
-                    Id = 0,
+                    Id = 56,
                     Artikelen = new List<Artikel>
                     {
-                        new Artikel { Id =1, Prijs = 10.95m },
-                        new Artikel { Id =2, Prijs = 12.65m },
-                        new Artikel { Id =3, Prijs = 15.78m }
+                        new Artikel { Id =9, Prijs = 10.95m },
+                        new Artikel { Id =7, Prijs = 12.65m },
+                        new Artikel { Id =11, Prijs = 15.78m }
                     }
                 };
 
@@ -65,7 +65,7 @@ namespace FactuurService.Test
 
                 var BetaaldeFactuurAfmeldenCommand = new BetaaldeFactuurAfmelden
                 {
-                    Id = 0
+                    Id = 80
                 };
 
                 //Act
