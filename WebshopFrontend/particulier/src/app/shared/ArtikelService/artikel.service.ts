@@ -17,7 +17,7 @@ export class ArtikelService {
                 .catch(error => Promise.reject(error.message || error));
     }
 
-    getArtikel(artikelId : number): Promise<any> {
+    getArtikel(artikelId : number): Promise<Artikel> {
     return this.http.get(ARTIKELURLDEV + '/' + artikelId)
                 .toPromise()
                 .then(response => response.json())

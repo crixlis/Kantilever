@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PrijsPipe, ShoppingCartService, ArtikelService, Artikel } from './../shared';
+import { PrijsPipe, ShoppingCartService, ArtikelService, Artikel, ProductPair, IProductPair } from './../shared';
 
 @Component({
   selector: 'appWinkelwagen',
@@ -11,15 +11,23 @@ export class WinkelwagenComponent implements OnInit {
   constructor(private shoppingCart : ShoppingCartService, private artikelService : ArtikelService) {
   }
 
-  Artikelen : Artikel[];
+  ProductPairs : ProductPair[] = [];
 
   ngOnInit() {
-
-    this.artikelService.getArtikelen().then(result => {
-      this.Artikelen = result;
-    }, error => console.log(error));
-  
-    
+    this.getProductsAndAmounts();
   }
 
+  getProductsAndAmounts(){
+
+    var shoppingcart : IProductPair[] = this.shoppingCart.getProducts();
+
+    shoppingcart.forEach(artikel => {
+      this.artikelService.getArtikel(artikel.productId).then(a => 
+        {
+            this.ProductPairs.push(new ProductPair(a, artikel.amount));
+        }
+        ,error => console.error(error));
+    });
+
+  }
 }

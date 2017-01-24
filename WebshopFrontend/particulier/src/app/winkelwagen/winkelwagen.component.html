@@ -7,12 +7,13 @@
             </div>
             
             <ul>
-                <li *ngFor='let artikel of Artikelen'>
+                <li *ngFor='let pp of ProductPairs'>
                     <article (click)="goToProductPage(1)">
-                        <h3>{{artikel.naam}}</h3>
-                        <span class="prijs" [ngClass]="{'prijs-small': artikel.naam.length > 5 }">{{artikel.prijs | prijs}}</span>
+                        <h3>{{pp.Artikel.naam}}</h3>
+                        <span>{{pp.Amount}}</span>
+                        <span class="prijs">{{pp.Artikel.prijs | prijs}}</span>
                         <img src="image/fietsband.jpg" />
-                        <p>{{artikel.beschrijving}}</p>
+                        <p>{{pp.Artikel.beschrijving}}</p>
                     </article>
                 </li>
             </ul>
