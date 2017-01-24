@@ -11,6 +11,19 @@ services:
         ports:
             - 7559:3306
 
+    lmf-factuurservice.database:
+        image: mysql:latest
+        hostname: "lmf-factuurservice.database"
+        environment:
+            - MYSQL_ROOT_PASSWORD=my-secret-pw
+            - RABBITMQ_HOSTNAME=rabbitmq
+            - RABBITMQ_USERNAME=rabbitmq
+            - RABBITMQ_PASSWORD=rabbitmq
+            - MYSQL_CONNECTION=server=lmf-factuurservice.database;userid=root;pwd=my-secret-pw;port=3306;database=FacturenKantilever;sslmode=none;      
+        container_name: lmf-factuurservice.database
+        networks: 
+            - kantilever
+
     lmf-webfrontend.api.database:
         image: mysql:latest
         hostname: "lmf-webfrontend.api.database"
