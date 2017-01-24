@@ -1,6 +1,7 @@
 ﻿using System;
 using rabbitmq_demo;
 using FactuurService.Database;
+using System.Linq;
 
 namespace FactuurService
 {
@@ -33,6 +34,7 @@ namespace FactuurService
                 Totaal = totaal
             };
             _context.Facturen.Add(factuur);
+            _context.SaveChanges();
 
             _sender.PublishEvent(new FactuurAangemaakt {
                 Id = factuur.Id,
@@ -48,7 +50,7 @@ namespace FactuurService
             {
                 Id = item.Id
             };
-
+ 
             _sender.PublishEvent(newEvent);
         }
 

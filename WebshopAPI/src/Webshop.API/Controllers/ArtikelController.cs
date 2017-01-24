@@ -55,7 +55,7 @@ namespace Webshop.API.Controllers
         [HttpGet("{id}")]
         public Artikel Get(int id)
         {
-            return new Artikel
+            var artikel1 = new Artikel
             {
                 Id = 0,
                 Naam = "Giant XTC",
@@ -66,6 +66,26 @@ namespace Webshop.API.Controllers
                 Leverancier = "Giant",
                 Categorieen = new List<string> { "Mountainbikes", "Fietsen" }
             };
+
+            var artikel2 = new Artikel
+            {
+                Id = 1,
+                Naam = "Giant Talon 2",
+                Beschrijving = "Mountainbike",
+                Prijs = 600.29m,
+                LeverbaarVanaf = new DateTime(2017, 1, 1),
+                LeverbaarTot = new DateTime(2020, 1, 1),
+                Leverancier = "Giant",
+                Categorieen = new List<string> { "Mountainbikes", "Fietsen" }
+            };
+
+            if (id == 0)
+            {
+                return artikel1;
+            }else
+            {
+                return artikel2;
+            }
         }
     }
 }

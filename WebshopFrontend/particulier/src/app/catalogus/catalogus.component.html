@@ -3,12 +3,12 @@
     <h2>Catalogus</h2>
     <ul>
       <li *ngFor='let artikel of artikelen'>
-          <article (click)="goToProductPage(1)" >
+          <article (click)="goToProductPage(artikel.id)" >
             <h3>{{artikel.naam}}</h3>
             <span class="prijs" [ngClass]="{'prijs-small': artikel.naam.length > 5 }">{{artikel.prijs | prijs}}</span>
             <img src="image/fietsband.jpg" />
             <p>{{artikel.beschrijving}}</p>
-            <span class="addToCart" (click)="addProductToCart($event, 1)"></span>
+            <span class="addToCart" (click)="addProductToCart($event, artikel.id)"></span>
           </article>
       </li>
     </ul>

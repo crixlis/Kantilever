@@ -18,6 +18,7 @@ namespace BestelService
         public void Execute(BestellingAanmaken item)
         {
             _context.Bestelling.Add(new Bestelling { Artikelen = item.Artikelen, Id = item.Id, Klant = item.Klant });
+            _context.SaveChanges();
             _sender.PublishEvent(new BestellingKeuren{Id = item.Id });
         }
         public void Execute(BestellingGoedgekeurd item)

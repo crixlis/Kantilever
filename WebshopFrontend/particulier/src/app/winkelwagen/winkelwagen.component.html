@@ -1,29 +1,34 @@
 <main >
     <section id="detailPage">
-        <article>
+        <div id="productDetails">
             <h2>Winkelwagen</h2>
-            <div class="pdInfo">
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quo, dolor ut eius accusantium repellat consequatur, dignissimos error in adipisci, sit placeat minima, harum dicta.</span>
+            <div id="pdInfo">
+                <span>U heeft de volgende producten toegevoegd in de winkelwagen:</span>
             </div>
-            
-            <ul>
-                <li *ngFor='let artikel of Artikelen'>
-                    <article (click)="goToProductPage(1)">
-                        <h3>{{artikel.naam}}</h3>
-                        <span class="prijs" [ngClass]="{'prijs-small': artikel.naam.length > 5 }">{{artikel.prijs | prijs}}</span>
-                        <img src="image/fietsband.jpg" />
-                        <p>{{artikel.beschrijving}}</p>
-                    </article>
-                </li>
-            </ul>
-
-        </article>
+            <div *ngIf="Error" class="ErrorBox">
+                <strong>Foutmelding:</strong>
+                <span class="message">{{Error}}</span>
+            </div>
+            <div id="productContainer">
+                <ul>
+                    <li *ngFor='let pp of ProductPairs'>
+                        <article (click)="goToProductPage(pp.Artikel.id)">
+                            <h3>{{pp.Artikel.naam}}</h3>
+                            <span>Aantal: {{pp.Amount}}</span>
+                            <span class="prijs">Prijs: {{pp.Artikel.prijs | prijs}}</span>
+                            <img src="image/fietsband.jpg" />
+                            <p>Beschrijving: {{pp.Artikel.beschrijving}}</p>
+                        </article>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <aside>
             <div id="buyProduct">
                 <h2>Kostenoverzicht</h2>
                 <div id="prijs">
                     <span class="bpTitle">Totaal:</span>
-                    <span>€ 309 ,-</span>
+                    <span>{{TotalCosts | prijs}}</span>
                 </div>
                 <button>Bestellen</button>
             </div>
