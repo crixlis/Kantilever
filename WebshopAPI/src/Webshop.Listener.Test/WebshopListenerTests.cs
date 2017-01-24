@@ -92,10 +92,30 @@ namespace Webshop.Listener.Test
             using (var context = new WebshopContext(options))
             {
                 var sender = Substitute.For<ISender>();
+                Environment.SetEnvironmentVariable("IMG_ROOT", @".\img");
                 var service = new WebshopListenerService(sender, context, Environment.GetEnvironmentVariable("IMG_ROOT"));
 
-                service.Execute(new ArtikelAanCatalogusToegevoegd { Id = 10});
-                Environment.SetEnvironmentVariable("IMG_ROOT", "C:\\");
+                service.Execute(new ArtikelAanCatalogusToegevoegd { Id = 10, Afbeelding = null});
+                
+                Assert.False(File.Exists(Path.Combine(Environment.GetEnvironmentVariable("IMG_ROOT"), "10.txt")));
+            }
+        }
+
+        [Fact]
+        public void AlsDePropertyAfbeeldingVanHetInkomendeBerichtEenLegeStringIsMoetDeByteArrayNietNaarFileGeschrevenWorden()
+        {
+            var options = new DbContextOptionsBuilder<WebshopContext>()
+                .UseInMemoryDatabase(databaseName: "ZelfArtikelAanCatalogusToevoegen")
+                .Options;
+
+            using (var context = new WebshopContext(options))
+            {
+                var sender = Substitute.For<ISender>();
+                Environment.SetEnvironmentVariable("IMG_ROOT", @".\img");
+                var service = new WebshopListenerService(sender, context, Environment.GetEnvironmentVariable("IMG_ROOT"));
+
+                service.Execute(new ArtikelAanCatalogusToegevoegd { Id = 765, Afbeelding =  Array.Empty<byte>() });
+
                 Assert.False(File.Exists(Path.Combine(Environment.GetEnvironmentVariable("IMG_ROOT"), "10.txt")));
             }
         }
