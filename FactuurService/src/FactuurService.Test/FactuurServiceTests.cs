@@ -32,7 +32,13 @@ namespace FactuurService.Test
 
                 var FactuurAanmakenCommand = new FactuurAanmaken
                 {
-                    Id = 0
+                    Id = 0,
+                    Artikelen = new List<Artikel>
+                    {
+                        new Artikel { Id =1, Prijs = 10.95m },
+                        new Artikel { Id =2, Prijs = 12.65m },
+                        new Artikel { Id =3, Prijs = 15.78m }
+                    }
                 };
 
                 //Act

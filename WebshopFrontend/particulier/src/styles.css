@@ -281,3 +281,17 @@ table td, .table th {
         display: none;
     }
 }
+
+/**********************************
+ * ICON AND IMAGE URL INSIDE VIEWS
+ **********************************/
+/* Placed here due the fact included url inside views are not hashed and the related imagesources are not distibuted */
+
+#catalogus .addToCart:before {
+    background-image: url('svg/shoppigCarAddWhite.svg');
+}
+
+#catalogus .addToCart:hover:before,
+#catalogus .addToCart:active:before {
+    background-image: url('svg/shoppigCarAddBlue.svg');
+}
