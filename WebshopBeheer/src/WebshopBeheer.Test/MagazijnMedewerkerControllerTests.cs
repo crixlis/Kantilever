@@ -6,36 +6,12 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace WebshopBeheer.Test
 {
     public class MagazijnMedewerkerControllerTests
     {
-        private Bestelling bestelling1 = new Bestelling()
-        {
-            Id = 1,
-            Klant = new Klant()
-            {
-                Id = 10,
-                Achternaam = "Slager"
-            },
-            Artikelen = new List<Artikel>()
-                {
-                    new Artikel()
-                    {
-                        Id = 5,
-                        Beschrijving= "Fietsband",
-                        Voorraad = 6
-                    },
-                    new Artikel()
-                    {
-                        Id = 7,
-                        Beschrijving= "Fietscomputer",
-                        Voorraad = 2
-                    }
-                }
-        };
-
 
         [Fact]
         public async void TestOfPaginaBereikbaarIsNaHetStarten()
@@ -53,8 +29,18 @@ namespace WebshopBeheer.Test
         [Fact]
         public void WebshopBeheercontextKanEenBestellingOpslaan()
         {
-
             //Arrange
+            var bestelling1 = new Bestelling()
+            {
+                Id = 1,
+                Klant = new Klant() { Id = 10, Achternaam = "Slager" },
+                Artikelen = new List<Artikel>()
+                {
+                    new Artikel() { Id = 5, Beschrijving= "Fietsband", Voorraad = 6 },
+                    new Artikel() { Id = 7, Beschrijving= "Fietscomputer", Voorraad = 2 }
+                }
+            };
+
             var options = new DbContextOptionsBuilder<WebshopBeheerContext>()
                .UseInMemoryDatabase(databaseName: "MagazijnMedewerkerTest2")
                .Options;
@@ -75,10 +61,19 @@ namespace WebshopBeheer.Test
         public void MagazijnMedewerkerPaginaControllerKanBestellingenLatenZien()
         {
             //Arrange
-            
+            var bestelling1 = new Bestelling()
+            {
+                Id = 1,
+                Klant = new Klant() { Id = 10, Achternaam = "Slager" },
+                Artikelen = new List<Artikel>()
+                {
+                    new Artikel() { Id = 5, Beschrijving= "Fietsband", Voorraad = 6 },
+                    new Artikel() { Id = 7, Beschrijving= "Fietscomputer", Voorraad = 2 }
+                }
+            };
 
             var options = new DbContextOptionsBuilder<WebshopBeheerContext>()
-               .UseInMemoryDatabase(databaseName: "MagazijnMedewerkerTest2")
+               .UseInMemoryDatabase(databaseName: "MagazijnMedewerkerTest3")
                .Options;
 
             using (var context = new WebshopBeheerContext(options))
@@ -101,6 +96,47 @@ namespace WebshopBeheer.Test
             }
 
             
+        }
+
+        [Fact]
+        void MagazijnMedewerkerControllerLaatAlleenBestellingenZienDieNogNietGekeurdZijn()
+        {
+            //Arrange
+
+            var nognietgekeurdebestelling = new Bestelling()
+            {
+                Id = 1,
+                Status = 0,
+                Klant = new Klant() { Id = 10, Achternaam = "Slager" },
+                Artikelen = new List<Artikel>()
+                {
+                    new Artikel() { Id = 5, Beschrijving= "Fietsband", Voorraad = 6 },
+                    new Artikel() { Id = 7, Beschrijving= "Fietscomputer", Voorraad = 2 }
+                }
+            };
+
+            var options = new DbContextOptionsBuilder<WebshopBeheerContext>()
+               .UseInMemoryDatabase(databaseName: "MagazijnMedewerkerTest4")
+               .Options;
+
+            using (var context = new WebshopBeheerContext(options))
+            {
+
+
+                context.Bestellingen.Add(nognietgekeurdebestelling);
+                context.SaveChanges();
+
+                var controller = new MagazijnMedewerkerController(context);
+
+                //Act
+                var view = controller.Index();
+
+                //Act
+                var result = Assert.IsType<ViewResult>(view);
+                var model = Assert.IsAssignableFrom<IEnumerable<Bestelling>>(result.Model);
+
+                Assert.True(model.Any());
+            }
         }
     }
 }
