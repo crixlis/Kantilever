@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace FactuurService
 {
-    public class Factuur
+    public class Factuur : FactuurAanmaken
     {
+        public DateTime BetalenVoorDatum { get; set; }
+        public decimal Totaal;      
     }
 }

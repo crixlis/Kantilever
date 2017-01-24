@@ -7,6 +7,8 @@ using FactuurService;
 using RabbitMQ;
 using rabbitmq_demo;
 using NSubstitute;
+using FactuurService.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace FactuurService.Test
 {
@@ -16,38 +18,58 @@ namespace FactuurService.Test
         public void DeFactuurServiceKanEenFactuurAanmakenCommandOntvangenEnVerstuurtEenFactuurAangemaaktEvent()
         {
             //Arrange
-            var sender = Substitute.For<ISender>();
-            var service = new FactuurService(sender);
+            var options = new DbContextOptionsBuilder<FactuurServiceContext>()
+                .UseInMemoryDatabase(databaseName: "FacturenKantilever")
+                .Options;
 
-            var FactuurAanmakenCommand = new FactuurAanmaken
+            using (var context = new FactuurServiceContext(options))
             {
-                Id = 0
-            };
+                context.Database.EnsureCreated();
 
-            //Act
-            service.Execute(FactuurAanmakenCommand);
 
-            //Assert
-            sender.Received(1).PublishEvent(Arg.Any<FactuurAangemaakt>());
+                var sender = Substitute.For<ISender>();
+                var service = new FactuurService(sender, context);
+
+                var FactuurAanmakenCommand = new FactuurAanmaken
+                {
+                    Id = 0
+                };
+
+                //Act
+                service.Execute(FactuurAanmakenCommand);
+
+                //Assert
+                sender.Received(1).PublishEvent(Arg.Any<FactuurAangemaakt>());
+            }           
         }
 
         [Fact]
         public void DeFactuurServiceKanEenBetaaldeFactuurAfmeldenCommandOntvangenEnEenBetaaldeFactuurAfgemeldEventOpgooien()
         {
             //Arrange
-            var sender = Substitute.For<ISender>();
-            var service = new FactuurService(sender);
+            var options = new DbContextOptionsBuilder<FactuurServiceContext>()
+                .UseInMemoryDatabase(databaseName: "FacturenKantilever")
+                .Options;
 
-            var BetaaldeFactuurAfmeldenCommand = new BetaaldeFactuurAfmelden
+            using (var context = new FactuurServiceContext(options))
             {
-                Id = 0
-            };
+                context.Database.EnsureCreated();
 
-            //Act
-            service.Execute(BetaaldeFactuurAfmeldenCommand);
 
-            //Assert
-            sender.Received(1).PublishEvent(Arg.Any<BetaaldeFactuurAfgemeld>());
+                var sender = Substitute.For<ISender>();
+                var service = new FactuurService(sender, context);
+
+                var BetaaldeFactuurAfmeldenCommand = new BetaaldeFactuurAfmelden
+                {
+                    Id = 0
+                };
+
+                //Act
+                service.Execute(BetaaldeFactuurAfmeldenCommand);
+
+                //Assert
+                sender.Received(1).PublishEvent(Arg.Any<BetaaldeFactuurAfgemeld>());
+            }
         }
     }
 }

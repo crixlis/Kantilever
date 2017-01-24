@@ -7,7 +7,8 @@
     "NSubstitute": "2.0.0-rc",
     "RabbitMQ.Client": "4.1.1",
     "BestelService": "1.0.0-*",
-    "Microsoft.CodeCoverage": "1.0.2"
+    "Microsoft.CodeCoverage": "1.0.2",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.1.0"
   },
     "frameworks": {
         "netcoreapp1.0": {
