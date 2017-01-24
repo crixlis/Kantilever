@@ -17,7 +17,7 @@ export class CatalogusComponent implements OnInit {
   @Output() onNewAmountProducts = new EventEmitter();
 
   ngOnInit() {
-    this._artikelService.getArtikelen().then(result => this.artikelen = result, error => console.error(error) )
+    this._artikelService.getArtikelen().then(result => { this.artikelen = result; }, error => console.error(error) );
   }
 
   public addProductToCart(event: any, productId : number) {
