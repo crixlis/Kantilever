@@ -8,9 +8,10 @@ using WebshopBeheer.Database;
 namespace WebshopBeheer.Database.Migrations
 {
     [DbContext(typeof(WebshopBeheerContext))]
-    partial class WebshopBeheerContextModelSnapshot : ModelSnapshot
+    [Migration("20170124120530_Besteldatum")]
+    partial class Besteldatum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -19,8 +20,6 @@ namespace WebshopBeheer.Database.Migrations
             modelBuilder.Entity("WebshopBeheer.Database.Artikel", b =>
                 {
                     b.Property<int>("Id");
-
-                    b.Property<int>("ArtikelId");
 
                     b.Property<string>("Beschrijving");
 

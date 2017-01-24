@@ -19,12 +19,14 @@ namespace WebshopBeheer.Controllers
         {
             ViewData["Title"] = "Magazijnmedewerker";
 
-            var bestellingen = _context
+            var bestelling = _context
                 .Bestellingen
-                .Where(b => b.Status == 0);
+                .Where(b => b.Status == 0)
+                .OrderBy(b => b.BestelDatum)
+                .FirstOrDefault();
 
 
-            return View(bestellingen);
+            return View(bestelling);
         }
 
 

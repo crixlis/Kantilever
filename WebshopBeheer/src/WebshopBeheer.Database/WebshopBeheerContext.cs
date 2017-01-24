@@ -14,6 +14,12 @@ namespace WebshopBeheer.Database
                 .Entity<Bestelling>()
                 .Property(a => a.Id)
                 .ValueGeneratedNever();
+
+            modelBuilder
+                .Entity<Artikel>()
+                .Property(a => a.Id)
+                .ValueGeneratedNever();
+
         }
     }
 }

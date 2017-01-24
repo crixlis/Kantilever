@@ -8,9 +8,10 @@ using WebshopBeheer.Database;
 namespace WebshopBeheer.Database.Migrations
 {
     [DbContext(typeof(WebshopBeheerContext))]
-    partial class WebshopBeheerContextModelSnapshot : ModelSnapshot
+    [Migration("20170124120843_ArtikelId")]
+    partial class ArtikelId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")

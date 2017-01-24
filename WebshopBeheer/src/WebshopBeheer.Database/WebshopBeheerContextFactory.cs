@@ -10,7 +10,8 @@ namespace WebshopBeheer.Database
         public WebshopBeheerContext Create(DbContextFactoryOptions options)
         {
             var builder = new DbContextOptionsBuilder<WebshopBeheerContext>()
-             .UseMySQL(@"server=lmf-webbeheer.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;");
+            //.UseMySQL(@"server=lmf-webbeheer.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;");
+            .UseSqlServer(@"Server=.\SQLEXPRESS;Database=WebShopbeheer;Trusted_Connection=True");
 
             return new WebshopBeheerContext(builder.Options);
         }

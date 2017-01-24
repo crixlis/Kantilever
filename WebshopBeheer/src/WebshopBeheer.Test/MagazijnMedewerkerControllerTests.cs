@@ -7,12 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
+using System;
 
 namespace WebshopBeheer.Test
 {
     public class MagazijnMedewerkerControllerTests
     {
-
+        
         [Fact]
         public async void TestOfPaginaBereikbaarIsNaHetStarten()
         {
@@ -90,9 +91,9 @@ namespace WebshopBeheer.Test
 
                 //Act
                 var result = Assert.IsType<ViewResult>(view);
-                var model = Assert.IsAssignableFrom<IEnumerable<Bestelling>>(result.Model);
+                var model = Assert.IsType<Bestelling>(result.Model);
 
-                Assert.True(model.Any());
+                Assert.True(model != null);
             }
 
             
@@ -111,18 +112,6 @@ namespace WebshopBeheer.Test
                 Artikelen = new List<Artikel>()
                 {
                     new Artikel() { Id = 5, Beschrijving= "Fietsband", Voorraad = 6 },
-                    new Artikel() { Id = 7, Beschrijving= "Fietscomputer", Voorraad = 2 }
-                }
-            };
-
-            var nognietgekeurdebestelling2 = new Bestelling()
-            {
-                Id = 4,
-                Status = 0,
-                Klant = new Klant() { Id = 10, Achternaam = "Slager" },
-                Artikelen = new List<Artikel>()
-                {
-                    new Artikel() { Id = 5, Beschrijving= "Stuur", Voorraad = 6 },
                     new Artikel() { Id = 7, Beschrijving= "Fietscomputer", Voorraad = 2 }
                 }
             };
@@ -169,16 +158,63 @@ namespace WebshopBeheer.Test
 
                 //Act
                 var result = Assert.IsType<ViewResult>(view);
-                var model = Assert.IsAssignableFrom<IEnumerable<Bestelling>>(result.Model);
+                var model = Assert.IsType<Bestelling>(result.Model);
 
-                Assert.True(model.Count() == 1);
-                Assert.True(model.First() == nognietgekeurdebestelling);
+                Assert.True(model == nognietgekeurdebestelling);
             }
         }
 
         [Fact]
-        public void ddd()
+        public void MagazijnMedewerkerControllerLaatMaar1NogNietGekeurdeBestellingZien()
         {
+
+            //Arrange
+            var nognietgekeurdebestelling = new Bestelling()
+            {
+                Id = 1,
+                Status = 0,
+                Klant = new Klant() { Id = 10, Achternaam = "Slager" },
+                Artikelen = new List<Artikel>()
+                {
+                    new Artikel() { Id = 1, ArtikelId = 2, Beschrijving= "Fietsband", Voorraad = 6 },
+                    new Artikel() { Id = 2, ArtikelId = 3, Beschrijving= "Fietscomputer", Voorraad = 2 }
+                }
+            };
+
+            var nognietgekeurdebestelling2 = new Bestelling()
+            {
+                Id = 4,
+                Status = 0,
+                Klant = new Klant() { Id = 10, Achternaam = "Slager" },
+                Artikelen = new List<Artikel>()
+                {
+                    new Artikel() { Id = 3, ArtikelId = 4, Beschrijving= "Stuur", Voorraad = 6 },
+                    new Artikel() { Id = 4, ArtikelId = 3, Beschrijving= "Fietscomputer", Voorraad = 2 }
+                }
+            };
+
+            
+            var options = new DbContextOptionsBuilder<WebshopBeheerContext>()
+               .UseInMemoryDatabase(databaseName: "MagazijnMedewerkerTest8")
+               .Options;
+
+            using (var context = new WebshopBeheerContext(options))
+            {
+
+                context.Bestellingen.Add(nognietgekeurdebestelling);
+                context.Bestellingen.Add(nognietgekeurdebestelling2);
+                context.SaveChanges();
+
+                var controller = new MagazijnMedewerkerController(context);
+
+                //Act
+                var view = controller.Index();
+
+                //Act
+                var result = Assert.IsType<ViewResult>(view);
+                var model = Assert.IsType<Bestelling>(result.Model); //And not IEnumerable
+
+            }
 
         }
     }

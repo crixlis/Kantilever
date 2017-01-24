@@ -6,6 +6,7 @@ namespace WebshopBeheer.Database
     public class Artikel
     {
         public int Id { get; set; }
+        public int ArtikelId { get; set; }
         public string Naam { get; set; }
         public string Beschrijving { get; set; }
         public decimal Prijs { get; set; }
@@ -14,5 +15,6 @@ namespace WebshopBeheer.Database
         public string Leverancier { get; set; }
         public List<string> Categorieen = new List<string>();
         public int Voorraad { get; set; }
+
     }
 }
