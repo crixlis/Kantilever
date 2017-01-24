@@ -37,9 +37,11 @@ namespace FactuurService.Database.Migrations
                 {
                     b.Property<int>("Id");
 
-                    b.Property<DateTime>("BetalenVoorDatum");
+                    b.Property<DateTime>("HuidigeDatum");
 
                     b.Property<int?>("KlantId");
+
+                    b.Property<decimal>("Totaal");
 
                     b.HasKey("Id");
 

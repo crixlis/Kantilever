@@ -45,7 +45,7 @@ namespace FactuurService.Test
                 service.Execute(FactuurAanmakenCommand);
 
                 //Assert
-                sender.Received(1).PublishEvent(Arg.Any<FactuurAangemaakt>());
+                sender.Received(1).PublishEvent(Arg.Any<Factuur>());
             }           
         }
 

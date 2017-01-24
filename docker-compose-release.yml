@@ -49,6 +49,8 @@ services:
         container_name: lmf-webfrontend.api.database
         networks: 
             - kantilever
+        ports:
+            - 4567:3306
 
     lmf-webshop-frontend:
         container_name: lmf-webshop-frontend
@@ -58,7 +60,7 @@ services:
         ports:
             - 7000:80
         volumes_from: 
-            - lmf-img-storage
+            - lmf-img-storage:/usr/share/nginx/html/img/
 
     lmf-webshopbeheer:
         container_name: lmf-webshopbeheer

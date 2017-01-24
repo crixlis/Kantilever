@@ -8,7 +8,7 @@ using FactuurService.Database;
 namespace FactuurService.Database.Migrations
 {
     [DbContext(typeof(FactuurServiceContext))]
-    [Migration("20170124083436_initial")]
+    [Migration("20170124091647_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,9 +38,11 @@ namespace FactuurService.Database.Migrations
                 {
                     b.Property<int>("Id");
 
-                    b.Property<DateTime>("BetalenVoorDatum");
+                    b.Property<DateTime>("HuidigeDatum");
 
                     b.Property<int?>("KlantId");
+
+                    b.Property<decimal>("Totaal");
 
                     b.HasKey("Id");
 

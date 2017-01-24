@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FactuurService;
 
 namespace FactuurService.Database
 {
@@ -8,7 +9,7 @@ namespace FactuurService.Database
         public List<Artikel> Artikelen { get; set; }
         public int Id { get; set; }
         public Klant Klant { get; set; }
-        public DateTime BetalenVoorDatum { get; set; }
-        public decimal Totaal;
+        public DateTime HuidigeDatum { get; set; }
+        public decimal Totaal { get; set; }
     }
 }
