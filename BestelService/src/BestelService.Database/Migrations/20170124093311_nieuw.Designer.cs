@@ -8,9 +8,10 @@ using BestelService.Database;
 namespace BestelService.Database.Migrations
 {
     [DbContext(typeof(BestelServiceContext))]
-    partial class BestelServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20170124093311_nieuw")]
+    partial class nieuw
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1");

@@ -10,7 +10,7 @@ namespace BestelService.Test
     public class BestelServiceTests
     {
         [Fact]
-        public void IkWilEenBestellingAanmakenEventOpvangenEnEenBestellingAangemaaktPublishen()
+        public void IkWilEenBestellingAanmakenEventOpvangenEnEenBestellingKeurenPublishen()
         {
             //Arrange
             var options = new DbContextOptionsBuilder<BestelServiceContext>()
@@ -27,22 +27,23 @@ namespace BestelService.Test
                 service.Execute(bestelling);
 
                 //Assert
-                sender.Received(1).PublishEvent(Arg.Any<BestellingAangemaakt>());
+                sender.Received(1).PublishEvent(Arg.Any<BestellingKeuren>());
             }
         }
 
         [Fact]
-        public void IkWilEenBestellingKeurenEventOpvangenEnInDeDatabaseOpslaan()
+        public void IkWilEenBestellingAanmakenEventOpvangenEnInDeDatabaseOpslaan()
         {
             //Arrange
             var options = new DbContextOptionsBuilder<BestelServiceContext>()
-               .UseInMemoryDatabase(databaseName: "BestellingKeuren")
+               .UseInMemoryDatabase(databaseName: "BestellingAanmakenOpslaanInDB")
                .Options;
+
             using (var context = new BestelServiceContext(options))
             {
                 var sender = Substitute.For<ISender>();
                 var service = new BestelService(sender, context);
-                var bestelling = new BestellingKeuren { Id = 1 };
+                var bestelling = new BestellingAanmaken { Id = 1 };
 
                 //Act
                 service.Execute(bestelling);
@@ -53,12 +54,13 @@ namespace BestelService.Test
         }
 
         [Fact]
-        public void IkWilEenBestellingGoedgekeurdEventOpvangenEnInDeDatabaseOpslaan()
+        public void IkWilEenBestellingGoedgekeurdEventOpvangenEnUpdatenInDeDatabase()
         {
             //Arrange
             var options = new DbContextOptionsBuilder<BestelServiceContext>()
-               .UseInMemoryDatabase(databaseName: "BestellingGoedkeuren")
+               .UseInMemoryDatabase(databaseName: "BestellingGoedkeurenOpslaanInDB")
                .Options;
+
             using (var context = new BestelServiceContext(options))
             {
                 var sender = Substitute.For<ISender>();
@@ -66,6 +68,9 @@ namespace BestelService.Test
                 var bestelling = new BestellingGoedgekeurd { Id = 1 };
 
                 //Act
+                context.Bestelling.Add(new Bestelling { Id = 1});
+                context.SaveChanges();
+
                 service.Execute(bestelling);
 
                 //Assert
