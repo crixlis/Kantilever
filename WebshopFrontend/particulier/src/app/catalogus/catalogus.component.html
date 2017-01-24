@@ -1,6 +1,10 @@
 <main>
   <section id="catalogus">
     <h2>Catalogus</h2>
+    <div *ngIf="error" class="ErrorBox">
+        <strong>Foutmelding:</strong>
+        <span class="message">{{error}}</span>
+    </div>
     <ul>
       <li *ngFor='let artikel of artikelen'>
           <article (click)="goToProductPage(artikel.id)" >

@@ -23,6 +23,6 @@ export class ArtikelService {
     return this.http.get(ARTIKELURL + '/' + artikelId)
                 .toPromise()
                 .then(response => response.json())
-                .catch(response => console.log(response))
+                .catch(error => Promise.reject(error.message || error))
     }
 }
