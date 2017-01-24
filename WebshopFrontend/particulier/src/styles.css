@@ -247,6 +247,24 @@ table td, .table th {
     padding: .75rem;
 }
 
+.ErrorBox{
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #a94442;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.ErrorBox strong{
+    font-weight: 800;
+    color: #a94442;
+}
+
+.ErrorBox.message{    
+    white-space: pre-line;
+}
+
 /**********************************
  * WIDESCREEN CORRECTIONS
  **********************************/

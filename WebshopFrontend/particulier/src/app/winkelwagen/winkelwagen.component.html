@@ -3,7 +3,11 @@
         <div id="productDetails">
             <h2>Winkelwagen</h2>
             <div id="pdInfo">
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quo, dolor ut eius accusantium repellat consequatur, dignissimos error in adipisci, sit placeat minima, harum dicta.</span>
+                <span>U heeft de volgende producten toegevoegd in de winkelwagen:</span>
+            </div>
+            <div *ngIf="Error" class="ErrorBox">
+                <strong>Foutmelding:</strong>
+                <span class="message">{{Error}}</span>
             </div>
             <div id="productContainer">
                 <ul>

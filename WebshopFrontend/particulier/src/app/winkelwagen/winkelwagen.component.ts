@@ -13,6 +13,7 @@ export class WinkelwagenComponent implements OnInit {
 
   ProductPairs : ProductPair[] = [];
   TotalCosts : number = 0;
+  Error : string = "";
 
   ngOnInit() {
     this.getProductsAndAmounts();
@@ -26,9 +27,11 @@ export class WinkelwagenComponent implements OnInit {
       this.artikelService.getArtikel(artikel.productId).then(a => 
         {
             this.ProductPairs.push(new ProductPair(a, artikel.amount));
-      this.TotalCosts += parseFloat((a.prijs*artikel.amount).toFixed(4));
+            this.TotalCosts += parseFloat((a.prijs*artikel.amount).toFixed(4));
         }
-        ,error => console.error(error));
+        ,error => {
+          this.Error = "Er lijkt een probleem te zijn met de connectie. \nProbeer de pagina te verversen of probeer het later nog eens."
+        });
     });
   }
 }
