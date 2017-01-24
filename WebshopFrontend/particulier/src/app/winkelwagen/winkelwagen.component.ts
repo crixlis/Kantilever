@@ -12,6 +12,7 @@ export class WinkelwagenComponent implements OnInit {
   }
 
   ProductPairs : ProductPair[] = [];
+  TotalCosts : number = 0;
 
   ngOnInit() {
     this.getProductsAndAmounts();
@@ -25,9 +26,9 @@ export class WinkelwagenComponent implements OnInit {
       this.artikelService.getArtikel(artikel.productId).then(a => 
         {
             this.ProductPairs.push(new ProductPair(a, artikel.amount));
+      this.TotalCosts += parseFloat((a.prijs*artikel.amount).toFixed(4));
         }
         ,error => console.error(error));
     });
-
   }
 }
