@@ -3,16 +3,16 @@
         <div id="productDetails">
             <h2>Winkelwagen</h2>
             <div id="pdInfo">
-                <span *ngIf="ProductPairs?.length>0">U heeft de volgende producten toegevoegd in de winkelwagen:</span>
-                <span *ngIf="ProductPairs?.length==0">U winkelwagen is leeg.</span>
+                <span *ngIf="productPairs?.length>0">U heeft de volgende producten toegevoegd in de winkelwagen:</span>
+                <span *ngIf="productPairs?.length==0">U winkelwagen is leeg.</span>
             </div>
-            <div *ngIf="Error" class="ErrorBox">
+            <div *ngIf="error" class="ErrorBox">
                 <strong>Foutmelding:</strong>
-                <span class="message">{{Error}}</span>
+                <span class="message">{{error}}</span>
             </div>
-            <div *ngIf="ProductPairs?.length>0" id="productContainer">
+            <div *ngIf="productPairs?.length>0" id="productContainer">
                 <ul>
-                    <li *ngFor='let pp of ProductPairs'>
+                    <li *ngFor='let pp of productPairs'>
                         <article (click)="goToProductPage(pp.Artikel.id)">
                             <h3>{{pp.Artikel.naam}}</h3>
                             <span>Aantal: {{pp.Amount}}</span>
@@ -29,7 +29,7 @@
                 <h2>Kostenoverzicht</h2>
                 <div id="prijs">
                     <span class="bpTitle">Totaal:</span>
-                    <span>{{TotalCosts | prijs}}</span>
+                    <span>{{totalCosts | prijs}}</span>
                 </div>
                 <button>Bestellen</button>
             </div>

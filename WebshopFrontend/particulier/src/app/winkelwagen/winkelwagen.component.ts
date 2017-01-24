@@ -11,9 +11,9 @@ export class WinkelwagenComponent implements OnInit {
   constructor(private shoppingCart : ShoppingCartService, private artikelService : ArtikelService) {
   }
 
-  ProductPairs : ProductPair[] = [];
-  TotalCosts : number = 0;
-  Error : string = "";
+  productPairs : ProductPair[] = [];
+  totalCosts : number = 0;
+  error : string = "";
 
   ngOnInit() {
     this.getProductsAndAmounts();
@@ -26,11 +26,11 @@ export class WinkelwagenComponent implements OnInit {
     shoppingcart.forEach(artikel => {
       this.artikelService.getArtikel(artikel.productId).then(a => 
         {
-            this.ProductPairs.push(new ProductPair(a, artikel.amount));
-            this.TotalCosts += parseFloat((a.prijs*artikel.amount).toFixed(4));
-        }
-        ,error => {
-          this.Error = "Er lijkt een probleem te zijn met de connectie. Probeer de pagina te verversen of probeer het later nog eens."
+          this.productPairs.push(new ProductPair(a, artikel.amount));
+          this.totalCosts += parseFloat((a.prijs*artikel.amount).toFixed(4));
+        },error => {
+          console.error(error);
+          this.error = "Er lijkt een probleem te zijn met de connectie. Probeer de pagina te verversen of probeer het later nog eens."
         });
     });
   }
