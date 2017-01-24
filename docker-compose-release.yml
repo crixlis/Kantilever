@@ -7,7 +7,7 @@ services:
         networks:
             - kantilever
         volumes: 
-            - /img
+            - img:/img
         ports:
             - 7559:3306
 
@@ -59,8 +59,8 @@ services:
             - kantilever
         ports:
             - 7000:80
-        volumes_from: 
-            - lmf-img-storage:/usr/share/nginx/html/img/
+        volumes: 
+            - img:/usr/share/nginx/html/img/
 
     lmf-webshopbeheer:
         container_name: lmf-webshopbeheer
@@ -97,8 +97,8 @@ services:
             - IMG_ROOT=/img
         networks: 
             - kantilever
-        volumes_from: 
-            - lmf-img-storage
+        volumes: 
+            - img:/img
 
     lmf-bestelservice:
         container_name: lmf-bestelservice
@@ -138,4 +138,7 @@ services:
             
 networks: 
     kantilever:
-        driver: bridge 
+        driver: bridge
+        
+volumes:
+    img:
