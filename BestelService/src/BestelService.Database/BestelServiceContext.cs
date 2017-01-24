@@ -11,5 +11,13 @@ namespace BestelService.Database
         public BestelServiceContext(DbContextOptions<BestelServiceContext> options) : base(options) { }
 
         public DbSet<Bestelling> Bestelling { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Bestelling>()
+                .Property(a => a.Id)
+                .ValueGeneratedNever();
+        }
     }
 }
