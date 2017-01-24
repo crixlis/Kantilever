@@ -3,56 +3,54 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using BestelService.Database;
+using FactuurService.Database;
 
-namespace BestelService.Database.Migrations
+namespace FactuurService.Database.Migrations
 {
-    [DbContext(typeof(BestelServiceContext))]
-    partial class BestelServiceContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(FactuurServiceContext))]
+    partial class FactuurServiceContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.1");
+                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
 
-            modelBuilder.Entity("Artikel", b =>
+            modelBuilder.Entity("FactuurService.Database.Artikel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Beschrijving");
-
-                    b.Property<int?>("BestellingId");
-
-                    b.Property<string>("Leverancier");
+                    b.Property<int?>("FactuurId");
 
                     b.Property<string>("Naam");
 
                     b.Property<decimal>("Prijs");
 
-                    b.Property<int>("Voorraad");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("BestellingId");
+                    b.HasIndex("FactuurId");
 
                     b.ToTable("Artikel");
                 });
 
-            modelBuilder.Entity("Bestelling", b =>
+            modelBuilder.Entity("FactuurService.Database.Factuur", b =>
                 {
                     b.Property<int>("Id");
 
+                    b.Property<DateTime>("HuidigeDatum");
+
                     b.Property<int?>("KlantId");
+
+                    b.Property<decimal>("Totaal");
 
                     b.HasKey("Id");
 
                     b.HasIndex("KlantId");
 
-                    b.ToTable("Bestelling");
+                    b.ToTable("Facturen");
                 });
 
-            modelBuilder.Entity("Klant", b =>
+            modelBuilder.Entity("FactuurService.Database.Klant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -74,16 +72,16 @@ namespace BestelService.Database.Migrations
                     b.ToTable("Klant");
                 });
 
-            modelBuilder.Entity("Artikel", b =>
+            modelBuilder.Entity("FactuurService.Database.Artikel", b =>
                 {
-                    b.HasOne("Bestelling")
+                    b.HasOne("FactuurService.Database.Factuur")
                         .WithMany("Artikelen")
-                        .HasForeignKey("BestellingId");
+                        .HasForeignKey("FactuurId");
                 });
 
-            modelBuilder.Entity("Bestelling", b =>
+            modelBuilder.Entity("FactuurService.Database.Factuur", b =>
                 {
-                    b.HasOne("Klant", "Klant")
+                    b.HasOne("FactuurService.Database.Klant", "Klant")
                         .WithMany()
                         .HasForeignKey("KlantId");
                 });

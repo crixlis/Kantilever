@@ -14,6 +14,7 @@ namespace FactuurService.Database
         {
             var builder = new DbContextOptionsBuilder<FactuurServiceContext>()
              .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION"));
+             //.UseMySQL(@"server=localhost;userid=root;pwd=my-secret-pw;port=3306;database=FacturenKantilever;sslmode=none");
 
             return new FactuurServiceContext(builder.Options);
         }

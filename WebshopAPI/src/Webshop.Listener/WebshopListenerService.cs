@@ -1,6 +1,7 @@
 ﻿using rabbitmq_demo;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Webshop.Listener
 {
@@ -34,7 +35,7 @@ namespace Webshop.Listener
 
             Guid imgName;
 
-            if(item.Afbeelding != null)
+            if(item.Afbeelding != null && item.Afbeelding.Any() )
             {
                 imgName = Guid.NewGuid();
                 string rootPath = Path.Combine(_imgRoot, imgName.ToString());

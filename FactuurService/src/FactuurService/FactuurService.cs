@@ -1,6 +1,7 @@
 ﻿using System;
 using rabbitmq_demo;
 using FactuurService.Database;
+using System.Linq;
 
 namespace FactuurService
 {
@@ -24,14 +25,23 @@ namespace FactuurService
                 totaal += artikel.Prijs;
             }
 
-            _sender.PublishEvent(new FactuurAangemaakt
+            Factuur factuur = new Factuur
             {
                 Id = item.Id,
                 Artikelen = item.Artikelen,
                 Klant = item.Klant,
-                BetalenVoorDatum = DateTime.Today.AddMonths(1),
+                HuidigeDatum = DateTime.Today,
                 Totaal = totaal
-            });
+            };
+            _context.Facturen.Add(factuur);
+            _context.SaveChanges();
+
+            _sender.PublishEvent(new FactuurAangemaakt {
+                Id = factuur.Id,
+                Artikelen = factuur.Artikelen,
+                HuidigeDatum = factuur.HuidigeDatum,
+                Klant = factuur.Klant, Totaal = 
+                factuur.Totaal });
         }
 
         public void Execute(BetaaldeFactuurAfmelden item)
@@ -40,7 +50,7 @@ namespace FactuurService
             {
                 Id = item.Id
             };
-
+ 
             _sender.PublishEvent(newEvent);
         }
 

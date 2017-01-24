@@ -9,15 +9,22 @@ namespace WebshopBeheer.Controllers
 {
     public class MagazijnMedewerkerController : Controller
     {
+        private WebshopBeheerContext _context;
+
+        public MagazijnMedewerkerController(WebshopBeheerContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
             ViewData["Title"] = "Magazijnmedewerker";
 
+            var bestellingen = _context
+                .Bestellingen
+                .Where(b => b.Status == 0);
 
 
-
-
-            return View();
+            return View(bestellingen);
         }
 
 
