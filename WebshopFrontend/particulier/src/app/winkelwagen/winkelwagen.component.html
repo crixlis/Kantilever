@@ -10,10 +10,10 @@
                     <li *ngFor='let pp of ProductPairs'>
                         <article (click)="goToProductPage(1)">
                             <h3>{{pp.Artikel.naam}}</h3>
-                            <span>{{pp.Amount}}</span>
-                            <span class="prijs">{{pp.Artikel.prijs | prijs}}</span>
+                            <span>Aantal: {{pp.Amount}}</span>
+                            <span class="prijs">Prijs: {{pp.Artikel.prijs | prijs}}</span>
                             <img src="image/fietsband.jpg" />
-                            <p>{{pp.Artikel.beschrijving}}</p>
+                            <p>Beschrijving: {{pp.Artikel.beschrijving}}</p>
                         </article>
                     </li>
                 </ul>
