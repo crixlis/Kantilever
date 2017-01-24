@@ -31,8 +31,9 @@ namespace FactuurService.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
-                    BetalenVoorDatum = table.Column<DateTime>(nullable: false),
-                    KlantId = table.Column<int>(nullable: true)
+                    HuidigeDatum = table.Column<DateTime>(nullable: false),
+                    KlantId = table.Column<int>(nullable: true),
+                    Totaal = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
