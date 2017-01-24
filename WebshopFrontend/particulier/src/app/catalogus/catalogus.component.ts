@@ -13,11 +13,15 @@ export class CatalogusComponent implements OnInit {
 
   // _artikelenService : ArtikelenService;
   artikelen : Artikel[] = [];
+  error : string;
 
   @Output() onNewAmountProducts = new EventEmitter();
 
   ngOnInit() {
-    this._artikelService.getArtikelen().then(result => { this.artikelen = result; }, error => console.error(error) );
+    this._artikelService.getArtikelen().then(result => { this.artikelen = result; }, error => {
+      console.error(error);
+      this.error = "Er lijkt een probleem te zijn met de connectie. Probeer de pagina te verversen of probeer het later nog eens."
+     } );
   }
 
   public addProductToCart(event: any, productId : number) {
