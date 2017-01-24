@@ -8,6 +8,7 @@ using RabbitMQ.Client;
 using Microsoft.EntityFrameworkCore;
 using MySQL.Data.EntityFrameworkCore.Extensions;
 using System;
+using Webshop.Database;
 
 namespace Webshop.API
 {

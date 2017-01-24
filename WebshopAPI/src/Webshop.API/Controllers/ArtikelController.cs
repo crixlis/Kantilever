@@ -18,11 +18,17 @@ namespace Webshop.API.Controllers
 
         private ISender _sender;
         private IWebshopContext _context;
+        private ISender sender;
 
         public ArtikelController(ISender sender, IWebshopContext context)
         {
             _sender = sender;
             _context = context;
+        }
+
+        public ArtikelController(ISender sender)
+        {
+            this.sender = sender;
         }
 
         // GET: api/values

@@ -5,6 +5,7 @@ using RabbitMQ.Client;
 using rabbitmq_demo;
 using System;
 using System.Threading;
+using Webshop.Database;
 
 namespace Webshop.Listener
 {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using rabbitmq_demo;
 using System;
+using Webshop.Database;
 
 namespace Webshop.API.Controllers
 {
@@ -14,7 +15,7 @@ namespace Webshop.API.Controllers
         public BestellingenController(ISender sender, IWebshopContext context)
         {
             _sender = sender;
-            _context = cont
+            _context = context;
         }
 
         // GET api/bestellingen
