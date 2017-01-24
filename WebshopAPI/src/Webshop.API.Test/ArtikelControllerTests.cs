@@ -1,8 +1,10 @@
-﻿using NSubstitute;
+﻿using Microsoft.EntityFrameworkCore;
+using NSubstitute;
 using rabbitmq_demo;
 using System;
 using System.Collections.Generic;
 using Webshop.API.Controllers;
+using Webshop.Database;
 using Xunit;
 
 namespace Webshop.API.Test
@@ -51,17 +53,32 @@ namespace Webshop.API.Test
             /* Let op, deze test moest herschreven worden zodra de database actief is. 
             Voor nu wordt het artikel statisch vanuit de controller meegegeven */
 
-            //Arrange
-            var sender = Substitute.For<ISender>();
-            var controller = new ArtikelController(sender);
+            var options = new DbContextOptionsBuilder<WebshopContext>()
+                .UseInMemoryDatabase(databaseName: "ZelfArtikelAanCatalogusToevoegen")
+                .Options;
 
-            //Act
-            var artikelenFromAPI = controller.Get();
+            using (var context = new WebshopContext(options))
+            {
+                context.Artikelen.Add(new Database.Artikel
+                {
+                    Id = 889,
+                    Naam = "testArtikel"
+                });
 
-            //Assert
-            Assert.True(artikelenFromAPI.Count > 1);
-            Assert.Equal(0, artikelenFromAPI[0].Id);
-            Assert.Equal(1, artikelenFromAPI[1].Id);
+                context.SaveChanges();
+                //Arrange
+                var sender = Substitute.For<ISender>();
+                var controller = new ArtikelController(sender, context);
+
+                //Act
+                var artikelenFromAPI = controller.Get();
+
+                //Assert
+                Assert.True(artikelenFromAPI.Count == 1);
+                Assert.Equal(889, artikelenFromAPI[0].Id);
+                //Assert.Equal(1, artikelenFromAPI[1].Id);
+
+            }
         }
     }
 }
