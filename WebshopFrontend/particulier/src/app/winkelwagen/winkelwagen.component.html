@@ -1,24 +1,24 @@
 <main >
     <section id="detailPage">
-        <article>
+        <div id="productDetails">
             <h2>Winkelwagen</h2>
-            <div class="pdInfo">
+            <div id="pdInfo">
                 <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quo, dolor ut eius accusantium repellat consequatur, dignissimos error in adipisci, sit placeat minima, harum dicta.</span>
             </div>
-            
-            <ul>
-                <li *ngFor='let pp of ProductPairs'>
-                    <article (click)="goToProductPage(1)">
-                        <h3>{{pp.Artikel.naam}}</h3>
-                        <span>{{pp.Amount}}</span>
-                        <span class="prijs">{{pp.Artikel.prijs | prijs}}</span>
-                        <img src="image/fietsband.jpg" />
-                        <p>{{pp.Artikel.beschrijving}}</p>
-                    </article>
-                </li>
-            </ul>
-
-        </article>
+            <div id="productContainer">
+                <ul>
+                    <li *ngFor='let pp of ProductPairs'>
+                        <article (click)="goToProductPage(1)">
+                            <h3>{{pp.Artikel.naam}}</h3>
+                            <span>{{pp.Amount}}</span>
+                            <span class="prijs">{{pp.Artikel.prijs | prijs}}</span>
+                            <img src="image/fietsband.jpg" />
+                            <p>{{pp.Artikel.beschrijving}}</p>
+                        </article>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <aside>
             <div id="buyProduct">
                 <h2>Kostenoverzicht</h2>

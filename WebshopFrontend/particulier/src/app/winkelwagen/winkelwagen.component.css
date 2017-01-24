@@ -1,25 +1,20 @@
-.productDetails{
-    display: flex;
-    margin: 10px 0;
-    flex-flow: row wrap;
-    width: 100%;
+#productContainer, #pdInfo{
+    margin: 0 0 10px;
 }
 
-header, main, nav, aside, footer, article {
+header, main, nav, aside, footer, section {
   flex: 1 100%;
-}
-
-main{
-    display: flex;
-    flex-flow: row wrap;
 }
 
 article{
     display: flex;
-    width: 100%;
-    flex-flow: row wrap;
-    margin-right: 10%;
     flex-direction: column;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
 }
 
 .pdTitle{
@@ -44,30 +39,32 @@ img{
     margin: 20px 0;
 }
 
+ul{
+    list-style: none;
+}
+
 @media screen and (min-width: 760px) {
 
     main{
         flex-flow: row wrap;
     }
 
-    header, main, nav, aside, footer, article {
+    header, main, nav, aside, footer, section {
         flex: 1 auto;
     }
 
-    article{
+    #productDetails{
         width: 60%;
+        margin-right: 5%;
     }
 
     aside{
         width :30%;
     }
 
-    .productDetails{
-         flex-flow: row wrap;
-    }
-
     section{
         flex-flow: row wrap;
         display: flex;
+        max-width: 100%;
     }
 }
