@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MySQL.Data.EntityFrameworkCore.Extensions;
 using WebshopBeheer.Data;
-using WebshopBeheer.Database;
 using WebshopBeheer.Models;
 using WebshopBeheer.Services;
 
@@ -43,7 +42,6 @@ namespace WebshopBeheer
             //Add framework services.
             if (_env.IsDevelopment())
             {
-                services.AddDbContext<WebshopBeheerContext>(options => options.UseInMemoryDatabase("DevelopmentTesting"));
                 services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("DevelopmentTesting"));
 
                 services.AddDbContext<CommercieelManager.Database.CommercieelManagerContext>(options => options.UseInMemoryDatabase("DevelopmentTesting2"));
@@ -52,8 +50,6 @@ namespace WebshopBeheer
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
-                services.AddDbContext<WebshopBeheerContext>(options =>
                     options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
 
                 services.AddDbContext<CommercieelManager.Database.CommercieelManagerContext>(options =>
@@ -98,11 +94,6 @@ namespace WebshopBeheer
             if (!env.IsDevelopment())
             {
                 using (var context = app.ApplicationServices.GetService<ApplicationDbContext>())
-                {
-                    context.Database.Migrate();
-                }
-
-                using (var context = app.ApplicationServices.GetService<WebshopBeheerContext>())
                 {
                     context.Database.Migrate();
                 }

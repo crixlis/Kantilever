@@ -1,40 +1,36 @@
 <main>
-   <!-- Angular forms lijkt niet meer te werken... Zie ook : https://github.com/AngularClass/angular2-webpack-starter/issues/1399 voor een soortgelijke fout-->
+   <!-- Angular forms lijkt niet meer te werken, daarom maar met ngModel... Zie ook : https://github.com/AngularClass/angular2-webpack-starter/issues/1399 voor een soortgelijke fout-->
   <section id="bestellingAfronden">
     <h2>Bestelling afronden</h2>
     <p>
       Om de bestelling af te ronden dient u de onderstaande gegevens in te voeren.
     </p>
-    <form (submit)="bestellingAfronden()" <[formGroup]="bestellingAfrondenForm" id="addPersonForm">
-      <!--<div class="form-group">
+    <form (submit)="bestellingAfronden()" id="addPersonForm">
+      <div class="form-group">
         <label class="col-form-label">Voornaam:</label>
-        <input placeholder="Voornaam" class="form-control">
+        <input placeholder="Voornaam" class="form-control" [(ngModel)]="klant.voornaam" name="voornaam">
       </div>
       <div class="form-group">
         <label class="col-form-label">Achternaam:</label>
-        <input placeholder="Achternaam" class="form-control">
+        <input placeholder="Achternaam" class="form-control" [(ngModel)]="klant.acternaam" name="achternaam">
       </div>
       <div class="form-group">
-        <label class="col-form-label">Straat:</label>
-        <input placeholder="Biltstraat" class="form-control">
+        <label class="col-form-label">Straatnaam en huisnummer:</label>
+        <input placeholder="Biltstraat 1" class="form-control" [(ngModel)]="klant.adres" name="adres">
       </div>
       <div class="form-group">
         <label class="col-form-label">Postcode:</label>
-        <input placeholder="3512AA" class="form-control">
+        <input placeholder="3512AA" class="form-control" [(ngModel)]="klant.postcode" name="postcode">
       </div>
       <div class="form-group">
         <label class="col-form-label">Telefoonnummer:</label>
-        <input placeholder="0642878830" type="tel" class="form-control">
-      </div>
-      <div class="form-group row">
-        <label for="example-number-input">Huisnummer:</label>
-        <input class="form-control" type="number" placeholder="Huisnummer">
+        <input placeholder="0642878830" type="number" class="form-control" [(ngModel)]="klant.telefoonnummer" name="telefoonnummer">
       </div>
       <div class="form-group">
         <label class="col-form-label">E-mailadres:</label>
-        <input placeholder="voornaam@live.com" type="email" class="form-control">
-      </div>-->
-      <button [disabled]="" class="btn btn-primary">Bestelling afronden</button>
+        <input placeholder="voornaam@live.com" type="email" class="form-control" [(ngModel)]="klant.email" name="email">
+      </div>
+      <button class="btn btn-primary">Bestelling afronden</button>
     </form>
   </section>
 </main>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RouterModule } from '@angular/router';
 
-import { shoppingCartService, IProductPair } from './shoppingCartService';
+import { ShoppingCartService, IProductPair } from './shoppingCartService';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -18,7 +18,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [shoppingCartService]
+      providers: [ShoppingCartService]
     };
   }
 }
