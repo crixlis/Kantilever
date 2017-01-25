@@ -33,20 +33,42 @@
     <h4>Bestel Datum</h4>
 </div>
 <div class="col-md-12">
-    @model.BestelDatum
+    @Model.BestelDatum
 </div>
 
 <div class="row">
     
-    <div >
-
+    <div class="row">
+        <div class="col-md-4">
+            Id
+        </div>
+        <div class="col-md-4">
+            Naam
+        </div>
+        <div class="col-md-4">
+            Prijs
+        </div>
+        <div class="col-md-4">
+            Aantal
+        </div>
     </div>
     
 </div>
-@for(var artikel in Model.Artikelen)
+@foreach(var artikel in Model.Artikelen)
 {
     <div class="row">
-
+        <div class="col-md-4">
+            @artikel.Id
+        </div>
+        <div class="col-md-4">
+            @artikel.Naam
+        </div>
+        <div class="col-md-4">
+            @artikel.Prijs
+        </div>
+        <div class="col-md-4">
+            @artikel.Aantal
+        </div>
     </div>
 }
     <div class="col-md-12">
