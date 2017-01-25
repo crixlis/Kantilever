@@ -1,16 +1,58 @@
-﻿<h2>@ViewData["Title"].</h2>
+﻿@using WebshopBeheer.Models.CommercieelManagerModels;
+@model BestellingViewModel
+
+<h2>@ViewData["Title"].</h2>
 <p>Overzicht van alle bestellingen. Klik op goedkeuren om een bestelling door te zetten naar het magazijn.</p>
  
+<div class="col-md-12">
+    <h4>Bestel ID</h4>
+</div>
+<div class="col-md-12">
+    @Model.Id
+</div>
+<div class="col-md-12">
+    <h4>Klant</h4>
+</div>
+<div class="col-md-12">
+    <dl>
+        <dt>Voornaam</dt>
+        <dd>@Model.Klant.Voornaam</dd>
+        <dt>Achternaam</dt>
+        <dd>@Model.Klant.Achternaam</dd>
+        <dt>Adres</dt>
+        <dd>@Model.Klant.Adres</dd>
+        <dt>Postcode</dt>
+        <dd>@Model.Klant.Postcode</dd>
+        <dt>Plaatsnaam</dt>
+        <dd>@Model.Klant.Plaatsnaam</dd>
+        <dt>Telefoonnummer</dt>
+        <dd>@Model.Klant.Telefoonnummer</dd>
+    </dl>
+</div>
+<div class="col-md-12">
+    <h4>Bestel Datum</h4>
+</div>
+<div class="col-md-12">
+    @model.BestelDatum
+</div>
+
 <div class="row">
-    <div class="col-md-4">
-        <h4>Bestelling</h4>
+    
+    <div >
+
     </div>
-    <div class="col-md-4">
-        <h4>Klant</h4>
+    
+</div>
+@for(var artikel in Model.Artikelen)
+{
+    <div class="row">
+
     </div>
+}
+    <div class="col-md-12">
+    <h4>Afronden</h4>
     <div class="col-md-4">
-        <h4>Goedkeuren</h4>
         <button>Goedkeuren</button>
         <button>Afkeuren</button>
     </div>
-</div>
+</div>

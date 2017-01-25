@@ -12,10 +12,17 @@ namespace WebshopBeheer.Listener
         IReceive<FactuurAangemaakt>, 
         IReceive<BetaaldeFactuurAfgemeld>
     {
+
         private CommercieelManagerContext _commercieelManagerContext;
         private MagazijnMedewerkerContext _magazijnMedewerkerContext;
         private ISender _sender;
 
+
+        public WebshopBeheerService(CommercieelManagerContext commercieelmanagercontext, MagazijnMedewerkerContext magazijnmedewerkercontext)
+        {
+            _commercieelManagerContext = commercieelmanagercontext;
+            _magazijnMedewerkerContext = magazijnmedewerkercontext;
+        }
         public WebshopBeheerService(ISender sender)
         {
             _sender = sender;
