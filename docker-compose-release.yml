@@ -42,10 +42,6 @@ services:
         hostname: "lmf-webfrontend.api.database"
         environment:
             - MYSQL_ROOT_PASSWORD=my-secret-pw
-            - RABBITMQ_HOSTNAME=rabbitmq
-            - RABBITMQ_USERNAME=rabbitmq
-            - RABBITMQ_PASSWORD=rabbitmq
-            - MYSQL_CONNECTION=server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;      
         container_name: lmf-webfrontend.api.database
         networks: 
             - kantilever
@@ -73,6 +69,8 @@ services:
     lmf-webshop.api:
         container_name: lmf-webshop.api
         image: docentm:5000/lmf-webshop.api:${BUILD_BUILDNUMBER}
+        depends_on: 
+            - lmf-webfrontend.api.database
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
@@ -84,6 +82,9 @@ services:
     lmf-webshop.proxy:
         container_name: lmf-webshop.proxy
         image: docentm:5000/lmf-webshop.proxy:${BUILD_BUILDNUMBER}
+        depends_on: 
+            - lmf-webshop.api
+            - lmf-webshop-frontend
         networks: 
             - kantilever
         ports: 

@@ -27,7 +27,7 @@ namespace Webshop.API
             else
             {
                 options = new DbContextOptionsBuilder<WebshopContext>()
-               .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION"))
+               .UseMySql(Environment.GetEnvironmentVariable("MYSQL_CONNECTION"))
                .Options;
 
                 using (var context = new WebshopContext(options))
@@ -65,7 +65,7 @@ namespace Webshop.API
             else
             {
                 services.AddDbContext<WebshopContext>(options => options
-                    .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION")));
+                    .UseMySql(Environment.GetEnvironmentVariable("MYSQL_CONNECTION")));
             }
             services.AddScoped<IWebshopContext, WebshopContext>(p =>
                 p.GetService<WebshopContext>()

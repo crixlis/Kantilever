@@ -9,7 +9,7 @@ import { PageNotFoundComponent } from './pageNotFound';
 import { ProductComponent } from './product';
 import { WinkelwagenComponent } from './winkelwagen';
 import { BestellingAfrondenComponent } from './bestellingAfronden';
-import { ShoppingCartService, IProductPair, PrijsPipe, ArtikelService } from './shared';
+import { ShoppingCartService, IProductPair, PrijsPipe, ArtikelService, BestellingService } from './shared';
 import { ConfigComponent } from './config';
 
 const appRoutes: Routes = ConfigComponent.routes;
@@ -30,7 +30,7 @@ const appRoutes: Routes = ConfigComponent.routes;
     FormsModule,
     HttpModule
   ],
-  providers: [ShoppingCartService, ArtikelService],
+  providers: [ShoppingCartService, ArtikelService, BestellingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

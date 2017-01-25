@@ -246,3 +246,5 @@ ModelManifest.xml
 .fake/
 
 .vscode
+
+**/project.lock.json

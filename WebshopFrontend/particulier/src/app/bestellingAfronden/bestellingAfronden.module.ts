@@ -1,18 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BestellingAfrondenComponent } from './bestellingAfronden.component';
-import { ShoppingCartService, ArtikelService } from './../shared';
+import { ShoppingCartService, ArtikelService, BestellingService } from './../shared';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     BestellingAfrondenComponent
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [],
   providers: [
     ShoppingCartService,
-    ArtikelService
+    ArtikelService,
+    BestellingService    
   ]
 })
 export class BestellingAfrondenModule { }
