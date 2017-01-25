@@ -247,4 +247,4 @@ ModelManifest.xml
 
 .vscode
 
-project.lock.json
+**/project.lock.json
