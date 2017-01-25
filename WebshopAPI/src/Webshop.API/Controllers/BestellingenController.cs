@@ -32,7 +32,7 @@ namespace Webshop.API.Controllers
         public IActionResult Post([FromBody]Bestelling bestelling)
         {
             if (bestelling.Klant != null && bestelling.Artikelen.Count > 0)
-                {
+            {
                     foreach (var artikel in bestelling.Artikelen)
                     {
                         if(artikel.Id <= 0) { throw new ArgumentException($"Artikel Id {artikel.Id} is ongeldig"); }

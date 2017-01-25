@@ -28,6 +28,43 @@ namespace Webshop.API.Test
             Assert.Equal("Er is iets fout gegaan met het toevoegen van het product. Controleer of de bestelling geldig is.", response.Value);
         }
 
-       
+        [Fact]
+        public void ErKanEenPostMetEenBestellingGedaanWordenWaarnaEenBestellingAanmakenCommandWordtOpgegooid()
+        {
+            //Arrange
+            var sender = Substitute.For<ISender>();
+            var bestelling = new Bestelling
+            {
+                Id = 1,
+                Artikelen = new List<Artikel>
+                {
+                    new Artikel
+                    {
+                        Id = 1,
+                        Aantal = 2
+                    }
+                },
+                Klant = new Klant
+                {
+                    Voornaam = "Henk",
+                    Achternaam = "Jansen",
+                    Plaatsnaam = "Utrecht",
+                    Postcode = "3512AA",
+                    Telefoonnummer = 030464646,
+                    Adres = "Bilstraat 123"
+                }
+            };
+
+            //Act
+            var controller = new BestellingenController(sender);
+            var response = (CreatedAtRouteResult)controller.Post(bestelling);
+
+            //Assert
+            sender.Received(1).PublishCommand(Arg.Any<BestellingAanmaken>());
+            Assert.Equal(201, response.StatusCode);
+        }
+
+
+
     }
 }

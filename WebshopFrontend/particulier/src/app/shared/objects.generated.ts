@@ -17,6 +17,7 @@ export class Artikel {
     categorieen: string[];
     voorraad: number;
     aantal : number;
+    imagepath : string;
 
     constructor(data?: any) {
         if (data !== undefined) {
@@ -33,7 +34,8 @@ export class Artikel {
                     this.categorieen.push(item);
             }
             this.voorraad = data["voorraad"] !== undefined ? data["voorraad"] : null;
-
+            this.aantal = data["aantal"] !== undefined ? data["aantal"] : null;
+            this.imagepath = data["imagepath"] !== undefined ? data["imagepath"] : null;
         }
     }
 
@@ -56,6 +58,8 @@ export class Artikel {
                 data["categorieen"].push(item);
         }
         data["voorraad"] !== this.voorraad != undefined ? this.voorraad : null;
+        data["aantal"] !== this.aantal != undefined ? this.aantal : null;
+        data["imagepath"] !== this.imagepath != undefined ? this.imagepath : null;
         return data; 
     }
 
