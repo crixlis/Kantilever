@@ -14,9 +14,7 @@ namespace WebshopBeheer.Models.CommercieelManagerModels
     {
         public int Id { get; set; }
         public Klant Klant { get; set; }
-
         public IEnumerable<Artikel> Artikelen { get; set; }
-
         public DateTime BestelDatum { get; set; }
     }
 
