@@ -39,7 +39,7 @@ export class BestellingAfrondenComponent implements OnInit {
       bestelling.id = 0;
       bestelling.klant = this.klant;
       bestelling.artikelen = artikelen;
-
+      console.log(bestelling);
       this._bestellingService.postBestelling(bestelling);
     }
 }
