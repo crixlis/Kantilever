@@ -36,7 +36,6 @@ namespace Webshop.Listener
             using (var container = builder.Build())
             using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
             {
-                listener.SubscribeEvents<BetaaldeFactuurAfgemeld>(container);
                 listener.SubscribeEvents<ArtikelAanCatalogusToegevoegd>(container);
                 listener.Received += Listener_Received;
 
