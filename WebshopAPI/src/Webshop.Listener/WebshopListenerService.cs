@@ -58,6 +58,12 @@ namespace Webshop.Listener
                 artikel.Naam = item.Naam;
                 artikel.Prijs = item.Prijs;
 
+                var path = _context.Artikelen.Single(x => x.Id == item.Id).ImagePath;
+                if (path != null)
+                {
+                    RemoveImage(path);
+                }
+
                 if (item.Afbeelding != null && item.Afbeelding.Any())
                 {
                     artikel.ImagePath = SaveImage(item.Afbeelding);
@@ -66,6 +72,11 @@ namespace Webshop.Listener
             }
             _context.SaveChanges();
 
+        }
+
+        private void RemoveImage(string path)
+        {
+            File.Delete(path);
         }
 
         private string SaveImage(byte[] img)

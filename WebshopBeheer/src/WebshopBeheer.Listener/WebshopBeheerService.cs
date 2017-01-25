@@ -2,7 +2,6 @@
 using CommercieelManager.Database;
 using rabbitmq_demo;
 using System;
-using System.Collections.Generic;
 using WebshopBeheer.Database;
 using System.Linq;
 
@@ -34,34 +33,58 @@ namespace WebshopBeheer.Listener
 
         public void Execute(ArtikelAanCatalogusToegevoegd item)
         {
-            var artikelBestaatAl = _magazijnMedewerkerContext.Artikelen.Any(x => x.Id == item.Id);
-            if (artikelBestaatAl)
-            {
-                throw new ArgumentException($"Artikel met id {item.Id} bestaat al.");
-            }
+            var artikel = _magazijnMedewerkerContext.Artikelen.SingleOrDefault(x => x.Id == item.Id);
 
-            var artikel = new MagazijnMedewerker.Database.Artikel
+            if (artikel == null)
             {
-                Id = item.Id,
-                Beschrijving = item.Beschrijving,
-                Leverancier = item.LeverancierCode,
-                LeverbaarTot = item.LeverbaarTot,
-                LeverbaarVanaf = item.LeverbaarVanaf,
-                Categorieen = item.Categorieen,
-                Naam = item.Naam,
-                Prijs = item.Prijs,
-                Voorraad = 0
-            };
-            _magazijnMedewerkerContext.Artikelen.Add(artikel);
+                artikel = new MagazijnMedewerker.Database.Artikel
+                {
+                    Beschrijving = item.Beschrijving,
+                    Categorieen = item.Categorieen,
+                    Leverancier = item.LeverancierCode,
+                    Id = item.Id,
+                    LeverbaarTot = item.LeverbaarTot,
+                    LeverbaarVanaf = item.LeverbaarVanaf,
+                    Naam = item.Naam,
+                    Prijs = item.Prijs
+                };
+
+                _magazijnMedewerkerContext.Artikelen.Add(artikel);
+            }
+            else
+            {
+                artikel.Beschrijving = item.Beschrijving;
+                artikel.Categorieen = item.Categorieen;
+                artikel.Leverancier = item.LeverancierCode;
+                artikel.LeverbaarTot = item.LeverbaarTot;
+                artikel.LeverbaarVanaf = item.LeverbaarVanaf;
+                artikel.Naam = item.Naam;
+                artikel.Prijs = item.Prijs;
+                _magazijnMedewerkerContext.Artikelen.Update(artikel);
+            }
             _magazijnMedewerkerContext.SaveChanges();
+
+           
         }
 
         public void Execute(ArtikelInMagazijnGezet item)
         {
-            var artikel = _magazijnMedewerkerContext.Artikelen.Single(x => x.Id == item.Id); //ArtikelId in catalogus hetzelfde als in magazijn?
+            var artikel = _magazijnMedewerkerContext.Artikelen.Where(a => a.Id == item.Id).SingleOrDefault();
+            if (artikel != null)
+            {
+                artikel.Voorraad = item.Hoeveelheid;
+                _magazijnMedewerkerContext.Artikelen.Update(artikel);
 
-            artikel.Voorraad += item.Hoeveelheid; // krijgen we de som of moeten we zelf optellen?
-            _magazijnMedewerkerContext.Artikelen.Update(artikel);
+            }
+            else
+            {
+                var nieuwartikel = new MagazijnMedewerker.Database.Artikel
+                {
+                    Id = item.Id,
+                    Voorraad = item.Hoeveelheid
+                };
+                _magazijnMedewerkerContext.Artikelen.Add(nieuwartikel);
+            }
             _magazijnMedewerkerContext.SaveChanges();
         }
 
