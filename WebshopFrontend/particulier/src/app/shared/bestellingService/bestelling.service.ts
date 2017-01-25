@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response }    from '@angular/http';
+import { Http, Response, Headers }    from '@angular/http';
 import { Bestelling } from '.';
 import 'rxjs/add/operator/toPromise'; //needed for toPromise to work.
 
@@ -20,7 +20,10 @@ export class BestellingService {
     }
 
     postBestelling(bestelling : Bestelling): Promise<Bestelling> {
-        return this.http.post(BESTELLINGSERVICEURL, bestelling)
+            let header = new Headers();
+                header.append('Content-Type', 'application/json');
+
+        return this.http.post(BESTELLINGSERVICEURL, bestelling.toJSON(), { headers: header })
                 .toPromise()
                 .then(response => response.json().data)
                 .catch(error => Promise.reject(error.message || error));

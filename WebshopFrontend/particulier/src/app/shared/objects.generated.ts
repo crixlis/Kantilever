@@ -77,7 +77,7 @@ export class Artikel {
 }
 
 export class Bestelling { 
-    artikelen: Artikel[]; 
+    artikelen: BestellingArtikel[]; 
     id: number; 
     klant: Klant;
 
@@ -86,7 +86,7 @@ export class Bestelling {
             if (data["artikelen"] && data["artikelen"].constructor === Array) {
                 this.artikelen = [];
                 for (let item of data["artikelen"])
-                    this.artikelen.push(Artikel.fromJS(item));
+                    this.artikelen.push(BestellingArtikel.fromJS(item));
             }
             this.id = data["id"] !== undefined ? data["id"] : null;
             this.klant = data["klant"] ? Klant.fromJS(data["klant"]) : null;
@@ -116,6 +116,38 @@ export class Bestelling {
     clone() {
         const json = this.toJSON();
         return new Bestelling(JSON.parse(json));
+    }
+}
+
+export class BestellingArtikel { 
+    id: number; 
+    aantal: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.id = data["id"] !== undefined ? data["id"] : null;
+            this.aantal = data["aantal"] !== undefined ? data["aantal"] : null;
+        }
+    }
+
+    static fromJS(data: any): BestellingArtikel {
+        return new BestellingArtikel(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["id"] = this.id !== undefined ? this.id : null;
+        data["aantal"] = this.aantal !== undefined ? this.aantal : null;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new BestellingArtikel(JSON.parse(json));
     }
 }
 

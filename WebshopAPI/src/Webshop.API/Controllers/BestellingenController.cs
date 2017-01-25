@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using rabbitmq_demo;
 using System;
+using System.Linq;
 
 namespace Webshop.API.Controllers
 {
@@ -35,20 +36,21 @@ namespace Webshop.API.Controllers
             {
                     foreach (var artikel in bestelling.Artikelen)
                     {
-                        if(artikel.Id <= 0) { throw new ArgumentException($"Artikel Id {artikel.Id} is ongeldig"); }
+                        if(artikel.Id < 0) { throw new ArgumentException($"Artikel Id {artikel.Id} is ongeldig"); }
                     }
 
                 var bestellingAanmaken = new BestellingAanmaken
                 {
                     Klant = bestelling.Klant,
-                    BestelDatum = DateTime.Now
+                    BestelDatum = DateTime.Now,
+                    Artikelen = new List<Artikel>()
                 };
                 
                 foreach(var artikel in bestelling.Artikelen)
                 {
                     bestellingAanmaken.Artikelen.Add(new Artikel
                     {
-                        Id = bestelling.Id,
+                        Id = artikel.Id,
                         Aantal = artikel.Aantal
                     });
                 }

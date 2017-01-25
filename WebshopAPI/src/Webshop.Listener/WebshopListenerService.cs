@@ -87,7 +87,7 @@ namespace Webshop.Listener
             string rootPath = Path.Combine(_imgRoot, imgName.ToString());
 
             File.WriteAllBytes(rootPath + ".png", img);
-            return rootPath;
+            return Path.Combine(rootPath, ".png");
         }
         
         public void Execute(ArtikelVoorraadBijgewerkt item)
