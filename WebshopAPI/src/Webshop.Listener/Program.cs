@@ -22,6 +22,7 @@ namespace Webshop.Listener
             var builder = new ContainerBuilder();
 
             builder.RegisterReceiverFor<WebshopListenerService, ArtikelAanCatalogusToegevoegd>();
+            builder.RegisterReceiverFor<WebshopListenerService, ArtikelVoorraadBijgewerkt>();
             builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
             builder.Register(r => Environment.GetEnvironmentVariable("IMG_ROOT"));
 
@@ -36,8 +37,9 @@ namespace Webshop.Listener
             using (var container = builder.Build())
             using (var listener = new rabbitmq_demo.Listener(connection, "Kantilever"))
             {
-                listener.SubscribeEvents<BetaaldeFactuurAfgemeld>(container);
                 listener.SubscribeEvents<ArtikelAanCatalogusToegevoegd>(container);
+                listener.SubscribeEvents<ArtikelVoorraadBijgewerkt>(container);
+
                 listener.Received += Listener_Received;
 
                 using (var mEvent = new ManualResetEvent(false))

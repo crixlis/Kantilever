@@ -36,6 +36,28 @@ namespace Webshop.Listener.Test
         }
 
         [Fact]
+        public void IkWilEenArtikelVoorraadBijgewerktEventOpvangenEnOpslaanInDeDatabase()
+        {
+            var options = new DbContextOptionsBuilder<WebshopContext>()
+                .UseInMemoryDatabase(databaseName: "ArtikelVoorraadBijgewerktOpslaan")
+                .Options;
+
+            using (var context = new WebshopContext(options))
+            {
+                //Arrange
+                var sender = Substitute.For<ISender>();
+                var service = new WebshopListenerService(sender, context, Environment.GetEnvironmentVariable("IMG_ROOT"));
+                var artikelToegevoegd = new ArtikelVoorraadBijgewerkt();
+
+                //Act
+                service.Execute(artikelToegevoegd);
+
+                //Assert
+                Assert.True(context.Artikelen.Any());
+            }
+        }
+
+        [Fact]
         public void ZelfToevoegenVanIdVanArtikelAanCatalogusToegevoegdAanDB()
         {
             var options = new DbContextOptionsBuilder<WebshopContext>()
@@ -45,8 +67,6 @@ namespace Webshop.Listener.Test
             using (var context = new WebshopContext(options))
             {
                 //Arrange
-                context.Database.EnsureCreated();
-
                 var id = 34;
                 var sender = Substitute.For<ISender>();
                 var service = new WebshopListenerService(sender, context, Environment.GetEnvironmentVariable("IMG_ROOT"));
