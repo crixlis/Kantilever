@@ -3,10 +3,13 @@ param(
 )
 
 foreach ($folder in $(Get-ChildItem -Path $rootURL | Where-Object{ $_.PSIsContainer -and $_.Name -ne "Documentatie" -and $_.Name -ne "WebshopFrontend" })) {
-    foreach($item in $(Get-ChildItem -Path "$($folder.FullName)\src")) {
-        if($item.Name -like "*.Test" ) {
-            Set-Location $($item.FullName)
-            dotnet test --no-build "$($item.FullName)" -xml "$($item.Name)-TestBuild.xml"
+    $source = Join-Path $folder "src"
+    if(Test-Path $source) {
+        foreach($item in $(Get-ChildItem -Path $source)) {
+            if($item.Name -like "*.Test" ) {
+                Set-Location $($item.FullName)
+                dotnet test --no-build "$($item.FullName)" -xml "$($item.Name)-TestBuild.xml"
+            }
         }
     }            
 }    
