@@ -14,23 +14,17 @@ namespace Webshop.API.Test
         [Fact]
         public void ErKanEenArtikelOpBasisVanEeenSpecifiekIdOpgevraagdWorden()
         {
-            /* Let op, deze test moest herschreven worden zodra de database actief is. 
-            Voor nu wordt het artikel statisch vanuit de controller meegegeven */
 
             //Arrange
-
             var options = new DbContextOptionsBuilder<WebshopContext>()
                 .UseInMemoryDatabase(databaseName: "ArtikelOBVId")
                 .Options;
 
             using (var context = new WebshopContext(options))
             {
-
-                var sender = Substitute.For<ISender>();
-                var controller = new ArtikelController(sender, context);
-                var artikelExpected = new Artikel
+                context.Artikelen.Add(new Database.Artikel
                 {
-                    Id = 0,
+                    Id = 5,
                     Naam = "Giant XTC",
                     Beschrijving = "Mountainbike",
                     Prijs = 1000.99m,
@@ -39,29 +33,25 @@ namespace Webshop.API.Test
                     Leverancier = "Giant",
                     Categorieen = new List<string> { "Mountainbikes", "Fietsen" },
                     ImagePath = "/img/root"
-                };
+                });
+
+                context.SaveChanges();
+
+                var sender = Substitute.For<ISender>();
+                var controller = new ArtikelController(sender, context);
 
                 //Act
-                var artikelFromAPI = controller.Get(0);
+                var result = controller.Get(5);
 
-                //Assert all properties
-                Assert.Equal(artikelExpected.Id, artikelFromAPI.Id);
-                Assert.Equal(artikelExpected.Naam, artikelFromAPI.Naam);
-                Assert.Equal(artikelExpected.Beschrijving, artikelFromAPI.Beschrijving);
-                Assert.Equal(artikelExpected.Prijs, artikelFromAPI.Prijs);
-                Assert.Equal(artikelExpected.LeverbaarVanaf, artikelFromAPI.LeverbaarVanaf);
-                Assert.Equal(artikelExpected.LeverbaarTot, artikelFromAPI.LeverbaarTot);
-                Assert.Equal(artikelExpected.Leverancier, artikelFromAPI.Leverancier);
-                Assert.Equal(artikelExpected.Categorieen, artikelFromAPI.Categorieen);
+                //Assert
+                Assert.Equal(5 , result.Id);
             }
         }
 
         [Fact]
         public void AlleArtikelenKunnenInEenKeerOpgevraagdWorden()
         {
-            /* Let op, deze test moest herschreven worden zodra de database actief is. 
-            Voor nu wordt het artikel statisch vanuit de controller meegegeven */
-
+            //Arrange
             var options = new DbContextOptionsBuilder<WebshopContext>()
                 .UseInMemoryDatabase(databaseName: "ZelfArtikelAanCatalogusToevoegen")
                 .Options;
@@ -71,22 +61,29 @@ namespace Webshop.API.Test
                 context.Artikelen.Add(new Database.Artikel
                 {
                     Id = 889,
-                    Naam = "testArtikel"
+                    Naam = "testArtikel",
+                    Beschrijving = "testBeschrijving",
+                    Categorieen = new List<string> {"testcategorie" },
+                    ImagePath = "/img/root",
+                    Leverancier = "testLeverancier",
+                    LeverancierCode =  "5XC",
+                    LeverbaarTot = new DateTime(2018, 2, 28),
+                    LeverbaarVanaf = new DateTime(2017, 2, 28),
+                    Prijs = 5m,
+                    Voorraad = 5
                 });
 
                 context.SaveChanges();
-                //Arrange
+
                 var sender = Substitute.For<ISender>();
                 var controller = new ArtikelController(sender, context);
 
                 //Act
-                var artikelenFromAPI = controller.Get();
+                var result = controller.Get();
 
                 //Assert
-                Assert.True(artikelenFromAPI.Count == 1);
-                Assert.Equal(889, artikelenFromAPI[0].Id);
-                //Assert.Equal(1, artikelenFromAPI[1].Id);
-
+                Assert.True(result.Count == 1);
+                Assert.Equal(889, result[0].Id);
             }
         }
     }
