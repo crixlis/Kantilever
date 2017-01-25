@@ -16,6 +16,7 @@ export class Artikel {
     leverancier: string; 
     categorieen: string[];
     voorraad: number;
+    aantal : number;
 
     constructor(data?: any) {
         if (data !== undefined) {
@@ -112,7 +113,7 @@ export class Bestelling {
 }
 
 export class Klant { 
-    acternaam: string; 
+    achternaam: string; 
     adres: string; 
     id: number; 
     plaatsnaam: string; 
@@ -122,7 +123,7 @@ export class Klant {
 
     constructor(data?: any) {
         if (data !== undefined) {
-            this.acternaam = data["acternaam"] !== undefined ? data["acternaam"] : null;
+            this.achternaam = data["achternaam"] !== undefined ? data["achternaam"] : null;
             this.adres = data["adres"] !== undefined ? data["adres"] : null;
             this.id = data["id"] !== undefined ? data["id"] : null;
             this.plaatsnaam = data["plaatsnaam"] !== undefined ? data["plaatsnaam"] : null;
@@ -138,7 +139,7 @@ export class Klant {
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
-        data["acternaam"] = this.acternaam !== undefined ? this.acternaam : null;
+        data["achternaam"] = this.achternaam !== undefined ? this.achternaam : null;
         data["adres"] = this.adres !== undefined ? this.adres : null;
         data["id"] = this.id !== undefined ? this.id : null;
         data["plaatsnaam"] = this.plaatsnaam !== undefined ? this.plaatsnaam : null;
