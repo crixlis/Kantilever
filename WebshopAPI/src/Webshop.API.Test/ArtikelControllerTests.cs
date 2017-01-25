@@ -18,33 +18,42 @@ namespace Webshop.API.Test
             Voor nu wordt het artikel statisch vanuit de controller meegegeven */
 
             //Arrange
-            var sender = Substitute.For<ISender>();
-            var controller = new ArtikelController(sender);
-            var artikelExpected = new Artikel
+
+            var options = new DbContextOptionsBuilder<WebshopContext>()
+                .UseInMemoryDatabase(databaseName: "ArtikelOBVId")
+                .Options;
+
+            using (var context = new WebshopContext(options))
             {
-                Id = 0,
-                Naam = "Giant XTC",
-                Beschrijving = "Mountainbike",
-                Prijs = 1000.99m,
-                LeverbaarVanaf = new DateTime(2017, 1, 1),
-                LeverbaarTot = new DateTime(2020, 1, 1),
-                Leverancier = "Giant",
-                Categorieen = new List<string> { "Mountainbikes", "Fietsen" },
-                ImagePath = "/img/root"
-            };
 
-            //Act
-            var artikelFromAPI = controller.Get(0);
+                var sender = Substitute.For<ISender>();
+                var controller = new ArtikelController(sender, context);
+                var artikelExpected = new Artikel
+                {
+                    Id = 0,
+                    Naam = "Giant XTC",
+                    Beschrijving = "Mountainbike",
+                    Prijs = 1000.99m,
+                    LeverbaarVanaf = new DateTime(2017, 1, 1),
+                    LeverbaarTot = new DateTime(2020, 1, 1),
+                    Leverancier = "Giant",
+                    Categorieen = new List<string> { "Mountainbikes", "Fietsen" },
+                    ImagePath = "/img/root"
+                };
 
-            //Assert all properties
-            Assert.Equal(artikelExpected.Id, artikelFromAPI.Id);
-            Assert.Equal(artikelExpected.Naam, artikelFromAPI.Naam);
-            Assert.Equal(artikelExpected.Beschrijving, artikelFromAPI.Beschrijving);
-            Assert.Equal(artikelExpected.Prijs, artikelFromAPI.Prijs);
-            Assert.Equal(artikelExpected.LeverbaarVanaf, artikelFromAPI.LeverbaarVanaf);
-            Assert.Equal(artikelExpected.LeverbaarTot, artikelFromAPI.LeverbaarTot);
-            Assert.Equal(artikelExpected.Leverancier, artikelFromAPI.Leverancier);
-            Assert.Equal(artikelExpected.Categorieen, artikelFromAPI.Categorieen);
+                //Act
+                var artikelFromAPI = controller.Get(0);
+
+                //Assert all properties
+                Assert.Equal(artikelExpected.Id, artikelFromAPI.Id);
+                Assert.Equal(artikelExpected.Naam, artikelFromAPI.Naam);
+                Assert.Equal(artikelExpected.Beschrijving, artikelFromAPI.Beschrijving);
+                Assert.Equal(artikelExpected.Prijs, artikelFromAPI.Prijs);
+                Assert.Equal(artikelExpected.LeverbaarVanaf, artikelFromAPI.LeverbaarVanaf);
+                Assert.Equal(artikelExpected.LeverbaarTot, artikelFromAPI.LeverbaarTot);
+                Assert.Equal(artikelExpected.Leverancier, artikelFromAPI.Leverancier);
+                Assert.Equal(artikelExpected.Categorieen, artikelFromAPI.Categorieen);
+            }
         }
 
         [Fact]
