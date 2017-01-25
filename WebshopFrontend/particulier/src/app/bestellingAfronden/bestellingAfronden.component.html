@@ -1,5 +1,5 @@
 <main>
-   <!-- Angular forms lijkt niet meer te werken... Zie ook : https://github.com/AngularClass/angular2-webpack-starter/issues/1399 voor een soortgelijke fout-->
+   <!-- Angular forms lijkt niet meer te werken, daarom maar met ngModel... Zie ook : https://github.com/AngularClass/angular2-webpack-starter/issues/1399 voor een soortgelijke fout-->
   <section id="bestellingAfronden">
     <h2>Bestelling afronden</h2>
     <p>
@@ -30,7 +30,7 @@
         <label class="col-form-label">E-mailadres:</label>
         <input placeholder="voornaam@live.com" type="email" class="form-control" [(ngModel)]="klant.email" name="email">
       </div>
-      <button [disabled]="" class="btn btn-primary">Bestelling afronden</button>
+      <button class="btn btn-primary">Bestelling afronden</button>
     </form>
   </section>
 </main>

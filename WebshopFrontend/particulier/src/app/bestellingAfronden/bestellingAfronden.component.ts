@@ -14,11 +14,9 @@ export class BestellingAfrondenComponent implements OnInit {
   constructor(
     private _shoppingCart : ShoppingCartService, 
     private _artikelService : ArtikelService,
-    private _bestellingenService : BestellingService) {}
+    private _bestellingService : BestellingService) {}
 
   error : string;
-
-
   klant: Klant =  new Klant;
 
   @Output() onNewAmountProducts = new EventEmitter();
@@ -35,6 +33,6 @@ export class BestellingAfrondenComponent implements OnInit {
 
       console.log(bestelling)
 
-      this._bestellingenService.postBestelling(bestelling);
+      this._bestellingService.postBestelling(bestelling);
     }
 }
