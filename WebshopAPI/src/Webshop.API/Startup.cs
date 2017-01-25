@@ -8,13 +8,17 @@ using RabbitMQ.Client;
 using Microsoft.EntityFrameworkCore;
 using MySQL.Data.EntityFrameworkCore.Extensions;
 using System;
+using Webshop.Database;
 
 namespace Webshop.API
 {
     public class Startup
     {
+        private IHostingEnvironment _env { get; set; }
+
         public Startup(IHostingEnvironment env)
         {
+            _env = env;
             var options = new DbContextOptions<WebshopContext>();
             if(env.IsDevelopment())
             {
@@ -52,14 +56,20 @@ namespace Webshop.API
             services.AddSingleton<ISender>(s => new Sender(connection, "Kantilever"));
             services.AddMvc();
             services.AddCors();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen();           
 
+            if (_env.IsDevelopment())
+            {
+                services.AddDbContext<WebshopContext>(options => options.UseInMemoryDatabase("DevelopmentTesting"));
+            }
+            else
+            {
+                services.AddDbContext<WebshopContext>(options => options
+                    .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION")));
+            }
             services.AddScoped<IWebshopContext, WebshopContext>(p =>
                 p.GetService<WebshopContext>()
             );
-
-            services.AddDbContext<WebshopContext>(options => options
-                .UseMySQL(Environment.GetEnvironmentVariable("MSQL_CONNECTION")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

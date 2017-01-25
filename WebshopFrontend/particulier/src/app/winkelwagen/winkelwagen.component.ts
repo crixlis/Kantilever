@@ -38,4 +38,8 @@ export class WinkelwagenComponent implements OnInit {
   goToProductPage(productId : number) {
     window.location.href = 'product/' + productId;
   }
+
+  goToBestellingAfrondenPage() {
+    window.location.href = 'bestellingAfronden';
+  }
 }

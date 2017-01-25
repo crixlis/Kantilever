@@ -7,6 +7,7 @@ using System.Linq;
 using System.Data.SqlClient;
 using MySQL.Data.EntityFrameworkCore.Extensions;
 using System.IO;
+using Webshop.Database;
 
 namespace Webshop.Listener.Test
 {
