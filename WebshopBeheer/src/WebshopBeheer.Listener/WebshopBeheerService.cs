@@ -2,7 +2,6 @@
 using CommercieelManager.Database;
 using rabbitmq_demo;
 using System;
-using WebshopBeheer.Database;
 using System.Linq;
 
 namespace WebshopBeheer.Listener
@@ -13,7 +12,6 @@ namespace WebshopBeheer.Listener
         IReceive<FactuurAangemaakt>, 
         IReceive<BetaaldeFactuurAfgemeld>
     {
-        private WebshopBeheerContext _webshopbeheerContext;
         private CommercieelManagerContext _commercieelManagerContext;
         private MagazijnMedewerkerContext _magazijnMedewerkerContext;
         private ISender _sender;
@@ -23,15 +21,37 @@ namespace WebshopBeheer.Listener
             _sender = sender;
         }
 
-        public WebshopBeheerService(ISender sender, WebshopBeheerContext context)
+        public void Execute(ArtikelAanCatalogusToegevoegd item)
         {
-            _sender = sender;
-            _webshopbeheerContext = context;
-
-            _webshopbeheerContext.Database.EnsureCreated();
+            ArtikelAanCatalogusToegevoegdVoorCommercieelManager(item);
+            ArtikelAanCatalogusToegevoegdVoorMagazijnMedewerker(item);
         }
 
-        public void Execute(ArtikelAanCatalogusToegevoegd item)
+        private void ArtikelAanCatalogusToegevoegdVoorCommercieelManager(ArtikelAanCatalogusToegevoegd item)
+        {
+            var artikel = _commercieelManagerContext.Artikelen.SingleOrDefault(x => x.Id == item.Id);
+
+            if (artikel == null)
+            {
+                artikel = new CommercieelManager.Database.Artikel
+                {
+                    Id = item.Id,
+                    Naam = item.Naam,
+                    Prijs = item.Prijs
+                };
+
+                _commercieelManagerContext.Artikelen.Add(artikel);
+            }
+            else
+            {
+                artikel.Naam = item.Naam;
+                artikel.Prijs = item.Prijs;
+                _commercieelManagerContext.Artikelen.Update(artikel);
+            }
+            _commercieelManagerContext.SaveChanges();
+        }
+
+        private void ArtikelAanCatalogusToegevoegdVoorMagazijnMedewerker(ArtikelAanCatalogusToegevoegd item)
         {
             var artikel = _magazijnMedewerkerContext.Artikelen.SingleOrDefault(x => x.Id == item.Id);
 
@@ -63,11 +83,14 @@ namespace WebshopBeheer.Listener
                 _magazijnMedewerkerContext.Artikelen.Update(artikel);
             }
             _magazijnMedewerkerContext.SaveChanges();
-
-           
         }
 
         public void Execute(ArtikelInMagazijnGezet item)
+        {
+            ArtikelInMagazijnGezetVoorMagazijnMedewerker(item);
+        }
+
+        private void ArtikelInMagazijnGezetVoorMagazijnMedewerker(ArtikelInMagazijnGezet item)
         {
             var artikel = _magazijnMedewerkerContext.Artikelen.Where(a => a.Id == item.Id).SingleOrDefault();
             if (artikel != null)
@@ -113,6 +136,12 @@ namespace WebshopBeheer.Listener
 
         public void Execute(BestellingAangemaakt item)
         {
+            BestellingAangemaaktVoorCommercieelManager(item);
+            BestellingAangemaaktVoorMagazijnMedewerker(item);  
+        }
+
+        private void BestellingAangemaaktVoorCommercieelManager(BestellingAangemaakt item)
+        {
             var bestellingVoorCommercieelManager = new CommercieelManager.Database.Bestelling
             {
                 Id = item.Id,
@@ -123,17 +152,19 @@ namespace WebshopBeheer.Listener
             _commercieelManagerContext.SaveChanges();
             var lastBestellingVoorCommercieelManager = _commercieelManagerContext.Bestellingen.Last();
 
-            foreach(var artikel in item.Artikelen)
+            foreach (var artikel in item.Artikelen)
             {
                 var bestelArtikel = new CommercieelManager.Database.BestelArtikel
                 {
                     Bestelling = lastBestellingVoorCommercieelManager,
-                    Aantal = artikel.Voorraad, //Aantal
+                    Aantal = artikel.Aantal,
                     Artikel = _commercieelManagerContext.Artikelen.First(x => x.Id == item.Id)
                 };
             }
+        }
 
-
+        private void BestellingAangemaaktVoorMagazijnMedewerker(BestellingAangemaakt item)
+        {
             var bestellingVoorMagazijnMedewerker = new MagazijnMedewerker.Database.Bestelling
             {
                 Id = item.Id,

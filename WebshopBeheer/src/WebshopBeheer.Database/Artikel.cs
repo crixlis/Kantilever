@@ -13,7 +13,7 @@ namespace WebshopBeheer.Database
         public DateTime LeverbaarTot { get; set; }
         public string Leverancier { get; set; }
         public List<string> Categorieen = new List<string>();
-        public int Voorraad { get; set; }
+        public int Aantal { get; set; }
 
     }
 }
