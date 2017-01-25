@@ -3,7 +3,6 @@ import { Http } from '@angular/http';
 import { ShoppingCartService, ArtikelService, BestellingService, Artikel, PrijsPipe, Klant, Bestelling, IProductPair } from './../shared';
 
 @Component({
-  moduleId: module.id,
   selector: 'bestellingAfronden',
   providers: [],
   templateUrl: './bestellingAfronden.component.html',
@@ -37,7 +36,6 @@ export class BestellingAfrondenComponent implements OnInit {
       });
 
       bestelling.artikelen = artikelen;
-      bestelling.id = 0;
       bestelling.klant = this.klant;
 
       console.log(bestelling);
