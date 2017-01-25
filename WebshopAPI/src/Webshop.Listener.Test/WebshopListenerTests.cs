@@ -47,10 +47,10 @@ namespace Webshop.Listener.Test
                 //Arrange
                 var sender = Substitute.For<ISender>();
                 var service = new WebshopListenerService(sender, context, Environment.GetEnvironmentVariable("IMG_ROOT"));
-                var artikelToegevoegd = new ArtikelVoorraadBijgewerkt();
+                var artikel = new ArtikelVoorraadBijgewerkt();
 
                 //Act
-                service.Execute(artikelToegevoegd);
+                service.Execute(artikel);
 
                 //Assert
                 Assert.True(context.Artikelen.Any());
