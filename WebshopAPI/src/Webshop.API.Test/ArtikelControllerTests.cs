@@ -45,6 +45,13 @@ namespace Webshop.API.Test
 
                 //Assert
                 Assert.Equal(5 , result.Id);
+                Assert.Equal("Giant XTC", result.Naam);
+                Assert.Equal(1000.99m, result.Prijs);
+                Assert.Equal(new DateTime(2017, 1, 1), result.LeverbaarVanaf);
+                Assert.Equal(new DateTime(2020, 1, 1), result.LeverbaarTot);
+                Assert.Equal("Giant", result.Leverancier);
+                Assert.Equal("Mountainbikes", result.Categorieen[0]);
+                Assert.Equal("/img/root", result.ImagePath);
             }
         }
 
