@@ -36,9 +36,9 @@ namespace Webshop.API.Test
             var bestelling = new Bestelling
             {
                 Id = 1,
-                Artikelen = new List<Artikel>
+                Artikelen = new List<Database.Artikel>
                 {
-                    new Artikel
+                    new Database.Artikel
                     {
                         Id = 1,
                         Aantal = 2
