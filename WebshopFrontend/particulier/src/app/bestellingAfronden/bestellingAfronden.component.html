@@ -1,10 +1,11 @@
 <main>
+   <!-- Angular forms lijkt niet meer te werken... Zie ook : https://github.com/AngularClass/angular2-webpack-starter/issues/1399 voor een soortgelijke fout-->
   <section id="bestellingAfronden">
     <h2>Bestelling afronden</h2>
     <p>
       Om de bestelling af te ronden dient u de onderstaande gegevens in te voeren.
     </p>
-    <form (submit)="addPerson()"id="addPersonForm">
+    <form (submit)="bestellingAfronden()" id="addPersonForm">
       <div class="form-group">
         <label class="col-form-label">Voornaam:</label>
         <input placeholder="Voornaam" class="form-control">
@@ -35,5 +36,8 @@
       </div>
       <button [disabled]="" class="btn btn-primary">Bestelling afronden</button>
     </form>
+    <!--<form (submit)="bestellingAfronden()" <[formGroup]="bestellingAfrondenForm" id="addPersonForm">
+
+    </form>-->
   </section>
 </main>

@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+/*import { FormsModule, ReactiveFormsModule } from '@angular/forms';*/
 import { BestellingAfrondenComponent } from './bestellingAfronden.component';
 import { ShoppingCartService, ArtikelService } from './../shared';
+
 
 @NgModule({
   declarations: [
     BestellingAfrondenComponent
   ],
-  imports: [],
+  imports: [/*FormsModule, ReactiveFormsModule*/],
   providers: [
     ShoppingCartService,
     ArtikelService
