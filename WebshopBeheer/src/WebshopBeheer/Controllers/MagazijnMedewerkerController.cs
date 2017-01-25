@@ -44,11 +44,10 @@ namespace WebshopBeheer.Controllers
                 Id = bestelling.Id,
                 Artikelen = artikelen,
                 BestelDatum = bestelling.BestelDatum,
-                klant = bestelling.Klant,
+                Klant = bestelling.Klant,
                 Status = bestelling.Status
             });
         }
-
 
         public IActionResult Error()
         {
