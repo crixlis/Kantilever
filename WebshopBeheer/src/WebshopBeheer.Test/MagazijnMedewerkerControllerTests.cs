@@ -79,7 +79,6 @@ namespace WebshopBeheer.Test
 
             using (var context = new WebshopBeheerContext(options))
             {
-                
 
                 context.Bestellingen.Add(bestelling1);
                 context.SaveChanges();
@@ -176,8 +175,8 @@ namespace WebshopBeheer.Test
                 Klant = new Klant() { Id = 10, Achternaam = "Slager" },
                 Artikelen = new List<Artikel>()
                 {
-                    new Artikel() { Id = 1, ArtikelId = 2, Beschrijving= "Fietsband", Voorraad = 6 },
-                    new Artikel() { Id = 2, ArtikelId = 3, Beschrijving= "Fietscomputer", Voorraad = 2 }
+                    new Artikel() { Id = 1, Beschrijving= "Fietsband", Voorraad = 6 },
+                    new Artikel() { Id = 2,  Beschrijving= "Fietscomputer", Voorraad = 2 }
                 }
             };
 
@@ -188,8 +187,8 @@ namespace WebshopBeheer.Test
                 Klant = new Klant() { Id = 10, Achternaam = "Slager" },
                 Artikelen = new List<Artikel>()
                 {
-                    new Artikel() { Id = 3, ArtikelId = 4, Beschrijving= "Stuur", Voorraad = 6 },
-                    new Artikel() { Id = 4, ArtikelId = 3, Beschrijving= "Fietscomputer", Voorraad = 2 }
+                    new Artikel() { Id = 3, Beschrijving= "Stuur", Voorraad = 6 },
+                    new Artikel() { Id = 4, Beschrijving= "Fietscomputer", Voorraad = 2 }
                 }
             };
 

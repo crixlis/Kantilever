@@ -20,6 +20,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebshopBeheer.Listener.Test
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebshopBeheer.Database", "src\WebshopBeheer.Database\WebshopBeheer.Database.xproj", "{F357C2E3-8CF1-4FD2-94C9-6FBE9B9A8FF9}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MagazijnMedewerker.Database", "src\MagazijnMedewerker.Database\MagazijnMedewerker.Database.xproj", "{6DBC309F-5700-4480-B401-5665F257BEA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{F357C2E3-8CF1-4FD2-94C9-6FBE9B9A8FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F357C2E3-8CF1-4FD2-94C9-6FBE9B9A8FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F357C2E3-8CF1-4FD2-94C9-6FBE9B9A8FF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DBC309F-5700-4480-B401-5665F257BEA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DBC309F-5700-4480-B401-5665F257BEA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DBC309F-5700-4480-B401-5665F257BEA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DBC309F-5700-4480-B401-5665F257BEA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,5 +62,6 @@ Global
 		{4300E94D-162F-4A7E-B715-A3BFCB31CAAD} = {0D24C645-C8F7-45E6-8D8C-1D0A5F46ECB5}
 		{379EC5CF-2A4B-46A6-B569-E245FE978487} = {0D24C645-C8F7-45E6-8D8C-1D0A5F46ECB5}
 		{F357C2E3-8CF1-4FD2-94C9-6FBE9B9A8FF9} = {0D24C645-C8F7-45E6-8D8C-1D0A5F46ECB5}
+		{6DBC309F-5700-4480-B401-5665F257BEA8} = {0D24C645-C8F7-45E6-8D8C-1D0A5F46ECB5}
 	EndGlobalSection
 EndGlobal

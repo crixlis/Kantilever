@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using rabbitmq_demo;
 using System;
+using Webshop.Database;
 
 namespace Webshop.API.Controllers
 {
@@ -9,10 +10,12 @@ namespace Webshop.API.Controllers
     public class BestellingenController : Controller
     {
         private ISender _sender;
+        private IWebshopContext _context;
 
-        public BestellingenController(ISender sender)
+        public BestellingenController(ISender sender, IWebshopContext context)
         {
             _sender = sender;
+            _context = context;
         }
 
         // GET api/bestellingen
@@ -31,21 +34,21 @@ namespace Webshop.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Bestelling bestelling)
         {
-                if (bestelling.Id != 0 && bestelling.Klant != null && bestelling.Artikelen.Count > 0)
+            if (bestelling.Id != 0 && bestelling.Klant != null && bestelling.Artikelen.Count > 0)
+            {
+                var bestellingKeuren = new BestellingKeuren
                 {
-                    var bestellingKeuren = new BestellingKeuren
-                    {
-                        Id = bestelling.Id,
-                        Artikelen = bestelling.Artikelen,
-                        Klant = bestelling.Klant
-                    };
+                    Id = bestelling.Id,
+                    Artikelen = bestelling.Artikelen,
+                    Klant = bestelling.Klant
+                };
 
-                    _sender.PublishCommand(bestellingKeuren);
+                _sender.PublishCommand(bestellingKeuren);
 
-                    return CreatedAtRoute("api/bestellingen", bestelling);
-                }
+                return CreatedAtRoute("api/bestellingen", bestelling);
+            }
 
-                return BadRequest("Er is iets fout gegaan met het toevoegen van het product. Controleer of de bestelling compleet is.");
+            return BadRequest("Er is iets fout gegaan met het toevoegen van het product. Controleer of de bestelling compleet is.");
         }
 
         // PUT api/bestellingen/5

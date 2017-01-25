@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebshopBeheer.Database
+namespace MagazijnMedewerker.Database
 {
     public class Artikel
     {
@@ -14,6 +14,5 @@ namespace WebshopBeheer.Database
         public string Leverancier { get; set; }
         public List<string> Categorieen = new List<string>();
         public int Voorraad { get; set; }
-
     }
 }
