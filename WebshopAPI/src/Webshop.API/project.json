@@ -25,7 +25,8 @@
     "Swashbuckle.SwaggerUi": "6.0.0-beta902",
     "Webshop.Database": "1.0.0-*",
     "MySql.Data.EntityFrameworkCore": "7.0.6-IR31",
-    "Microsoft.EntityFrameworkCore.InMemory": "1.1.*"
+    "Microsoft.EntityFrameworkCore.InMemory": "1.1.*",
+    "Pomelo.EntityFrameworkCore.MySql": "1.1.0"
   },
   "frameworks": {
     "netcoreapp1.0": {
