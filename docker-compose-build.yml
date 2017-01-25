@@ -32,7 +32,7 @@ services:
 
   lmf-bestelservice:
     build:
-      context: ./BestelService/src/BestelService
+      context: ./BestelService/src/BestelService 
       dockerfile: Dockerfile
       args: 
         SOURCE: ./bin/publish
