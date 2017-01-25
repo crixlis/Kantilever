@@ -1,6 +1,7 @@
 ﻿namespace WebshopBeheer.Listener
 {
-    public class BestellingGoedgekeurd : BestellingKeuren
+    public class BestellingGoedgekeurd
     {
+        public int Id {get;set;}
     }
 }

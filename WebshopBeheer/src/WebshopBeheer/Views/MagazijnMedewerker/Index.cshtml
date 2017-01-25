@@ -1,36 +1,81 @@
-﻿@using WebshopBeheer.Database
-@model Bestelling
+﻿@using WebshopBeheer.Models.MagazijnMedewerkerModels;
+@model BestellingViewModel
 
 <h2>@ViewData["Title"].</h2>
-<p>Overzicht van alle bestellingen. Klik op de bestelling af te ronden wanneer een bestelling is verstuurd.</p>
- 
-<div class="row">
-    <div class="col-md-4">
-        <h4>Bestel ID</h4>
-    </div>
-    <div class="col-md-4">
-        <h4>Klant</h4>
-    </div>
-    <div class="col-md-4">
-        <h4>Bestel Datum</h4>
-    </div>
-    <div class="col-md-4">
-        <h4>Afronden</h4>
-    </div>
-</div>
+<p>Overzicht van eerste bestelling om te verzenden. Klik op de bestelling af te ronden wanneer een bestelling is verstuurd.</p>
 
-@*<div class="row">
-    
-    <div class="col-md-4">
-        <h4>@Model.Id</h4>
+@if(Model == null)
+{
+    <p>Alle bestellingen zijn op dit moment afgehandeld</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Bestel ID</h4>
+        </div>
+        <div class="col-md-4">
+            <h4>Klant</h4>
+        </div>
+        <div class="col-md-4">
+            <h4>Bestel Datum</h4>
+        </div>
+        <div class="col-md-4">
+            <h4>Afronden</h4>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h4>@Model.Klant.Achternaam</h4>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <h4>@Model.Id</h4>
+        </div>
+        <div class="col-md-4">
+            <h4>@Model.BestelDatum</h4>
+        </div>
+        <div class="col-md-4">
+            <ul>
+                @foreach (var artikel in Model.Artikelen)
+                {
+                    <li>
+                        <dl>
+                            <td>Id</td>
+                            <dd>@artikel.Id</dd>
+                            <td>Naam</td>
+                            <dd>@artikel.Naam</dd>
+                            <td>Aantal</td>
+                            <dd>@artikel.Aantal</dd>
+                            <td>Categorieen</td>
+                            @foreach (var categorie in artikel.Categorieen)
+                            {
+                                <dd>@categorie</dd>
+                            }
+                        </dl>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h4>Klant</h4>
+            <dd>
+                <dt>Voornaam</dt>
+                <dl>@Model.klant.Voornaam</dl>
+                <dt>Achternaam</dt>
+                <dl>@Model.klant.Achternaam</dl>
+                <dt>Adres</dt>
+                <dl>@Model.klant.Adres</dl>
+                <dt>Postcode</dt>
+                <dl>@Model.klant.Postcode</dl>
+                <dt>Plaatsnaam</dt>
+                <dl>@Model.klant.Plaatsnaam</dl>
+                <dt>Telefoonnummer</dt>
+                <dl>@Model.klant.Telefoonnummer</dl>
+            </dd>
+        </div>
+
+        <div class="col-md-4">
+            <button>Afronden</button>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h4>@Model.BestelDatum</h4>
-    </div>
-    <div class="col-md-4">
-        <button>Afronden</button>
-    </div>
-</div>*@
+}
+

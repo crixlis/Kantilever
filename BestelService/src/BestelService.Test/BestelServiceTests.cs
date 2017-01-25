@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using NSubstitute;
 using rabbitmq_demo;
+using System;
 using System.Linq;
 using Xunit;
 
@@ -21,13 +22,13 @@ namespace BestelService.Test
             {
                 var sender = Substitute.For<ISender>();
                 var service = new BestelService(sender, context);
-                var bestelling = new BestellingAanmaken { Id = 1 };
+                var bestelling = new BestellingAanmaken { };
 
                 //Act
                 service.Execute(bestelling);
 
                 //Assert
-                sender.Received(1).PublishEvent(Arg.Any<BestellingKeuren>());
+                sender.Received(1).PublishEvent(Arg.Any<BestellingAangemaakt>());
             }
         }
 
@@ -43,7 +44,7 @@ namespace BestelService.Test
             {
                 var sender = Substitute.For<ISender>();
                 var service = new BestelService(sender, context);
-                var bestelling = new BestellingAanmaken { Id = 1 };
+                var bestelling = new BestellingAanmaken { };
 
                 //Act
                 service.Execute(bestelling);
@@ -65,10 +66,10 @@ namespace BestelService.Test
             {
                 var sender = Substitute.For<ISender>();
                 var service = new BestelService(sender, context);
-                var bestelling = new BestellingGoedgekeurd { Id = 1 };
+                var bestelling = new BestellingKeuren { };
 
                 //Act
-                context.Bestelling.Add(new Bestelling { Id = 1});
+                context.Bestelling.Add(new Bestelling { });
                 context.SaveChanges();
 
                 service.Execute(bestelling);

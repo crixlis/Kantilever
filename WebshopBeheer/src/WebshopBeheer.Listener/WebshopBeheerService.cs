@@ -1,13 +1,21 @@
-﻿using rabbitmq_demo;
+﻿using MagazijnMedewerker.Database;
+using CommercieelManager.Database;
+using rabbitmq_demo;
 using System;
-using System.Collections.Generic;
 using WebshopBeheer.Database;
+using System.Linq;
 
 namespace WebshopBeheer.Listener
 {
-    public class WebshopBeheerService : IReceive<BestellingKeuren>, IReceive<BestellingGoedgekeurd>, IReceive<FactuurAangemaakt>, IReceive<BetaaldeFactuurAfgemeld>
+    public class WebshopBeheerService : 
+        IReceive<BestellingAangemaakt>,
+        IReceive<BestellingGoedgekeurd>,  
+        IReceive<FactuurAangemaakt>, 
+        IReceive<BetaaldeFactuurAfgemeld>
     {
-        private WebshopBeheerContext _context;
+        private WebshopBeheerContext _webshopbeheerContext;
+        private CommercieelManagerContext _commercieelManagerContext;
+        private MagazijnMedewerkerContext _magazijnMedewerkerContext;
         private ISender _sender;
 
         public WebshopBeheerService(ISender sender)
@@ -18,56 +26,79 @@ namespace WebshopBeheer.Listener
         public WebshopBeheerService(ISender sender, WebshopBeheerContext context)
         {
             _sender = sender;
-            _context = context;
+            _webshopbeheerContext = context;
 
-            _context.Database.EnsureCreated();
+            _webshopbeheerContext.Database.EnsureCreated();
+        }
+
+        public void Execute(ArtikelAanCatalogusToegevoegd item)
+        {
+            var artikel = _magazijnMedewerkerContext.Artikelen.SingleOrDefault(x => x.Id == item.Id);
+
+            if (artikel == null)
+            {
+                artikel = new MagazijnMedewerker.Database.Artikel
+                {
+                    Beschrijving = item.Beschrijving,
+                    Categorieen = item.Categorieen,
+                    Leverancier = item.LeverancierCode,
+                    Id = item.Id,
+                    LeverbaarTot = item.LeverbaarTot,
+                    LeverbaarVanaf = item.LeverbaarVanaf,
+                    Naam = item.Naam,
+                    Prijs = item.Prijs
+                };
+
+                _magazijnMedewerkerContext.Artikelen.Add(artikel);
+            }
+            else
+            {
+                artikel.Beschrijving = item.Beschrijving;
+                artikel.Categorieen = item.Categorieen;
+                artikel.Leverancier = item.LeverancierCode;
+                artikel.LeverbaarTot = item.LeverbaarTot;
+                artikel.LeverbaarVanaf = item.LeverbaarVanaf;
+                artikel.Naam = item.Naam;
+                artikel.Prijs = item.Prijs;
+                _magazijnMedewerkerContext.Artikelen.Update(artikel);
+            }
+            _magazijnMedewerkerContext.SaveChanges();
+
+           
+        }
+
+        public void Execute(ArtikelInMagazijnGezet item)
+        {
+            var artikel = _magazijnMedewerkerContext.Artikelen.Where(a => a.Id == item.Id).SingleOrDefault();
+            if (artikel != null)
+            {
+                artikel.Voorraad = item.Hoeveelheid;
+                _magazijnMedewerkerContext.Artikelen.Update(artikel);
+
+            }
+            else
+            {
+                var nieuwartikel = new MagazijnMedewerker.Database.Artikel
+                {
+                    Id = item.Id,
+                    Voorraad = item.Hoeveelheid
+                };
+                _magazijnMedewerkerContext.Artikelen.Add(nieuwartikel);
+            }
+            _magazijnMedewerkerContext.SaveChanges();
         }
 
         public void Execute(BestellingGoedgekeurd item)
         {
-            _sender.PublishCommand(new FactuurAanmaken { Id = item.Id });   
-        }
+            var bestellingVoorCommercieelManager = _commercieelManagerContext.Bestellingen.Single(x => x.Id == item.Id);
+            bestellingVoorCommercieelManager.Status = CommercieelManager.Database.Status.GoedGekeurd;
+            _commercieelManagerContext.Update(bestellingVoorCommercieelManager);
+            _commercieelManagerContext.SaveChanges();
 
-        public void Execute(BestellingKeuren item)
-        {
-            List<Artikel> artikelen = new List<Artikel>();
-
-            foreach (var artikel in item.Artikelen)
-            {
-                artikelen.Add(
-                    new Artikel
-                    {
-                        Id = artikel.Id,
-                        Beschrijving = artikel.Beschrijving,
-                        Leverancier = artikel.Leverancier,
-                        LeverbaarTot = artikel.LeverbaarTot,
-                        LeverbaarVanaf = artikel.LeverbaarVanaf,
-                        Naam = artikel.Naam,
-                        Prijs = artikel.Prijs,
-                        Categorieen = artikel.Categorieen,
-                        Voorraad = artikel.Voorraad
-                    }
-                );
-            }
-
-            var bestelling = new Bestelling
-            {
-                Id = item.Id,
-                Klant = new Klant
-                {
-                    Id = item.Klant.Id,
-                    Achternaam = item.Klant.Achternaam,
-                    Voornaam = item.Klant.Voornaam,
-                    Adres = item.Klant.Adres,
-                    Plaatsnaam = item.Klant.Plaatsnaam,
-                    Postcode = item.Klant.Postcode,
-                    Telefoonnummer = item.Klant.Telefoonnummer
-                },
-                Artikelen = artikelen
-            };
-
-            _context.Bestellingen.Add(bestelling);
-            _context.SaveChanges();
+            var bestellingVoorMagazijnMedewerker = _magazijnMedewerkerContext.Bestellingen.Single(x => x.Id == item.Id);
+            bestellingVoorMagazijnMedewerker.Status = MagazijnMedewerker.Database.Status.GoedGekeurd;
+            _magazijnMedewerkerContext.Update(bestellingVoorMagazijnMedewerker);
+            _magazijnMedewerkerContext.SaveChanges();
         }
 
         public void Execute(FactuurAangemaakt item)
@@ -78,6 +109,49 @@ namespace WebshopBeheer.Listener
         public void Execute(BetaaldeFactuurAfgemeld item)
         {
             throw new NotImplementedException(message: "De cirkel is rond !!!");
+        }
+
+        public void Execute(BestellingAangemaakt item)
+        {
+            var bestellingVoorCommercieelManager = new CommercieelManager.Database.Bestelling
+            {
+                Id = item.Id,
+                BestelDatum = item.BestelDatum,
+                Status = CommercieelManager.Database.Status.NogTeKeuren
+            };
+            _commercieelManagerContext.Bestellingen.Add(bestellingVoorCommercieelManager);
+            _commercieelManagerContext.SaveChanges();
+            var lastBestellingVoorCommercieelManager = _commercieelManagerContext.Bestellingen.Last();
+
+            foreach(var artikel in item.Artikelen)
+            {
+                var bestelArtikel = new CommercieelManager.Database.BestelArtikel
+                {
+                    Bestelling = lastBestellingVoorCommercieelManager,
+                    Aantal = artikel.Voorraad, //Aantal
+                    Artikel = _commercieelManagerContext.Artikelen.First(x => x.Id == item.Id)
+                };
+            }
+
+
+            var bestellingVoorMagazijnMedewerker = new MagazijnMedewerker.Database.Bestelling
+            {
+                Id = item.Id,
+                BestelDatum = item.BestelDatum,
+                Klant = new MagazijnMedewerker.Database.Klant
+                {
+                    Id = item.Klant.Id,
+                    Achternaam = item.Klant.Achternaam,
+                    Adres = item.Klant.Adres,
+                    Plaatsnaam = item.Klant.Plaatsnaam,
+                    Postcode = item.Klant.Postcode,
+                    Telefoonnummer = item.Klant.Telefoonnummer,
+                    Voornaam = item.Klant.Voornaam
+                },
+                Status = MagazijnMedewerker.Database.Status.NogTeKeuren
+            };
+            _magazijnMedewerkerContext.Bestellingen.Add(bestellingVoorMagazijnMedewerker);
+            _magazijnMedewerkerContext.SaveChanges();
         }
     }
 }

@@ -45,12 +45,20 @@ namespace WebshopBeheer
             {
                 services.AddDbContext<WebshopBeheerContext>(options => options.UseInMemoryDatabase("DevelopmentTesting"));
                 services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("DevelopmentTesting"));
+
+                services.AddDbContext<CommercieelManager.Database.CommercieelManagerContext>(options => options.UseInMemoryDatabase("DevelopmentTesting2"));
+                services.AddDbContext<MagazijnMedewerker.Database.MagazijnMedewerkerContext>(options => options.UseInMemoryDatabase("DevelopmentTesting3"));
             }
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
                 services.AddDbContext<WebshopBeheerContext>(options =>
+                    options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+
+                services.AddDbContext<CommercieelManager.Database.CommercieelManagerContext>(options =>
+                    options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+                services.AddDbContext<MagazijnMedewerker.Database.MagazijnMedewerkerContext>(options =>
                     options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
             }
 
@@ -95,6 +103,16 @@ namespace WebshopBeheer
                 }
 
                 using (var context = app.ApplicationServices.GetService<WebshopBeheerContext>())
+                {
+                    context.Database.Migrate();
+                }
+
+                using (var context = app.ApplicationServices.GetService<CommercieelManager.Database.CommercieelManagerContext>())
+                {
+                    context.Database.Migrate();
+                }
+
+                using (var context = app.ApplicationServices.GetService<MagazijnMedewerker.Database.MagazijnMedewerkerContext>())
                 {
                     context.Database.Migrate();
                 }

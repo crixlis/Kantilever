@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MagazijnMedewerker.Database
+namespace CommercieelManager.Database
 {
     public class Bestelling
     {

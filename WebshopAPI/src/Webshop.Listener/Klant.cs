@@ -1,4 +1,4 @@
-﻿namespace BestelService.Database
+﻿namespace Webshop.Listener
 {
     public class Klant
     {

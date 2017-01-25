@@ -9,7 +9,8 @@
     "Microsoft.CodeCoverage": "1.0.2",
     "WebshopBeheer.Listener": "1.0.0-*",
     "Microsoft.EntityFrameworkCore.InMemory": "1.0.1",
-    "WebshopBeheer.Database": "1.0.0-*"
+    "WebshopBeheer.Database": "1.0.0-*",
+    "MagazijnMedewerker.Database": "1.0.0-*"
   },
   "frameworks": {
       "netcoreapp1.0": {

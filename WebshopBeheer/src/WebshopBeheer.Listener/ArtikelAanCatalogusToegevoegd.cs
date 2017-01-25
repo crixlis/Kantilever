@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MagazijnMedewerker.Database
+namespace WebshopBeheer.Listener
 {
-    public class Artikel
+    public class ArtikelAanCatalogusToegevoegd
     {
         public int Id { get; set; }
         public string Naam { get; set; }
@@ -11,8 +11,8 @@ namespace MagazijnMedewerker.Database
         public decimal Prijs { get; set; }
         public DateTime LeverbaarVanaf { get; set; }
         public DateTime? LeverbaarTot { get; set; }
-        public string Leverancier { get; set; }
-        public List<string> Categorieen = new List<string>();
-        public int Voorraad { get; set; }
+        public string LeverancierCode { get; set; }
+        public List<string> Categorieen { get; set; }
+        public byte[] Afbeelding { get; set; }
     }
 }

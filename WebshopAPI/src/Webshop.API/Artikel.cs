@@ -13,7 +13,8 @@ namespace Webshop.API
         public DateTime LeverbaarTot { get; set; }
         public string Leverancier { get; set; }
         public List<string> Categorieen { get; set; }
-        public int Voorraad { get; set; }
+        //TODO: Hoeveelheid aanpassen naar aantal. Ook in frontend!!!
+        public int Aantal { get; set; }
         public string ImagePath { get; set; }
     }
 }

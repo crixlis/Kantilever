@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using WebshopBeheer.Database;
+using MagazijnMedewerker.Database;
 using Microsoft.EntityFrameworkCore;
+using viewModel = WebshopBeheer.Models.MagazijnMedewerkerModels.BestellingViewModel;
+using viewModelArtikel = WebshopBeheer.Models.MagazijnMedewerkerModels.Artikel;
 
 namespace WebshopBeheer.Controllers
 {
     public class MagazijnMedewerkerController : Controller
     {
-        private WebshopBeheerContext _context;
+        private MagazijnMedewerkerContext _context;
 
-        public MagazijnMedewerkerController(WebshopBeheerContext context)
+        public MagazijnMedewerkerController(MagazijnMedewerkerContext context)
         {
             _context = context;
         }
@@ -20,20 +19,34 @@ namespace WebshopBeheer.Controllers
         {
             ViewData["Title"] = "Magazijnmedewerker";
 
-
-            //_context.Add(new Bestelling() { Id = 1, Klant = new Klant() { Id = 1, Achternaam = "Slager" }, Status = 0, BestelDatum = DateTime.Now, Artikelen = new List<Artikel>() { new Artikel() { ArtikelId = 1, Naam = "Fietsband" } } });
-            //_context.SaveChanges();
-
             var bestelling = _context
                 .Bestellingen
-                .Include(b => b.Klant)
-                .Include(b => b.Artikelen)
-                .Where(b => b.Status == 0)
+                .Where(b => b.Status == Status.GoedGekeurd)
                 .OrderBy(b => b.BestelDatum)
                 .FirstOrDefault();
 
+            if(bestelling == null)
+            {
+                return View(null);
+            }
 
-            return View(bestelling);
+            var artikelen = _context.BestelArtikelSet
+                .Where(x => x.Bestelling.Id == bestelling.Id)
+                .Include(x => x.Artikel)
+                .Select(x => new viewModelArtikel {
+                    Id = x.Artikel.Id,
+                    Aantal = x.Aantal,
+                    Categorieen = x.Artikel.Categorieen,
+                    Naam = x.Artikel.Naam
+                });
+
+            return View(new viewModel {
+                Id = bestelling.Id,
+                Artikelen = artikelen,
+                BestelDatum = bestelling.BestelDatum,
+                klant = bestelling.Klant,
+                Status = bestelling.Status
+            });
         }
 
 

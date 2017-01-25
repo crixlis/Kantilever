@@ -20,7 +20,7 @@ namespace Webshop.Listener
                 .FromEnvironment();
 
             var builder = new ContainerBuilder();
-            builder.RegisterReceiverFor<WebshopListenerService, BetaaldeFactuurAfgemeld>();
+
             builder.RegisterReceiverFor<WebshopListenerService, ArtikelAanCatalogusToegevoegd>();
             builder.Register(s => new Sender(connection, "Kantilever")).As<ISender>();
             builder.Register(r => Environment.GetEnvironmentVariable("IMG_ROOT"));

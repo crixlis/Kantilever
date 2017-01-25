@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using rabbitmq_demo;
 using System;
-using Webshop.Database;
 
 namespace Webshop.API.Controllers
 {
@@ -10,12 +9,10 @@ namespace Webshop.API.Controllers
     public class BestellingenController : Controller
     {
         private ISender _sender;
-        private IWebshopContext _context;
 
-        public BestellingenController(ISender sender, IWebshopContext context)
+        public BestellingenController(ISender sender)
         {
             _sender = sender;
-            _context = context;
         }
 
         // GET api/bestellingen
@@ -34,21 +31,26 @@ namespace Webshop.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Bestelling bestelling)
         {
-            if (bestelling.Id != 0 && bestelling.Klant != null && bestelling.Artikelen.Count > 0)
-            {
-                var bestellingKeuren = new BestellingKeuren
+            if (bestelling.Klant != null && bestelling.Artikelen.Count > 0)
                 {
-                    Id = bestelling.Id,
+                    foreach (var artikel in bestelling.Artikelen)
+                    {
+                        if(artikel.Id <= 0) { throw new ArgumentException($"Artikel Id {artikel.Id} is ongeldig"); }
+                    }
+
+                var bestellingAanmaken = new BestellingAanmaken
+                {
                     Artikelen = bestelling.Artikelen,
-                    Klant = bestelling.Klant
+                    Klant = bestelling.Klant,
+                    BestelDatum = DateTime.Now
                 };
 
-                _sender.PublishCommand(bestellingKeuren);
+                _sender.PublishCommand(bestellingAanmaken);
 
                 return CreatedAtRoute("api/bestellingen", bestelling);
             }
 
-            return BadRequest("Er is iets fout gegaan met het toevoegen van het product. Controleer of de bestelling compleet is.");
+            return BadRequest("Er is iets fout gegaan met het toevoegen van het product. Controleer of de bestelling geldig is.");
         }
 
         // PUT api/bestellingen/5

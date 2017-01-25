@@ -21,7 +21,7 @@ namespace BestelService
 
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<BestelService, BestellingAanmaken>();
-            builder.RegisterReceiverFor<BestelService, BestellingGoedgekeurd>();
+            builder.RegisterReceiverFor<BestelService, BestellingKeuren>();
 
             builder.Register(d => new Sender(connection, "Kantilever")).As<ISender>();
 
@@ -38,7 +38,7 @@ namespace BestelService
             using (var listener = new Listener(connection, "Kantilever"))
             {
                 listener.SubscribeCommands<BestellingAanmaken>(container);
-                listener.SubscribeCommands <BestellingGoedgekeurd>(container);
+                listener.SubscribeCommands <BestellingKeuren>(container);
                 listener.Received += ListenerMessage;
                 using (ManualResetEvent manualResetEvent = new ManualResetEvent(false))
                 {

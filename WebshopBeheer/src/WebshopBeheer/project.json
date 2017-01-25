@@ -39,7 +39,9 @@
       "type": "build"
     },
     "WebshopBeheer.Database": "1.0.0-*",
-    "Microsoft.EntityFrameworkCore.InMemory": "1.1.0"
+    "Microsoft.EntityFrameworkCore.InMemory": "1.1.0",
+    "MagazijnMedewerker.Database": "1.0.0-*",
+    "CommercieelManager.Database": "1.0.0-*"
   },
 
   "tools": {

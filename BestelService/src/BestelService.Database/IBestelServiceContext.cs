@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-public interface IBestelServiceContext
+namespace BestelService.Database
 {
-    EntityEntry<TEntity> Add<TEntity>(TEntity entity) where TEntity : class;
-    int SaveChanges();
-    DbSet<Bestelling> Bestelling  { get; set; }
+    public interface IBestelServiceContext
+    {
+        EntityEntry<TEntity> Add<TEntity>(TEntity entity) where TEntity : class;
+        int SaveChanges();
+        DbSet<Bestelling> Bestelling { get; set; }
+    }
 }

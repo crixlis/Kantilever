@@ -28,7 +28,20 @@ namespace Webshop.API.Controllers
         [HttpGet]
         public List<DatabaseArtikel> Get()
         {
-            return _context.Artikelen.ToList();          
+            return new List<DatabaseArtikel> {
+                new DatabaseArtikel
+                {
+                    Id = 0,
+                    Naam = "Giant XTC",
+                    Beschrijving = "Mountainbike",
+                    Prijs = 1000.99m,
+                    LeverbaarVanaf = new DateTime(2017, 1, 1),
+                    LeverbaarTot = new DateTime(2020, 1, 1),
+                    Leverancier = "Giant",
+                    Categorieen = new List<string> { "Mountainbikes", "Fietsen" }
+                }
+            };
+           //return _context.Artikelen.ToList();          
         }
 
         // GET api/values/5
