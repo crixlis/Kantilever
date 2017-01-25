@@ -60,7 +60,7 @@ namespace Webshop.API
             );
 
             services.AddDbContext<WebshopContext>(options => options
-                .UseMySQL(Environment.GetEnvironmentVariable("MSQL_CONNECTION")));
+                .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
