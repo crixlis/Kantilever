@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NSubstitute;
+﻿using NSubstitute;
 using rabbitmq_demo;
 using System;
-using System.Linq;
 using Xunit;
-using WebshopBeheer.Database;
-using System.Collections.Generic;
 
 namespace WebshopBeheer.Listener.Test
 {
