@@ -26,12 +26,19 @@ export class BestellingAfrondenComponent implements OnInit {
 
     bestellingAfronden(){
       let bestelling : Bestelling =  new Bestelling;
+      let productpairs : IProductPair[] = this._shoppingCart.getProducts();
+      let artikelen : Artikel[] = [];
+
+      productpairs.forEach(a => {
+        let artikel = new Artikel();
+        artikel.aantal = a.amount;
+        artikel.id = a.productId
+        artikelen.push(artikel);
+      });
 
       bestelling.id = 0;
       bestelling.klant = this.klant;
-      //bestelling.artikelen : IProductPair[] = this._shoppingCart.getProducts();
-
-      console.log(bestelling)
+      bestelling.artikelen = artikelen;
 
       this._bestellingService.postBestelling(bestelling);
     }
