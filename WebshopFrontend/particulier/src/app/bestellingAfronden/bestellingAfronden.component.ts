@@ -10,8 +10,10 @@ import { Http } from '@angular/http';
 })
 export class BestellingAfrondenComponent implements OnInit {
 
-  constructor(private _shoppingCart : ShoppingCartService, private _artikelService : ArtikelService/*, private http: Http,
-		private fb: FormBuilder*/) {
+  constructor(private _shoppingCart : ShoppingCartService, private _artikelService : ArtikelService
+  /*, private http: Http,
+		private fb: FormBuilder*/
+    ) {
   }
 
   artikelen : Artikel[] = [];
