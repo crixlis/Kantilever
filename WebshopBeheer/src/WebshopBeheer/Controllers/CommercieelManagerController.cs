@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CommercieelManager.Database;
-using viewModel = WebshopBeheer.Models.CommercieelManagerModels.BestellingViewModel;
-using viewModelArtikel = WebshopBeheer.Models.CommercieelManagerModels.Artikel;
+using ViewModel = WebshopBeheer.Models.CommercieelManagerModels.BestellingenViewModel;
+using ViewModelBestelling = WebshopBeheer.Models.CommercieelManagerModels.Bestelling;
+using ViewModelArtikel = WebshopBeheer.Models.CommercieelManagerModels.Artikel;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,35 +21,43 @@ namespace WebshopBeheer.Controllers
         {
             ViewData["Title"] = "CommercieelManager";
 
-            var bestelling = _context
+            var bestellingen = _context
                 .Bestellingen
                 .Where(b => b.Status == Status.NogTeKeuren)
-                .OrderBy(b => b.BestelDatum)
-                .FirstOrDefault();
+                .OrderBy(b => b.BestelDatum);
 
-            if (bestelling == null)
+            if (bestellingen.Count() == 0)
             {
-                return View(null);
+                return View(new ViewModel {
+                    Bestellingen = Enumerable.Empty<ViewModelBestelling>()
+                });
             }
 
-            var artikelen = _context.BestelArtikelSet
-                .Where(x => x.Bestelling.Id == bestelling.Id)
+            var viewModel = new ViewModel
+            {
+                Bestellingen = bestellingen.Select(x => new ViewModelBestelling
+                {
+                    Id = x.Id,
+                    BestelDatum = x.BestelDatum,
+                    Klant = x.Klant,
+                })
+            };
+
+            foreach(ViewModelBestelling bestelling in viewModel.Bestellingen)
+            {
+                bestelling.Artikelen = _context.BestelArtikelSet
+                .Where(x => x.Id == bestelling.Id)
                 .Include(x => x.Artikel)
-                .Select(x => new viewModelArtikel
+                .Select(x => new ViewModelArtikel
                 {
                     Id = x.Artikel.Id,
                     Aantal = x.Aantal,
                     Prijs = x.Artikel.Prijs,
                     Naam = x.Artikel.Naam
                 });
+            }
 
-            return View(new viewModel
-            {
-                Id = bestelling.Id,
-                Artikelen = artikelen,
-                BestelDatum = bestelling.BestelDatum,
-                Klant = bestelling.Klant
-            });
+            return View(viewModel);
         }
 
         public IActionResult Error()

@@ -4,14 +4,11 @@
     "preserveCompilationContext": true
   },
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "version": "1.0.1",
-      "type": "platform"
-    },
     "Microsoft.AspNetCore.Mvc": "1.0.1",
     "Microsoft.AspNetCore.Routing": "1.0.1",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.1.*",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
     "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
@@ -19,14 +16,17 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "rabbitmq-demo": "1.2.*",
+    "Microsoft.NETCore.App": {
+      "version": "1.0.1",
+      "type": "platform"
+    },
+    "MySql.Data.EntityFrameworkCore": "7.0.6-IR31",
+    "Pomelo.EntityFrameworkCore.MySql": "1.1.0",
     "RabbitMQ.Client": "4.1.1",
+    "rabbitmq-demo": "1.2.*",
     "Swashbuckle.SwaggerGen": "6.0.0-beta902",
     "Swashbuckle.SwaggerUi": "6.0.0-beta902",
-    "Webshop.Database": "1.0.0-*",
-    "MySql.Data.EntityFrameworkCore": "7.0.6-IR31",
-    "Microsoft.EntityFrameworkCore.InMemory": "1.1.*",
-    "Pomelo.EntityFrameworkCore.MySql": "1.1.0"
+    "Webshop.Database": "1.0.0-*"
   },
   "frameworks": {
     "netcoreapp1.0": {

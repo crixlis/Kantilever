@@ -1,10 +1,16 @@
 ﻿using CommercieelManager.Database;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebshopBeheer.Models.CommercieelManagerModels
 {
-    public class BestellingViewModel
+    public class BestellingenViewModel
+    {
+        public IEnumerable<Bestelling> Bestellingen { get; set; }
+    }
+
+    public class Bestelling
     {
         public int Id { get; set; }
         public Klant Klant { get; set; }
