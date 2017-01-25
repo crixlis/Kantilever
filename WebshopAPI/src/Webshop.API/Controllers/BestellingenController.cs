@@ -35,7 +35,7 @@ namespace Webshop.API.Controllers
             {
                     foreach (var artikel in bestelling.Artikelen)
                     {
-                        if(artikel.Id <= 0) { throw new ArgumentException($"Artikel Id {artikel.Id} is ongeldig"); }
+                        if(artikel.Id < 0) { throw new ArgumentException($"Artikel Id {artikel.Id} is ongeldig"); }
                     }
 
                 var bestellingAanmaken = new BestellingAanmaken
