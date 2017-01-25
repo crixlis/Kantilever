@@ -52,7 +52,7 @@ services:
 
     lmf-webshop-frontend:
         container_name: lmf-webshop-frontend
-        image: docentm:5000/lmf-webshop-frontend:latest
+        image: docentm:5000/lmf-webshop-frontend:${BUILD_BUILDNUMBER}
         networks: 
             - kantilever
         volumes: 
@@ -60,7 +60,7 @@ services:
 
     lmf-webshopbeheer:
         container_name: lmf-webshopbeheer
-        image: docentm:5000/lmf-webshopbeheer:latest
+        image: docentm:5000/lmf-webshopbeheer:${BUILD_BUILDNUMBER}
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
@@ -72,7 +72,7 @@ services:
 
     lmf-webshop.api:
         container_name: lmf-webshop.api
-        image: docentm:5000/lmf-webshop.api:latest
+        image: docentm:5000/lmf-webshop.api:${BUILD_BUILDNUMBER}
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
@@ -91,7 +91,7 @@ services:
 
     lmf-webshop.listener:
         container_name: lmf-webshop.listener
-        image: docentm:5000/lmf-webshop.listener:latest
+        image: docentm:5000/lmf-webshop.listener:${BUILD_BUILDNUMBER}
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
@@ -104,7 +104,7 @@ services:
 
     lmf-bestelservice:
         container_name: lmf-bestelservice
-        image: docentm:5000/lmf-bestelservice:latest
+        image: docentm:5000/lmf-bestelservice:${BUILD_BUILDNUMBER}
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
@@ -115,7 +115,7 @@ services:
     
     lmf-factuurservice:
         container_name: lmf-factuurservice
-        image: docentm:5000/lmf-factuurservice:latest
+        image: docentm:5000/lmf-factuurservice:${BUILD_BUILDNUMBER}
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
