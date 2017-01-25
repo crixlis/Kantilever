@@ -15,6 +15,7 @@ namespace Webshop.API
         public List<string> Categorieen { get; set; }
         //TODO: Hoeveelheid aanpassen naar aantal. Ook in frontend!!!
         public int Aantal { get; set; }
+        public int Voorraad { get; set; }
         public string ImagePath { get; set; }
     }
 }
