@@ -1,4 +1,5 @@
-﻿namespace BestelService.Database
+﻿
+namespace MagazijnMedewerker.Database
 {
     public class Klant
     {

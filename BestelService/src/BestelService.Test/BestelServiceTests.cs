@@ -28,7 +28,7 @@ namespace BestelService.Test
                 service.Execute(bestelling);
 
                 //Assert
-                sender.Received(1).PublishEvent(Arg.Any<BestellingKeuren>());
+                sender.Received(1).PublishEvent(Arg.Any<BestellingAangemaakt>());
             }
         }
 
@@ -66,7 +66,7 @@ namespace BestelService.Test
             {
                 var sender = Substitute.For<ISender>();
                 var service = new BestelService(sender, context);
-                var bestelling = new BestellingGoedgekeurd { };
+                var bestelling = new BestellingKeuren { };
 
                 //Act
                 context.Bestelling.Add(new Bestelling { });

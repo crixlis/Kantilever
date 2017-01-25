@@ -7,5 +7,6 @@ namespace CommercieelManager.Database
         public int Id { get; set; }
         public Status Status { get; set; }
         public DateTime BestelDatum { get; set; }
+        public Klant Klant { get; set; }
     }
 }

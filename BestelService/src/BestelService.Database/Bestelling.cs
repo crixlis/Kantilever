@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Bestelling 
+namespace BestelService.Database
 {
-    public List<Artikel> Artikelen { get; set; }
-    public int Id { get; set; }
-    public Klant Klant { get; set; }
-    public DateTime BestelDatum { get; set; }
+    public class Bestelling
+    {
+        public List<Artikel> Artikelen { get; set; }
+        public int Id { get; set; }
+        public Klant Klant { get; set; }
+        public DateTime BestelDatum { get; set; }
+        public Status Status { get; set; }
+    }
 }

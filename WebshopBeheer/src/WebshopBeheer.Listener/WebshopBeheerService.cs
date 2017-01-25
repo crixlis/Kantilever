@@ -32,7 +32,7 @@ namespace WebshopBeheer.Listener
             _webshopbeheerContext.Database.EnsureCreated();
         }
 
-        public void Execute(ArtikelInCatalogusToegevoegd item)
+        public void Execute(ArtikelAanCatalogusToegevoegd item)
         {
             var artikelBestaatAl = _magazijnMedewerkerContext.Artikelen.Any(x => x.Id == item.Id);
             if (artikelBestaatAl)
@@ -115,6 +115,16 @@ namespace WebshopBeheer.Listener
             {
                 Id = item.Id,
                 BestelDatum = item.BestelDatum,
+                Klant = new MagazijnMedewerker.Database.Klant
+                {
+                    Id = item.Klant.Id,
+                    Achternaam = item.Klant.Achternaam,
+                    Adres = item.Klant.Adres,
+                    Plaatsnaam = item.Klant.Plaatsnaam,
+                    Postcode = item.Klant.Postcode,
+                    Telefoonnummer = item.Klant.Telefoonnummer,
+                    Voornaam = item.Klant.Voornaam
+                },
                 Status = MagazijnMedewerker.Database.Status.NogTeKeuren
             };
             _magazijnMedewerkerContext.Bestellingen.Add(bestellingVoorMagazijnMedewerker);

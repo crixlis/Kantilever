@@ -1,4 +1,4 @@
-﻿namespace BestelService.Database
+﻿namespace CommercieelManager.Database
 {
     public class Klant
     {

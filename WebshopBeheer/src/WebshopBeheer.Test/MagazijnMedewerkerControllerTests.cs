@@ -13,7 +13,6 @@ namespace WebshopBeheer.Test
 {
     public class MagazijnMedewerkerControllerTests
     {
-        
         [Fact]
         public async void TestOfPaginaBereikbaarIsNaHetStarten()
         {
@@ -28,51 +27,18 @@ namespace WebshopBeheer.Test
         }
 
         [Fact]
-        public void WebshopBeheercontextKanEenBestellingOpslaan()
+        public void WebshopBeheercontextKanEenBestellingOpslaanVoorMagazijnMedewerker()
         {
+            var now = DateTime.Now;
+
             //Arrange
-            var bestelling1 = new Bestelling()
+            var bestelling1 = new MagazijnMedewerker.Database.Bestelling
             {
                 Id = 1,
+                Status = MagazijnMedewerker.Database.Status.NogTeKeuren,
                 Klant = new Klant() { Id = 10, Achternaam = "Slager" },
-                Artikelen = new List<Artikel>()
-                {
-                    new Artikel() { Id = 5, Beschrijving= "Fietsband", Voorraad = 6 },
-                    new Artikel() { Id = 7, Beschrijving= "Fietscomputer", Voorraad = 2 }
-                }
+                BestelDatum = now
             };
-
-            var bestelling1 = new Bestelling()
-            {
-                Id = 1,
-                Status = 2,
-                BestelDatum = DateTime.Now
-            };
-
-            /* OMG, vet coole pseudo code
-            foreach(_artikel in bestelling.Artikel)
-            {
-                new BestelArtikel
-                {
-                    Id = 0,
-                    Bestelling = bestelling,
-                    artikel = _context.getArtikel(_artikel.Id)
-                    amount = _artikel.hoeveelheid
-                };
-            }
-            */
-
-            var bestelling = new BestelArtikel()
-            {
-                Id = 1,
-                Bestelling = new Bestelling()
-                {
-                    Id = 1,
-                    Status = 0,
-                    BestelDatum = DateTime.Now
-                },
-                Artikelen = 
-            }
 
             var options = new DbContextOptionsBuilder<MagazijnMedewerkerContext>()
                .UseInMemoryDatabase(databaseName: "MagazijnMedewerkerTest2")
@@ -97,23 +63,22 @@ namespace WebshopBeheer.Test
         [Fact]
         public void MagazijnMedewerkerPaginaControllerKanBestellingenLatenZien()
         {
+            var now = DateTime.Now;
+
             //Arrange
             var bestelling1 = new Bestelling()
             {
                 Id = 1,
+                Status = Status.GoedGekeurd,
                 Klant = new Klant() { Id = 10, Achternaam = "Slager" },
-                Artikelen = new List<Artikel>()
-                {
-                    new Artikel() { Id = 5, Beschrijving= "Fietsband", Voorraad = 6 },
-                    new Artikel() { Id = 7, Beschrijving= "Fietscomputer", Voorraad = 2 }
-                }
+                BestelDatum = DateTime.Now
             };
 
-            var options = new DbContextOptionsBuilder<WebshopBeheerContext>()
+            var options = new DbContextOptionsBuilder<MagazijnMedewerkerContext>()
                .UseInMemoryDatabase(databaseName: "MagazijnMedewerkerTest3")
                .Options;
 
-            using (var context = new WebshopBeheerContext(options))
+            using (var context = new MagazijnMedewerkerContext(options))
             {
 
                 context.Bestellingen.Add(bestelling1);
@@ -126,59 +91,46 @@ namespace WebshopBeheer.Test
 
                 //Act
                 var result = Assert.IsType<ViewResult>(view);
-                var model = Assert.IsType<Bestelling>(result.Model);
+                var model = Assert.IsType<Models.MagazijnMedewerkerModels.BestellingViewModel>(result.Model);
 
                 Assert.True(model != null);
             }
-
-            
         }
 
         [Fact]
-        void MagazijnMedewerkerControllerLaatAlleenBestellingenZienDieNogNietGekeurdZijn()
+        void MagazijnMedewerkerControllerLaatAlleenBestellingenZienDieNogGoedgekeurdZijn()
         {
             //Arrange
+            var now = DateTime.Now;
 
             var nognietgekeurdebestelling = new Bestelling()
             {
                 Id = 1,
-                Status = 0,
+                Status = Status.NogTeKeuren,
                 Klant = new Klant() { Id = 10, Achternaam = "Slager" },
-                Artikelen = new List<Artikel>()
-                {
-                    new Artikel() { Id = 5, Beschrijving= "Fietsband", Voorraad = 6 },
-                    new Artikel() { Id = 7, Beschrijving= "Fietscomputer", Voorraad = 2 }
-                }
+                BestelDatum = now
             };
 
             var gekeurdebestelling = new Bestelling()
             {
                 Id = 2,
-                Status = 1,
+                Status = Status.GoedGekeurd,
                 Klant = new Klant() { Id = 10, Achternaam = "Slager" },
-                Artikelen = new List<Artikel>()
-                {
-                    new Artikel() { Id = 8, Beschrijving= "Zadel", Voorraad = 6 },
-                    new Artikel() { Id = 9, Beschrijving= "Ballenknijper met zeemleer", Voorraad = 2 }
-                }
+                BestelDatum = now
             };
             var afgekeurdebestelling = new Bestelling()
             {
                 Id = 3,
-                Status = 2,
+                Status = Status.Afgekeurd,
                 Klant = new Klant() { Id = 10, Achternaam = "Slager" },
-                Artikelen = new List<Artikel>()
-                {
-                    new Artikel() { Id = 10, Beschrijving= "Fietsbel", Voorraad = 6 },
-                    new Artikel() { Id = 11, Beschrijving= "Stuur", Voorraad = 2 }
-                }
+                BestelDatum = now
             };
 
-            var options = new DbContextOptionsBuilder<WebshopBeheerContext>()
+            var options = new DbContextOptionsBuilder<MagazijnMedewerkerContext>()
                .UseInMemoryDatabase(databaseName: "MagazijnMedewerkerTest5")
                .Options;
 
-            using (var context = new WebshopBeheerContext(options))
+            using (var context = new MagazijnMedewerkerContext(options))
             {
 
                 context.Bestellingen.Add(gekeurdebestelling);
@@ -193,51 +145,40 @@ namespace WebshopBeheer.Test
 
                 //Act
                 var result = Assert.IsType<ViewResult>(view);
-                var model = Assert.IsType<Bestelling>(result.Model);
+                var model = Assert.IsType<Models.MagazijnMedewerkerModels.BestellingViewModel>(result.Model);
 
-                Assert.True(model == nognietgekeurdebestelling);
+                Assert.True(model.Id == gekeurdebestelling.Id);
             }
         }
 
         [Fact]
-        public void MagazijnMedewerkerControllerLaatMaar1NogNietGekeurdeBestellingZien()
+        public void MagazijnMedewerkerControllerLaatMaar1GoedGekeurdeBestellingZien()
         {
 
             //Arrange
-            var nognietgekeurdebestelling = new Bestelling()
+            var goedGekeurdebestelling = new Bestelling()
             {
                 Id = 1,
-                Status = 0,
-                Klant = new Klant() { Id = 10, Achternaam = "Slager" },
-                Artikelen = new List<Artikel>()
-                {
-                    new Artikel() { Id = 1, Beschrijving= "Fietsband", Voorraad = 6 },
-                    new Artikel() { Id = 2,  Beschrijving= "Fietscomputer", Voorraad = 2 }
-                }
+                Status = Status.GoedGekeurd,
+                Klant = new Klant() { Id = 10, Achternaam = "Slager" }, 
             };
-
-            var nognietgekeurdebestelling2 = new Bestelling()
+           var  goedGekeurdebestelling2 = new Bestelling()
             {
                 Id = 4,
-                Status = 0,
+                Status = Status.GoedGekeurd,
                 Klant = new Klant() { Id = 10, Achternaam = "Slager" },
-                Artikelen = new List<Artikel>()
-                {
-                    new Artikel() { Id = 3, Beschrijving= "Stuur", Voorraad = 6 },
-                    new Artikel() { Id = 4, Beschrijving= "Fietscomputer", Voorraad = 2 }
-                }
             };
 
             
-            var options = new DbContextOptionsBuilder<WebshopBeheerContext>()
+            var options = new DbContextOptionsBuilder<MagazijnMedewerkerContext>()
                .UseInMemoryDatabase(databaseName: "MagazijnMedewerkerTest8")
                .Options;
 
-            using (var context = new WebshopBeheerContext(options))
+            using (var context = new MagazijnMedewerkerContext(options))
             {
 
-                context.Bestellingen.Add(nognietgekeurdebestelling);
-                context.Bestellingen.Add(nognietgekeurdebestelling2);
+                context.Bestellingen.Add(goedGekeurdebestelling);
+                context.Bestellingen.Add(goedGekeurdebestelling2);
                 context.SaveChanges();
 
                 var controller = new MagazijnMedewerkerController(context);
@@ -247,7 +188,7 @@ namespace WebshopBeheer.Test
 
                 //Act
                 var result = Assert.IsType<ViewResult>(view);
-                var model = Assert.IsType<Bestelling>(result.Model); //And not IEnumerable
+                var model = Assert.IsType<Models.MagazijnMedewerkerModels.BestellingViewModel>(result.Model); //And not IEnumerable
 
             }
 
