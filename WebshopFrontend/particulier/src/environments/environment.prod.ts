@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://cursistm06:8090'
+  apiBaseUrl: 'http://cursistm06'
 };

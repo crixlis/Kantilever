@@ -32,7 +32,7 @@ namespace Webshop.API.Controllers
         public IActionResult Post([FromBody]Bestelling bestelling)
         {
             if (bestelling.Klant != null && bestelling.Artikelen.Count > 0)
-                {
+            {
                     foreach (var artikel in bestelling.Artikelen)
                     {
                         if(artikel.Id <= 0) { throw new ArgumentException($"Artikel Id {artikel.Id} is ongeldig"); }
@@ -40,10 +40,18 @@ namespace Webshop.API.Controllers
 
                 var bestellingAanmaken = new BestellingAanmaken
                 {
-                    Artikelen = bestelling.Artikelen,
                     Klant = bestelling.Klant,
                     BestelDatum = DateTime.Now
                 };
+                
+                foreach(var artikel in bestelling.Artikelen)
+                {
+                    bestellingAanmaken.Artikelen.Add(new Artikel
+                    {
+                        Id = bestelling.Id,
+                        Aantal = artikel.Aantal
+                    });
+                }
 
                 _sender.PublishCommand(bestellingAanmaken);
 

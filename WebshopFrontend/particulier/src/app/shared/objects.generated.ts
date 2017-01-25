@@ -7,33 +7,37 @@
 
 
 export class Artikel { 
+    categorieen: string[]; 
     id: number; 
     naam: string; 
     beschrijving: string; 
     prijs: number; 
     leverbaarVanaf: Date; 
     leverbaarTot: Date; 
+    leverancierCode: string; 
     leverancier: string; 
-    categorieen: string[];
-    voorraad: number;
-    aantal : number;
+    voorraad: number; 
+    imagePath: string; 
+    aantal: number;
 
     constructor(data?: any) {
         if (data !== undefined) {
+            if (data["categorieen"] && data["categorieen"].constructor === Array) {
+                this.categorieen = [];
+                for (let item of data["categorieen"])
+                    this.categorieen.push(item);
+            }
             this.id = data["id"] !== undefined ? data["id"] : null;
             this.naam = data["naam"] !== undefined ? data["naam"] : null;
             this.beschrijving = data["beschrijving"] !== undefined ? data["beschrijving"] : null;
             this.prijs = data["prijs"] !== undefined ? data["prijs"] : null;
             this.leverbaarVanaf = data["leverbaarVanaf"] ? new Date(data["leverbaarVanaf"].toString()) : null;
             this.leverbaarTot = data["leverbaarTot"] ? new Date(data["leverbaarTot"].toString()) : null;
+            this.leverancierCode = data["leverancierCode"] !== undefined ? data["leverancierCode"] : null;
             this.leverancier = data["leverancier"] !== undefined ? data["leverancier"] : null;
-            if (data["categorieen"] && data["categorieen"].constructor === Array) {
-                this.categorieen = [];
-                for (let item of data["categorieen"])
-                    this.categorieen.push(item);
-            }
             this.voorraad = data["voorraad"] !== undefined ? data["voorraad"] : null;
-
+            this.imagePath = data["imagePath"] !== undefined ? data["imagePath"] : null;
+            this.aantal = data["aantal"] !== undefined ? data["aantal"] : null;
         }
     }
 
@@ -43,19 +47,22 @@ export class Artikel {
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
+        if (this.categorieen && this.categorieen.constructor === Array) {
+            data["categorieen"] = [];
+            for (let item of this.categorieen)
+                data["categorieen"].push(item);
+        }
         data["id"] = this.id !== undefined ? this.id : null;
         data["naam"] = this.naam !== undefined ? this.naam : null;
         data["beschrijving"] = this.beschrijving !== undefined ? this.beschrijving : null;
         data["prijs"] = this.prijs !== undefined ? this.prijs : null;
         data["leverbaarVanaf"] = this.leverbaarVanaf ? this.leverbaarVanaf.toISOString() : null;
         data["leverbaarTot"] = this.leverbaarTot ? this.leverbaarTot.toISOString() : null;
+        data["leverancierCode"] = this.leverancierCode !== undefined ? this.leverancierCode : null;
         data["leverancier"] = this.leverancier !== undefined ? this.leverancier : null;
-        if (this.categorieen && this.categorieen.constructor === Array) {
-            data["categorieen"] = [];
-            for (let item of this.categorieen)
-                data["categorieen"].push(item);
-        }
-        data["voorraad"] !== this.voorraad != undefined ? this.voorraad : null;
+        data["voorraad"] = this.voorraad !== undefined ? this.voorraad : null;
+        data["imagePath"] = this.imagePath !== undefined ? this.imagePath : null;
+        data["aantal"] = this.aantal !== undefined ? this.aantal : null;
         return data; 
     }
 

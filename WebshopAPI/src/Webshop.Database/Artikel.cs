@@ -16,6 +16,7 @@ namespace Webshop.Database
         public List<string> Categorieen = new List<string>();
         public int Voorraad { get; set; }
         public string ImagePath { get; set; }
+        public int Aantal { get; set; }
     }
 }
 

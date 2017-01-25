@@ -47,13 +47,41 @@ namespace Webshop.Listener.Test
                 //Arrange
                 var sender = Substitute.For<ISender>();
                 var service = new WebshopListenerService(sender, context, Environment.GetEnvironmentVariable("IMG_ROOT"));
-                var artikelToegevoegd = new ArtikelVoorraadBijgewerkt();
+                var artikel = new ArtikelVoorraadBijgewerkt();
 
                 //Act
-                service.Execute(artikelToegevoegd);
+                service.Execute(artikel);
 
                 //Assert
                 Assert.True(context.Artikelen.Any());
+            }
+        }
+
+        [Fact]
+        public void IkWilEenArtikelVoorraadBijgewerktEventUpdatenEnOpslaanInDeDatabase()
+        {
+            var options = new DbContextOptionsBuilder<WebshopContext>()
+                .UseInMemoryDatabase(databaseName: "ArtikelVoorraadBijgewerktUpdaten")
+                .Options;
+
+            using (var context = new WebshopContext(options))
+            {
+                //Arrange
+                var sender = Substitute.For<ISender>();
+                var service = new WebshopListenerService(sender, context, Environment.GetEnvironmentVariable("IMG_ROOT"));
+
+                var id = 12;
+                context.Artikelen.Add(new Artikel { Id = id, Voorraad = 1 });
+                context.SaveChanges();
+
+                var artikelMetGeupdateVoorraad = context.Artikelen.Where(a => a.Id == id).SingleOrDefault();
+                var nieuweVoorraad = artikelMetGeupdateVoorraad.Voorraad = 2;
+
+                //Act
+                service.Execute( new ArtikelAanCatalogusToegevoegd { Id = id, Voorraad = nieuweVoorraad });
+
+                //Assert
+                Assert.NotEmpty(context.Artikelen.Where(a => a.Voorraad == 2));
             }
         }
 

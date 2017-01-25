@@ -13,16 +13,16 @@ export class BestellingService {
     constructor(private http: Http) { }
 
     getBestelling(): Promise<Bestelling[]> {
-    return this.http.get(BESTELLINGSERVICEURL)
+        return this.http.get(BESTELLINGSERVICEURL)
                 .toPromise()
                 .then(response => response.json().data as Bestelling[])
                 .catch(error => Promise.reject(error.message || error));
     }
 
-    postBestelling(bestelling : Bestelling): Promise<Bestelling[]> {
-    return this.http.post(BESTELLINGSERVICEURL, bestelling.toJSON())
+    postBestelling(bestelling : Bestelling): Promise<Bestelling> {
+        return this.http.post(BESTELLINGSERVICEURL, bestelling)
                 .toPromise()
                 .then(response => response.json().data)
-                .catch(error => error.json().error);
+                .catch(error => Promise.reject(error.message || error));
     }
 }
