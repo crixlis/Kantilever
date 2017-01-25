@@ -56,11 +56,7 @@ namespace Webshop.API
             services.AddSingleton<ISender>(s => new Sender(connection, "Kantilever"));
             services.AddMvc();
             services.AddCors();
-            services.AddSwaggerGen();
-
-            services.AddScoped<IWebshopContext, WebshopContext>(p =>
-                p.GetService<WebshopContext>()
-            );
+            services.AddSwaggerGen();           
 
             if (_env.IsDevelopment())
             {
@@ -71,6 +67,9 @@ namespace Webshop.API
                 services.AddDbContext<WebshopContext>(options => options
                     .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION")));
             }
+            services.AddScoped<IWebshopContext, WebshopContext>(p =>
+                p.GetService<WebshopContext>()
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

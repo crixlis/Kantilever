@@ -5,8 +5,8 @@
     <p>
       Om de bestelling af te ronden dient u de onderstaande gegevens in te voeren.
     </p>
-    <form (submit)="bestellingAfronden()" id="addPersonForm">
-      <div class="form-group">
+    <form (submit)="bestellingAfronden()" <[formGroup]="bestellingAfrondenForm" id="addPersonForm">
+      <!--<div class="form-group">
         <label class="col-form-label">Voornaam:</label>
         <input placeholder="Voornaam" class="form-control">
       </div>
@@ -33,11 +33,8 @@
       <div class="form-group">
         <label class="col-form-label">E-mailadres:</label>
         <input placeholder="voornaam@live.com" type="email" class="form-control">
-      </div>
+      </div>-->
       <button [disabled]="" class="btn btn-primary">Bestelling afronden</button>
     </form>
-    <!--<form (submit)="bestellingAfronden()" <[formGroup]="bestellingAfrondenForm" id="addPersonForm">
-
-    </form>-->
   </section>
 </main>
