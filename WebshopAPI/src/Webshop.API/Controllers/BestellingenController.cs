@@ -40,10 +40,18 @@ namespace Webshop.API.Controllers
 
                 var bestellingAanmaken = new BestellingAanmaken
                 {
-                    Artikelen = bestelling.Artikelen,
                     Klant = bestelling.Klant,
                     BestelDatum = DateTime.Now
                 };
+                
+                foreach(var artikel in bestelling.Artikelen)
+                {
+                    bestellingAanmaken.Artikelen.Add(new Artikel
+                    {
+                        Id = bestelling.Id,
+                        Aantal = artikel.Aantal
+                    });
+                }
 
                 _sender.PublishCommand(bestellingAanmaken);
 
