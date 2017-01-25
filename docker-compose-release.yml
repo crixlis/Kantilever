@@ -55,8 +55,6 @@ services:
         image: docentm:5000/lmf-webshop-frontend:latest
         networks: 
             - kantilever
-        ports:
-            - 7000:80
         volumes: 
             - img:/usr/share/nginx/html/img/
 
@@ -82,8 +80,14 @@ services:
             - MYSQL_CONNECTION=server=lmf-webfrontend.api.database;userid=root;pwd=my-secret-pw;port=3306;database=ArtikelenKantilever;sslmode=none;
         networks: 
             - kantilever
+
+    lmf-webshop.proxy:
+        container_name: lmf-webshop.proxy
+        image: docentm:5000/lmf-webshop.proxy:${BUILD_BUILDNUMBER}
+        networks: 
+            - kantilever
         ports: 
-            - 8090:5000
+            - 80:80
 
     lmf-webshop.listener:
         container_name: lmf-webshop.listener

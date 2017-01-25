@@ -13,6 +13,12 @@ services:
       args: 
         SOURCE: ./bin/publish
     image: docentm:5000/lmf-webshop.api:${BUILD_BUILDNUMBER}
+
+  lmf-webshop.proxy:
+    build:
+      context: ./WebshopProxy
+      dockerfile: Dockerfile
+    image: docentm:5000/lmf-webshop.proxy:${BUILD_BUILDNUMBER}
     
   lmf-webshop.listener:
     build:
