@@ -18,7 +18,7 @@ body
 }
  
 header {
-    background-image: url('image/Kantilever 8 Banner.png');
+    background-image: url('/image/Kantilever 8 Banner.png');
     background-repeat: no-repeat;
     background-size: auto 100%;
     background-position-x: 60%;
@@ -368,8 +368,6 @@ label {
     **********************************/
 
     header {
-        background-image: url('/image/Kantilever 8 Banner.png');
-        background-repeat: no-repeat;
         background-size: 720px auto;
     }
 
