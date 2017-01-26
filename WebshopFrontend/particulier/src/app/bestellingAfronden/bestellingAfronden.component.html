@@ -1,6 +1,11 @@
 <main>
    <!-- Angular forms lijkt niet meer te werken, daarom maar met ngModel... Zie ook : https://github.com/AngularClass/angular2-webpack-starter/issues/1399 voor een soortgelijke fout-->
-  <section id="bestellingAfronden">
+  
+    <div *ngIf="message" class="{{statusclass}}">
+      <strong>Gelukt:</strong>
+      <span class="statusclass">{{message}}</span>
+  </div>
+  <section id="bestellingAfronden" *ngIf="!message">
     <h2>Bestelling afronden</h2>
     <p>
       Om de bestelling af te ronden dient u de onderstaande gegevens in te voeren.
