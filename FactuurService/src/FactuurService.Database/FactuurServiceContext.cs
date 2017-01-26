@@ -20,6 +20,11 @@ namespace FactuurService.Database
                 .Entity<Factuur>()
                 .Property(a => a.Id)
                 .ValueGeneratedNever();
+
+            modelBuilder
+                .Entity<Bestelling>()
+                .Property(a => a.Id)
+                .ValueGeneratedNever();
         }
     }
 }
