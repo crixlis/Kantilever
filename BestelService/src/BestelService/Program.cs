@@ -22,12 +22,14 @@ namespace BestelService
             var builder = new ContainerBuilder();
             builder.RegisterReceiverFor<BestelService, BestellingAanmaken>();
             builder.RegisterReceiverFor<BestelService, BestellingKeuren>();
-
             builder.Register(d => new Sender(connection, "Kantilever")).As<ISender>();
 
             var options = new DbContextOptionsBuilder<BestelServiceContext>()
                .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION"))
                .Options;
+
+            builder.RegisterType<BestelServiceContext>().As<IBestelServiceContext>();
+            builder.RegisterInstance(options);
 
             using (var context = new BestelServiceContext(options))
             {
