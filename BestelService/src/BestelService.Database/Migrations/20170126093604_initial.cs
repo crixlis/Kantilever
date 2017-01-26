@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BestelService.Database.Migrations
 {
-    public partial class eerstemigratie : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,9 +30,10 @@ namespace BestelService.Database.Migrations
                 name: "Bestelling",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    KlantId = table.Column<int>(nullable: true)
+                    Id = table.Column<int>(nullable: false),
+                    BestelDatum = table.Column<DateTime>(nullable: false),
+                    KlantId = table.Column<int>(nullable: true),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,12 +52,12 @@ namespace BestelService.Database.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
+                    Aantal = table.Column<int>(nullable: false),
                     Beschrijving = table.Column<string>(nullable: true),
                     BestellingId = table.Column<int>(nullable: true),
                     Leverancier = table.Column<string>(nullable: true),
                     Naam = table.Column<string>(nullable: true),
-                    Prijs = table.Column<decimal>(nullable: false),
-                    Voorraad = table.Column<int>(nullable: false)
+                    Prijs = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

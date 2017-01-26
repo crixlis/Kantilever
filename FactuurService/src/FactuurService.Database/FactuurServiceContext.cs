@@ -12,11 +12,17 @@ namespace FactuurService.Database
         public FactuurServiceContext(DbContextOptions<FactuurServiceContext> options) : base(options) { }
 
         public DbSet<Factuur> Facturen { get; set; }
+        public DbSet<Bestelling> Bestellingen { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Entity<Factuur>()
+                .Property(a => a.Id)
+                .ValueGeneratedNever();
+
+            modelBuilder
+                .Entity<Bestelling>()
                 .Property(a => a.Id)
                 .ValueGeneratedNever();
         }

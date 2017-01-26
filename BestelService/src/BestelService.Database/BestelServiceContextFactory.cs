@@ -10,7 +10,7 @@ namespace BestelService.Database
         public BestelServiceContext Create(DbContextFactoryOptions options)
         {
             var builder = new DbContextOptionsBuilder<BestelServiceContext>()
-             //.UseMySQL(@"server=localhost;userid=root;pwd=my-secret-pw;port=3306;database=BestellingenKantilever;sslmode=none;");
+             //.UseMySQL(@"server=localhost;userid=root;pwd=my-secret-pw;port=9876;database=BestellingenKantilever;sslmode=none;");
              .UseMySQL(Environment.GetEnvironmentVariable("MYSQL_CONNECTION"));
             return new BestelServiceContext(builder.Options);
         }

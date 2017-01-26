@@ -1,21 +1,21 @@
 <main >
     <section id="detailPage">
         <article>
-            <h2>{{artikel.naam}}</h2>
-            <div class="pdImage">
-            <img src="https://s.s-bol.com/imgbase0/imagebase3/large/FC/6/6/4/0/9200000057890466.jpg">
+            <h2 *ngIf="artikel.naam">{{artikel.naam}}</h2>
+            <div class="pdImage" *ngIf="artikel.imagePath">
+                <img src="{{artikel.imagePath}}">
             </div>
-            <div class="pdInfo">
+            <div class="pdInfo" *ngIf="artikel.beschrijving">
                 <h2>Informatie:</h2>
-                <span>{{artikel.beschrijving}}</span>
+                <span >{{artikel.beschrijving}}</span>
             </div>
             <div class="productDetails">
                 <h2>Productdetails:</h2>
-                <div id="leverancierdetail">
+                <div id="leverancierdetail" *ngIf="artikel.leverancier">
                     <span class="pdTitle">Leverancier:</span>
-                    <span>{{artikel.leverancier}}</span>
+                    <span >{{artikel.leverancier}}</span>
                 </div>
-                <div id="beschikbaardetail">
+                <div id="beschikbaardetail" *ngIf="artikel.voorraad">
                     <span class="pdTitle">Beschikbaar:</span>
                     <span>{{artikel.Voorraad}}</span>
                 </div>
@@ -32,13 +32,13 @@
                 </div>
                 <button (click)="AddToShoppingCart()">{{addtoshoppingcarttext}}</button>
             </div>
-            <div id="bekeken">
+            <div id="bekeken" *ngIf="artikel.imagePath">
                 <span class="sbTitle">Andere bekeken ook:</span>
                 <div class="sidebarImage">
-                    <img src="https://s.s-bol.com/imgbase0/imagebase3/large/FC/6/5/8/4/9200000039744856.jpg">
+                    <img src="{{artikel.imagePath}}">
                 </div>
                 <div class="sidebarImage">
-                    <img src="https://s.s-bol.com/imgbase0/imagebase3/large/FC/6/9/6/4/9200000057694696.jpg">
+                    <img src="{{artikel.imagePath}}">
                 </div>
             </div>
         </aside>

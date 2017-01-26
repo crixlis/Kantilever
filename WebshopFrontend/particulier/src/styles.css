@@ -18,7 +18,7 @@ body
 }
  
 header {
-    background-image: url('image/Kantilever 8 Banner.png');
+    background-image: url('/image/Kantilever 8 Banner.png');
     background-repeat: no-repeat;
     background-size: auto 100%;
     background-position-x: 60%;
@@ -57,17 +57,17 @@ h2 {
     margin: 0 0 10px 0;
 }
 
-main button{
+main button, .messageBox a{
     padding: 10px;
     border-radius: 5px;
 }
 
-button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:active{
+button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:active, .messageBox a{
     cursor: pointer;
 }
 
 section{
-    max-width: 100%;
+    width: 100%;
 }
 
 /**********************************
@@ -247,6 +247,14 @@ table td, .table th {
     padding: .75rem;
 }
 
+.messageBox{
+    background: #f1f1f1;
+    padding: 3% 3% 5%;
+    display: block;
+    float: left;
+    width: 94%;
+}
+
 .ErrorBox{
     color: #a94442;
     background-color: #f2dede;
@@ -258,10 +266,22 @@ table td, .table th {
 
 .ErrorBox strong{
     font-weight: 800;
-    color: #a94442;
 }
 
-.ErrorBox.message{    
+.SuccessBox{
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.SuccessBox strong{
+    font-weight: 800;
+}
+
+.ErrorBox.message, .SuccessBox.message{    
     white-space: pre-line;
 }
 
@@ -269,7 +289,7 @@ table td, .table th {
     margin: 20px 0;
 }
 
-button {
+button, .messageBox a{
     border-radius: 0px;
     background-color:#2D398E;
     border: 5px solid white;
@@ -279,7 +299,7 @@ button {
     max-width: 150px;
 }
 
-button:hover {
+button:hover, .messageBox a:hover{
     background-color: white;
     color:#2D398E;
     border-color: #2D398E;
@@ -349,7 +369,6 @@ label {
 
     header {
         background-image: url('/image/Kantilever 8 Banner.png');
-        background-repeat: no-repeat;
         background-size: 720px auto;
     }
 

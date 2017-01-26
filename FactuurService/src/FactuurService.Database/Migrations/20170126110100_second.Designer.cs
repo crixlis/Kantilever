@@ -8,9 +8,10 @@ using FactuurService.Database;
 namespace FactuurService.Database.Migrations
 {
     [DbContext(typeof(FactuurServiceContext))]
-    partial class FactuurServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20170126110100_second")]
+    partial class second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");

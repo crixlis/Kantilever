@@ -15,7 +15,8 @@ export class BestellingAfrondenComponent implements OnInit {
     private _artikelService : ArtikelService,
     private _bestellingService : BestellingService) {}
 
-  error : string;
+  message : string;
+  statusclass = "";
   klant: Klant =  new Klant;
 
   @Output() onNewAmountProducts = new EventEmitter();
@@ -42,5 +43,7 @@ export class BestellingAfrondenComponent implements OnInit {
 
       console.log(bestelling);
       this._bestellingService.postBestelling(bestelling);
+      this.message = "Uw bestelling is afgerond.";
+      this.statusclass = "SuccessBox";
     }
 }
