@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using WebshopBeheer.Controllers;
 using Xunit;
+using NSubstitute;
+using rabbitmq_demo;
 
 namespace WebshopBeheer.Test
 {
@@ -30,6 +32,8 @@ namespace WebshopBeheer.Test
             var options = new DbContextOptionsBuilder<CommercieelManagerContext>()
                .UseInMemoryDatabase(databaseName: "Commercieelmanagertestt3")
                .Options;
+
+            var sender = Substitute.For<ISender>();
 
             using (var context = new CommercieelManagerContext(options))
             {
@@ -75,7 +79,7 @@ namespace WebshopBeheer.Test
 
                 Console.WriteLine(context.Artikelen.Count());
 
-                var controller = new CommercieelManagerController(context);
+                var controller = new CommercieelManagerController(context, sender);
 
                 //Act
                 var view = controller.Index();
