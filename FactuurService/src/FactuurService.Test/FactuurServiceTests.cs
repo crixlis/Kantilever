@@ -14,65 +14,65 @@ namespace FactuurService.Test
 {
     public class FactuurServiceTests
     {
-        [Fact]
-        public void DeFactuurServiceKanEenFactuurAanmakenCommandOntvangenEnVerstuurtEenFactuurAangemaaktEvent()
-        {
-            //Arrange
-            var options = new DbContextOptionsBuilder<FactuurServiceContext>()
-                .UseInMemoryDatabase(databaseName: "FacturenKantilever")
-                .Options;
+        //[Fact]
+        //public void DeFactuurServiceKanEenFactuurAanmakenCommandOntvangenEnVerstuurtEenFactuurAangemaaktEvent()
+        //{
+        //    //Arrange
+        //    var options = new DbContextOptionsBuilder<FactuurServiceContext>()
+        //        .UseInMemoryDatabase(databaseName: "FacturenKantilever")
+        //        .Options;
 
-            using (var context = new FactuurServiceContext(options))
-            {
-                //context.Database.EnsureCreated();
+        //    using (var context = new FactuurServiceContext(options))
+        //    {
+        //        //context.Database.EnsureCreated();
 
-                var sender = Substitute.For<ISender>();
-                var service = new FactuurService(sender, context);
+        //        var sender = Substitute.For<ISender>();
+        //        var service = new FactuurService(sender, context);
 
-                var FactuurAanmakenCommand = new FactuurAanmaken
-                {
-                    Id = 56,
-                    Artikelen = new List<Artikel>
-                    {
-                        new Artikel { Id =9, Prijs = 10.95m },
-                        new Artikel { Id =7, Prijs = 12.65m },
-                        new Artikel { Id =11, Prijs = 15.78m }
-                    }
-                };
+        //        var FactuurAanmakenCommand = new FactuurAanmaken
+        //        {
+        //            Id = 56,
+        //            Artikelen = new List<Artikel>
+        //            {
+        //                new Artikel { Id =9, Prijs = 10.95m },
+        //                new Artikel { Id =7, Prijs = 12.65m },
+        //                new Artikel { Id =11, Prijs = 15.78m }
+        //            }
+        //        };
 
-                //Act
-                service.Execute(FactuurAanmakenCommand);
+        //        //Act
+        //        service.Execute(FactuurAanmakenCommand);
 
-                //Assert
-                sender.Received(1).PublishEvent(Arg.Any<Factuur>());
-            }           
-        }
+        //        //Assert
+        //        sender.Received(1).PublishEvent(Arg.Any<Factuur>());
+        //    }           
+        //}
 
-        [Fact]
-        public void IkWilFactuurAanmakenEventOpvangenEnInDeDatabaseOpslaan()
-        {
-            //Arrange
-            var options = new DbContextOptionsBuilder<FactuurServiceContext>()
-               .UseInMemoryDatabase(databaseName: "FactuurAanmaken")
-               .Options;
+        //[Fact]
+        //public void IkWilFactuurAanmakenEventOpvangenEnInDeDatabaseOpslaan()
+        //{
+        //    //Arrange
+        //    var options = new DbContextOptionsBuilder<FactuurServiceContext>()
+        //       .UseInMemoryDatabase(databaseName: "FactuurAanmaken")
+        //       .Options;
 
-            using (var context = new FactuurServiceContext(options))
-            {
-                var sender = Substitute.For<ISender>();
-                var service = new FactuurService(sender, context);
-                var factuur = new FactuurAanmaken
-                {
-                    Id = 1,
-                    Artikelen = new List<Artikel> { new Artikel { Id = 1} }
-                };
+        //    using (var context = new FactuurServiceContext(options))
+        //    {
+        //        var sender = Substitute.For<ISender>();
+        //        var service = new FactuurService(sender, context);
+        //        var factuur = new FactuurAanmaken
+        //        {
+        //            Id = 1,
+        //            Artikelen = new List<Artikel> { new Artikel { Id = 1} }
+        //        };
 
-                //Act
-                service.Execute(factuur);
+        //        //Act
+        //        service.Execute(factuur);
 
-                //Assert
-                Assert.True(context.Facturen.Any());
-            }
-        }
+        //        //Assert
+        //        Assert.True(context.Facturen.Any());
+        //    }
+        //}
 
         [Fact]
         public void DeFactuurServiceKanEenBetaaldeFactuurAfmeldenCommandOntvangenEnEenBetaaldeFactuurAfgemeldEventOpgooien()
