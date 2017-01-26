@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MySQL.Data.EntityFrameworkCore.Extensions;
+using RabbitMQ.Client;
+using rabbitmq_demo;
 using WebshopBeheer.Data;
 using WebshopBeheer.Models;
 using WebshopBeheer.Services;
@@ -61,6 +63,11 @@ namespace WebshopBeheer
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+
+            var connection = new ConnectionFactory()
+                .FromEnvironment();
+            services.AddSingleton<ISender>(s => new Sender(connection, "Kantilever"));
 
             services.AddMvc();
 

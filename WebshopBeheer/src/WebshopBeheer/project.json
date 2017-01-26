@@ -11,6 +11,8 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
+    "RabbitMQ.Client": "4.1.1",
+    "rabbitmq-demo": "1.2.*",
     "Microsoft.AspNetCore.Routing": "1.0.1",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",

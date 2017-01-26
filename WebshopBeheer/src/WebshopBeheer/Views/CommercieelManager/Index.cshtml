@@ -45,19 +45,22 @@ else
             @bestelling.BestelDatum
         </div>
 
+        <div class="col-md-12">
+            <h4>Artikelen</h4>
+        </div>
         <div class="row">
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3 col-sm-3">
                     Id
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3 col-sm-3">
                     Naam
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3 col-sm-3">
                     Prijs
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3 col-sm-3">
                     Aantal
                 </div>
             </div>
@@ -66,28 +69,55 @@ else
         @foreach (var artikel in bestelling.Artikelen)
         {
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3 col-sm-3">
                     @artikel.Id
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3 col-sm-3">
                     @artikel.Naam
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3 col-sm-3">
                     @artikel.Prijs
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3 col-sm-3">
                     @artikel.Aantal
                 </div>
             </div>
         }
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                Totaal
+            </div>
+            <div class="col-md-3 col-sm-3">
+                @(bestelling.Artikelen.Sum(x => x.Prijs * x.Aantal))
+            </div>
+        </div>
 
 
         <div class="col-md-12">
             <h4>Afronden</h4>
             <div class="col-md-4">
-                <button>Goedkeuren</button>
-                <button>Afkeuren</button>
+                @Html.ActionLink("Goedkeuren", "KeurBestellingGoed", null, new { id = "keurBestellingGoed" })
+                @Html.ActionLink("Afkeuren", "KeurBestellingAf", null, new { id = "keurBestellingAf" })
             </div>
         </div>
     }
 }
+<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+      asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+      asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+
+<script>
+    $("#keurBestellingGoed").click(function (e) {
+
+        e.preventDefault();
+        $.ajax({
+
+            url: $(this).attr("href"), // comma here instead of semicolon   
+            success: function () {
+                alert("Value Added");  // or any other indication if you want to show
+            }
+
+        });
+
+    });
+</script>

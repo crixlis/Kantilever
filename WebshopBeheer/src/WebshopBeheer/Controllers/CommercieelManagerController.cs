@@ -5,16 +5,20 @@ using ViewModelBestelling = WebshopBeheer.Models.CommercieelManagerModels.Bestel
 using ViewModelArtikel = WebshopBeheer.Models.CommercieelManagerModels.Artikel;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
+using rabbitmq_demo;
 
 namespace WebshopBeheer.Controllers
 {
     public class CommercieelManagerController : Controller
     {
         private CommercieelManagerContext _context;
+        private ISender _sender;
 
-        public CommercieelManagerController(CommercieelManagerContext context)
+        public CommercieelManagerController(CommercieelManagerContext context, ISender sender)
         {
             _context = context;
+            _sender = sender;
         }
 
         public IActionResult Index()
@@ -28,7 +32,8 @@ namespace WebshopBeheer.Controllers
 
             if (bestellingen.Count() == 0)
             {
-                return View(new ViewModel {
+                return View(new ViewModel
+                {
                     Bestellingen = Enumerable.Empty<ViewModelBestelling>()
                 });
             }
@@ -39,14 +44,14 @@ namespace WebshopBeheer.Controllers
                 {
                     Id = x.Id,
                     BestelDatum = x.BestelDatum,
-                    Klant = x.Klant,
-                })
+                    Klant = x.Klant
+                }).ToArray()
             };
 
-            foreach(ViewModelBestelling bestelling in viewModel.Bestellingen)
+            foreach (ViewModelBestelling bestelling in viewModel.Bestellingen)
             {
                 bestelling.Artikelen = _context.BestelArtikelSet
-                .Where(x => x.Id == bestelling.Id)
+                .Where(x => x.Bestelling.Id == bestelling.Id)
                 .Include(x => x.Artikel)
                 .Select(x => new ViewModelArtikel
                 {
@@ -54,7 +59,7 @@ namespace WebshopBeheer.Controllers
                     Aantal = x.Aantal,
                     Prijs = x.Artikel.Prijs,
                     Naam = x.Artikel.Naam
-                });
+                }).ToArray();
             }
 
             return View(viewModel);
@@ -64,5 +69,24 @@ namespace WebshopBeheer.Controllers
         {
             return View();
         }
+
+        public void KeurBestellingGoed(int id)
+        {
+            _sender.PublishCommand(new Controllers.Commands.BestellingKeuren
+            {
+                Id = id,
+                Status = Commands.Status.GoedGekeurd
+            });
+        }
+
+        public void KeurBestellingAf(int id)
+        {
+            _sender.PublishCommand(new Commands.BestellingKeuren
+            {
+                Id = id,
+                Status = Commands.Status.Afgekeurd
+            });
+        }
+
     }
 }

@@ -4,6 +4,7 @@
     {
         NogTeKeuren,
         GoedGekeurd,
-        Afgekeurd
+        Afgekeurd,
+        Betaald
     }
 }
