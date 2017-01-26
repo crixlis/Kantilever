@@ -14,10 +14,6 @@ services:
         hostname: "lmf-bestelservice.database"
         environment:
             - MYSQL_ROOT_PASSWORD=my-secret-pw
-            - RABBITMQ_HOSTNAME=rabbitmq
-            - RABBITMQ_USERNAME=rabbitmq
-            - RABBITMQ_PASSWORD=rabbitmq
-            - MYSQL_CONNECTION=server=lmf-bestelservice.database;userid=root;pwd=my-secret-pw;port=3306;database=BestellingenKantilever;sslmode=none;      
         container_name: lmf-bestelservice.database
         networks: 
             - kantilever
@@ -27,10 +23,6 @@ services:
         hostname: "lmf-factuurservice.database"
         environment:
             - MYSQL_ROOT_PASSWORD=my-secret-pw
-            - RABBITMQ_HOSTNAME=rabbitmq
-            - RABBITMQ_USERNAME=rabbitmq
-            - RABBITMQ_PASSWORD=rabbitmq
-            - MYSQL_CONNECTION=server=lmf-factuurservice.database;userid=root;pwd=my-secret-pw;port=3306;database=FacturenKantilever;sslmode=none;      
         container_name: lmf-factuurservice.database
         networks: 
             - kantilever
@@ -54,13 +46,25 @@ services:
         volumes: 
             - img:/usr/share/nginx/html/img/
 
+    lmf-webshopbeheer.database:
+        image: mysql:latest
+        hostname: "lmf-webshopbeheer.database"
+        environment:
+            - MYSQL_ROOT_PASSWORD=my-secret-pw
+        container_name: lmf-webshopbeheer.database
+        networks: 
+            - kantilever
+            
     lmf-webshopbeheer:
         container_name: lmf-webshopbeheer
         image: docentm:5000/lmf-webshopbeheer:${BUILD_BUILDNUMBER}
+        depends_on:
+            - lmf-webshopbeheer.database
         environment:
             - RABBITMQ_HOSTNAME=rabbitmq
             - RABBITMQ_USERNAME=rabbitmq
             - RABBITMQ_PASSWORD=rabbitmq
+            - DefaultConnection=server=lmf-webshopbeheer.database;userid=root;pwd=my-secret-pw;port=3306;database=BestellingenKantilever;sslmode=none;      
         networks: 
             - kantilever
         ports: 
