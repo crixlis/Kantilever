@@ -11,7 +11,7 @@ namespace BestelService.Test
     public class BestelServiceTests
     {
         [Fact]
-        public void IkWilEenBestellingAanmakenEventOpvangenEnEenBestellingKeurenPublishen()
+        public void IkWilEenBestellingAanmakenEventOpvangenEnEenBestellingAangemaaktPublishen()
         {
             //Arrange
             var options = new DbContextOptionsBuilder<BestelServiceContext>()
@@ -55,27 +55,80 @@ namespace BestelService.Test
         }
 
         [Fact]
-        public void IkWilEenBestellingGoedgekeurdEventOpvangenEnUpdatenInDeDatabase()
+        public void IkWilEenBestellingKeurenEventOpvangenEnUpdatenInDeDatabase()
         {
             //Arrange
             var options = new DbContextOptionsBuilder<BestelServiceContext>()
-               .UseInMemoryDatabase(databaseName: "BestellingGoedkeurenOpslaanInDB")
+               .UseInMemoryDatabase(databaseName: "BestellingKeurenUpdatenInDB")
                .Options;
 
             using (var context = new BestelServiceContext(options))
             {
                 var sender = Substitute.For<ISender>();
                 var service = new BestelService(sender, context);
-                var bestelling = new BestellingKeuren { };
+                var id = 124;
 
-                //Act
-                context.Bestelling.Add(new Bestelling { });
+                context.Bestelling.Add(new Bestelling { Id = id,  Status = Status.NogTeKeuren });
                 context.SaveChanges();
 
-                service.Execute(bestelling);
+                var bestellingteUpdaten = context.Bestelling.Where(a => a.Id == id).Single();
+                bestellingteUpdaten.Status = Status.GoedGekeurd;
+
+                //Act
+                service.Execute( new BestellingKeuren { Id = id, Status = bestellingteUpdaten.Status });
 
                 //Assert
                 Assert.True(context.Bestelling.Any());
+            }
+        }
+
+        [Fact]
+        public void IkWilEenBestellingKeurenEventOpvangenEnEenBestellingGoedgekeurdPublishen()
+        {
+            //Arrange
+            var options = new DbContextOptionsBuilder<BestelServiceContext>()
+               .UseInMemoryDatabase(databaseName: "BestellingKeurenEnGoedgekeurdePublishen")
+               .Options;
+
+            using (var context = new BestelServiceContext(options))
+            {
+                var sender = Substitute.For<ISender>();
+                var service = new BestelService(sender, context);
+
+                var id = 20;
+                context.Bestelling.Add(new Bestelling { Id = id, Status = Status.GoedGekeurd });
+                context.SaveChanges();
+
+                //Act
+                service.Execute(new BestellingKeuren { Id = id, Status = Status.GoedGekeurd });
+
+                //Assert
+                sender.Received(1).PublishEvent(Arg.Any<BestellingGoedgekeurd>());
+            }
+        }
+
+        [Fact]
+        public void IkWilEenBestellingKeurenEventOpvangenEnEenBestellingAfgekeurdPublishen()
+        {
+            //Arrange
+            var options = new DbContextOptionsBuilder<BestelServiceContext>()
+               .UseInMemoryDatabase(databaseName: "BestellingKeurenEnAfgekeurdePublishen")
+               .Options;
+
+            using (var context = new BestelServiceContext(options))
+            {
+                var sender = Substitute.For<ISender>();
+                var service = new BestelService(sender, context);
+
+                var id = 22;
+                context.Bestelling.Add(new Bestelling { Id = id, Status = Status.Afgekeurd });
+                context.SaveChanges();
+
+                //Act
+                service.Execute(new BestellingKeuren { Id = id });
+
+                //Assert
+                sender.Received(1).PublishEvent(Arg.Any<BestellingAfgekeurd>());
             }
         }
     }

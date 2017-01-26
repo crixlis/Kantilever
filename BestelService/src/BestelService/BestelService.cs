@@ -18,7 +18,6 @@ namespace BestelService
 
         public void Execute(BestellingAanmaken item)
         {
-            //Patrick, niet aankomen s.v.p.
             _context.Bestelling.Add(new Bestelling { Artikelen = item.Artikelen, Klant = item.Klant });
             _context.SaveChanges();
             var last = _context.Bestelling.Last();
