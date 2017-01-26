@@ -10,7 +10,7 @@
           <article (click)="goToProductPage(artikel.id)" >
             <h3>{{artikel.naam}}</h3>
             <span class="prijs" [ngClass]="{'prijs-small': artikel.naam.length > 5 }">{{artikel.prijs | prijs}}</span>
-            <img src="image/fietsband.jpg" />
+            <img src="{{artikel.imagePath}}" />
             <p>{{artikel.beschrijving}}</p>
             <span class="addToCart" (click)="addProductToCart($event, artikel.id)"></span>
           </article>
