@@ -12,5 +12,6 @@ namespace FactuurService.Database
         EntityEntry<TEntity> Add<TEntity>(TEntity entity) where TEntity : class;
         int SaveChanges();
         DbSet<Factuur> Facturen { get; set; }
+        DbSet<Bestelling> Bestellingen { get; set; }
     }
 }

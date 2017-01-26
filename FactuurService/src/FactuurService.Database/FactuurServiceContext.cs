@@ -12,6 +12,7 @@ namespace FactuurService.Database
         public FactuurServiceContext(DbContextOptions<FactuurServiceContext> options) : base(options) { }
 
         public DbSet<Factuur> Facturen { get; set; }
+        public DbSet<Bestelling> Bestellingen { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
