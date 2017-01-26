@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MySQL.Data.EntityFrameworkCore.Extensions;
 using Pomelo.EntityFrameworkCore.MySql;
 using WebshopBeheer.Data;
 using WebshopBeheer.Models;
@@ -51,7 +50,7 @@ namespace WebshopBeheer
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
                 services.AddDbContext<CommercieelManager.Database.CommercieelManagerContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
