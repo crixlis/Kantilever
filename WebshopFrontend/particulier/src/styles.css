@@ -67,7 +67,7 @@ button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:ac
 }
 
 section{
-    max-width: 100%;
+    width: 100%;
 }
 
 /**********************************
@@ -368,6 +368,7 @@ label {
     **********************************/
 
     header {
+        background-image: url('/image/Kantilever 8 Banner.png');
         background-size: 720px auto;
     }
 
