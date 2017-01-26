@@ -1,9 +1,13 @@
 <main>
    <!-- Angular forms lijkt niet meer te werken, daarom maar met ngModel... Zie ook : https://github.com/AngularClass/angular2-webpack-starter/issues/1399 voor een soortgelijke fout-->
   
-    <div *ngIf="message" class="{{statusclass}}">
+  <div *ngIf="message" class="messageBox">
+    <div class="{{statusclass}} message" >
       <strong>Gelukt:</strong>
       <span class="statusclass">{{message}}</span>
+    </div>
+    <br/>
+    <a href="/" class="btn btn-primary">Ga naar de homepagina.</a>
   </div>
   <section id="bestellingAfronden" *ngIf="!message">
     <h2>Bestelling afronden</h2>

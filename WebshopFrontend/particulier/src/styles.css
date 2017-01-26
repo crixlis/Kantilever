@@ -57,12 +57,12 @@ h2 {
     margin: 0 0 10px 0;
 }
 
-main button{
+main button, .messageBox a{
     padding: 10px;
     border-radius: 5px;
 }
 
-button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:active{
+button:hover, button:active, #floatingHeader span:hover, #floatingHeader span:active, .messageBox a{
     cursor: pointer;
 }
 
@@ -247,6 +247,14 @@ table td, .table th {
     padding: .75rem;
 }
 
+.messageBox{
+    background: #f1f1f1;
+    padding: 3% 3% 5%;
+    display: block;
+    float: left;
+    width: 94%;
+}
+
 .ErrorBox{
     color: #a94442;
     background-color: #f2dede;
@@ -281,7 +289,7 @@ table td, .table th {
     margin: 20px 0;
 }
 
-button {
+button, .messageBox a{
     border-radius: 0px;
     background-color:#2D398E;
     border: 5px solid white;
@@ -291,7 +299,7 @@ button {
     max-width: 150px;
 }
 
-button:hover {
+button:hover, .messageBox a:hover{
     background-color: white;
     color:#2D398E;
     border-color: #2D398E;
