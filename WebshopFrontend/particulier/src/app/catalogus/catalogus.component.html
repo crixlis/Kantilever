@@ -9,7 +9,7 @@
       <li *ngFor='let artikel of artikelen'>
           <article (click)="goToProductPage(artikel.id)" >
             <h3>{{artikel.naam}}</h3>
-            <span class="prijs" [ngClass]="{'prijs-small': artikel.naam.length > 6 }">{{artikel.prijs | prijs}}</span>
+            <span class="prijs" [ngClass]="{'prijs-small': artikel.prijs > 99 }">{{artikel.prijs | prijs}}</span>
             <img src="{{artikel.imagePath}}" />
             <p>{{artikel.beschrijving}}</p>
             <span class="addToCart" (click)="addProductToCart($event, artikel.id)"></span>
