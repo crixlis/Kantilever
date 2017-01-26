@@ -8,9 +8,10 @@ using MagazijnMedewerker.Database;
 namespace MagazijnMedewerker.Database.Migrations
 {
     [DbContext(typeof(MagazijnMedewerkerContext))]
-    partial class MagazijnMedewerkerContextModelSnapshot : ModelSnapshot
+    [Migration("20170126152946_Magazijnmedewerker")]
+    partial class Magazijnmedewerker
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")

@@ -3,43 +3,34 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using MagazijnMedewerker.Database;
+using CommercieelManager.Database;
 
-namespace MagazijnMedewerker.Database.Migrations
+namespace CommercieelManager.Database.Migrations
 {
-    [DbContext(typeof(MagazijnMedewerkerContext))]
-    partial class MagazijnMedewerkerContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(CommercieelManagerContext))]
+    [Migration("20170126153048_Commercieelmanager")]
+    partial class Commercieelmanager
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MagazijnMedewerker.Database.Artikel", b =>
+            modelBuilder.Entity("CommercieelManager.Database.Artikel", b =>
                 {
                     b.Property<int>("Id");
-
-                    b.Property<string>("Beschrijving");
-
-                    b.Property<string>("Leverancier");
-
-                    b.Property<DateTime?>("LeverbaarTot");
-
-                    b.Property<DateTime>("LeverbaarVanaf");
 
                     b.Property<string>("Naam");
 
                     b.Property<decimal>("Prijs");
-
-                    b.Property<int>("Voorraad");
 
                     b.HasKey("Id");
 
                     b.ToTable("Artikelen");
                 });
 
-            modelBuilder.Entity("MagazijnMedewerker.Database.BestelArtikel", b =>
+            modelBuilder.Entity("CommercieelManager.Database.BestelArtikel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -59,7 +50,7 @@ namespace MagazijnMedewerker.Database.Migrations
                     b.ToTable("BestelArtikelSet");
                 });
 
-            modelBuilder.Entity("MagazijnMedewerker.Database.Bestelling", b =>
+            modelBuilder.Entity("CommercieelManager.Database.Bestelling", b =>
                 {
                     b.Property<int>("Id");
 
@@ -76,7 +67,7 @@ namespace MagazijnMedewerker.Database.Migrations
                     b.ToTable("Bestellingen");
                 });
 
-            modelBuilder.Entity("MagazijnMedewerker.Database.Klant", b =>
+            modelBuilder.Entity("CommercieelManager.Database.Klant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -98,20 +89,20 @@ namespace MagazijnMedewerker.Database.Migrations
                     b.ToTable("Klant");
                 });
 
-            modelBuilder.Entity("MagazijnMedewerker.Database.BestelArtikel", b =>
+            modelBuilder.Entity("CommercieelManager.Database.BestelArtikel", b =>
                 {
-                    b.HasOne("MagazijnMedewerker.Database.Artikel", "Artikel")
+                    b.HasOne("CommercieelManager.Database.Artikel", "Artikel")
                         .WithMany()
                         .HasForeignKey("ArtikelId");
 
-                    b.HasOne("MagazijnMedewerker.Database.Bestelling", "Bestelling")
+                    b.HasOne("CommercieelManager.Database.Bestelling", "Bestelling")
                         .WithMany()
                         .HasForeignKey("BestellingId");
                 });
 
-            modelBuilder.Entity("MagazijnMedewerker.Database.Bestelling", b =>
+            modelBuilder.Entity("CommercieelManager.Database.Bestelling", b =>
                 {
-                    b.HasOne("MagazijnMedewerker.Database.Klant", "Klant")
+                    b.HasOne("CommercieelManager.Database.Klant", "Klant")
                         .WithMany()
                         .HasForeignKey("KlantId");
                 });
